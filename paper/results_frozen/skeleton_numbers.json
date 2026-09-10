@@ -1,0 +1,366 @@
+{
+  "_note": "raw npz/csv에서 독립 재계산. 낮을수록 우수(RMSE/MAE, dB).",
+  "backbones": {
+    "inception_v3": {
+      "label": "Inception-v3",
+      "w_xgb": 0.6,
+      "oof": {
+        "n_eyes": 240,
+        "n_points": 12480,
+        "xgb": {
+          "rmse": 8.66,
+          "mae": 6.398
+        },
+        "cnn": {
+          "rmse": 9.11,
+          "mae": 6.222
+        },
+        "fusion": {
+          "rmse": 8.255,
+          "mae": 5.952
+        },
+        "delta_fus_minus_xgb_rmse": -0.405,
+        "delta_fus_minus_cnn_rmse": -0.855,
+        "p_fus_vs_xgb": 5.69e-11,
+        "p_fus_vs_cnn": 0.0471,
+        "win_fus_vs_xgb": "172/240",
+        "win_fus_vs_cnn": "129/240"
+      },
+      "test": {
+        "n_eyes": 37,
+        "n_points": 1924,
+        "xgb": {
+          "rmse": 8.919,
+          "mae": 6.832
+        },
+        "cnn": {
+          "rmse": 9.17,
+          "mae": 6.148
+        },
+        "fusion": {
+          "rmse": 8.606,
+          "mae": 6.391
+        },
+        "delta_fus_minus_xgb_rmse": -0.313,
+        "delta_fus_minus_cnn_rmse": -0.564,
+        "p_fus_vs_xgb": 0.0676,
+        "p_fus_vs_cnn": 0.846,
+        "win_fus_vs_xgb": "25/37",
+        "win_fus_vs_cnn": "16/37"
+      }
+    },
+    "inception_resnet_v2": {
+      "label": "IR-v2",
+      "w_xgb": 0.47,
+      "oof": {
+        "n_eyes": 240,
+        "n_points": 12480,
+        "xgb": {
+          "rmse": 8.66,
+          "mae": 6.398
+        },
+        "cnn": {
+          "rmse": 8.54,
+          "mae": 6.123
+        },
+        "fusion": {
+          "rmse": 8.069,
+          "mae": 5.894
+        },
+        "delta_fus_minus_xgb_rmse": -0.591,
+        "delta_fus_minus_cnn_rmse": -0.471,
+        "p_fus_vs_xgb": 1.3e-10,
+        "p_fus_vs_cnn": 0.00135,
+        "win_fus_vs_xgb": "160/240",
+        "win_fus_vs_cnn": "149/240"
+      },
+      "test": {
+        "n_eyes": 37,
+        "n_points": 1924,
+        "xgb": {
+          "rmse": 8.919,
+          "mae": 6.832
+        },
+        "cnn": {
+          "rmse": 8.732,
+          "mae": 6.033
+        },
+        "fusion": {
+          "rmse": 8.411,
+          "mae": 6.272
+        },
+        "delta_fus_minus_xgb_rmse": -0.509,
+        "delta_fus_minus_cnn_rmse": -0.322,
+        "p_fus_vs_xgb": 0.0264,
+        "p_fus_vs_cnn": 0.633,
+        "win_fus_vs_xgb": "27/37",
+        "win_fus_vs_cnn": "17/37"
+      }
+    },
+    "vgg16": {
+      "label": "VGG16",
+      "w_xgb": 0.63,
+      "oof": {
+        "n_eyes": 240,
+        "n_points": 12480,
+        "xgb": {
+          "rmse": 8.66,
+          "mae": 6.398
+        },
+        "cnn": {
+          "rmse": 9.165,
+          "mae": 6.417
+        },
+        "fusion": {
+          "rmse": 8.379,
+          "mae": 6.109
+        },
+        "delta_fus_minus_xgb_rmse": -0.281,
+        "delta_fus_minus_cnn_rmse": -0.786,
+        "p_fus_vs_xgb": 6.48e-11,
+        "p_fus_vs_cnn": 0.0538,
+        "win_fus_vs_xgb": "172/240",
+        "win_fus_vs_cnn": "132/240"
+      },
+      "test": {
+        "n_eyes": 37,
+        "n_points": 1924,
+        "xgb": {
+          "rmse": 8.919,
+          "mae": 6.832
+        },
+        "cnn": {
+          "rmse": 8.502,
+          "mae": 5.832
+        },
+        "fusion": {
+          "rmse": 8.397,
+          "mae": 6.297
+        },
+        "delta_fus_minus_xgb_rmse": -0.522,
+        "delta_fus_minus_cnn_rmse": -0.105,
+        "p_fus_vs_xgb": 0.00534,
+        "p_fus_vs_cnn": 0.295,
+        "win_fus_vs_xgb": "27/37",
+        "win_fus_vs_cnn": "14/37"
+      }
+    },
+    "xception": {
+      "label": "Xception",
+      "w_xgb": 0.43,
+      "oof": {
+        "n_eyes": 240,
+        "n_points": 12480,
+        "xgb": {
+          "rmse": 8.66,
+          "mae": 6.398
+        },
+        "cnn": {
+          "rmse": 8.352,
+          "mae": 5.946
+        },
+        "fusion": {
+          "rmse": 7.964,
+          "mae": 5.811
+        },
+        "delta_fus_minus_xgb_rmse": -0.697,
+        "delta_fus_minus_cnn_rmse": -0.388,
+        "p_fus_vs_xgb": 2.11e-12,
+        "p_fus_vs_cnn": 0.0678,
+        "win_fus_vs_xgb": "176/240",
+        "win_fus_vs_cnn": "133/240"
+      },
+      "test": {
+        "n_eyes": 37,
+        "n_points": 1924,
+        "xgb": {
+          "rmse": 8.919,
+          "mae": 6.832
+        },
+        "cnn": {
+          "rmse": 8.963,
+          "mae": 6.349
+        },
+        "fusion": {
+          "rmse": 8.568,
+          "mae": 6.365
+        },
+        "delta_fus_minus_xgb_rmse": -0.352,
+        "delta_fus_minus_cnn_rmse": -0.395,
+        "p_fus_vs_xgb": 0.0943,
+        "p_fus_vs_cnn": 0.633,
+        "win_fus_vs_xgb": "23/37",
+        "win_fus_vs_cnn": "20/37"
+      }
+    },
+    "densenet121": {
+      "label": "DenseNet121",
+      "w_xgb": 0.5,
+      "oof": {
+        "n_eyes": 240,
+        "n_points": 12480,
+        "xgb": {
+          "rmse": 8.66,
+          "mae": 6.398
+        },
+        "cnn": {
+          "rmse": 8.669,
+          "mae": 6.155
+        },
+        "fusion": {
+          "rmse": 8.027,
+          "mae": 5.765
+        },
+        "delta_fus_minus_xgb_rmse": -0.633,
+        "delta_fus_minus_cnn_rmse": -0.641,
+        "p_fus_vs_xgb": 2.71e-12,
+        "p_fus_vs_cnn": 6.01e-05,
+        "win_fus_vs_xgb": "169/240",
+        "win_fus_vs_cnn": "146/240"
+      },
+      "test": {
+        "n_eyes": 37,
+        "n_points": 1924,
+        "xgb": {
+          "rmse": 8.919,
+          "mae": 6.832
+        },
+        "cnn": {
+          "rmse": 8.557,
+          "mae": 5.71
+        },
+        "fusion": {
+          "rmse": 8.329,
+          "mae": 6.081
+        },
+        "delta_fus_minus_xgb_rmse": -0.591,
+        "delta_fus_minus_cnn_rmse": -0.229,
+        "p_fus_vs_xgb": 0.0106,
+        "p_fus_vs_cnn": 0.483,
+        "win_fus_vs_xgb": "24/37",
+        "win_fus_vs_cnn": "17/37"
+      }
+    }
+  },
+  "checks": [],
+  "ensemble_5backbone": {
+    "oof": {
+      "n_eyes": 240,
+      "ens_cnn": {
+        "rmse": 8.115,
+        "mae": 5.666
+      },
+      "xgb": {
+        "rmse": 8.66,
+        "mae": 6.398
+      },
+      "ens_fusion_w047": {
+        "rmse": 7.967,
+        "mae": 5.752
+      },
+      "p_fus_vs_ensCNN": 0.593,
+      "win_fus_vs_ensCNN": "115/240",
+      "p_fus_vs_xgb": 1.64e-16,
+      "win_fus_vs_xgb": "177/240"
+    },
+    "test": {
+      "n_eyes": 37,
+      "ens_cnn": {
+        "rmse": 8.602,
+        "mae": 5.841
+      },
+      "xgb": {
+        "rmse": 8.919,
+        "mae": 6.832
+      },
+      "ens_fusion_w047": {
+        "rmse": 8.39,
+        "mae": 6.176
+      },
+      "p_fus_vs_ensCNN": 0.446,
+      "win_fus_vs_ensCNN": "16/37",
+      "p_fus_vs_xgb": 0.0181,
+      "win_fus_vs_xgb": "27/37"
+    }
+  },
+  "patient_level_ir_v2": {
+    "oof": {
+      "n_eyes": 240,
+      "n_patients": 125,
+      "p_fus_vs_xgb": 3.89e-08,
+      "win_fus_vs_xgb": "94/125",
+      "p_fus_vs_cnn": 0.00817,
+      "win_fus_vs_cnn": "80/125",
+      "mean_diff_fus_minus_xgb": -0.671
+    },
+    "test": {
+      "n_eyes": 37,
+      "n_patients": 19,
+      "p_fus_vs_xgb": 0.104,
+      "win_fus_vs_xgb": "14/19",
+      "p_fus_vs_cnn": 0.86,
+      "win_fus_vs_cnn": "8/19",
+      "mean_diff_fus_minus_xgb": -0.538
+    }
+  },
+  "labels": {
+    "n_eyes": 280,
+    "n_patients": 145,
+    "n_cells_52pt": 14560,
+    "n_zero_current": 1924,
+    "pct_zero_current": 13.21,
+    "n_from_minus1": 1792,
+    "pct_from_minus1": 12.31,
+    "n_true_zero_before_rule": 132,
+    "pct_true_zero_before_rule": 0.91,
+    "share_of_zeros_from_minus1_pct": 93.1,
+    "mean_db": 22.18,
+    "median_db": 26.0,
+    "pct_ge30": 26.7,
+    "pct_lt10": 17.1
+  },
+  "cohort_severity_EMR_MD": {
+    "n_with_md": 274,
+    "n_missing": 6,
+    "mean": -7.42,
+    "sd": 8.67,
+    "median": -4.0,
+    "min": -32.16,
+    "max": 2.34,
+    "normal_MD_gt_-3": [
+      110,
+      40.1
+    ],
+    "early_-6_to_-3": [
+      62,
+      22.6
+    ],
+    "moderate_-12_to_-6": [
+      35,
+      12.8
+    ],
+    "advanced_le_-12": [
+      67,
+      24.5
+    ]
+  },
+  "oct_vf_gap_days": {
+    "mean": 6.66,
+    "sd": 18.18,
+    "median": 0.0,
+    "max": 89.0,
+    "pct_same_day": 80.0
+  },
+  "split_structure": {
+    "cv_fold_eye_counts": {
+      "0": 47,
+      "1": 50,
+      "2": 47,
+      "3": 47,
+      "4": 51,
+      "test": 38
+    },
+    "n_eyes_total": 280,
+    "note": "cv_fold는 280안 전체에 환자 단위로 배정(split-first) 후 양 모달 존재 안만 필터(filter-second)"
+  }
+}

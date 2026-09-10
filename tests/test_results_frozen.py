@@ -1,0 +1,75 @@
+"""paper/results_frozen/ must stay parseable, de-identified, and quotable.
+
+These are the numbers the manuscript prints. The tests check that the files are
+there, that the headline values are what the text says, and that the two
+transforms the freezer applies -- absolute paths removed, the representative
+eye's quasi-identifier removed -- are still in force.
+"""
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[1]
+FROZEN = ROOT / 'paper' / 'results_frozen'
+
+EXPECTED = 18
+
+
+def frozen_files():
+    return sorted(FROZEN.glob('*.json'))
+
+
+def test_all_present():
+    assert len(frozen_files()) == EXPECTED
+
+
+@pytest.mark.parametrize('p', frozen_files(), ids=lambda p: p.name)
+def test_parses(p):
+    json.loads(p.read_text(encoding='utf-8'))
+
+
+@pytest.mark.parametrize('p', frozen_files(), ids=lambda p: p.name)
+def test_no_absolute_home_path(p):
+    text = p.read_text(encoding='utf-8')
+    for m in re.findall(r'/(?:home|Users)/[A-Za-z0-9_.-]+', text):
+        assert m.endswith('/<user>'), f'{p.name}: {m}'
+
+
+def test_representative_eye_is_not_identifiable():
+    """Pseudonym, laterality and examination date are re-identifying together."""
+    doc = json.loads((FROZEN / 'case_profile.json').read_text(encoding='utf-8'))
+    case = doc['case']
+    for key in ('pseudonym', 'eye', 'vf_date'):
+        assert key not in case, key
+    # the part the manuscript actually cites survives
+    assert doc['distribution_position']['rmse_fusion_minus_summary']['n'] == 240
+
+
+def test_headline_out_of_fold_values():
+    """Section 4: XGB 8.66, image branch 8.54, late fusion 8.07 (IR-v2, OOF)."""
+    doc = json.loads((FROZEN / 'final_model_comparison.json').read_text(encoding='utf-8'))
+    row = next(r for r in doc['rows'] if r['backbone'] == 'inception_resnet_v2')
+    assert row['w_xgb'] == 0.47
+    assert row['oof']['n_eyes'] == 240
+    assert row['test']['n_eyes'] == 37
+    assert row['oof']['xgb']['rmse'] == 8.66
+    assert row['oof']['cnn']['rmse'] == 8.54
+    assert row['oof']['fusion']['rmse'] == 8.07
+
+
+def test_backbone_set_matches_config():
+    import sys
+    sys.path.insert(0, str(ROOT))
+    from hvf_config import get
+    want = set(get('constants', 'backbones', 'ensemble5'))
+    doc = json.loads((FROZEN / 'backbone_matrix_table.json').read_text(encoding='utf-8'))
+    assert {r['backbone'] for r in doc['rows']} == want
+
+    # the same five, under their display labels
+    labels = get('constants', 'backbones', 'labels')
+    doc = json.loads((FROZEN / 'fusion_consistency_matrix.json').read_text(encoding='utf-8'))
+    assert {r['backbone'] for r in doc['rows']} == {labels[b] for b in want}

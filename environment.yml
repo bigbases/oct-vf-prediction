@@ -10,9 +10,10 @@ dependencies:
   - scipy=1.15.2
   - scikit-learn=1.7.2
   - xgboost=3.2.0
-  # 그림 생성(scripts/make_fig_pipeline.py, make_case_heatmap.py)에 필요.
-  # 2026-08-26 재현 실사에서 이게 빠져 있어 그림이 hvf env로 안 돌았다.
-  # 버전은 실제로 그림을 만든 env(aaa)의 3.9.4에 맞춤.
+  # Required by the figure scripts (scripts/make_fig_*.py, make_case_heatmap.py).
+  # A reproduction audit found this missing from the training environment, so the
+  # figure scripts would not run there. The pin is the version that actually
+  # produced the published figures.
   - matplotlib-base=3.9.4
   - pip
   - pip:

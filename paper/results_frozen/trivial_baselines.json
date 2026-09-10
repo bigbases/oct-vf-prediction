@@ -1,0 +1,80 @@
+{
+  "protocol": "90d, 5-fold, seed42, IR-v2 대표, pooled RMSE/MAE(dB), 52-point masked",
+  "w_xgb": 0.47,
+  "n_oof_eyes": 240,
+  "n_test_eyes": 37,
+  "rows": [
+    {
+      "model": "grand",
+      "label": "grand-mean (상수)",
+      "oof": {
+        "rmse": 10.75,
+        "mae": 8.62
+      },
+      "test": {
+        "rmse": 10.61,
+        "mae": 8.86
+      }
+    },
+    {
+      "model": "ppmean",
+      "label": "per-point mean (climatology)",
+      "oof": {
+        "rmse": 10.38,
+        "mae": 8.18
+      },
+      "test": {
+        "rmse": 10.28,
+        "mae": 8.5
+      }
+    },
+    {
+      "model": "linear",
+      "label": "linear (tabular Ridge)",
+      "oof": {
+        "rmse": 10.07,
+        "mae": 7.42
+      },
+      "test": {
+        "rmse": 10.5,
+        "mae": 7.94
+      }
+    },
+    {
+      "model": "xgb",
+      "label": "XGB (tabular)",
+      "oof": {
+        "rmse": 8.66,
+        "mae": 6.4
+      },
+      "test": {
+        "rmse": 8.92,
+        "mae": 6.83
+      }
+    },
+    {
+      "model": "cnn",
+      "label": "image-only CNN (IR-v2)",
+      "oof": {
+        "rmse": 8.54,
+        "mae": 6.12
+      },
+      "test": {
+        "rmse": 8.73,
+        "mae": 6.03
+      }
+    },
+    {
+      "model": "fusion",
+      "label": "late fusion",
+      "oof": {
+        "rmse": 8.07,
+        "mae": 5.89
+      },
+      "test": {
+        "rmse": 8.41,
+        "mae": 6.27
+      }
+    }
+  ]
+}

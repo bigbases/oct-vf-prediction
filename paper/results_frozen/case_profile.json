@@ -1,0 +1,382 @@
+{
+  "note": "fig_case_representative 대표안 프로파일. 값만 산출, 그림 없음.",
+  "case": {
+    "fold": 2,
+    "n_valid_points": 52,
+    "label_range_dB": [
+      0.0,
+      32.0
+    ]
+  },
+  "provenance": {
+    "note": "The eye is supplied on the command line to scripts/make_case_heatmap.py; no identifier is stored here or in the code. The selection rule was not recorded at the time, and the eye sits in the favourable tail of the cohort - see distribution_position below."
+  },
+  "basis": {
+    "tree_primary": "/home/<user>/experiments/laterality_qfix/step4_work/B",
+    "tree_identity_check": "/home/<user>",
+    "w_fixed": 0.47,
+    "backbone": "IR-v2 (Inception-ResNet-v2)",
+    "branch_map": {
+      "summary": "XGB",
+      "image": "CNN",
+      "fusion": "w*XGB + (1-w)*CNN"
+    },
+    "residual_sign": "prediction - measurement, 양수 = 과대예측",
+    "bins": [
+      "[0,10)",
+      "[10,20)",
+      "[20,30)",
+      "[30,inf)"
+    ],
+    "bin_edges_dB": [
+      0,
+      10,
+      20,
+      30,
+      "inf"
+    ]
+  },
+  "passA_identity_check": {
+    "summary": {
+      "rmse": 8.3797,
+      "mae": 7.0474
+    },
+    "image": {
+      "rmse": 8.1524,
+      "mae": 5.1769
+    },
+    "fusion": {
+      "rmse": 6.5533,
+      "mae": 4.5603
+    },
+    "fold": 2,
+    "n_points": 52
+  },
+  "passB_case_metrics": {
+    "rmse": {
+      "summary": 9.3149,
+      "image": 8.1524,
+      "fusion": 6.5465
+    },
+    "mae": {
+      "summary": 8.0363,
+      "image": 5.1769,
+      "fusion": 4.5681
+    }
+  },
+  "distribution_position": {
+    "rmse_fusion_minus_summary": {
+      "case_delta": -2.7684,
+      "percentile_rank": 9.58,
+      "percentile_strict_below": 9.17,
+      "rank_ascending": 23,
+      "n": 240,
+      "cohort_mean": -0.6706,
+      "cohort_median": -0.516,
+      "cohort_min": -5.2477,
+      "cohort_max": 4.1013,
+      "n_negative": 160
+    },
+    "rmse_fusion_minus_image": {
+      "case_delta": -1.606,
+      "percentile_rank": 14.17,
+      "percentile_strict_below": 13.75,
+      "rank_ascending": 34,
+      "n": 240,
+      "cohort_mean": -0.2873,
+      "cohort_median": -0.2493,
+      "cohort_min": -7.7153,
+      "cohort_max": 3.6204,
+      "n_negative": 149
+    },
+    "mae_fusion_minus_summary": {
+      "case_delta": -3.4682,
+      "percentile_rank": 5.0,
+      "percentile_strict_below": 4.58,
+      "rank_ascending": 12,
+      "n": 240,
+      "cohort_mean": -0.5032,
+      "cohort_median": -0.4301,
+      "cohort_min": -5.0459,
+      "cohort_max": 4.7411,
+      "n_negative": 147
+    },
+    "mae_fusion_minus_image": {
+      "case_delta": -0.6088,
+      "percentile_rank": 32.92,
+      "percentile_strict_below": 32.5,
+      "rank_ascending": 79,
+      "n": 240,
+      "cohort_mean": -0.229,
+      "cohort_median": -0.1844,
+      "cohort_min": -7.9403,
+      "cohort_max": 3.7924,
+      "n_negative": 143
+    }
+  },
+  "bins_case": {
+    "summary": {
+      "residual_mean_by_bin": [
+        14.8093,
+        -4.8769,
+        -7.8131,
+        -9.4762
+      ],
+      "n_points_by_bin": [
+        3,
+        10,
+        33,
+        6
+      ],
+      "residual_mean_global": -6.1352
+    },
+    "image": {
+      "residual_mean_by_bin": [
+        24.8281,
+        10.1952,
+        1.7233,
+        -3.5126
+      ],
+      "n_points_by_bin": [
+        3,
+        10,
+        33,
+        6
+      ],
+      "residual_mean_global": 4.0814
+    },
+    "fusion": {
+      "residual_mean_by_bin": [
+        20.1192,
+        3.1113,
+        -2.7588,
+        -6.3155
+      ],
+      "n_points_by_bin": [
+        3,
+        10,
+        33,
+        6
+      ],
+      "residual_mean_global": -0.7204
+    },
+    "n_points_by_bin": [
+      3,
+      10,
+      33,
+      6
+    ]
+  },
+  "bins_cohort_w047": {
+    "summary": {
+      "residual_mean_by_bin": [
+        13.2111,
+        3.1725,
+        -3.0182,
+        -4.4696
+      ],
+      "n_points_by_bin": [
+        2187,
+        1135,
+        6043,
+        3115
+      ],
+      "residual_mean_global": 0.0266
+    },
+    "image": {
+      "residual_mean_by_bin": [
+        14.1704,
+        4.6321,
+        -2.0459,
+        -3.4518
+      ],
+      "n_points_by_bin": [
+        2187,
+        1135,
+        6043,
+        3115
+      ],
+      "residual_mean_global": 1.0523
+    },
+    "fusion": {
+      "residual_mean_by_bin": [
+        13.7195,
+        3.9461,
+        -2.5029,
+        -3.9302
+      ],
+      "n_points_by_bin": [
+        2187,
+        1135,
+        6043,
+        3115
+      ],
+      "residual_mean_global": 0.5702
+    }
+  },
+  "bins_cohort_nested_w_reference": {
+    "source": "experiments/bias_structure/bias_by_bin.json::passes.B.IR-v2.OOF",
+    "n_points_by_bin": [
+      2187,
+      1135,
+      6043,
+      3115
+    ],
+    "summary_residual_mean_by_bin": [
+      13.2111,
+      3.1725,
+      -3.0182,
+      -4.4696
+    ],
+    "image_residual_mean_by_bin": [
+      14.1704,
+      4.6321,
+      -2.0459,
+      -3.4518
+    ],
+    "summary_residual_mean_global": 0.0266,
+    "image_residual_mean_global": 1.0523
+  },
+  "severity": {
+    "md": -6.96,
+    "stratum": "moderate",
+    "md_source": "cohort_md.csv (step4_work/B)",
+    "cohort_md_n": 235,
+    "md_percentile_rank": 35.74,
+    "cohort_md_median": -4.09,
+    "strata_counts": {
+      "normal": 93,
+      "early": 54,
+      "moderate": 29,
+      "advanced": 59
+    }
+  },
+  "checks": {
+    "passA_summary_rmse": {
+      "got": 8.379687,
+      "want": 8.38,
+      "tol": 0.005,
+      "ok": true
+    },
+    "passA_summary_mae": {
+      "got": 7.047383,
+      "want": 7.047,
+      "tol": 0.005,
+      "ok": true
+    },
+    "passA_image_rmse": {
+      "got": 8.152433,
+      "want": 8.152,
+      "tol": 0.005,
+      "ok": true
+    },
+    "passA_image_mae": {
+      "got": 5.176928,
+      "want": 5.177,
+      "tol": 0.005,
+      "ok": true
+    },
+    "passA_fusion_rmse": {
+      "got": 6.553302,
+      "want": 6.553,
+      "tol": 0.005,
+      "ok": true
+    },
+    "passA_fusion_mae": {
+      "got": 4.560298,
+      "want": 4.56,
+      "tol": 0.005,
+      "ok": true
+    },
+    "passA_n_points": {
+      "got": 52.0,
+      "want": 52.0,
+      "tol": 0,
+      "ok": true
+    },
+    "n_eyes_oof": {
+      "got": 240.0,
+      "want": 240.0,
+      "tol": 0,
+      "ok": true
+    },
+    "vf_date_match_A_B": {
+      "got": 1.0,
+      "want": 1.0,
+      "tol": 0,
+      "ok": true
+    },
+    "cohort_summary_bin0": {
+      "got": 13.2111,
+      "want": 13.211139,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_summary_bin1": {
+      "got": 3.1725,
+      "want": 3.172501,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_summary_bin2": {
+      "got": -3.0182,
+      "want": -3.018189,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_summary_bin3": {
+      "got": -4.4696,
+      "want": -4.469596,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_image_bin0": {
+      "got": 14.1704,
+      "want": 14.170403,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_image_bin1": {
+      "got": 4.6321,
+      "want": 4.632133,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_image_bin2": {
+      "got": -2.0459,
+      "want": -2.045935,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_image_bin3": {
+      "got": -3.4518,
+      "want": -3.451811,
+      "tol": 0.001,
+      "ok": true
+    },
+    "cohort_n_bin0": {
+      "got": 2187.0,
+      "want": 2187.0,
+      "tol": 0,
+      "ok": true
+    },
+    "cohort_n_bin1": {
+      "got": 1135.0,
+      "want": 1135.0,
+      "tol": 0,
+      "ok": true
+    },
+    "cohort_n_bin2": {
+      "got": 6043.0,
+      "want": 6043.0,
+      "tol": 0,
+      "ok": true
+    },
+    "cohort_n_bin3": {
+      "got": 3115.0,
+      "want": 3115.0,
+      "tol": 0,
+      "ok": true
+    }
+  }
+}

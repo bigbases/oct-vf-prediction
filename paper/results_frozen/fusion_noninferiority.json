@@ -1,0 +1,270 @@
+{
+  "note": "delta = eye-level(fusion) - eye-level(CNN). 음수=fusion 우세. 환자 클러스터 부트스트랩 10000회, seed 42. w=RMSE 기준, OOF는 nested.",
+  "margins": [
+    0.25,
+    0.5
+  ],
+  "n_boot": 10000,
+  "rows": [
+    {
+      "backbone": "IR-v2",
+      "split": "OOF",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": -0.2611779570579529,
+      "ci_lo": -0.4769593819975853,
+      "ci_hi": -0.044821773469448115,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "IR-v2",
+      "split": "OOF",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": -0.2078600376844406,
+      "ci_lo": -0.41905477941036223,
+      "ci_hi": 0.0018604686309116871,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "IR-v2",
+      "split": "TEST",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": 0.07667601853609085,
+      "ci_lo": -0.5722678169608116,
+      "ci_hi": 0.7012970149517053,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "IR-v2",
+      "split": "TEST",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": 0.23916971683502197,
+      "ci_lo": -0.3515088766813278,
+      "ci_hi": 0.8510877445340157,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "Inception-v3",
+      "split": "OOF",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": -0.32914260029792786,
+      "ci_lo": -0.6718823567032814,
+      "ci_hi": -0.010841241548769205,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "Inception-v3",
+      "split": "OOF",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": -0.24197432398796082,
+      "ci_lo": -0.5727557644248009,
+      "ci_hi": 0.06621513497084361,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "Inception-v3",
+      "split": "TEST",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": -0.030086684972047806,
+      "ci_lo": -0.8454120770096779,
+      "ci_hi": 0.793039159476757,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "Inception-v3",
+      "split": "TEST",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": 0.2426552176475525,
+      "ci_lo": -0.546857313811779,
+      "ci_hi": 1.0951721400022505,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "VGG16",
+      "split": "OOF",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": -0.33267274498939514,
+      "ci_lo": -0.5919314876198769,
+      "ci_hi": -0.07293226998299375,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "VGG16",
+      "split": "OOF",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": -0.2955518960952759,
+      "ci_lo": -0.545309616625309,
+      "ci_hi": -0.048545367084443604,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "VGG16",
+      "split": "TEST",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": 0.3244721293449402,
+      "ci_lo": -0.3617833279073238,
+      "ci_hi": 1.0140888541936872,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "VGG16",
+      "split": "TEST",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": 0.46558770537376404,
+      "ci_lo": -0.2141401808708906,
+      "ci_hi": 1.2285586953163141,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "Xception",
+      "split": "OOF",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": -0.1711670309305191,
+      "ci_lo": -0.3786992184817791,
+      "ci_hi": 0.03023777916096142,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "Xception",
+      "split": "OOF",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": -0.12802349030971527,
+      "ci_lo": -0.3374284692108631,
+      "ci_hi": 0.06669958513230083,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "Xception",
+      "split": "TEST",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": -0.10462872684001923,
+      "ci_lo": -0.6700576081871986,
+      "ci_hi": 0.4587552487850189,
+      "noninf": {
+        "0.25": false,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "Xception",
+      "split": "TEST",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": 0.016120394691824913,
+      "ci_lo": -0.513225057721138,
+      "ci_hi": 0.5943470120429991,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "DenseNet121",
+      "split": "OOF",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": -0.41550156474113464,
+      "ci_lo": -0.6536116972565651,
+      "ci_hi": -0.16966111138463022,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "DenseNet121",
+      "split": "OOF",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": -0.3770132064819336,
+      "ci_lo": -0.6235583737492562,
+      "ci_hi": -0.1297904793173075,
+      "noninf": {
+        "0.25": true,
+        "0.5": true
+      }
+    },
+    {
+      "backbone": "DenseNet121",
+      "split": "TEST",
+      "metric": "rmse",
+      "comparator": "CNN",
+      "delta": 0.2632397413253784,
+      "ci_lo": -0.3963931411504745,
+      "ci_hi": 0.962261152267456,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    },
+    {
+      "backbone": "DenseNet121",
+      "split": "TEST",
+      "metric": "mae",
+      "comparator": "CNN",
+      "delta": 0.37088802456855774,
+      "ci_lo": -0.27495842799544334,
+      "ci_hi": 1.084697213768959,
+      "noninf": {
+        "0.25": false,
+        "0.5": false
+      }
+    }
+  ]
+}

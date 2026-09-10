@@ -1,0 +1,115 @@
+{
+  "w_xgb": 0.47,
+  "n_boot": 5000,
+  "note": "환자 평균 검정(양안 상관 제거) + 환자 클러스터 부트스트랩. GEE 대체(statsmodels 부재).",
+  "OOF": {
+    "n_eyes": 240,
+    "n_patients": 125,
+    "eye_level": {
+      "fusion_vs_XGB": {
+        "n": 240,
+        "mean_fusion": 7.1381689394513765,
+        "mean_solo": 7.808804738521576,
+        "mean_diff": -0.6706357990701993,
+        "fusion_better": "160/240",
+        "wilcoxon_p": 1.2993503457930597e-10,
+        "paired_t_p": 2.2445752026102192e-10
+      },
+      "fusion_vs_CNN": {
+        "n": 240,
+        "mean_fusion": 7.1381689394513765,
+        "mean_solo": 7.425471645096938,
+        "mean_diff": -0.2873027056455612,
+        "fusion_better": "149/240",
+        "wilcoxon_p": 0.0013493832733225994,
+        "paired_t_p": 0.0022116508276554874
+      }
+    },
+    "patient_level": {
+      "fusion_vs_XGB": {
+        "n": 125,
+        "mean_fusion": 7.082571687221527,
+        "mean_solo": 7.754048604329427,
+        "mean_diff": -0.6714769171078999,
+        "fusion_better": "94/125",
+        "wilcoxon_p": 3.8894900697159996e-08,
+        "paired_t_p": 2.4397436738226665e-07
+      },
+      "fusion_vs_CNN": {
+        "n": 125,
+        "mean_fusion": 7.082571687221527,
+        "mean_solo": 7.378418272654215,
+        "mean_diff": -0.2958465854326884,
+        "fusion_better": "80/125",
+        "wilcoxon_p": 0.008168378111163995,
+        "paired_t_p": 0.011346267371550551
+      }
+    },
+    "fusion_pooled_rmse": 8.068803787231445,
+    "bootstrap": {
+      "eye_resample_ci95": [
+        7.543800210952758,
+        8.596678733825684
+      ],
+      "patient_cluster_ci95": [
+        7.377409589290619,
+        8.783945846557616
+      ]
+    }
+  },
+  "TEST": {
+    "n_eyes": 37,
+    "n_patients": 19,
+    "eye_level": {
+      "fusion_vs_XGB": {
+        "n": 37,
+        "mean_fusion": 7.306463222245912,
+        "mean_solo": 7.947114435402122,
+        "mean_diff": -0.6406512131562104,
+        "fusion_better": "27/37",
+        "wilcoxon_p": 0.02640274581790436,
+        "paired_t_p": 0.04361794243767018
+      },
+      "fusion_vs_CNN": {
+        "n": 37,
+        "mean_fusion": 7.306463222245912,
+        "mean_solo": 7.229787198272911,
+        "mean_diff": 0.07667602397300102,
+        "fusion_better": "17/37",
+        "wilcoxon_p": 0.6330981708597392,
+        "paired_t_p": 0.7945984432820544
+      }
+    },
+    "patient_level": {
+      "fusion_vs_XGB": {
+        "n": 19,
+        "mean_fusion": 7.369266867637634,
+        "mean_solo": 7.9077650183125545,
+        "mean_diff": -0.5384981506749204,
+        "fusion_better": "14/19",
+        "wilcoxon_p": 0.104156494140625,
+        "paired_t_p": 0.17552059239332587
+      },
+      "fusion_vs_CNN": {
+        "n": 19,
+        "mean_fusion": 7.369266867637634,
+        "mean_solo": 7.381320090670335,
+        "mean_diff": -0.012053223032700388,
+        "fusion_better": "8/19",
+        "wilcoxon_p": 0.8595733642578125,
+        "paired_t_p": 0.9738611806939264
+      }
+    },
+    "fusion_pooled_rmse": 8.410520553588867,
+    "bootstrap": {
+      "eye_resample_ci95": [
+        6.91650915145874,
+        9.98797960281372
+      ],
+      "patient_cluster_ci95": [
+        6.613495421409607,
+        10.321516919136046
+      ]
+    }
+  }
+}

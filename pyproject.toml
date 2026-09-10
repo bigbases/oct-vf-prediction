@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hvf-late-fusion"
+version = "1.0.0"
+description = "Late fusion of OCT thickness maps and clinical summary features for pointwise 24-2 visual field prediction"
+requires-python = ">=3.10"
+# Runtime versions are pinned exactly in requirements*.txt / environment.yml
+# for reproduction; deliberately left empty here.
+dependencies = []
+
+[tool.setuptools]
+# Flat layout: the entry points sit at the repository root and import each other
+# by module name (`from paths import ...`), the way they were run for the paper.
+# Repackaging them under src/ would falsify every command in the README.
+py-modules = ["paths", "hvf_config", "image_preprocessing"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

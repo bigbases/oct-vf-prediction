@@ -1,0 +1,80 @@
+{
+  "w": 0.47,
+  "xgb": "shared seed42 baseline",
+  "seeds": {
+    "42": {
+      "oof": {
+        "cnn_rmse": 8.53967571258545,
+        "fusion_rmse": 8.068803787231445,
+        "fusion_mae": 5.894312381744385,
+        "xgb_rmse": 8.660277366638184,
+        "fus_vs_cnn_p": 0.0013493832733225994,
+        "fus_vs_cnn_win": "149/240",
+        "fus_vs_xgb_p": 1.2993503457930597e-10,
+        "fus_vs_xgb_win": "160/240"
+      },
+      "test": {
+        "cnn_rmse": 8.732285499572754,
+        "fusion_rmse": 8.410520553588867,
+        "fusion_mae": 6.271999359130859,
+        "xgb_rmse": 8.919268608093262,
+        "fus_vs_cnn_p": 0.6330981708597392,
+        "fus_vs_cnn_win": "17/37",
+        "fus_vs_xgb_p": 0.02640274581790436,
+        "fus_vs_xgb_win": "27/37"
+      }
+    },
+    "43": {
+      "oof": {
+        "cnn_rmse": 8.365266799926758,
+        "fusion_rmse": 7.978989601135254,
+        "fusion_mae": 5.77290678024292,
+        "xgb_rmse": 8.660277366638184,
+        "fus_vs_cnn_p": 0.04404910287772835,
+        "fus_vs_cnn_win": "134/240",
+        "fus_vs_xgb_p": 9.956910412999131e-12,
+        "fus_vs_xgb_win": "168/240"
+      },
+      "test": {
+        "cnn_rmse": 8.60364055633545,
+        "fusion_rmse": 8.320022583007812,
+        "fusion_mae": 6.09647274017334,
+        "xgb_rmse": 8.919268608093262,
+        "fus_vs_cnn_p": 0.550494163078838,
+        "fus_vs_cnn_win": "15/37",
+        "fus_vs_xgb_p": 0.02640274581790436,
+        "fus_vs_xgb_win": "26/37"
+      }
+    },
+    "44": {
+      "oof": {
+        "cnn_rmse": 8.561346054077148,
+        "fusion_rmse": 8.079034805297852,
+        "fusion_mae": 5.86442232131958,
+        "xgb_rmse": 8.660277366638184,
+        "fus_vs_cnn_p": 0.018922210036177663,
+        "fus_vs_cnn_win": "133/240",
+        "fus_vs_xgb_p": 9.984488171574243e-11,
+        "fus_vs_xgb_win": "165/240"
+      },
+      "test": {
+        "cnn_rmse": 8.765564918518066,
+        "fusion_rmse": 8.362593650817871,
+        "fusion_mae": 6.135968208312988,
+        "xgb_rmse": 8.919268608093262,
+        "fus_vs_cnn_p": 0.9524598861316917,
+        "fus_vs_cnn_win": "19/37",
+        "fus_vs_xgb_p": 0.047265768895158544,
+        "fus_vs_xgb_win": "23/37"
+      }
+    }
+  },
+  "summary": {
+    "oof_fusion_rmse_mean": 8.04227606455485,
+    "oof_fusion_rmse_std": 0.044944786659401804,
+    "oof_cnn_rmse_mean": 8.488762855529785,
+    "oof_cnn_rmse_std": 0.08777189275700671,
+    "fus_vs_xgb_all_sig": true,
+    "fus_vs_cnn_all_sig": true
+  }
+}

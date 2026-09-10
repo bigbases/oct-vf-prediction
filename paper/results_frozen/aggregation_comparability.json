@@ -1,0 +1,595 @@
+{
+  "_note": "동일 예측을 pooled / per-eye mean±SD 두 방식으로 집계. 선행연구(Park·Shin·Abdullahi)는 per-eye mean±SD 방식이므로 그쪽 열로 비교할 것.",
+  "_jensen": "pooled >= per-eye mean (Jensen). 섞어 비교하면 본 연구가 부당하게 나빠 보인다.",
+  "models": {
+    "OOF": {
+      "n_eyes": 240,
+      "xgb": {
+        "pooled_rmse": 8.66,
+        "pooled_mae": 6.398,
+        "eye_rmse_mean": 7.809,
+        "eye_rmse_sd": 3.753,
+        "eye_rmse_sd_pop": 3.745,
+        "eye_mae_mean": 6.398,
+        "eye_mae_sd": 3.429,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.66,
+        "identity_abs_err_vs_pooled": 0.0,
+        "gap_pooled_minus_eyemean_rmse": 0.851
+      },
+      "backbones": {
+        "inception_v3": {
+          "label": "Inception-v3",
+          "cnn": {
+            "pooled_rmse": 9.11,
+            "pooled_mae": 6.222,
+            "eye_rmse_mean": 7.614,
+            "eye_rmse_sd": 5.013,
+            "eye_rmse_sd_pop": 5.002,
+            "eye_mae_mean": 6.222,
+            "eye_mae_sd": 4.619,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 9.11,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.496
+          },
+          "fusion": {
+            "pooled_rmse": 8.255,
+            "pooled_mae": 5.952,
+            "eye_rmse_mean": 7.256,
+            "eye_rmse_sd": 3.945,
+            "eye_rmse_sd_pop": 3.937,
+            "eye_mae_mean": 5.952,
+            "eye_mae_sd": 3.611,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.255,
+            "identity_abs_err_vs_pooled": 1e-06,
+            "gap_pooled_minus_eyemean_rmse": 0.999
+          }
+        },
+        "inception_resnet_v2": {
+          "label": "IR-v2",
+          "cnn": {
+            "pooled_rmse": 8.54,
+            "pooled_mae": 6.123,
+            "eye_rmse_mean": 7.425,
+            "eye_rmse_sd": 4.226,
+            "eye_rmse_sd_pop": 4.218,
+            "eye_mae_mean": 6.123,
+            "eye_mae_sd": 3.837,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.54,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.114
+          },
+          "fusion": {
+            "pooled_rmse": 8.069,
+            "pooled_mae": 5.894,
+            "eye_rmse_mean": 7.138,
+            "eye_rmse_sd": 3.77,
+            "eye_rmse_sd_pop": 3.762,
+            "eye_mae_mean": 5.894,
+            "eye_mae_sd": 3.44,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.069,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 0.931
+          }
+        },
+        "vgg16": {
+          "label": "VGG16",
+          "cnn": {
+            "pooled_rmse": 9.165,
+            "pooled_mae": 6.417,
+            "eye_rmse_mean": 7.731,
+            "eye_rmse_sd": 4.932,
+            "eye_rmse_sd_pop": 4.922,
+            "eye_mae_mean": 6.417,
+            "eye_mae_sd": 4.632,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 9.165,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.434
+          },
+          "fusion": {
+            "pooled_rmse": 8.379,
+            "pooled_mae": 6.109,
+            "eye_rmse_mean": 7.381,
+            "eye_rmse_sd": 3.973,
+            "eye_rmse_sd_pop": 3.965,
+            "eye_mae_mean": 6.109,
+            "eye_mae_sd": 3.681,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.379,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 0.997
+          }
+        },
+        "xception": {
+          "label": "Xception",
+          "cnn": {
+            "pooled_rmse": 8.352,
+            "pooled_mae": 5.946,
+            "eye_rmse_mean": 7.221,
+            "eye_rmse_sd": 4.206,
+            "eye_rmse_sd_pop": 4.197,
+            "eye_mae_mean": 5.946,
+            "eye_mae_sd": 3.943,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.352,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.131
+          },
+          "fusion": {
+            "pooled_rmse": 7.964,
+            "pooled_mae": 5.811,
+            "eye_rmse_mean": 7.039,
+            "eye_rmse_sd": 3.732,
+            "eye_rmse_sd_pop": 3.725,
+            "eye_mae_mean": 5.811,
+            "eye_mae_sd": 3.459,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 7.964,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 0.925
+          }
+        },
+        "densenet121": {
+          "label": "DenseNet121",
+          "cnn": {
+            "pooled_rmse": 8.669,
+            "pooled_mae": 6.155,
+            "eye_rmse_mean": 7.437,
+            "eye_rmse_sd": 4.463,
+            "eye_rmse_sd_pop": 4.454,
+            "eye_mae_mean": 6.155,
+            "eye_mae_sd": 4.127,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.669,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.231
+          },
+          "fusion": {
+            "pooled_rmse": 8.027,
+            "pooled_mae": 5.765,
+            "eye_rmse_mean": 7.001,
+            "eye_rmse_sd": 3.936,
+            "eye_rmse_sd_pop": 3.927,
+            "eye_mae_mean": 5.765,
+            "eye_mae_sd": 3.611,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.027,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.026
+          }
+        }
+      }
+    },
+    "TEST": {
+      "n_eyes": 37,
+      "xgb": {
+        "pooled_rmse": 8.919,
+        "pooled_mae": 6.832,
+        "eye_rmse_mean": 7.947,
+        "eye_rmse_sd": 4.105,
+        "eye_rmse_sd_pop": 4.049,
+        "eye_mae_mean": 6.832,
+        "eye_mae_sd": 3.935,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.919,
+        "identity_abs_err_vs_pooled": 1e-06,
+        "gap_pooled_minus_eyemean_rmse": 0.972
+      },
+      "backbones": {
+        "inception_v3": {
+          "label": "Inception-v3",
+          "cnn": {
+            "pooled_rmse": 9.17,
+            "pooled_mae": 6.148,
+            "eye_rmse_mean": 7.503,
+            "eye_rmse_sd": 5.346,
+            "eye_rmse_sd_pop": 5.273,
+            "eye_mae_mean": 6.148,
+            "eye_mae_sd": 4.829,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 9.17,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.668
+          },
+          "fusion": {
+            "pooled_rmse": 8.606,
+            "pooled_mae": 6.391,
+            "eye_rmse_mean": 7.473,
+            "eye_rmse_sd": 4.329,
+            "eye_rmse_sd_pop": 4.27,
+            "eye_mae_mean": 6.391,
+            "eye_mae_sd": 4.045,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.606,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.134
+          }
+        },
+        "inception_resnet_v2": {
+          "label": "IR-v2",
+          "cnn": {
+            "pooled_rmse": 8.732,
+            "pooled_mae": 6.033,
+            "eye_rmse_mean": 7.23,
+            "eye_rmse_sd": 4.965,
+            "eye_rmse_sd_pop": 4.897,
+            "eye_mae_mean": 6.033,
+            "eye_mae_sd": 4.411,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.732,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.502
+          },
+          "fusion": {
+            "pooled_rmse": 8.411,
+            "pooled_mae": 6.272,
+            "eye_rmse_mean": 7.306,
+            "eye_rmse_sd": 4.223,
+            "eye_rmse_sd_pop": 4.166,
+            "eye_mae_mean": 6.272,
+            "eye_mae_sd": 3.891,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.411,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.104
+          }
+        },
+        "vgg16": {
+          "label": "VGG16",
+          "cnn": {
+            "pooled_rmse": 8.502,
+            "pooled_mae": 5.832,
+            "eye_rmse_mean": 6.996,
+            "eye_rmse_sd": 4.898,
+            "eye_rmse_sd_pop": 4.832,
+            "eye_mae_mean": 5.832,
+            "eye_mae_sd": 4.54,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.502,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.506
+          },
+          "fusion": {
+            "pooled_rmse": 8.397,
+            "pooled_mae": 6.297,
+            "eye_rmse_mean": 7.32,
+            "eye_rmse_sd": 4.171,
+            "eye_rmse_sd_pop": 4.114,
+            "eye_mae_mean": 6.297,
+            "eye_mae_sd": 3.923,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.397,
+            "identity_abs_err_vs_pooled": 1e-06,
+            "gap_pooled_minus_eyemean_rmse": 1.077
+          }
+        },
+        "xception": {
+          "label": "Xception",
+          "cnn": {
+            "pooled_rmse": 8.963,
+            "pooled_mae": 6.349,
+            "eye_rmse_mean": 7.479,
+            "eye_rmse_sd": 5.008,
+            "eye_rmse_sd_pop": 4.94,
+            "eye_mae_mean": 6.349,
+            "eye_mae_sd": 4.56,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.963,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.484
+          },
+          "fusion": {
+            "pooled_rmse": 8.568,
+            "pooled_mae": 6.365,
+            "eye_rmse_mean": 7.374,
+            "eye_rmse_sd": 4.422,
+            "eye_rmse_sd_pop": 4.362,
+            "eye_mae_mean": 6.365,
+            "eye_mae_sd": 4.113,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.568,
+            "identity_abs_err_vs_pooled": 1e-06,
+            "gap_pooled_minus_eyemean_rmse": 1.193
+          }
+        },
+        "densenet121": {
+          "label": "DenseNet121",
+          "cnn": {
+            "pooled_rmse": 8.557,
+            "pooled_mae": 5.71,
+            "eye_rmse_mean": 6.833,
+            "eye_rmse_sd": 5.222,
+            "eye_rmse_sd_pop": 5.151,
+            "eye_mae_mean": 5.71,
+            "eye_mae_sd": 4.808,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.557,
+            "identity_abs_err_vs_pooled": 1e-06,
+            "gap_pooled_minus_eyemean_rmse": 1.724
+          },
+          "fusion": {
+            "pooled_rmse": 8.329,
+            "pooled_mae": 6.081,
+            "eye_rmse_mean": 7.097,
+            "eye_rmse_sd": 4.419,
+            "eye_rmse_sd_pop": 4.359,
+            "eye_mae_mean": 6.081,
+            "eye_mae_sd": 4.135,
+            "n_points_per_eye_unique": [
+              52
+            ],
+            "identity_sqrt_mean2_plus_sdpop2": 8.329,
+            "identity_abs_err_vs_pooled": 0.0,
+            "gap_pooled_minus_eyemean_rmse": 1.232
+          }
+        }
+      }
+    }
+  },
+  "comparison_ready": {
+    "OOF": {
+      "xgb": {
+        "pooled_rmse": 8.66,
+        "pooled_mae": 6.398,
+        "eye_rmse_mean": 7.809,
+        "eye_rmse_sd": 3.753,
+        "eye_rmse_sd_pop": 3.745,
+        "eye_mae_mean": 6.398,
+        "eye_mae_sd": 3.429,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.66,
+        "identity_abs_err_vs_pooled": 0.0,
+        "gap_pooled_minus_eyemean_rmse": 0.851
+      },
+      "cnn_ir_v2": {
+        "pooled_rmse": 8.54,
+        "pooled_mae": 6.123,
+        "eye_rmse_mean": 7.425,
+        "eye_rmse_sd": 4.226,
+        "eye_rmse_sd_pop": 4.218,
+        "eye_mae_mean": 6.123,
+        "eye_mae_sd": 3.837,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.54,
+        "identity_abs_err_vs_pooled": 0.0,
+        "gap_pooled_minus_eyemean_rmse": 1.114
+      },
+      "fusion_ir_v2": {
+        "pooled_rmse": 8.069,
+        "pooled_mae": 5.894,
+        "eye_rmse_mean": 7.138,
+        "eye_rmse_sd": 3.77,
+        "eye_rmse_sd_pop": 3.762,
+        "eye_mae_mean": 5.894,
+        "eye_mae_sd": 3.44,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.069,
+        "identity_abs_err_vs_pooled": 0.0,
+        "gap_pooled_minus_eyemean_rmse": 0.931
+      }
+    },
+    "TEST": {
+      "xgb": {
+        "pooled_rmse": 8.919,
+        "pooled_mae": 6.832,
+        "eye_rmse_mean": 7.947,
+        "eye_rmse_sd": 4.105,
+        "eye_rmse_sd_pop": 4.049,
+        "eye_mae_mean": 6.832,
+        "eye_mae_sd": 3.935,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.919,
+        "identity_abs_err_vs_pooled": 1e-06,
+        "gap_pooled_minus_eyemean_rmse": 0.972
+      },
+      "cnn_ir_v2": {
+        "pooled_rmse": 8.732,
+        "pooled_mae": 6.033,
+        "eye_rmse_mean": 7.23,
+        "eye_rmse_sd": 4.965,
+        "eye_rmse_sd_pop": 4.897,
+        "eye_mae_mean": 6.033,
+        "eye_mae_sd": 4.411,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.732,
+        "identity_abs_err_vs_pooled": 0.0,
+        "gap_pooled_minus_eyemean_rmse": 1.502
+      },
+      "fusion_ir_v2": {
+        "pooled_rmse": 8.411,
+        "pooled_mae": 6.272,
+        "eye_rmse_mean": 7.306,
+        "eye_rmse_sd": 4.223,
+        "eye_rmse_sd_pop": 4.166,
+        "eye_mae_mean": 6.272,
+        "eye_mae_sd": 3.891,
+        "n_points_per_eye_unique": [
+          52
+        ],
+        "identity_sqrt_mean2_plus_sdpop2": 8.411,
+        "identity_abs_err_vs_pooled": 0.0,
+        "gap_pooled_minus_eyemean_rmse": 1.104
+      }
+    },
+    "literature_axis_conversion": [
+      {
+        "study": "Park 2020",
+        "metric": "RMSE",
+        "setting": "IR-v2 / SS-OCT / test 305안",
+        "reported_per_eye_mean_sd": "4.44 ± 2.09",
+        "pooled_equivalent_rmse": 4.91,
+        "note": "안별 RMSE → pooled 환산 가능"
+      },
+      {
+        "study": "Shin 2021",
+        "metric": "RMSE",
+        "setting": "SD-OCT",
+        "reported_per_eye_mean_sd": "5.29 ± 2.68",
+        "pooled_equivalent_rmse": 5.93,
+        "note": "안별 RMSE → pooled 환산 가능"
+      },
+      {
+        "study": "Shin 2021",
+        "metric": "RMSE",
+        "setting": "SS-OCT",
+        "reported_per_eye_mean_sd": "4.51 ± 2.54",
+        "pooled_equivalent_rmse": 5.18,
+        "note": "안별 RMSE → pooled 환산 가능"
+      },
+      {
+        "study": "Abdullahi 2026",
+        "metric": "MAE",
+        "setting": "제안모델",
+        "reported_per_eye_mean_sd": "3.32 ± 2.35",
+        "pooled_equivalent_rmse": null,
+        "note": "MAE는 pooled와 안별평균이 동일값이므로 환산 불필요 (본 연구 eye_mae_mean과 직접 비교)"
+      },
+      {
+        "study": "Abdullahi 2026",
+        "metric": "MAE",
+        "setting": "재학습 IR-v2 baseline",
+        "reported_per_eye_mean_sd": "5.77 ± 2.01",
+        "pooled_equivalent_rmse": null,
+        "note": "MAE는 pooled와 안별평균이 동일값이므로 환산 불필요 (본 연구 eye_mae_mean과 직접 비교)"
+      },
+      {
+        "study": "Abdullahi 2026",
+        "metric": "MAE",
+        "setting": "재학습 InceptionV3 baseline",
+        "reported_per_eye_mean_sd": "6.70 ± 2.15",
+        "pooled_equivalent_rmse": null,
+        "note": "MAE는 pooled와 안별평균이 동일값이므로 환산 불필요 (본 연구 eye_mae_mean과 직접 비교)"
+      }
+    ],
+    "_caution": "위 문헌값은 사용자 2차보고 기반. 1차출처 재확인 전 원고 인용 금지."
+  },
+  "gap_decomposition_vs_literature": {
+    "_basis": "본 연구 OOF late fusion (IR-v2): pooled RMSE 8.069, 안별 RMSE 7.138 ± 3.77",
+    "_read": "explained_by_aggregation_* 는 [pooled축 기준, 안별평균축 기준] 두 값. 집계방식이 설명하는 몫은 일부일 뿐 격차 대부분은 남는다 — 과대해석 금지.",
+    "rows": [
+      {
+        "study": "Park 2020 (SS-OCT, IR-v2)",
+        "lit_eye_mean_sd": "4.44 ± 2.09",
+        "lit_pooled_equiv": 4.91,
+        "gap_naive_mixed_axis": 3.63,
+        "gap_same_axis_eye_mean": 2.7,
+        "gap_same_axis_pooled": 3.16,
+        "explained_by_aggregation_dB": [
+          0.47,
+          0.93
+        ],
+        "explained_by_aggregation_pct": [
+          13,
+          26
+        ],
+        "our_eye_rmse_sd_vs_lit_sd": [
+          3.77,
+          2.09
+        ]
+      },
+      {
+        "study": "Shin 2021 (SD-OCT)",
+        "lit_eye_mean_sd": "5.29 ± 2.68",
+        "lit_pooled_equiv": 5.93,
+        "gap_naive_mixed_axis": 2.78,
+        "gap_same_axis_eye_mean": 1.85,
+        "gap_same_axis_pooled": 2.14,
+        "explained_by_aggregation_dB": [
+          0.64,
+          0.93
+        ],
+        "explained_by_aggregation_pct": [
+          23,
+          34
+        ],
+        "our_eye_rmse_sd_vs_lit_sd": [
+          3.77,
+          2.68
+        ]
+      },
+      {
+        "study": "Shin 2021 (SS-OCT)",
+        "lit_eye_mean_sd": "4.51 ± 2.54",
+        "lit_pooled_equiv": 5.18,
+        "gap_naive_mixed_axis": 3.56,
+        "gap_same_axis_eye_mean": 2.63,
+        "gap_same_axis_pooled": 2.89,
+        "explained_by_aggregation_dB": [
+          0.67,
+          0.93
+        ],
+        "explained_by_aggregation_pct": [
+          19,
+          26
+        ],
+        "our_eye_rmse_sd_vs_lit_sd": [
+          3.77,
+          2.54
+        ]
+      }
+    ],
+    "MAE_axis_note": {
+      "fact": "모든 안의 유효지점이 52로 동일하므로 pooled MAE = 안별 MAE 평균 (정확히 일치).",
+      "implication": "MAE로 보고된 선행연구(Abdullahi, Kihara PMAE)와의 비교에는 집계방식 보정이 아예 필요 없다. 이 경로는 변명 없이 그대로 성립.",
+      "our_oof_fusion_mae": 5.894,
+      "our_oof_cnn_irv2_mae": 6.123
+    }
+  }
+}

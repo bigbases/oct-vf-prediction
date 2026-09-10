@@ -1,0 +1,296 @@
+{
+  "protocol": "Phase C 5-fold, 90d, seed42",
+  "csv": "ml_final_90d_excl_empty_flip.csv",
+  "rows": [
+    {
+      "backbone": "inception_v3",
+      "mode": "image",
+      "run_dir": "runs/phasec_b0_clip_mse_5fold",
+      "use_tabular": false,
+      "cnn_oof_rmse": 9.11,
+      "cnn_oof_mae": 6.222,
+      "w_xgb": 0.6,
+      "fusion_oof_rmse": 8.255,
+      "fusion_oof_mae": 5.952,
+      "cnn_test_rmse_mean": 9.801,
+      "cnn_test_rmse_std": 0.73,
+      "fusion_test_rmse_mean": 8.827,
+      "fusion_test_rmse_std": 0.325,
+      "cnn_test_per_fold": [
+        8.895,
+        9.16,
+        10.891,
+        10.295,
+        9.765
+      ],
+      "fusion_test_per_fold": [
+        8.279,
+        8.736,
+        9.034,
+        9.245,
+        8.839
+      ]
+    },
+    {
+      "backbone": "inception_v3",
+      "mode": "mm",
+      "run_dir": "runs/phasec_mm_inception_v3_5fold",
+      "use_tabular": true,
+      "cnn_oof_rmse": 9.046,
+      "cnn_oof_mae": 6.763,
+      "w_xgb": 0.61,
+      "fusion_oof_rmse": 8.378,
+      "fusion_oof_mae": 6.225,
+      "cnn_test_rmse_mean": 9.461,
+      "cnn_test_rmse_std": 0.373,
+      "fusion_test_rmse_mean": 8.848,
+      "fusion_test_rmse_std": 0.109,
+      "cnn_test_per_fold": [
+        9.108,
+        9.617,
+        9.462,
+        9.046,
+        10.073
+      ],
+      "fusion_test_per_fold": [
+        8.64,
+        8.96,
+        8.877,
+        8.868,
+        8.895
+      ]
+    },
+    {
+      "backbone": "inception_resnet_v2",
+      "mode": "image",
+      "run_dir": "runs/phasec_b0_inception_resnet_v2_5fold",
+      "use_tabular": false,
+      "cnn_oof_rmse": 8.54,
+      "cnn_oof_mae": 6.123,
+      "w_xgb": 0.47,
+      "fusion_oof_rmse": 8.069,
+      "fusion_oof_mae": 5.894,
+      "cnn_test_rmse_mean": 9.168,
+      "cnn_test_rmse_std": 0.533,
+      "fusion_test_rmse_mean": 8.622,
+      "fusion_test_rmse_std": 0.206,
+      "cnn_test_per_fold": [
+        8.841,
+        8.519,
+        10.067,
+        9.007,
+        9.406
+      ],
+      "fusion_test_per_fold": [
+        8.443,
+        8.328,
+        8.874,
+        8.683,
+        8.782
+      ]
+    },
+    {
+      "backbone": "inception_resnet_v2",
+      "mode": "mm",
+      "run_dir": "runs/phasec_mm_inception_resnet_v2_5fold",
+      "use_tabular": true,
+      "cnn_oof_rmse": 9.106,
+      "cnn_oof_mae": 6.258,
+      "w_xgb": 0.6,
+      "fusion_oof_rmse": 8.263,
+      "fusion_oof_mae": 6.024,
+      "cnn_test_rmse_mean": 8.825,
+      "cnn_test_rmse_std": 0.235,
+      "fusion_test_rmse_mean": 8.56,
+      "fusion_test_rmse_std": 0.194,
+      "cnn_test_per_fold": [
+        8.783,
+        8.828,
+        8.606,
+        9.265,
+        8.646
+      ],
+      "fusion_test_per_fold": [
+        8.523,
+        8.528,
+        8.421,
+        8.932,
+        8.396
+      ]
+    },
+    {
+      "backbone": "vgg16",
+      "mode": "image",
+      "run_dir": "runs/phasec_b0_vgg16_5fold",
+      "use_tabular": false,
+      "cnn_oof_rmse": 9.165,
+      "cnn_oof_mae": 6.417,
+      "w_xgb": 0.63,
+      "fusion_oof_rmse": 8.379,
+      "fusion_oof_mae": 6.109,
+      "cnn_test_rmse_mean": 8.806,
+      "cnn_test_rmse_std": 0.416,
+      "fusion_test_rmse_mean": 8.556,
+      "fusion_test_rmse_std": 0.12,
+      "cnn_test_per_fold": [
+        9.583,
+        8.885,
+        8.596,
+        8.506,
+        8.458
+      ],
+      "fusion_test_per_fold": [
+        8.723,
+        8.497,
+        8.502,
+        8.664,
+        8.394
+      ]
+    },
+    {
+      "backbone": "vgg16",
+      "mode": "mm",
+      "run_dir": "runs/phasec_mm_vgg16_5fold",
+      "use_tabular": true,
+      "cnn_oof_rmse": 9.24,
+      "cnn_oof_mae": 6.467,
+      "w_xgb": 0.65,
+      "fusion_oof_rmse": 8.413,
+      "fusion_oof_mae": 6.134,
+      "cnn_test_rmse_mean": 9.19,
+      "cnn_test_rmse_std": 0.665,
+      "fusion_test_rmse_mean": 8.633,
+      "fusion_test_rmse_std": 0.268,
+      "cnn_test_per_fold": [
+        8.499,
+        9.498,
+        9.226,
+        10.251,
+        8.475
+      ],
+      "fusion_test_per_fold": [
+        8.377,
+        8.55,
+        8.6,
+        9.147,
+        8.488
+      ]
+    },
+    {
+      "backbone": "xception",
+      "mode": "image",
+      "run_dir": "runs/phasec_b0_xception_5fold",
+      "use_tabular": false,
+      "cnn_oof_rmse": 8.352,
+      "cnn_oof_mae": 5.946,
+      "w_xgb": 0.43,
+      "fusion_oof_rmse": 7.964,
+      "fusion_oof_mae": 5.811,
+      "cnn_test_rmse_mean": 9.276,
+      "cnn_test_rmse_std": 0.366,
+      "fusion_test_rmse_mean": 8.727,
+      "fusion_test_rmse_std": 0.272,
+      "cnn_test_per_fold": [
+        9.008,
+        9.039,
+        8.997,
+        9.947,
+        9.391
+      ],
+      "fusion_test_per_fold": [
+        8.617,
+        8.552,
+        8.56,
+        9.266,
+        8.637
+      ]
+    },
+    {
+      "backbone": "xception",
+      "mode": "mm",
+      "run_dir": "runs/phasec_mm_xception_5fold",
+      "use_tabular": true,
+      "cnn_oof_rmse": 8.733,
+      "cnn_oof_mae": 6.207,
+      "w_xgb": 0.52,
+      "fusion_oof_rmse": 8.111,
+      "fusion_oof_mae": 5.94,
+      "cnn_test_rmse_mean": 8.689,
+      "cnn_test_rmse_std": 0.266,
+      "fusion_test_rmse_mean": 8.448,
+      "fusion_test_rmse_std": 0.091,
+      "cnn_test_per_fold": [
+        8.434,
+        9.096,
+        8.755,
+        8.363,
+        8.796
+      ],
+      "fusion_test_per_fold": [
+        8.37,
+        8.587,
+        8.379,
+        8.377,
+        8.527
+      ]
+    },
+    {
+      "backbone": "densenet121",
+      "mode": "image",
+      "run_dir": "runs/phasec_b0_densenet121_5fold",
+      "use_tabular": false,
+      "cnn_oof_rmse": 8.669,
+      "cnn_oof_mae": 6.155,
+      "w_xgb": 0.5,
+      "fusion_oof_rmse": 8.027,
+      "fusion_oof_mae": 5.765,
+      "cnn_test_rmse_mean": 9.292,
+      "cnn_test_rmse_std": 0.21,
+      "fusion_test_rmse_mean": 8.57,
+      "fusion_test_rmse_std": 0.154,
+      "cnn_test_per_fold": [
+        9.357,
+        9.61,
+        9.37,
+        9.032,
+        9.089
+      ],
+      "fusion_test_per_fold": [
+        8.644,
+        8.72,
+        8.295,
+        8.679,
+        8.511
+      ]
+    },
+    {
+      "backbone": "densenet121",
+      "mode": "mm",
+      "run_dir": "runs/phasec_mm_densenet121_5fold",
+      "use_tabular": true,
+      "cnn_oof_rmse": 8.519,
+      "cnn_oof_mae": 6.099,
+      "w_xgb": 0.46,
+      "fusion_oof_rmse": 8.096,
+      "fusion_oof_mae": 5.852,
+      "cnn_test_rmse_mean": 9.089,
+      "cnn_test_rmse_std": 0.425,
+      "fusion_test_rmse_mean": 8.544,
+      "fusion_test_rmse_std": 0.22,
+      "cnn_test_per_fold": [
+        9.543,
+        9.526,
+        9.188,
+        8.642,
+        8.545
+      ],
+      "fusion_test_per_fold": [
+        8.91,
+        8.62,
+        8.372,
+        8.542,
+        8.276
+      ]
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "protocol": "90d 5-fold OOF, IR-v2, pooled RMSE/MAE(dB), w_xgb=0.47",
+  "w_xgb": 0.47,
+  "n_eyes": 240,
+  "severity": {
+    "normal": {
+      "n_eyes": 93,
+      "n_points": 4836,
+      "xgb": {
+        "rmse": 6.04,
+        "mae": 4.54
+      },
+      "cnn": {
+        "rmse": 5.38,
+        "mae": 3.95
+      },
+      "fusion": {
+        "rmse": 5.07,
+        "mae": 3.93
+      },
+      "p_fus_vs_cnn": 0.6036,
+      "p_fus_vs_xgb": 0.0
+    },
+    "early": {
+      "n_eyes": 54,
+      "n_points": 2808,
+      "xgb": {
+        "rmse": 6.6,
+        "mae": 4.73
+      },
+      "cnn": {
+        "rmse": 6.37,
+        "mae": 4.48
+      },
+      "fusion": {
+        "rmse": 5.9,
+        "mae": 4.1
+      },
+      "p_fus_vs_cnn": 0.001,
+      "p_fus_vs_xgb": 0.0001
+    },
+    "moderate": {
+      "n_eyes": 29,
+      "n_points": 1508,
+      "xgb": {
+        "rmse": 9.75,
+        "mae": 7.62
+      },
+      "cnn": {
+        "rmse": 9.85,
+        "mae": 7.29
+      },
+      "fusion": {
+        "rmse": 9.16,
+        "mae": 6.92
+      },
+      "p_fus_vs_cnn": 0.0028,
+      "p_fus_vs_xgb": 0.1056
+    },
+    "advanced": {
+      "n_eyes": 59,
+      "n_points": 3068,
+      "xgb": {
+        "rmse": 12.57,
+        "mae": 10.45
+      },
+      "cnn": {
+        "rmse": 12.76,
+        "mae": 10.65
+      },
+      "fusion": {
+        "rmse": 12.18,
+        "mae": 10.3
+      },
+      "p_fus_vs_cnn": 0.0321,
+      "p_fus_vs_xgb": 0.0506
+    }
+  },
+  "region": {
+    "superior (상반구)": {
+      "n_eyes": 240,
+      "n_points": 6240,
+      "xgb": {
+        "rmse": 8.84,
+        "mae": 6.63
+      },
+      "cnn": {
+        "rmse": 8.79,
+        "mae": 6.43
+      },
+      "fusion": {
+        "rmse": 8.22,
+        "mae": 6.15
+      },
+      "p_fus_vs_cnn": 0.0074,
+      "p_fus_vs_xgb": 0.0
+    },
+    "inferior (하반구)": {
+      "n_eyes": 240,
+      "n_points": 6240,
+      "xgb": {
+        "rmse": 8.48,
+        "mae": 6.17
+      },
+      "cnn": {
+        "rmse": 8.28,
+        "mae": 5.81
+      },
+      "fusion": {
+        "rmse": 7.91,
+        "mae": 5.64
+      },
+      "p_fus_vs_cnn": 0.0946,
+      "p_fus_vs_xgb": 0.0
+    },
+    "central ≤9° (중심)": {
+      "n_eyes": 240,
+      "n_points": 3840,
+      "xgb": {
+        "rmse": 8.14,
+        "mae": 5.65
+      },
+      "cnn": {
+        "rmse": 8.01,
+        "mae": 5.4
+      },
+      "fusion": {
+        "rmse": 7.57,
+        "mae": 5.16
+      },
+      "p_fus_vs_cnn": 0.004,
+      "p_fus_vs_xgb": 0.0
+    },
+    "peripheral (주변)": {
+      "n_eyes": 240,
+      "n_points": 8640,
+      "xgb": {
+        "rmse": 8.88,
+        "mae": 6.73
+      },
+      "cnn": {
+        "rmse": 8.76,
+        "mae": 6.45
+      },
+      "fusion": {
+        "rmse": 8.28,
+        "mae": 6.22
+      },
+      "p_fus_vs_cnn": 0.0028,
+      "p_fus_vs_xgb": 0.0
+    }
+  },
+  "overall": {
+    "n_eyes": 240,
+    "n_points": 12480,
+    "xgb": {
+      "rmse": 8.66,
+      "mae": 6.4
+    },
+    "cnn": {
+      "rmse": 8.54,
+      "mae": 6.12
+    },
+    "fusion": {
+      "rmse": 8.07,
+      "mae": 5.89
+    },
+    "p_fus_vs_cnn": 0.0013,
+    "p_fus_vs_xgb": 0.0
+  }
+}

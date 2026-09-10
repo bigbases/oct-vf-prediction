@@ -1,0 +1,72 @@
+{
+  "note": "§4 Robustness 산문 수치의 산출물 근거. 정렬 규약은 explore_fusion_gains.py 와 동일 (공통 키 = XGB ∩ 5백본, 마스크 = 전 분지 교집합).",
+  "split": "OOF (5-fold)",
+  "backbone_single": "IR-v2",
+  "n_eyes": 240,
+  "n_points": 12480,
+  "w_grid_step": 0.01,
+  "fusion_machinery": {
+    "global_w_dev": {
+      "rmse": 8.068803787231445,
+      "w": 0.47000000000000003,
+      "note": "w 를 전체 OOF 로 적합하고 같은 OOF 에서 평가 — development estimate."
+    },
+    "global_w_nested": {
+      "rmse": 8.10079574584961,
+      "w_per_fold": [
+        0.45,
+        0.51,
+        0.49,
+        0.5,
+        0.4
+      ],
+      "note": "평가 fold 를 뺀 4 fold 에서 w 적합 — 선택 낙관 제거."
+    },
+    "fixed_w_0.5": {
+      "rmse": 8.070690155029297,
+      "w": 0.5,
+      "note": "적합 없이 두 분지를 동일 가중으로 평균."
+    },
+    "per_point_w_nested": {
+      "rmse": 8.120380270719785,
+      "note": "52 개 field 위치마다 w 를 따로 적합, nested."
+    },
+    "nnls_stack_nested": {
+      "rmse": 8.119242668151855,
+      "columns": [
+        "xgb",
+        "IR-v2"
+      ],
+      "note": "위치별 비음수 최소제곱 스택(합 1 로 정규화), nested."
+    }
+  },
+  "per_eye_advantage": {
+    "model": "fusion(XGB + 5백본 평균 CNN), nested global-w",
+    "w_per_fold": [
+      0.29,
+      0.39,
+      0.33,
+      0.36,
+      0.27
+    ],
+    "vs_xgb": {
+      "comparator": "XGB 단독",
+      "mean_delta_rmse_db": -0.8779391144712766,
+      "mean_advantage_db": 0.8779391144712766,
+      "median_delta_rmse_db": -0.5965619087219238,
+      "n_eyes": 240,
+      "n_eyes_fusion_better": 172,
+      "p_wilcoxon": 6.272191692318065e-13
+    },
+    "vs_cnn_ensemble": {
+      "comparator": "5백본 평균 CNN",
+      "mean_delta_rmse_db": -0.02595724364121755,
+      "mean_advantage_db": 0.02595724364121755,
+      "median_delta_rmse_db": -0.002321481704711914,
+      "n_eyes": 240,
+      "n_eyes_fusion_better": 120,
+      "p_wilcoxon": 0.5380332808256405
+    },
+    "note": "안 단위 RMSE 의 대응표본 Wilcoxon. 음수 delta = fusion 우세."
+  }
+}

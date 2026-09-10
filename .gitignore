@@ -1,22 +1,99 @@
-# Nothing derived from patient data belongs in this repository.
+# ============================================================================
+#  PHI and patient-derived data — must never enter this repository
+# ============================================================================
+# Everything below either is patient data or is derived from it row by row.
+
+# Report archives and image crops
+cirrus_out/
+cirrus_out*/
+dw_images/
+phase_b_images/
+_crop_*/
+_check_samples/
+
+# Modelling tables and every extraction product. These carry patient
+# identifiers and examination dates in their key columns.
 *.csv
+*.xlsx
+*.xls
+
+# Per-eye predictions, checkpoints, and anything a model wrote
 *.npz
 *.pt
 *.pth
 *.ckpt
-*.pdf
+*.h5
+*.pkl
+*.joblib
+runs/
+build/
+step4_work/
+experiments/laterality_qfix/step4_work/
+
+# Notebooks: outputs are saved with the source, so a single execution can
+# embed a patient identifier or an image that no diff will show.
+*.ipynb
+.ipynb_checkpoints/
+
+# Rendered figures and documents. Figures 1 and 6 contain thickness maps and a
+# measured field from a study eye.
 *.png
 *.jpg
 *.jpeg
-*.xlsx
-cirrus_out/
-phase_b_images/
-runs/
-build/
-docs/
+*.tif
+*.tiff
+*.pdf
+*.docx
+*.pptx
 
+# Local secrets and environment
+.env
+*.key
+*.pem
+pseudonym_map*
+*phi_blocklist*
+
+# ============================================================================
+#  Working material that is not part of the reproduction chain
+# ============================================================================
 __pycache__/
 *.py[cod]
-.ipynb_checkpoints/
-*.ipynb
-.env
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
+*.log
+*.out
+*.swp
+
+# The manuscript itself is out of scope for this repository (see README).
+docs/journal_manuscript/
+paper/manuscript/
+paper/drafts/
+
+# Internal working notes: audit trails, meeting memos, status reports. They are
+# how the work was managed, not how it is reproduced, and several name people.
+docs/*
+!docs/coordinate_frame_convention.md
+
+# ============================================================================
+#  Public-repository curation
+#
+#  The rules above exclude by default. What follows re-admits, one path at a
+#  time, the artefacts a reader needs in order to check a printed number. Each
+#  exception is a deliberate decision, not a pattern: a frozen result is
+#  aggregate over 240 or 37 eyes and holds no per-eye row.
+# ============================================================================
+
+# The frozen values the manuscript quotes. Aggregate only; see
+# paper/results_frozen/README.md for what was removed on the way in.
+!paper/results_frozen/
+!paper/results_frozen/*.json
+!paper/results_frozen/README.md
+
+# Report region coordinates for the extraction step. Page geometry, no data.
+!cirrus_regions.json
+
+# Configuration. Constants only.
+!config/params.yaml

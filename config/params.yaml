@@ -1,0 +1,99 @@
+# ============================================================================
+# Single source of truth for the constants this study reports.
+# ----------------------------------------------------------------------------
+# Read it with `from hvf_config import load_config, get, seed`.
+#
+# Honest scope note. In the sister repository this file *drives* the pipeline.
+# Here it does not: the training and fitting code was frozen when the reported
+# numbers were produced, and rewiring it to read YAML would change code that can
+# no longer be re-run against the withheld data. So this file is the recorded
+# value of every constant, and `tests/test_config.py` asserts that each value
+# still matches the literal in the source file named beside it. A drift between
+# the two fails the test rather than passing silently.
+# ============================================================================
+
+seed: 42                      # train.py set_seed / XGB random_state
+seeds_reported: [42, 43, 44]  # the three seeds of the multi-seed robustness arm
+
+paths:
+  # The raw archive is withheld under the governing IRB approval; these are
+  # placeholders. Override with HVF_ROOT / HVF_DATA_ROOT (see paths.py).
+  data_root:   "."
+  runs_dir:    "runs"
+  results_dir: "paper/results_frozen"
+
+environment:
+  python: "3.10.18"
+  cuda:   "11.3"
+
+constants:
+  vf:
+    n_points_total: 54        # image_preprocessing.py PT_ALL
+    n_points_used: 52         # the two blind-spot points are dropped
+    blind_points: ["p26", "p35"]   # image_preprocessing.py BLIND_POINTS
+    missing_sentinel: -1      # ml_final CSV encoding for masked / missing
+
+  inputs:
+    # Section 3.2. image_preprocessing.py (_crop_gca_thickness,
+    # _crop_rnfl_thickness, transforms.Resize) and train.py --input_geometry.
+    use_deviation: false      # two maps per eye: GCA thickness + RNFL thickness
+    panel_h: 161
+    panel_w: 161
+    model_h: 161
+    model_w: 322              # the two panels concatenated side by side
+    input_geometry: "paper"
+
+  split:
+    cv_folds: 5               # patient-level, the cv_fold column
+    n_eyes_oof: 240
+    n_eyes_heldout: 37
+
+  xgb:
+    # Section 3.6. baseline_xgb.py:54-62 and scripts/export_xgb_oof.py:88-96.
+    # 52 independent pointwise regressors, no early stopping.
+    n_estimators: 300
+    learning_rate: 0.05
+    max_depth: 4
+    subsample: 0.8
+    colsample_bytree: 0.8
+    reg_alpha: 0.1
+    reg_lambda: 1.0
+    random_state: 42
+    n_regressors: 52
+
+  fusion:
+    # A single scalar weight, fitted inside each fold on out-of-fold predictions.
+    grid_points: 101          # np.linspace(0, 1, 101)
+    w_fixed: 0.47             # the value fixed in the Section 4.2 arms
+    convention: "pred = w * XGB + (1 - w) * CNN"
+
+  backbones:
+    # The five image branches that are averaged into the ensemble.
+    ensemble5:
+      - inception_resnet_v2
+      - inception_v3
+      - densenet121
+      - vgg16
+      - xception
+    labels:
+      inception_resnet_v2: IR-v2
+      inception_v3: Inception-v3
+      densenet121: DenseNet121
+      vgg16: VGG16
+      xception: Xception
+    # Run directories whose name does not describe the checkpoint they hold.
+    # runs/phasec_b0_clip_mse_5fold is an Inception-v3 run; the name is
+    # historical and has caught readers out before.
+    run_dir_aliases:
+      inception_v3: clip_mse
+    representative: inception_resnet_v2
+    sixth_tested: resnet50    # a robustness check, not part of the ensemble
+
+  reported:
+    # Pooled RMSE in dB, out-of-fold unless stated. Frozen copies of the
+    # producing JSON are in paper/results_frozen/.
+    xgb_summary_oof: 8.660
+    cnn_maps_oof: 8.540
+    fusion_ir_v2_oof: 8.097
+    ensemble5_oof: 8.115
+    ensemble5_fusion_oof: 7.964

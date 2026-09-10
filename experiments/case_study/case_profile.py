@@ -1,8 +1,20 @@
 #!/usr/bin/env python3
-"""대표 사례(fig_case_representative)로 쓴 안구의 프로파일 — 값만 낸다.
+"""Profile of the eye used as the representative case in Figure 6.
 
-원고 Figure 4 (재배정 전 3) 의 heat map 한 장이 어떤 안구인지는
-`docs/FIGURE_SOURCES.md` 의 등록 항목이 정본이다 (가명 P-19).
+It produces numbers only, no figure. What it measures is where that one eye
+stands in the cohort: its per-eye error for each branch, its percentile in the
+out-of-fold distribution of the fusion-minus-summary difference, its residual by
+sensitivity bin, and its severity stratum. The eye sits in the favourable tail,
+and no selection rule was recorded at the time; the output says so.
+
+The eye is identified only by the pseudonym P-19. The record that binds that
+pseudonym to a study eye is an internal document (`docs/FIGURE_SOURCES.md`) and
+is not distributed with this repository.
+
+대표 사례(fig_case_representative)로 쓴 안구의 프로파일 — 값만 낸다.
+
+원고 Figure 6 (그림 번호 재배정 전에는 3, 그 뒤 4) 의 heat map 한 장이 어떤
+안구인지는 `docs/FIGURE_SOURCES.md` 의 등록 항목이 정본이다 (가명 P-19).
 `scripts/make_case_heatmap.py` 는 안구를 위치인자로 받으므로 선택 규칙이
 코드에 없다. 이 스크립트는 그 안구가 코호트 안에서 어디에 서 있는지를 잰다.
 
@@ -21,7 +33,7 @@ PHI: 실제 환자 ID 는 출력에 쓰지 않는다. `~/hvf_private/pseudonym_m
 프로세스 안에서만 조회하고, 산출물에는 가명 P-19 만 남는다.
 
 출력: experiments/case_study/case_profile.json / .md
-env: aaa
+env: aaa (matplotlib 계열 — ENVIRONMENT.md 참조)
 """
 from __future__ import annotations
 

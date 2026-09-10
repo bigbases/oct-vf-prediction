@@ -1,0 +1,51 @@
+{
+  "note": "앙상블=5백본 CNN 평균. 결정적: fus>앙상블CNN(=정량이 강한 영상에 더하나)",
+  "OOF": {
+    "ensemble_cnn_rmse": 8.11470890045166,
+    "ensemble_cnn_mae": 5.666417598724365,
+    "xgb_rmse": 8.660277366638184,
+    "xgb_mae": 6.397546291351318,
+    "w0.47": {
+      "w_xgb": 0.47,
+      "fusion_rmse": 7.966861724853516,
+      "fusion_mae": 5.751837253570557,
+      "fus_vs_ensCNN_p": 0.5933028018127382,
+      "fus_vs_ensCNN_win": "115/240",
+      "fus_vs_XGB_p": 1.6402541654025147e-16,
+      "fus_vs_XGB_win": "177/240"
+    },
+    "w_refit": {
+      "w_xgb": 0.33,
+      "fusion_rmse": 7.933496475219727,
+      "fusion_mae": 5.666691303253174,
+      "fus_vs_ensCNN_p": 0.4233519126820273,
+      "fus_vs_ensCNN_win": "121/240",
+      "fus_vs_XGB_p": 2.500323825424196e-13,
+      "fus_vs_XGB_win": "174/240"
+    }
+  },
+  "TEST": {
+    "ensemble_cnn_rmse": 8.601716995239258,
+    "ensemble_cnn_mae": 5.840874671936035,
+    "xgb_rmse": 8.919268608093262,
+    "xgb_mae": 6.8320231437683105,
+    "w0.47": {
+      "w_xgb": 0.47,
+      "fusion_rmse": 8.389711380004883,
+      "fusion_mae": 6.176177501678467,
+      "fus_vs_ensCNN_p": 0.4461299913964467,
+      "fus_vs_ensCNN_win": "16/37",
+      "fus_vs_XGB_p": 0.01809786654484924,
+      "fus_vs_XGB_win": "27/37"
+    },
+    "w_refit": {
+      "w_xgb": 0.39,
+      "fusion_rmse": 8.379837989807129,
+      "fusion_mae": 6.100144386291504,
+      "fus_vs_ensCNN_p": 0.6119682093558367,
+      "fus_vs_ensCNN_win": "17/37",
+      "fus_vs_XGB_p": 0.02863003379025031,
+      "fus_vs_XGB_win": "25/37"
+    }
+  }
+}
