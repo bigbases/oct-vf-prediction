@@ -1,0 +1,23 @@
+name: hvf
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.18
+  - libgcc-ng=15.2.0
+  - libstdcxx=15.2.0
+  - numpy=1.26.4
+  - scipy=1.15.2
+  - scikit-learn=1.7.2
+  - xgboost=3.2.0
+  # 그림 생성(scripts/make_fig_pipeline.py, make_case_heatmap.py)에 필요.
+  # 2026-08-26 재현 실사에서 이게 빠져 있어 그림이 hvf env로 안 돌았다.
+  # 버전은 실제로 그림을 만든 env(aaa)의 3.9.4에 맞춤.
+  - matplotlib-base=3.9.4
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu113
+      - torch==1.12.1+cu113
+      - torchvision==0.13.1+cu113
+      - timm==1.0.27
+      - Pillow==12.2.0

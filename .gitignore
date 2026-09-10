@@ -1,0 +1,21 @@
+# Nothing derived from patient data belongs in this repository.
+*.csv
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.xlsx
+cirrus_out/
+runs/
+build/
+docs/
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.ipynb
+.env

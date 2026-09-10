@@ -1,0 +1,428 @@
+{
+  "_meta": {
+    "description": "Cirrus OCT/HFA report region coordinates for automated extraction",
+    "version": "1.0",
+    "calibration_notes": {
+      "GCA_PDF_rendering": "pdftoppm -r 200 -png (or pdf2image dpi=200)",
+      "RNFL_PDF_rendering": "pdftoppm -r 200 -png (or pdf2image dpi=200)",
+      "SFA_JPG": "original resolution as exported from HFA",
+      "SW_Ver_tested": "Cirrus 11.5.2.54532, HFA3 840-18931"
+    },
+    "format": "bbox = [x1, y1, x2, y2] in absolute pixels; ratio = [x1, y1, x2, y2] as fractions of width/height",
+    "usage": "Apply absolute pixels if image matches calibration dims; otherwise scale using ratios or ratio = bbox/dims"
+  },
+  "SFA": {
+    "calibration_dims": [
+      1240,
+      1754
+    ],
+    "detection_hints": [
+      "Single Field Analysis",
+      "Central 24-2",
+      "HFA"
+    ],
+    "regions": {
+      "threshold_grid": {
+        "bbox": [
+          300,
+          465,
+          685,
+          800
+        ],
+        "ratio": [
+          0.2419,
+          0.2651,
+          0.5524,
+          0.4561
+        ],
+        "description": "Raw numerical threshold grid with horizontal/vertical axes"
+      }
+    }
+  },
+  "GCA": {
+    "calibration_dims": [
+      1700,
+      2200
+    ],
+    "detection_hints": [
+      "Macular_Cube_512x128",
+      "Ganglion_Cell",
+      "신경절 세포"
+    ],
+    "regions": {
+      "od_thickness_map": {
+        "bbox": [
+          218,
+          420,
+          807,
+          957
+        ],
+        "ratio": [
+          0.1282,
+          0.1909,
+          0.4747,
+          0.435
+        ],
+        "description": "OD 두께 맵 (right-eye thickness heatmap)"
+      },
+      "os_thickness_map": {
+        "bbox": [
+          1000,
+          420,
+          1588,
+          957
+        ],
+        "ratio": [
+          0.5882,
+          0.1909,
+          0.9341,
+          0.435
+        ],
+        "description": "OS 두께 맵 (left-eye thickness heatmap)"
+      },
+      "od_deviation_map": {
+        "bbox": [
+          218,
+          1043,
+          541,
+          1415
+        ],
+        "ratio": [
+          0.1282,
+          0.4741,
+          0.3182,
+          0.6432
+        ],
+        "description": "OD 편차 맵 (right-eye deviation map with fundus overlay)"
+      },
+      "os_deviation_map": {
+        "bbox": [
+          1264,
+          1043,
+          1588,
+          1415
+        ],
+        "ratio": [
+          0.7435,
+          0.4741,
+          0.9341,
+          0.6432
+        ],
+        "description": "OS 편차 맵 (left-eye deviation map with fundus overlay)"
+      },
+      "od_sectors": {
+        "bbox": [
+          540,
+          1043,
+          810,
+          1260
+        ],
+        "ratio": [
+          0.3176,
+          0.4741,
+          0.4765,
+          0.5727
+        ],
+        "description": "OD 섹터 circular chart (6 sector values)"
+      },
+      "os_sectors": {
+        "bbox": [
+          935,
+          1043,
+          1255,
+          1260
+        ],
+        "ratio": [
+          0.55,
+          0.4741,
+          0.7382,
+          0.5727
+        ],
+        "description": "OS 섹터 circular chart (6 sector values)"
+      },
+      "gcl_thickness_table": {
+        "bbox": [
+          690,
+          1265,
+          1200,
+          1420
+        ],
+        "ratio": [
+          0.4059,
+          0.575,
+          0.7059,
+          0.6455
+        ],
+        "description": "Average + Minimum GCL thickness table (OD μm / OS μm values)"
+      },
+      "od_bscan": {
+        "bbox": [
+          218,
+          1427,
+          866,
+          1890
+        ],
+        "ratio": [
+          0.1282,
+          0.6486,
+          0.5094,
+          0.8591
+        ],
+        "description": "OD 수평 B-스캔 (horizontal OCT cross-section)"
+      },
+      "os_bscan": {
+        "bbox": [
+          939,
+          1427,
+          1588,
+          1890
+        ],
+        "ratio": [
+          0.5524,
+          0.6486,
+          0.9341,
+          0.8591
+        ],
+        "description": "OS 수평 B-스캔 (horizontal OCT cross-section)"
+      }
+    }
+  },
+  "RNFL": {
+    "calibration_dims": [
+      1700,
+      2200
+    ],
+    "detection_hints": [
+      "Optic_Disc_Cube_200x200",
+      "ONH_and_RNFL",
+      "시신경"
+    ],
+    "regions": {
+      "od_thickness_map": {
+        "bbox": [
+          150,
+          420,
+          580,
+          707
+        ],
+        "ratio": [
+          0.0882,
+          0.1909,
+          0.3412,
+          0.3214
+        ],
+        "description": "OD RNFL 두께 맵 with 350/175/0 μm colorbar"
+      },
+      "os_thickness_map": {
+        "bbox": [
+          1215,
+          420,
+          1610,
+          707
+        ],
+        "ratio": [
+          0.7147,
+          0.1909,
+          0.9471,
+          0.3214
+        ],
+        "description": "OS RNFL 두께 맵 with 350/175/0 μm colorbar"
+      },
+      "rnfl_summary_table": {
+        "bbox": [
+          640,
+          416,
+          1200,
+          765
+        ],
+        "ratio": [
+          0.3765,
+          0.1891,
+          0.7059,
+          0.3477
+        ],
+        "description": "Top clinical summary table: average RNFL thickness, RNFL symmetry, rim/disc area, C/D ratios, cup volume (OD/OS)"
+      },
+      "od_deviation_map": {
+        "bbox": [
+          258,
+          772,
+          568,
+          1132
+        ],
+        "ratio": [
+          0.1518,
+          0.3509,
+          0.3341,
+          0.5145
+        ],
+        "description": "OD RNFL 편차 맵 (disc photo with deviation overlay)"
+      },
+      "os_deviation_map": {
+        "bbox": [
+          1258,
+          772,
+          1568,
+          1132
+        ],
+        "ratio": [
+          0.74,
+          0.3509,
+          0.9224,
+          0.5145
+        ],
+        "description": "OS RNFL 편차 맵 (disc photo with deviation overlay)"
+      },
+      "neuroretinal_rim": {
+        "bbox": [
+          607,
+          772,
+          1176,
+          1132
+        ],
+        "ratio": [
+          0.3571,
+          0.3509,
+          0.6918,
+          0.5145
+        ],
+        "description": "신경 망막 테 두께 graph (neuroretinal rim thickness chart)"
+      },
+      "rnfl_thickness_graph": {
+        "bbox": [
+          607,
+          1176,
+          1155,
+          1430
+        ],
+        "ratio": [
+          0.3571,
+          0.5345,
+          0.6794,
+          0.65
+        ],
+        "description": "RNFL 두께 TSNIT graph (central thickness profile)"
+      },
+      "od_horizontal_bscan": {
+        "bbox": [
+          248,
+          1143,
+          577,
+          1375
+        ],
+        "ratio": [
+          0.1459,
+          0.5195,
+          0.3394,
+          0.625
+        ],
+        "description": "OD 추출된 가로 B-스캔 (horizontal cross-section)"
+      },
+      "os_horizontal_bscan": {
+        "bbox": [
+          1247,
+          1143,
+          1577,
+          1375
+        ],
+        "ratio": [
+          0.7335,
+          0.5195,
+          0.9276,
+          0.625
+        ],
+        "description": "OS 추출된 가로 B-스캔"
+      },
+      "od_vertical_bscan": {
+        "bbox": [
+          248,
+          1399,
+          577,
+          1634
+        ],
+        "ratio": [
+          0.1459,
+          0.6359,
+          0.3394,
+          0.7427
+        ],
+        "description": "OD 추출된 세로 B-스캔 (vertical cross-section)"
+      },
+      "os_vertical_bscan": {
+        "bbox": [
+          1247,
+          1399,
+          1577,
+          1634
+        ],
+        "ratio": [
+          0.7335,
+          0.6359,
+          0.9276,
+          0.7427
+        ],
+        "description": "OS 추출된 세로 B-스캔"
+      },
+      "quadrants": {
+        "bbox": [
+          590,
+          1429,
+          1225,
+          1630
+        ],
+        "ratio": [
+          0.3471,
+          0.6495,
+          0.7206,
+          0.7409
+        ],
+        "description": "RNFL 사분면 (OD + OS quadrant S/T/I/N circles, both eyes)"
+      },
+      "clockhours": {
+        "bbox": [
+          590,
+          1630,
+          1225,
+          1900
+        ],
+        "ratio": [
+          0.3471,
+          0.7409,
+          0.7206,
+          0.8636
+        ],
+        "description": "RNFL 시계 시간 (OD + OS clock-hour charts, both eyes)"
+      },
+      "od_circular_bscan": {
+        "bbox": [
+          248,
+          1647,
+          577,
+          1890
+        ],
+        "ratio": [
+          0.1459,
+          0.7486,
+          0.3394,
+          0.8591
+        ],
+        "description": "OD RNFL 원형 단층 사진 (circular peripapillary scan)"
+      },
+      "os_circular_bscan": {
+        "bbox": [
+          1247,
+          1647,
+          1577,
+          1890
+        ],
+        "ratio": [
+          0.7335,
+          0.7486,
+          0.9276,
+          0.8591
+        ],
+        "description": "OS RNFL 원형 단층 사진"
+      }
+    }
+  }
+}
