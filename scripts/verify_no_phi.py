@@ -142,9 +142,10 @@ QUASI_LAT = re.compile(rb'\b(?:OD|OS)\b')
 QUASI_DATE = re.compile(rb'(?:19|20)\d{2}[-/]?\d{2}[-/]?\d{2}')
 
 FILENAME_ALLOW = ()
-# CITATION.cff 는 인용 메타데이터다 — 저자 실명·소속이 들어가는 것이 정상이며
-# 학술 저장소에서 요구되는 형식이다. 블록리스트 층에서만 면제한다(다른 층은 그대로).
-BLOCKLIST_FILE_ALLOW = {'CITATION.cff'}
+# 인용 메타데이터(CITATION.cff)에는 저자 실명·소속이 드는 것이 정상이므로
+# 여기 넣으면 차단이 아니라 면제로 보고한다. 지금은 저자 목록이 확정되지
+# 않아 파일 자체를 넣지 않았다 — 확정되면 파일과 함께 이 집합에 되돌린다.
+BLOCKLIST_FILE_ALLOW = set()
 
 TEXT_EXT = {'.py', '.md', '.txt', '.yaml', '.yml', '.json', '.sh', '.tex', '.cfg',
             '.ini', '.toml', '.cff', '.csv', '.bat', '.bib', '.log', ''}

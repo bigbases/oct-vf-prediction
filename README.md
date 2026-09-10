@@ -200,6 +200,12 @@ this assert on the tree root at import, so they fail loudly rather than silently
 reading the wrong pass. `docs/coordinate_frame_convention.md` explains what the
 fix changed and by how much.
 
+## Citation
+
+There is no `CITATION.cff` yet: the author list for the accompanying manuscript
+is not final. The file will be added once it is, rather than shipping a list
+that would have to be corrected in a public repository.
+
 ## License
 
 MIT — see `LICENSE`. Release of the code is separate from any release of data or
