@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""그림 3: 대표 증례 24-2 히트맵 — 실측 vs 요약 브랜치 vs 영상 브랜치 vs late fusion.
+"""Figure 6: the representative eye as 24-2 heat maps - measured field, summary
+branch, image branch and late fusion.
+
+It embeds one study eye, so it takes that eye's identifiers as command-line
+arguments; no identifier is stored in the code.
+
+그림 6: 대표 증례 24-2 히트맵 — 실측 vs 요약 브랜치 vs 영상 브랜치 vs late fusion.
 
 `scripts/fig_style.py` 규격(serif, 8/7 pt, 양단폭 180 mm, 600 dpi)을 따른다.
 다른 세 그림과 나란히 놓았을 때 폰트와 눈금 크기가 같아야 하기 때문이다.

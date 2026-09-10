@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""그림 1: 파이프라인 도식.
+"""Figure 1: the study pipeline.
+
+It embeds the real thickness-map crops of one study eye, so it takes that eye's
+identifiers as command-line arguments; no identifier is stored in the code.
+
+그림 1: 파이프라인 도식.
 
 2 Cirrus 큐브 → 두께맵 2종(비식별 대표안의 실제 crop) + 요약 26지표
 → CNN / 52×XGB → late fusion (w·XGB + (1-w)·CNN) → 24-2 52지점 감도.

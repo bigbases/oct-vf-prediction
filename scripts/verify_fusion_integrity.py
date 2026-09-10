@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Late fusion baseline 무결성 검증 (재학습 없음, 저장물만 독립 재계산).
+"""Integrity checks on the late-fusion baseline. No retraining: the stored
+predictions are recomputed independently.
+
+Checked: patient-level leakage across folds, whether the out-of-fold npz really
+are out of fold, whether the fusion weight is derived from validation folds
+only, whether the reported numbers reproduce from the stored npz, and mask and
+blind-spot consistency.
+
+Late fusion baseline 무결성 검증 (재학습 없음, 저장물만 독립 재계산).
 
 검증 항목:
   A. patient-level split 누수 (fold/test 간 환자 중복)

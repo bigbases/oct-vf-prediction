@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""새 CNN/XGB 5-fold NPZ에서 primary late-fusion 결과를 독립 재계산한다.
+"""Recompute the primary late-fusion numbers independently from the stored
+per-fold npz predictions, together with the nested-weight sensitivity variant.
+
+새 CNN/XGB 5-fold NPZ에서 primary late-fusion 결과를 독립 재계산한다.
 
 기존 논문 OOF 수치는 전체 OOF에서 weight를 정하고 같은 OOF에서 표시한
 development estimate다. 이 수치와 함께, 각 validation fold를 제외한 나머지

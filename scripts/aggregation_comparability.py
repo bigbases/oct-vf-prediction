@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""
+"""Table 4: the same predictions reported under both aggregation conventions -
+pooled over all points, and per-eye mean +- SD. Prior work uses the latter, and
+by Jensen's inequality pooled is always the larger of the two, so mixing them
+would make this study look worse than it is.
+
 선행연구와의 비교 가능성 확보: 동일 예측을 두 집계 방식으로 보고한다.
 
 - pooled       : 전 지점을 모아 한 번에 RMSE/MAE (본 연구 기존 방식)

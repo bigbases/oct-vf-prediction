@@ -1,4 +1,10 @@
-"""
+"""Train the multimodal visual-field prediction model.
+
+The GCA and RNFL thickness maps, concatenated side by side into 161x322, go
+through an ImageNet-pretrained CNN backbone to 52 pointwise sensitivities; an
+optional tabular branch is concatenated at the pooled feature. Loss and metric
+are masked MSE and masked MAE in dB, with the two blind-spot points excluded.
+
 train.py
 멀티모달 VF 예측 모델 학습 (선행연구 climyth/VFbySD-OCT 재현 + tabular 확장)
 

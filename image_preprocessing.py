@@ -1,4 +1,9 @@
-"""
+"""Build the model input tensors from the OCT thickness maps.
+
+This is where the cropping, resizing and side-by-side concatenation of Section
+3.2 happen: _crop_gca_thickness, _crop_rnfl_thickness and the Resize transforms
+below.
+
 Image Preprocessing Pipeline
 OCT 이미지(GCA + RNFL) → 모델 입력 텐서
 

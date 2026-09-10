@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-"""held-out에서 MAE만 역전되는 이유를 잔차 분위수로 확인한다.
+"""Why only MAE reverses on the held-out set, examined by residual quantile.
+
+For all five backbones fusion is worse in the lower quantiles and better in the
+upper ones, and the crossing point clusters around p84-p86.
+
+held-out에서 MAE만 역전되는 이유를 잔차 분위수로 확인한다.
 
 원고 §Discussion "What the held-out set does not support" 문단의 근거.
 5개 백본 전부에서 fusion이 하위 분위수에서 나빠지고 상위에서 좋아지며,

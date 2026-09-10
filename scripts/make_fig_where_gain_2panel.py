@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""fig_where_gain 의 2패널 확장 — (a) 구간별 계통 편향 (b) 중심화 전후 이득.
+"""Figure 4, two panels: (a) systematic bias per sensitivity bin for both
+branches, (b) whether the gain survives centring the image branch.
+
+Nothing is recomputed here; the stored experiments/bias_structure/ outputs are
+read. Those are pass B, so the values differ slightly from the earlier
+single-panel figure.
+
+fig_where_gain 의 2패널 확장 — (a) 구간별 계통 편향 (b) 중심화 전후 이득.
 
 단일 패널판(`make_fig_where_gain.py`)은 "이득이 저감도에 몰린다"만 보인다.
 리뷰어가 다음에 묻는 것은 "그 이득이 정보냐 편향 상쇄냐"다. (a) 가 두 브랜치의

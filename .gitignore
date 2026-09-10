@@ -10,6 +10,7 @@
 *.jpeg
 *.xlsx
 cirrus_out/
+phase_b_images/
 runs/
 build/
 docs/

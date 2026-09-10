@@ -1,4 +1,7 @@
-"""Late-fusion OOF 예측 공통: 행 키 정렬, masked metric, 잔차 상관."""
+"""Shared helpers for the out-of-fold fusion analyses: row-key alignment, masked
+metrics, residual correlation.
+
+Late-fusion OOF 예측 공통: 행 키 정렬, masked metric, 잔차 상관."""
 from __future__ import annotations
 
 import json

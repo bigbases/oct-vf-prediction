@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Per-severity(MD 층) + per-region(공간) 분석표 — 5-fold OOF, 재학습 없음.
+"""Table 6: per-severity (MD stratum) and per-region (hemifield, central versus
+peripheral) breakdown, out-of-fold, with a paired Wilcoxon test per cell.
+
+Per-severity(MD 층) + per-region(공간) 분석표 — 5-fold OOF, 재학습 없음.
 
 대표 백본 IR-v2. XGB / image-only CNN / late fusion 각각 pooled RMSE·MAE.
   · severity: cohort_md.csv MD 층 (normal/early/moderate/advanced), eye 단위 층화

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Bland-Altman 단일 패널 — 안 단위 평균 감도의 예측-실측 일치도, 층 없음.
+"""Figure 5: Bland-Altman agreement of eye-level mean sensitivity - a single
+panel, all 240 out-of-fold eyes, with regression-based limits of agreement.
+
+Bland-Altman 단일 패널 — 안 단위 평균 감도의 예측-실측 일치도, 층 없음.
 
 `make_fig_bland_altman.py` 의 단일 패널만 떼어내고 **표본을 240안으로 넓힌 것**이다.
 그 스크립트는 4패널·2패널을 함께 내느라 층별 n 을 `runs/severity_region.json` 과

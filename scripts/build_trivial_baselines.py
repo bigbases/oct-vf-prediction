@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Trivial baseline 비교표 (재학습 없음) — "ML이 왜 필요한가" 근거.
+"""Table 1: the ladder of trivial baselines (grand mean, per-point mean, per-point
+ridge) against XGB, the image branch and late fusion. Baseline statistics are
+fitted per fold on the training folds only, so there is no leakage.
+
+Trivial baseline 비교표 (재학습 없음) — "ML이 왜 필요한가" 근거.
 
 성능 사다리:
   1) grand-mean      : 모든 point를 train 평균 dB 하나로 예측 (가장 단순)

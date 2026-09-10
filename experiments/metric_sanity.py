@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""채점 코드 sanity check — 답을 이미 아는 입력을 실제 metric 함수에 넣는다.
+"""Sanity check of the scoring code: feed the metric functions inputs whose answers
+are known in advance.
+
+The manuscript's numbers come from some thirty metric functions scattered across
+the repository. Each looks plausible on its own, and a silently wrong one still
+returns a plausible-looking dB value - so the values are not inspected by eye,
+they are pinned by inputs with known answers.
+
+채점 코드 sanity check — 답을 이미 아는 입력을 실제 metric 함수에 넣는다.
 
 원고 수치는 저장소 곳곳에 흩어진 30여 개의 metric 함수가 만든다. 각각은 그럴듯해
 보이지만 서로 같은 값을 준다는 보장이 없고, 어느 하나가 조용히 틀려도 결과는 여전히

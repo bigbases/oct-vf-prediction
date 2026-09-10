@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Figure 6: 강건성 검사 forest plot.
+"""Figure 2: forest plot of the robustness checks of Section 4.2.
+
+One sign convention only: x = mean over eyes of RMSE(fusion) - RMSE(summary),
+so negative favours fusion. Out-of-fold and held-out are drawn in separate
+blocks, because pooling them would make the interval widths reflect sample size
+rather than the conditions.
+
+Figure 6: 강건성 검사 forest plot.
 
 원고 §4.2 의 아홉 항목은 표 3~5 와 본문 숫자로만 흩어져 있다. 이 그림은 그것을
 대체하지 않고 요약한다 — 각 조건에서 fusion 이 summary branch(XGB) 를 얼마나

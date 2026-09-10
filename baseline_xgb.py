@@ -1,4 +1,7 @@
-"""
+"""Summary branch: 52 independent XGBoost regressors on the 26 OCT summary
+parameters, five-fold patient-level cross-validation, blind-spot points
+excluded, left eyes mapped to right-eye coordinates.
+
 Tabular XGBoost Baseline: target-eye OCT + RNFL quadrant/clock-hour → VF 52점
 - 5-fold patient-level CV (cv_fold)
 - p26/p35 제외 (선행연구 동일)

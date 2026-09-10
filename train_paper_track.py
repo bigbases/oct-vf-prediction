@@ -1,4 +1,7 @@
-"""
+"""Prior-work-matched training track: a single random holdout split instead of
+five-fold cross-validation, used only to compare image-only against multimodal
+under the earlier paper's protocol.
+
 train_paper_track.py
 논문 일치 트랙(근사): 단일 random holdout split로 image-only vs multimodal 비교
 

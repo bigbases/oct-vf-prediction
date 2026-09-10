@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""최종 통합 비교표 (Phase C, ReLU 수정 後): 백본 × {XGB, image-only CNN, concat MM, late fusion}.
+"""Table 2: backbone x {XGB, image-only CNN, concat multimodal, late fusion},
+recomputed from the stored npz, with paired significance for fusion against each
+branch on both RMSE and MAE.
+
+최종 통합 비교표 (Phase C, ReLU 수정 後): 백본 × {XGB, image-only CNN, concat MM, late fusion}.
 
 npz에서 직접 재계산. RMSE·MAE 병기 + fusion vs {XGB, CNN} paired 유의성(양 지표).
 출력: runs/final_model_comparison.json / .md

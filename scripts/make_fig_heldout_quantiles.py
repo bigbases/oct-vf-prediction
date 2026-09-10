@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""그림 3: held-out 잔차 분위수 — fusion이 어디서 지고 어디서 이기는가.
+"""Figure 3: held-out residual quantiles - where fusion loses and where it wins.
+
+Quantiles are computed over point-level residuals, not eye-level ones. The
+script aborts if its recomputed values disagree with the stored canonical
+numbers.
+
+그림 3: held-out 잔차 분위수 — fusion이 어디서 지고 어디서 이기는가.
 
 원고 §Discussion "What the held-out set does not support" 의 근거 그림.
 tab:ladder 의 held-out MAE 역전(6.033 → 6.293 dB)을 본 리뷰어가 반드시 묻는

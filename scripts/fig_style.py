@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""원고 그림 공용 스타일.
+"""Shared figure style for the manuscript figures (MDPI two-column).
+
+Every scripts/make_fig_*.py builds its canvas with figure() and writes it with
+save_fig(). The three design decisions behind that are spelled out below.
+
+원고 그림 공용 스타일.
 
 MDPI 2단 조판 기준. 그림 스크립트(`scripts/make_fig_*.py`)는 전부 이 모듈의
 `figure()` 로 캔버스를 만들고 `save_fig()` 로 저장한다.

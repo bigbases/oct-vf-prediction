@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""환자 클러스터(양안 상관) 강건성 검정 — 재학습 없음.
+"""Robustness of the significance tests to the correlation between the two eyes of
+one patient. No retraining.
+
+Two variants remove that correlation entirely: (A) one value per patient by
+averaging their eyes, (B) a cluster bootstrap that resamples patients rather
+than eyes.
+
+환자 클러스터(양안 상관) 강건성 검정 — 재학습 없음.
 
 리뷰어 우려: 안 단위(eye) 검정은 한 환자의 양안을 독립으로 취급 → pseudo-replication으로
 p값이 과신될 수 있음. 여기서 양안 상관을 완전히 제거한 두 가지를 계산:

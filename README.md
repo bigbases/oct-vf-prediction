@@ -18,6 +18,12 @@ weight, produced a number printed in the paper, or drew a figure.
 | `runs/` result artefacts (`.json`, `.npz`) | Contain per-eye predictions keyed to study eyes. |
 | The manuscript source and figure files | Held separately. |
 
+The cropping, resizing and concatenation of Section 3.2 are in
+`image_preprocessing.py` (`_crop_gca_thickness`, `_crop_rnfl_thickness`, the
+`Resize` transforms) and `train.py`. The report extraction and threshold
+verification that precede them are described in a companion paper; their code is
+here as well, under `extract_cirrus.py`, `ocr_*.py` and `phase_b_*.py`.
+
 **Consequence: nothing here runs end to end as published.** The scripts are the
 executable record of the method, not a runnable demonstration. Reproduction
 requires an equivalently structured dataset; the CSV schema each script expects
@@ -36,7 +42,8 @@ extract_cirrus.py         Cirrus/HFA report pages -> panel crops (needs poppler)
 ocr_*.py                  summary parameters and 24-2 thresholds off the reports
 cirrus_regions.json       report region coordinates used by the above
 build_ml_final.py         assemble the modelling table
-merge_rnfl_into_ml_final.py, make_rnfl_flip.py, phase_b_apply.py
+merge_rnfl_into_ml_final.py, make_rnfl_flip.py
+phase_b_build.py, phase_b_apply.py   manual review of the extracted thresholds
 
 run_*.sh                  launch configurations, including the 42/43/44 seed sweeps
 scripts/                  evaluation, fusion, statistics, tables, figures
@@ -100,16 +107,18 @@ Launch scripts for every reported configuration are in `run_*.sh` and
 
 | Figure | Command |
 |---|---|
-| 1 Study pipeline | `python scripts/make_fig_pipeline.py <patient_id> <eye>` |
-| 2 Robustness forest | `python experiments/forest_robustness/compute_rows.py && python experiments/forest_robustness/make_fig_forest.py` |
-| 3 Where the gain is, by sensitivity bin | `python experiments/bias_structure/bias_by_bin.py && python scripts/make_fig_where_gain_2panel.py` |
-| 4 Representative eye | `python scripts/make_case_heatmap.py <patient_id> <eye>` |
-| 5 Held-out error quantiles | `python scripts/make_fig_heldout_quantiles.py` |
-| 6 Bland-Altman | `python scripts/make_fig_bland_altman_single.py` |
+| 1 `fig_pipeline` Study pipeline | `python scripts/make_fig_pipeline.py <patient_id> <eye>` |
+| 2 `fig_forest_robustness` Robustness forest | `python experiments/forest_robustness/compute_rows.py && python experiments/forest_robustness/make_fig_forest.py` |
+| 3 `fig_heldout_quantiles` Held-out error quantiles | `python scripts/make_fig_heldout_quantiles.py` |
+| 4 `fig_where_gain_2panel` Where the gain is, by sensitivity bin | `python experiments/bias_structure/bias_by_bin.py && python scripts/make_fig_where_gain_2panel.py` |
+| 5 `fig_bland_altman_single` Bland-Altman | `python scripts/make_fig_bland_altman_single.py` |
+| 6 `fig_case_representative` Representative eye | `python scripts/make_case_heatmap.py <patient_id> <eye>` |
 
 Shared figure style (serif, 8/7 pt, 180 mm, 600 dpi) is in `scripts/fig_style.py`.
-Figures 1 and 4 embed thickness maps and a measured field from one study eye, so
+Figures 1 and 6 embed thickness maps and a measured field from one study eye, so
 they take that eye's identifiers as arguments; no identifier is stored in the code.
+`scripts/make_fig_where_gain.py` draws the earlier single-panel version of
+Figure 4 and is kept for reference.
 
 ## The two laterality passes
 

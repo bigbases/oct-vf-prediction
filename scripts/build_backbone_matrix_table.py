@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""백본 매트릭스 집계 — image-only vs multimodal(concat) vs late-fusion (재학습 X).
+"""Table 3: the backbone matrix - image-only versus concat multimodal versus late
+fusion for every backbone, out-of-fold and held-out. No retraining; the stored
+per-fold npz are read.
+
+백본 매트릭스 집계 — image-only vs multimodal(concat) vs late-fusion (재학습 X).
 
 각 (backbone, mode)에 대해:
   - OOF CNN RMSE : val_preds_fold{k}.npz 5-fold concat, masked RMSE

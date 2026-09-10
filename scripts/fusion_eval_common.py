@@ -1,4 +1,10 @@
-"""fusion 평가 공용 로더 — fusion_consistency_matrix.py 와 동일한 절차를 재사용한다.
+"""Shared loader for the fusion evaluations. It reproduces the procedure of
+fusion_consistency_matrix.py so that new analysis scripts cannot drift from it,
+and self-checks its eye-level deltas against runs/fusion_noninferiority.json.
+Note the run-directory naming trap documented below: runs/phasec_b0_clip_mse_5fold
+holds an Inception-v3 run, not a CLIP one.
+
+fusion 평가 공용 로더 — fusion_consistency_matrix.py 와 동일한 절차를 재사용한다.
 
 기존 스크립트(fusion_consistency_matrix.py, fusion_noninferiority.py)는 재현성을 위해
 건드리지 않는다. 신규 분석 스크립트만 이 모듈을 쓴다.

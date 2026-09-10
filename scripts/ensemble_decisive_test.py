@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""결정적 검정: (5백본 앙상블 CNN) + XGB fusion 이 앙상블 CNN 단독을 이기는가?
+"""Table 5: the decisive test - does adding the summary branch improve the
+five-backbone ensemble? That is, does the quantitative branch still carry
+information once the image model is strong.
+
+결정적 검정: (5백본 앙상블 CNN) + XGB fusion 이 앙상블 CNN 단독을 이기는가?
 = "강한 image 모델에도 정량지표가 정보를 더하는가" (정량→영상 방향의 진짜 테스트).
 robustness_gains의 7.964 / p=0.46 을 신선하게 재확인. 재학습 없음(저장 npz만).
 출력: runs/ensemble_decisive.json

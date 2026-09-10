@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""
+"""Export the out-of-fold predictions of the summary (XGB) branch, one npz per
+fold. Late fusion reads these.
+
 XGB tabular OOF(val fold) 예측 export — late-fusion P1 선결.
 
 fold k: train = cv_fold ∉ {k, test}, predict on val fold k (OOF for those rows).

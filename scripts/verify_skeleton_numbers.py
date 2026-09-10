@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""
+"""Recompute every number quoted in the manuscript from the raw npz and csv
+outputs, and write the confirmed values to runs/skeleton_numbers.json.
+
 스켈레톤/원고에 인용된 모든 수치를 raw 산출물(npz, csv)에서 독립 재계산하여 검증한다.
 
 출력: runs/skeleton_numbers.json  (문서에 인용할 확정 수치)
