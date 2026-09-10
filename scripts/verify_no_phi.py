@@ -192,6 +192,16 @@ def loose_hits(needle, blob: bytes) -> int:
     return len(re.findall(core, blob)) if core != needle.pattern else 0
 
 
+def blob_hits(data: bytes, needles) -> dict:
+    """커밋된 blob 하나를 본다 — 패턴 + 사설 블록리스트."""
+    h = dict(scan(data))
+    low = data.lower()
+    for nd, kind in needles:
+        if nd.search(low):
+            h[kind] = h.get(kind, 0) + 1
+    return h
+
+
 def load_private():
     """블록리스트와 가명 매핑표를 읽는다. 값은 절대 출력하지 않는다."""
     bl_path = Path(os.environ.get('HVF_PHI_BLOCKLIST',
@@ -320,6 +330,10 @@ def main():
              if p.is_file() and not (SKIP_DIRS & set(p.parts))]
     rels = [p.relative_to(ROOT).as_posix() for p in files]
     tracked = {x for x in git('ls-files').decode('utf-8').split('\n') if x.strip()}
+    # 블록리스트 바늘은 L1f 뿐 아니라 L2·L3 에서도 쓴다. 커밋했다가 지운
+    # 파일의 기관명·실명은 작업 트리에 없으므로 L1f 로는 영영 안 잡힌다.
+    needles = [(id_needle(t), '블록리스트') for t in terms if t] + \
+              [(id_needle(i), '실제 환자ID') for i in ids if i]
     ign = ignored_set(rels, tracked)
     live = [(p, r) for p, r in zip(files, rels) if r not in ign]
     missed = sorted(tracked - {r for _, r in live})
@@ -423,8 +437,6 @@ def main():
     l1f, l1f_exempt = [], []
     collisions = 0
     if have_bl or have_map:
-        needles = [(id_needle(t), '블록리스트') for t in terms if t] + \
-                  [(id_needle(i), '실제 환자ID') for i in ids if i]
         for p, r in live:
             if p.suffix.lower() not in TEXT_EXT or r == SELF:
                 continue
@@ -485,7 +497,7 @@ def main():
     for rel in sorted(tracked):
         if Path(rel).suffix.lower() not in TEXT_EXT:
             continue
-        h = scan(git('show', 'HEAD:' + rel))
+        h = blob_hits(git('show', 'HEAD:' + rel), needles)
         if h:
             l2.append((rel, h))
     n2 = report('L2. HEAD — 지금 커밋돼 있는 내용', l2,
@@ -509,7 +521,7 @@ def main():
             seen.add((sha, path))
             if Path(path).suffix.lower() not in TEXT_EXT:
                 continue
-            h = scan(git('cat-file', 'blob', sha))
+            h = blob_hits(git('cat-file', 'blob', sha), needles)
             if h:
                 cur = l3.setdefault(path, {})
                 for k, v in h.items():
