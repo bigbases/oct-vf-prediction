@@ -49,7 +49,10 @@ PATTERNS = {
         b'(?:patient|pid|' + '환자'.encode('utf-8') + b')'
         rb'[\s:=_#]{0,3}(?<![0-9])\d{5,8}(?![0-9])', re.I),
     '환자ID(8자리)': re.compile(rb'(?<![0-9.])1[0-9]{7}(?![0-9])'),
-    '주민등록번호형': re.compile(rb'(?<![0-9])\d{6}-?[1-4]\d{6}(?![0-9])'),
+    # 소수점 뒤를 배제한다 — 부동소수 가수의 끝 13자리가 우연히 이 형태를
+    # 만든다(예: -0.3057941198349). 주민등록번호가 마침표 바로 뒤에
+    # 오는 표기는 없으므로 패턴이 느슨해지지 않는다.
+    '주민등록번호형': re.compile(rb'(?<![0-9.])\d{6}-?[1-4]\d{6}(?![0-9])'),
     'DOB/검사일': re.compile(rb'(?<![0-9.])(?:19[0-9]{2}|20[0-2][0-9])'
                              rb'(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])(?![0-9])'),
     # 하이픈/슬래시 표기도 검사일이다. 작업 일자 주석이 많아 문맥이 있을 때만.
@@ -116,6 +119,19 @@ PROSE_ALLOW = (
     # 두 이름 모두 environment.yml 로 재현되는 공개 사양이다.
     'These are the two\nconda environments the work was done in',
 )
+def prose_hit(word: str, low: str) -> bool:
+    """산문 낱말 하나를 찾는다. 영문은 낱말 경계를 요구한다.
+
+    부분일치로 두면 'secondary' 안의 'conda' 처럼 뜻이 전혀 다른 자리가
+    걸린다. 한글·기호가 섞인 항목은 경계 개념이 없으므로 그대로 찾는다.
+    """
+    w = word.lower()
+    if re.fullmatch(r'[a-z0-9 ]+', w):
+        return re.search(r'(?<![a-z0-9])%s(?![a-z0-9])' % re.escape(w),
+                         low) is not None
+    return w in low
+
+
 HANGUL = re.compile('[가-힣ᄀ-ᇿ㄰-㆏]')
 HANGUL_TARGETS = {'.md', '.txt', '.cff', '.rst', '.yaml', '.yml'}
 HANGUL_INFO_ONLY = {'.py', '.json', '.sh', '.toml', '.cfg', '.ini', ''}
@@ -151,6 +167,28 @@ def git(*args, stdin: bytes = None) -> bytes:
     return subprocess.run(['git', '-c', 'core.quotepath=false', *args],
                           cwd=str(ROOT), input=stdin,
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout
+
+
+def id_needle(term: str):
+    """블록리스트 항목 하나를 바이트 정규식으로 만든다(리터럴은 저장하지 않는다).
+
+    숫자로만 된 항목 — 실제 환자번호가 그렇다 — 은 앞뒤가 숫자면 일치로 치지
+    않는다. 소수점 바로 뒤도 배제한다. 부동소수 가수 안에서 6자리 숫자가
+    우연히 겹치는 일이 실제로 있었고(paper/results_frozen 의 통계값), 그걸
+    유출로 세면 검사기가 늑대소년이 된다. 숫자가 아닌 항목(기관·실명)은
+    경계 없이 그대로 찾는다.
+    """
+    b = re.escape(term.lower().encode('utf-8'))
+    if term.isdigit():
+        return re.compile(rb'(?<![0-9.])' + b + rb'(?![0-9])')
+    return re.compile(b)
+
+
+def loose_hits(needle, blob: bytes) -> int:
+    """경계 조건 때문에 제외된 우연 일치 수 — 보고에만 쓴다."""
+    core = needle.pattern
+    core = core.replace(rb'(?<![0-9.])', b'').replace(rb'(?![0-9])', b'')
+    return len(re.findall(core, blob)) if core != needle.pattern else 0
 
 
 def load_private():
@@ -193,13 +231,34 @@ def positive_control(terms, ids) -> bool:
     print('  %-22s %s' % ('밑줄 인접 ID', '검출 O' if underscore_ok else '검출 실패 X'))
     ok &= underscore_ok
     fp = scan(b'sha256 aa4a75bba04464120e2b5a9 / 2026-07-23 patch / 8.6531234 '
-              b'/ 0.12345678', apply_allow=False)
+              b'/ 0.12345678 / -0.3057941198349 / 7.5025954246521',
+              apply_allow=False)
     print('  %-22s %s' % ('SHA·작업일자·소수 오탐',
                           '없음 O' if not fp else '오탐 %s X' % list(fp)))
     ok &= not fp
     clean = not scan(b'anonymous@example.org / C:\\Users\\{user}\\x')
     print('  %-22s %s' % ('오탐 면제', '정상 O' if clean else '면제 실패 X'))
     ok &= clean
+    # 블록리스트 항목 자체는 출력하지 않는다. 첫 숫자 항목 하나로
+    # 경계 규칙만 증명한다 — 맨몸으로 나오면 잡고, 소수 가수 안에 파묻히면
+    # 넘긴다.
+    num = next((i for i in ids if i.isdigit()), None)
+    if num is None:
+        print('  %-22s %s' % ('ID 경계 규칙', '숫자 ID 없음 -'))
+    else:
+        nd = id_needle(num)
+        bare = bool(nd.search((' pid ' + num + ' ').encode()))
+        buried = bool(nd.search(('0.12' + num + '34').encode()))
+        print('  %-22s %s' % ('ID 경계 규칙',
+                              '검출 O / 소수 내부 무시 O' if bare and not buried
+                              else '규칙 실패 X'))
+        ok &= bare and not buried
+    prose_ok = (prose_hit('conda', 'conda activate hvf')
+                and not prose_hit('conda', 'a secondary source')
+                and prose_hit('미해결', '미해결 잔재'))
+    print('  %-22s %s' % ('산문 낱말 경계',
+                          '검출 O / 부분일치 무시 O' if prose_ok else '규칙 실패 X'))
+    ok &= prose_ok
     q = QUASI_PSEUDO.search(b'P-19 OS') and QUASI_LAT.search(b'P-19 OS')
     print('  %-22s %s' % ('준식별자 조합', '검출 O' if q else '검출 실패 X'))
     ok &= bool(q)
@@ -211,17 +270,28 @@ def positive_control(terms, ids) -> bool:
     return ok
 
 
-def ignored_set(rels):
-    out = git('check-ignore', '--stdin', stdin='\n'.join(rels).encode('utf-8'))
-    got = {x.decode('utf-8') for x in out.split(b'\n') if x.strip()}
-    sample = list(got)[:3] + [r for r in rels if r not in got][:3]
-    for s in sample:
-        single = subprocess.run(['git', 'check-ignore', '-q', s],
-                                cwd=str(ROOT)).returncode == 0
-        if single != (s in got):
-            print('  ! gitignore 판정 불일치: %s (일괄=%s, 단건=%s)'
-                  % (s, s in got, single))
-    return got
+def ignored_set(rels, tracked):
+    """제외될 경로의 집합. 부정 규칙(!)에 걸린 경로는 제외가 아니다.
+
+    git 2.17 의 check-ignore 는 "마지막으로 일치한 규칙"이 부정 규칙일 때도
+    그 경로를 출력한다. 그래서 -v 없이 쓰면 `!paper/results_frozen/*.json`
+    처럼 공개하려고 되살린 파일이 "제외됨"으로 잡혀 검사에서 통째로 빠진다.
+    실제로 그렇게 빠져 있었다 — 되살린 파일이 곧 공개 대상인데 그 층만
+    검사되지 않았다. 규칙 문자열을 받아 부정 규칙이면 되살린다.
+
+    추적 중인 파일은 어떤 규칙에 걸리든 push 되므로 항상 검사한다.
+    """
+    out = git('check-ignore', '-v', '--stdin',
+              stdin='\n'.join(rels).encode('utf-8'))
+    got = set()
+    for line in out.decode('utf-8').split('\n'):
+        if '\t' not in line:
+            continue
+        rule, path = line.split('\t', 1)
+        if rule.rsplit(':', 1)[-1].startswith('!'):   # 되살린 경로
+            continue
+        got.add(path)
+    return got - set(tracked)
 
 
 def report(title, rows, note=''):
@@ -248,9 +318,19 @@ def main():
     files = [p for p in ROOT.rglob('*')
              if p.is_file() and not (SKIP_DIRS & set(p.parts))]
     rels = [p.relative_to(ROOT).as_posix() for p in files]
-    ign = ignored_set(rels)
     tracked = {x for x in git('ls-files').decode('utf-8').split('\n') if x.strip()}
+    ign = ignored_set(rels, tracked)
     live = [(p, r) for p, r in zip(files, rels) if r not in ign]
+    missed = sorted(tracked - {r for _, r in live})
+    print(' 검사 대상 %d개 (추적 %d · 제외 %d · 미추적이나 검사 %d)'
+          % (len(live), len(tracked), len(ign),
+             len([r for _, r in live if r not in tracked])))
+    if missed:
+        print(' ! 추적 중인데 검사에서 빠졌다 — 검증 무효 (%d개)' % len(missed))
+        for r in missed[:10]:
+            print('   %s' % r)
+        return 2
+    print()
 
     l0 = [(r, h) for _, r in live if r not in FILENAME_ALLOW
           for h in [scan(r.encode('utf-8'))] if h]
@@ -300,8 +380,9 @@ def main():
         for a in PROSE_ALLOW:
             txt = txt.replace(a, '')
         h = {}
+        low = txt.lower()
         for name, words in PROSE_PATTERNS.items():
-            found = sorted({w for w in words if w.lower() in txt.lower()})
+            found = sorted({w for w in words if prose_hit(w, low)})
             if found:
                 h[name] = len(found)
         if h:
@@ -339,32 +420,38 @@ def main():
 
     # ── L1f 사설 블록리스트 ─────────────────────────────────────────────
     l1f, l1f_exempt = [], []
+    collisions = 0
     if have_bl or have_map:
-        needles = [(t.lower().encode('utf-8'), '블록리스트') for t in terms] + \
-                  [(i.lower().encode('utf-8'), '실제 환자ID') for i in ids]
+        needles = [(id_needle(t), '블록리스트') for t in terms if t] + \
+                  [(id_needle(i), '실제 환자ID') for i in ids if i]
         for p, r in live:
             if p.suffix.lower() not in TEXT_EXT or r == SELF:
                 continue
             low = p.read_bytes().lower()
             h = {}
             for nd, kind in needles:
-                if nd and nd in low:
-                    if r in BLOCKLIST_FILE_ALLOW and kind == '블록리스트':
-                        kind = '블록리스트(인용 메타데이터·면제)'
-                    h[kind] = h.get(kind, 0) + 1
+                if not nd.search(low):
+                    collisions += loose_hits(nd, low)
+                    continue
+                if r in BLOCKLIST_FILE_ALLOW and kind == '블록리스트':
+                    kind = '블록리스트(인용 메타데이터·면제)'
+                h[kind] = h.get(kind, 0) + 1
             if h:
                 (l1f_exempt if set(h) == {'블록리스트(인용 메타데이터·면제)'}
                  else l1f).append((r, h))
         # 파일명도 본다
         for _, r in live:
             low = r.lower().encode('utf-8')
-            h = {k: 1 for nd, k in needles if nd and nd in low}
+            h = {k: 1 for nd, k in needles if nd.search(low)}
             if h:
                 l1f.append(('(파일명) ' + r, h))
     n1f = report('L1f. 사설 블록리스트 (기관·연구자 실명·IRB·실제 환자ID)', l1f,
                  '리터럴은 이 소스에 없다 — %s / %s 에서 읽는다.'
                  % ('블록리스트 O' if have_bl else '블록리스트 없음 X',
                     '가명매핑표 O' if have_map else '가명매핑표 없음 X'))
+    if collisions:
+        print(' 참고 — 숫자 경계 밖 우연 일치 %d건(소수 가수 안의 숫자열). '
+              '유출이 아니라 자릿수 충돌이다.\n' % collisions)
     if l1f_exempt:
         print(' 면제(차단 아님) — 인용 메타데이터에 저자 실명·소속이 드는 것은 정상:')
         for r, h in l1f_exempt:
