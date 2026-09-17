@@ -88,7 +88,8 @@ d_seed = c_seed['delta'] - c_single['delta']
 d_multi = c_multi['delta'] - c_single['delta']
 md += ['',
        "`*` 는 CI 가 0 을 넘지 않는 행이다.",
-       f"단일 XGBoost 행의 RMSE Δ = {c_single['delta']:+.4f} 는 `direct_test.md` 의 "
+       f"단일 XGBoost 행의 RMSE Δ = {c_single['delta']:+.4f} 는 "
+       f"`experiments/image_vs_summary/direct_test.md` 의 "
        f"{J['reference_delta_rmse_single_xgb']:+.3f} 를 재현한다.",
        '',
        '## 3. 판정 — 0.852 dB 중 앙상블 효과의 몫',

@@ -167,7 +167,8 @@ def ocr_threshold(img_path: str, eye: str = 'OD', debug: bool = False) -> dict:
     # GRID_POINTS_OS 도 값이 같다. 즉 이 분기는 현재 아무 일도 하지 않는다.
     # 두 눈의 프린트 격자가 실제로 같은 화면 배치이므로 동작상 문제는 없다.
     # 눈별로 다른 격자가 필요해지면 LAYOUT_* 를 먼저 갈라야 한다.
-    # 근거: docs/LATERALITY_AUDIT.md §4(b).
+    # 근거: 두 눈의 프린트 격자가 같은 화면 배치라는 좌우 규약 —
+    #       docs/coordinate_frame_convention.md (원고 §3.2).
     grid_points = GRID_POINTS_OD if eye == 'OD' else GRID_POINTS_OS
     empty = {lbl: None for lbl in POINT_LABELS}
     empty.update({'n_detected': 0, 'n_missing': 54})

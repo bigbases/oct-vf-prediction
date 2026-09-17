@@ -19,7 +19,8 @@ Phase B: 340 페어 전수 review 준비
 ⚠️ 사용 전 수정 필요: 아래 LAYOUT_OD 의 행별 점수가 [4,6,8,8,8,8,6,4] = 52 로,
    24-2 표준 [4,6,8,9,9,8,6,4] = 54 가 아니다(LAYOUT_OS 는 54 로 맞다).
    그 결과 GP['OD'] 에 p53/p54 가 비고, BLIND['OD']='p33' 도 실측 OD 맹점
-   위치(p35)와 어긋난다. 근거: docs/LATERALITY_AUDIT.md §4(a).
+   위치(p35)와 어긋난다. VF 점 번호와 좌우 규약은
+   docs/coordinate_frame_convention.md 의 "Visual field points" 절.
 
    Known defect, unfixed: LAYOUT_OD gives 52 points where the 24-2 standard has
    54, so p53/p54 are missing from GP['OD'] and BLIND['OD'] points at the wrong

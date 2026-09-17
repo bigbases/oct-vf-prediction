@@ -22,7 +22,8 @@ they are pinned by inputs with known answers.
 
 기존 코드는 **읽기만 한다.** 각 함수는 AST 로 정의만 뽑아 격리된 네임스페이스에서
 실행하므로, import 시 분석을 돌려버리는 파일(__main__ 가드 없는 것)도 안전하다.
-아무 파일도 쓰지 않는다. 결과 해석은 docs/METRIC_SANITY.md.
+아무 파일도 쓰지 않는다. 지표 정의(pooled masked RMSE/MAE 와
+RMSE_pooled = sqrt(mu^2 + sigma^2) 항등식)는 원고 §3.8.
 
 실행:  python experiments/metric_sanity.py
 """

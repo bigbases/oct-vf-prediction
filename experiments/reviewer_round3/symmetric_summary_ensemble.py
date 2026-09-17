@@ -49,7 +49,8 @@ GUARDS = {
     'single_xgb_pooled_mae': 6.3975,
     'image_ensemble_pooled_rmse': 8.115,
 }
-# 재현 확인용 (가드 아님): direct_test.md 의 5백본 앙상블 대 단일 XGB 안별 차이
+# 재현 확인용 (가드 아님): experiments/image_vs_summary/direct_test.md
+# (같은 폴더의 direct_test.py 가 만든다) 의 5백본 앙상블 대 단일 XGB 안별 차이
 REF_DELTA_RMSE = -0.852
 
 

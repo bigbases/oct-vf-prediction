@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""반대편 눈 피처 ablation 평가 — 사전등록 docs/fellow_eye_ablation_prereg.md 대로만 본다.
+"""반대편 눈 피처 ablation 평가 — 사전에 고정한 계획(원고 §4.2)대로만 본다.
 
 주 종말점: XGB(46) 대 XGB(26). OOF 안 단위 RMSE 의 대응 Wilcoxon.
 부차: 융합(46) 대 융합(26), 융합(46) 대 영상 단독.
@@ -50,7 +50,7 @@ def main() -> None:
     oofb, tstb, labb, mskb = load_all(BASE_TAG)
     ooff, tstf, labf, mskf = load_all(FELLOW_TAG)
 
-    out = {'note': ('반대편 눈 ablation. 사전등록 docs/fellow_eye_ablation_prereg.md. '
+    out = {'note': ('반대편 눈 ablation. 사전에 고정한 계획(원고 §4.2)대로만 평가한다. '
                     '주 종말점 = XGB(46) vs XGB(26) OOF RMSE. '
                     '융합(46) vs 영상단독은 정보 비대칭이므로 C5 주장에 쓰지 않는다.'),
            'primary': None, 'secondary': [], 'diagnostic': []}

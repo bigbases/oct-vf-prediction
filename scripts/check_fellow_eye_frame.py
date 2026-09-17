@@ -139,7 +139,7 @@ def main() -> None:
            '  `avg_rnfl`, `vert_cd`, 그리고 `s_sup`·`s_inf` 는 스왑 대상이 아니다.',
            '- 부등호가 뒤집힌 그룹을 "버그"로 단정하기 전에 이 표를 먼저 본다. 이 프로젝트에는',
            '  정상 데이터를 버그로 오진해 정답을 손상시킨 전례가 있다',
-           '  (`docs/flip_convention_FINAL.md` §7).', '']
+           '  (좌우 규약은 `docs/coordinate_frame_convention.md`).', '']
 
     out = ROOT / 'docs/fellow_eye_frame_check.md'
     out.write_text('\n'.join(md), encoding='utf-8')

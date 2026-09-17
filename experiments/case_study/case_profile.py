@@ -8,13 +8,14 @@ sensitivity bin, and its severity stratum. The eye sits in the favourable tail,
 and no selection rule was recorded at the time; the output says so.
 
 The eye is identified only by the pseudonym P-19. The record that binds that
-pseudonym to a study eye is an internal document (`docs/FIGURE_SOURCES.md`) and
+pseudonym to a study eye is an internal record that is not part of this release, and
 is not distributed with this repository.
 
 대표 사례(fig_case_representative)로 쓴 안구의 프로파일 — 값만 낸다.
 
 원고 Figure 6 (그림 번호 재배정 전에는 3, 그 뒤 4) 의 heat map 한 장이 어떤
-안구인지는 `docs/FIGURE_SOURCES.md` 의 등록 항목이 정본이다 (가명 P-19).
+안구인지는 공개 대상이 아닌 내부 등록부가 정본이다 (가명 P-19).
+그림과 캡션 수치는 원고 §4.6 (Representative case).
 `scripts/make_case_heatmap.py` 는 안구를 위치인자로 받으므로 선택 규칙이
 코드에 없다. 이 스크립트는 그 안구가 코호트 안에서 어디에 서 있는지를 잰다.
 
@@ -24,7 +25,7 @@ is not distributed with this repository.
   (4) 중증도       cohort_md.csv 의 MD 와 층
 
 기준 트리는 **패스 B** (`step4_work/B`). 안구 동일성 확인만 정본(패스 A)에서
-`docs/FIGURE_SOURCES.md` 의 캡션 수치와 대조한다. 둘 다 읽기 전용이다.
+원고 §4.6 의 캡션 수치와 대조한다. 둘 다 읽기 전용이다.
 w 는 그림과 같은 고정 0.47 을 쓴다 (`make_case_heatmap.W`). 코호트 대조값은
 `experiments/bias_structure/bias_by_bin.json` (fold별 nested w) 과 함께 낸다 —
 xgb/cnn 잔차는 w 와 무관하므로 그 두 줄은 가드로 쓴다.
@@ -56,7 +57,7 @@ PSEUDO_MAP = Path.home() / 'hvf_private' / 'pseudonym_map.csv'
 BIAS_JSON = REPO / 'experiments/bias_structure/bias_by_bin.json'
 OUT = REPO / 'experiments/case_study'
 
-# docs/FIGURE_SOURCES.md:19-21 의 패스 A 캡션 수치. 안구 동일성 확인용.
+# 원고 §4.6 캡션 수치(패스 A 기준). 안구 동일성 확인용.
 CAPTION_A = {'summary': (8.380, 7.047), 'image': (8.152, 5.177),
              'fusion': (6.553, 4.560)}
 TOL = 0.005
@@ -262,8 +263,8 @@ def main() -> int:
             'how_the_eye_is_supplied': 'scripts/make_case_heatmap.py 의 위치인자 '
                                        '(ap.add_argument("pid"), ap.add_argument("eye")). '
                                        '선택 규칙이 코드에 없다.',
-            'canonical_record': 'docs/FIGURE_SOURCES.md (P-19 / fold 2)',
-            'how_that_record_was_made': 'docs/FIGURE_SOURCES.md §2 — 캡션에 인쇄된 안 단위 '
+            'canonical_record': 'internal figure registry, not released (P-19 / fold 2)',
+            'how_that_record_was_made': '원고 §4.6 캡션에 인쇄된 안 단위 '
                                         '지표를 240안 전체에 tol 0.005 로 역추적해 사후 복원. '
                                         '§5 는 이 복원이 "우연 덕" 이라고 적는다.',
             'runtime_binding': 'experiments/laterality_qfix/step4_runner.py 의 '

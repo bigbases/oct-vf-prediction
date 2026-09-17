@@ -25,7 +25,7 @@ temporal is image left (ocr_rnfl_detail.py:80-89, cross-checked by the quadrant 
 mean-of-3-clock-hours identity in make_rnfl_flip.py). Under the RNFL convention the
 four GCA T/N sectors collapse to r ~ 0.53-0.64; under the OCR convention they reach
 r ~ 0.87-0.94. Both maps are the same eye in the same fundus orientation, so the two
-cannot both be anatomically right -- see docs/LATERALITY_AUDIT.md.
+cannot both be anatomically right -- see docs/coordinate_frame_convention.md.
 """
 import json
 import os

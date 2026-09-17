@@ -3,7 +3,7 @@
 
 찾는 것: "규약을 바꾸면 성능이 달라지나"가 아니라 **"코드 안에서 규약이 일치하나"**.
 규약 오류는 값 하나하나가 그럴듯해서 값 대조로는 안 잡힌다. 집단(OD/OS)을 갈라
-분포를 봐야 나온다. 배경과 2026-08-26 판정은 docs/LATERALITY_AUDIT.md.
+분포를 봐야 나온다. 규약 정의는 docs/coordinate_frame_convention.md (원고 §3.2).
 
 검사 A (핵심) — tabular 프레임 항등식
     사분면 값은 해당 3개 시계시간의 평균이다. 각 행에서 |사분면 − mean(3시간)| 을
@@ -191,7 +191,8 @@ def check_b(rows, tag: str, normalised: bool) -> dict:
     res['quadrants'] = _mirror_line('RNFL 사분면 4개', qo, qs, qs[[0, 3, 2, 1]])
     print('      ※ 사분면 4개는 t/n 값이 서로 가까워 이 대조로는 판정력이 없다. 검사 A 를 쓴다.')
     print('      ※ GCA 섹터는 섹터끼리 상관이 높아 어떤 상관 검사로도 t/n 이 갈리지 않는다.')
-    print('         2026-08-26 판정 불가로 남김 (docs/LATERALITY_AUDIT.md §3).')
+    print('         판정 불가로 남김 — 규약 정의는 '
+              'docs/coordinate_frame_convention.md')
     return res
 
 

@@ -46,7 +46,7 @@ FEATURES_OS = [
     'os_avg_rnfl', 'os_vert_cd',
 ] + RNFL_TABULAR
 
-# ---- 반대편 눈 (--fellow both). 사전등록: docs/fellow_eye_ablation_prereg.md ----
+# ---- 반대편 눈 (--fellow both). 사전에 고정한 절제 계획대로만 본다 (원고 §4.2) ----
 # study 눈 피처 앞 10개와 1:1 대응한다. 나머지(RNFL clock/quadrant)는 반대편 값이 CSV 에 없다.
 N_FELLOW = 10
 # study OD → fellow 는 OS 눈. 원본 컬럼 이름이 해부학 기준이므로 그대로 대응한다.
@@ -57,7 +57,8 @@ FELLOW_FOR_OD = [
 ]
 # study OS → fellow 는 OD 눈. **t/n 을 맞바꿔 대응시킨다.**
 # flip CSV 는 OS 행의 os_* 섹터를 이미 스왑했으므로(structure-function 정규화), 같은 해부학
-# 위치끼리 비교하려면 fellow(od_*) 도 스왑해야 한다. 실측 근거 = docs/fellow_eye_frame_check.md
+# 위치끼리 비교하려면 fellow(od_*) 도 스왑해야 한다.
+# 실측 근거표는 scripts/check_fellow_eye_frame.py 를 돌리면 생성된다.
 FELLOW_FOR_OS = [
     'avg_gcl_od', 'min_gcl_od',
     'od_s_sup', 'od_s_sup_n', 'od_s_inf_n', 'od_s_inf', 'od_s_inf_t', 'od_s_sup_t',
@@ -255,7 +256,7 @@ def main():
                          '기본 None = 기존 결과 재현. 반드시 --tag를 바꿔 별도 파일로 저장할 것')
     ap.add_argument('--fellow', choices=['none', 'both'], default='none',
                     help="'both' = 반대편 눈 원값 10 + 비대칭 차이 10 추가 (26 → 46). "
-                         '사전등록 docs/fellow_eye_ablation_prereg.md. '
+                         '사전에 고정한 절제 계획(원고 §4.2)대로만 평가한다. '
                          '기본 none = 기존 결과 재현. 반드시 --tag를 바꿔 별도 파일로 저장할 것')
     ap.add_argument('--out_dir', default='runs/oof')
     ap.add_argument(
