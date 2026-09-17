@@ -37,6 +37,36 @@ The correction moved the reported numbers by less than 0.01 dB in each direction
 fusion weights were unchanged). The values in `paper/results_frozen/` are the
 post-correction ones.
 
+## Ganglion cell analysis sectors
+
+A second defect of the same kind was found later, in the ganglion cell analysis
+columns. `apply_vf_neg1_to_zero.py` applies a temporal/nasal swap to four OS
+superior and inferior sector columns that have already been mapped upstream, so
+the swap is applied twice and the two eyes end up in opposite frames for those
+four columns. It was found by a fellow-eye check: the correlation between a
+sector and its counterpart in the other eye should not depend on laterality, and
+it did (t = +5.02).
+
+**This correction is not applied to the reported results.** The reason is that
+its effect cannot be measured. Re-running the whole pipeline with the four
+columns corrected moves the summary branch, but so does re-running it with the
+columns untouched: the right-eye rows, whose features do not change by a single
+value, still move by +0.134 dB, which is the size of the refitting perturbation
+alone. The difference in differences — the left-eye shift minus the right-eye
+shift, which is the only part attributable to the frame — is +0.029 dB with
+Welch p = 0.819. The defect is real; its effect on the reported numbers is not
+distinguishable from noise.
+
+The numbers in `paper/results_frozen/`, and the numbers in the manuscript, are
+therefore the uncorrected ones: out-of-fold XGB 8.660 dB RMSE, out-of-fold late
+fusion 8.069, fusion weight w = 0.47. For the record, applying the correction and
+re-running everything gives 8.831, 8.142 and w = 0.43; the image branch does not
+move at all (out-of-fold CNN 8.540, five-backbone ensemble 8.115), which is
+direct evidence that the two branches are independent. Reporting the uncorrected
+values is the more conservative choice, because the correction widens the gap
+this study reports between the image and summary representations rather than
+narrowing it.
+
 ## Visual field points
 
 `p26` and `p35` are the two physiological blind-spot locations of the 24-2
