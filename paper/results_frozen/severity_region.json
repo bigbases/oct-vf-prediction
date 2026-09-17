@@ -6,6 +6,7 @@
     "normal": {
       "n_eyes": 93,
       "n_points": 4836,
+      "n_points_per_eye": 52,
       "xgb": {
         "rmse": 6.04,
         "mae": 4.54
@@ -24,6 +25,7 @@
     "early": {
       "n_eyes": 54,
       "n_points": 2808,
+      "n_points_per_eye": 52,
       "xgb": {
         "rmse": 6.6,
         "mae": 4.73
@@ -42,6 +44,7 @@
     "moderate": {
       "n_eyes": 29,
       "n_points": 1508,
+      "n_points_per_eye": 52,
       "xgb": {
         "rmse": 9.75,
         "mae": 7.62
@@ -60,6 +63,7 @@
     "advanced": {
       "n_eyes": 59,
       "n_points": 3068,
+      "n_points_per_eye": 52,
       "xgb": {
         "rmse": 12.57,
         "mae": 10.45
@@ -80,6 +84,7 @@
     "superior (상반구)": {
       "n_eyes": 240,
       "n_points": 6240,
+      "n_points_per_eye": 26,
       "xgb": {
         "rmse": 8.84,
         "mae": 6.63
@@ -98,6 +103,7 @@
     "inferior (하반구)": {
       "n_eyes": 240,
       "n_points": 6240,
+      "n_points_per_eye": 26,
       "xgb": {
         "rmse": 8.48,
         "mae": 6.17
@@ -116,6 +122,7 @@
     "central ≤9° (중심)": {
       "n_eyes": 240,
       "n_points": 3840,
+      "n_points_per_eye": 16,
       "xgb": {
         "rmse": 8.14,
         "mae": 5.65
@@ -134,6 +141,7 @@
     "peripheral (주변)": {
       "n_eyes": 240,
       "n_points": 8640,
+      "n_points_per_eye": 36,
       "xgb": {
         "rmse": 8.88,
         "mae": 6.73
@@ -150,9 +158,13 @@
       "p_fus_vs_xgb": 0.0
     }
   },
+  "n_rows_severity": 235,
+  "n_rows_md_unmatched": 5,
+  "n_eyes_severity_distinct": 230,
   "overall": {
     "n_eyes": 240,
     "n_points": 12480,
+    "n_points_per_eye": 52,
     "xgb": {
       "rmse": 8.66,
       "mae": 6.4

@@ -134,8 +134,14 @@ def block(X, C, L, M, rows, cols, w):
     F = w * X + (1 - w) * C
     rx, mx = pooled(X, L, mm); rc, mc = pooled(C, L, mm); rf, mf = pooled(F, L, mm)
     ef = eye_rmse(F, L, M, rows, cols); ec = eye_rmse(C, L, M, rows, cols); ex = eye_rmse(X, L, M, rows, cols)
+    # region 표의 n 열 = **안구당 점 수**(24-2 52점 격자의 분할: 상 26 / 하 26 /
+    # 중심 16 / 주변 36). 여태 이 값은 .md 표에만 int(np.sum(REGIONS[name])) 로
+    # 찍히고 JSON 에는 안 들어갔다. 그래서 원고의 26/16/36 은 근거 풀에서
+    # 무관한 값에 우연히 맞아 통과하고 있었다 — 36 은 case_profile.json 의
+    # md_percentile_rank=35.74 였다 (2026-09-17). n_rows_severity 때와 같은 건.
     return {
         'n_eyes': int(len(rows)), 'n_points': int(mm.sum()),
+        'n_points_per_eye': int(cols.sum()),
         'xgb': {'rmse': rx, 'mae': mx}, 'cnn': {'rmse': rc, 'mae': mc},
         'fusion': {'rmse': rf, 'mae': mf},
         'p_fus_vs_cnn': wil(ef, ec), 'p_fus_vs_xgb': wil(ef, ex),
@@ -165,6 +171,16 @@ def main():
 
     # severity 층화 (eye 단위)
     md_vals = np.array([MD.get(nkey(*k), np.nan) for k in keys])
+    # severity 표의 행수와 그 행들이 나온 고유 안구 수.
+    # 원고는 "the severity rows total 235 ... the 235 rows come from 230
+    # distinct eyes" 로 쓰는데, 저장된 건 층별 n 뿐이라 235 는 층 합으로만
+    # 재구성됐고 230 은 어느 산출물에도 없었다. 235 쪽은 그동안 무관한
+    # case_profile.json 의 235 에 우연히 맞아 통과하고 있었다 (2026-09-17).
+    _fin = np.isfinite(md_vals)
+    res['n_rows_severity'] = int(_fin.sum())
+    res['n_rows_md_unmatched'] = int((~_fin).sum())
+    res['n_eyes_severity_distinct'] = len(
+        {(k[0], k[1]) for k, f in zip(keys, _fin) if f})
     print('=== Per-severity (MD 층, eye 단위) ===', flush=True)
     print(f'{"stratum":12s} {"n":>4s}  {"XGB":>10s} {"CNN":>10s} {"fusion":>10s}  {"fus<CNN?":>9s}', flush=True)
     for name, fn in STRATA:

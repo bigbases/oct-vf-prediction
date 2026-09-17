@@ -1,0 +1,240 @@
+{
+  "item": "(2) 요약 분지의 대칭적 강화",
+  "tree": "/home/<user>/experiments/laterality_qfix/step4_work/B",
+  "pass": "B",
+  "split": "out-of-fold",
+  "seed": 42,
+  "n_boot": 5000,
+  "ci": "환자 군집 부트스트랩 95% percentile",
+  "note": "요약 분지만 재적합. 입력 26 파라미터·폴드·52 지점별 구조·결측 대치는 ablate_vert_cd.py 에서 import. XGB 는 XGB_KW 에서 seed 만 변경, RF/ET/Ridge/SVR 은 scikit-learn 기본값 그대로 (스케일링 없음). per-eye SD 는 모집단 분모(ddof=0).",
+  "reference_delta_rmse_single_xgb": -0.852,
+  "guards": {
+    "single_xgb_pooled_rmse": {
+      "got": 8.6603,
+      "want": 8.6603,
+      "tol": 0.005,
+      "ok": true
+    },
+    "single_xgb_pooled_mae": {
+      "got": 6.3975,
+      "want": 6.3975,
+      "tol": 0.005,
+      "ok": true
+    },
+    "image_ensemble_pooled_rmse": {
+      "got": 8.1147,
+      "want": 8.115,
+      "tol": 0.005,
+      "ok": true
+    },
+    "refit_vs_stored_seed42_max_abs_cell_diff": 0.0,
+    "refit_vs_stored_seed42_stored_pooled_rmse": 8.6603
+  },
+  "fit_seconds": {
+    "xgb_s42": 20.2,
+    "xgb_s43": 20.1,
+    "xgb_s44": 20.1,
+    "rf_s42": 90.1,
+    "et_s42": 44.9,
+    "ridge_s42": 0.5,
+    "svr_s42": 1.5
+  },
+  "members": [
+    "xgb_s42",
+    "xgb_s43",
+    "xgb_s44",
+    "rf_s42",
+    "et_s42",
+    "ridge_s42",
+    "svr_s42"
+  ],
+  "sklearn_defaults_caveat": "Ridge / SVR 은 표준화 없이 원 스케일 26 입력에 적합했다. SVR 기본값(RBF, C=1, epsilon=0.1)은 이 스케일에서 사실상 상수 예측에 가깝다 — 다중 모델 앙상블 행을 읽을 때 감안할 것. 지시대로 조정하지 않았다.",
+  "rows": [
+    {
+      "label": "summary: 단일 XGBoost (seed 42)",
+      "pooled_rmse": 8.660277366638184,
+      "pooled_mae": 6.397546291351318,
+      "eye_rmse_mean": 7.808804738521576,
+      "eye_rmse_sd_pop": 3.7447248865737266,
+      "eye_mae_mean": 6.397545442481836,
+      "eye_mae_sd_pop": 3.4221232467491727,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary 구성원: xgb (seed 43)",
+      "pooled_rmse": 8.635265350341797,
+      "pooled_mae": 6.383144378662109,
+      "eye_rmse_mean": 7.783838813006878,
+      "eye_rmse_sd_pop": 3.738937621680552,
+      "eye_mae_mean": 6.383143958946069,
+      "eye_mae_sd_pop": 3.4150213723044565,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary 구성원: xgb (seed 44)",
+      "pooled_rmse": 8.615638732910156,
+      "pooled_mae": 6.358394145965576,
+      "eye_rmse_mean": 7.76837919006745,
+      "eye_rmse_sd_pop": 3.725791068836727,
+      "eye_mae_mean": 6.358394180734952,
+      "eye_mae_sd_pop": 3.3991587653002067,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary 구성원: rf (seed 42)",
+      "pooled_rmse": 8.628896713256836,
+      "pooled_mae": 6.456467628479004,
+      "eye_rmse_mean": 7.722564263641834,
+      "eye_rmse_sd_pop": 3.8496560648910676,
+      "eye_mae_mean": 6.456467901170254,
+      "eye_mae_sd_pop": 3.5793890677153377,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary 구성원: et (seed 42)",
+      "pooled_rmse": 8.546323776245117,
+      "pooled_mae": 6.44529390335083,
+      "eye_rmse_mean": 7.688619468112787,
+      "eye_rmse_sd_pop": 3.731592195877494,
+      "eye_mae_mean": 6.445294070243835,
+      "eye_mae_sd_pop": 3.4657340960518144,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary 구성원: ridge (seed 42)",
+      "pooled_rmse": 10.360125541687012,
+      "pooled_mae": 7.677426338195801,
+      "eye_rmse_mean": 8.993450904885927,
+      "eye_rmse_sd_pop": 5.142960436244262,
+      "eye_mae_mean": 7.677426074445248,
+      "eye_mae_sd_pop": 4.885259286437984,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary 구성원: svr (seed 42)",
+      "pooled_rmse": 9.809794425964355,
+      "pooled_mae": 6.501682758331299,
+      "eye_rmse_mean": 7.980783106386662,
+      "eye_rmse_sd_pop": 5.704311818336536,
+      "eye_mae_mean": 6.501682475209236,
+      "eye_mae_sd_pop": 5.341422705747002,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary: XGB seed 앙상블 (42/43/44)",
+      "pooled_rmse": 8.584329605102539,
+      "pooled_mae": 6.34519624710083,
+      "eye_rmse_mean": 7.726708012322585,
+      "eye_rmse_sd_pop": 3.740146936594032,
+      "eye_mae_mean": 6.3451959451039635,
+      "eye_mae_sd_pop": 3.4178834023689495,
+      "n_eyes": 240
+    },
+    {
+      "label": "summary: 다중 모델 앙상블 (XGB+RF+ET+Ridge+SVR)",
+      "pooled_rmse": 8.56277847290039,
+      "pooled_mae": 6.332603931427002,
+      "eye_rmse_mean": 7.5814464310805,
+      "eye_rmse_sd_pop": 3.9803087100822045,
+      "eye_mae_mean": 6.332604156434536,
+      "eye_mae_sd_pop": 3.7010294807162167,
+      "n_eyes": 240
+    },
+    {
+      "label": "image: 5백본 이미지 앙상블",
+      "pooled_rmse": 8.11470890045166,
+      "pooled_mae": 5.666417598724365,
+      "eye_rmse_mean": 6.956822867691517,
+      "eye_rmse_sd_pop": 4.177453357459863,
+      "eye_mae_mean": 5.666417361795903,
+      "eye_mae_sd_pop": 3.8109550358509057,
+      "n_eyes": 240
+    }
+  ],
+  "comparisons": [
+    {
+      "image": "5백본 이미지 앙상블",
+      "summary": "단일 XGBoost (seed 42)",
+      "metric": "rmse",
+      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": -0.851981870830059,
+      "ci_lo": -1.2038410827685253,
+      "ci_hi": -0.49323791282513574,
+      "median_delta": -0.6154050827026367,
+      "p_wilcoxon": 7.914514571884058e-07,
+      "n_image_better": 158
+    },
+    {
+      "image": "5백본 이미지 앙상블",
+      "summary": "XGB seed 앙상블 (42/43/44)",
+      "metric": "rmse",
+      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": -0.7698851446310679,
+      "ci_lo": -1.116271665729738,
+      "ci_hi": -0.413275983876758,
+      "median_delta": -0.5220420360565186,
+      "p_wilcoxon": 5.880183932079984e-06,
+      "n_image_better": 151
+    },
+    {
+      "image": "5백본 이미지 앙상블",
+      "summary": "다중 모델 앙상블 (5종)",
+      "metric": "rmse",
+      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": -0.6246235633889834,
+      "ci_lo": -0.9345866850619172,
+      "ci_hi": -0.3043312393892166,
+      "median_delta": -0.30461835861206055,
+      "p_wilcoxon": 0.00020682734096450633,
+      "n_image_better": 145
+    },
+    {
+      "image": "5백본 이미지 앙상블",
+      "summary": "단일 XGBoost (seed 42)",
+      "metric": "mae",
+      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": -0.7311280806859334,
+      "ci_lo": -1.0730615698894657,
+      "ci_hi": -0.3898533919125293,
+      "median_delta": -0.49137938022613525,
+      "p_wilcoxon": 3.3568873119487017e-06,
+      "n_image_better": 160
+    },
+    {
+      "image": "5백본 이미지 앙상블",
+      "summary": "XGB seed 앙상블 (42/43/44)",
+      "metric": "mae",
+      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": -0.678778583308061,
+      "ci_lo": -1.018639396945065,
+      "ci_hi": -0.3330117286408855,
+      "median_delta": -0.4766089916229248,
+      "p_wilcoxon": 1.1362422775033299e-05,
+      "n_image_better": 160
+    },
+    {
+      "image": "5백본 이미지 앙상블",
+      "summary": "다중 모델 앙상블 (5종)",
+      "metric": "mae",
+      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": -0.6661867946386337,
+      "ci_lo": -0.9735275084354575,
+      "ci_hi": -0.3587866305533731,
+      "median_delta": -0.3084554672241211,
+      "p_wilcoxon": 2.6041947190204898e-05,
+      "n_image_better": 145
+    }
+  ]
+}

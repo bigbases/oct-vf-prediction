@@ -1,0 +1,116 @@
+{
+  "protocol": "OS 이미지 좌우반전(OD 정규화) 유무 대조. 하이퍼파라미터 동일, seed 42, num_workers 0. test 집계 = 5-fold 예측 평균(정본).",
+  "w_fixed": 0.47,
+  "reference_noflip": {
+    "cnn_oof_rmse": 8.54,
+    "fusion_oof_rmse": 8.064,
+    "fusion_test_rmse": 8.401
+  },
+  "integrity_checks": {
+    "base_cnn_oof_rmse_matches_ref": true,
+    "base_fusion_oof_rmse_matches_ref": true,
+    "base_fusion_test_rmse_matches_ref": true
+  },
+  "noflip": {
+    "oof_cnn": {
+      "rmse": 8.53967571258545,
+      "mae": 6.123324871063232,
+      "n_eyes": 240
+    },
+    "oof_xgb": {
+      "rmse": 8.660277366638184,
+      "mae": 6.397545337677002
+    },
+    "oof_fusion_w047": {
+      "rmse": 8.068803787231445,
+      "mae": 5.894312381744385,
+      "w_xgb": 0.47
+    },
+    "oof_fusion_wopt": {
+      "rmse": 8.068803787231445,
+      "mae": 5.894312381744385,
+      "w_xgb": 0.47000000000000003
+    },
+    "test_cnn": {
+      "rmse": 8.732285499572754,
+      "mae": 6.032829761505127,
+      "n_eyes": 37
+    },
+    "test_xgb": {
+      "rmse": 8.919267654418945,
+      "mae": 6.8320231437683105
+    },
+    "test_fusion_w047": {
+      "rmse": 8.410520553588867,
+      "mae": 6.271999359130859,
+      "w_xgb": 0.47
+    },
+    "test_fusion_wopt": {
+      "rmse": 8.410520553588867,
+      "mae": 6.271999359130859,
+      "w_xgb": 0.47000000000000003
+    }
+  },
+  "flip": {
+    "oof_cnn": {
+      "rmse": 8.686966896057129,
+      "mae": 6.208272457122803,
+      "n_eyes": 240
+    },
+    "oof_xgb": {
+      "rmse": 8.660277366638184,
+      "mae": 6.397545337677002
+    },
+    "oof_fusion_w047": {
+      "rmse": 8.141536712646484,
+      "mae": 5.951858043670654,
+      "w_xgb": 0.47
+    },
+    "oof_fusion_wopt": {
+      "rmse": 8.138630867004395,
+      "mae": 5.959514617919922,
+      "w_xgb": 0.51
+    },
+    "test_cnn": {
+      "rmse": 8.471378326416016,
+      "mae": 5.64774227142334,
+      "n_eyes": 37
+    },
+    "test_xgb": {
+      "rmse": 8.919267654418945,
+      "mae": 6.8320231437683105
+    },
+    "test_fusion_w047": {
+      "rmse": 8.264795303344727,
+      "mae": 6.024020195007324,
+      "w_xgb": 0.47
+    },
+    "test_fusion_wopt": {
+      "rmse": 8.282242774963379,
+      "mae": 6.073787212371826,
+      "w_xgb": 0.51
+    }
+  },
+  "paired_wilcoxon_flip_vs_noflip": {
+    "oof_cnn": {
+      "n_eyes": 240,
+      "p": 0.7876603786956449,
+      "median_delta": 0.0671236515045166
+    },
+    "oof_fusion_w047": {
+      "n_eyes": 240,
+      "p": 0.36614622318385426,
+      "median_delta": 0.03164386749267578
+    },
+    "test_cnn": {
+      "n_eyes": 37,
+      "p": 0.18656851025298238,
+      "median_delta": -0.381805419921875
+    },
+    "test_fusion_w047": {
+      "n_eyes": 37,
+      "p": 0.12112347882066388,
+      "median_delta": -0.26256847381591797
+    }
+  }
+}

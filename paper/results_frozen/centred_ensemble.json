@@ -1,0 +1,218 @@
+{
+  "item": "(1) 중심화한 이미지 앙상블 단독의 성능",
+  "tree": "/home/<user>/experiments/laterality_qfix/step4_work/B",
+  "pass": "B",
+  "split": "out-of-fold",
+  "seed": 42,
+  "n_boot": 5000,
+  "ci": "환자 군집 부트스트랩 95% percentile",
+  "note": "전역중심화 = 앙상블 예측에서 학습 폴드 잔차 평균 스칼라 하나를 뺀다. w 재적합 없음(보조 행 제외). 재학습 없음, 저장된 예측만 사용. per-eye SD 는 모집단 분모(ddof=0).",
+  "guards": {
+    "oof_ensemble_pooled_rmse": {
+      "got": 8.1147,
+      "want": 8.115,
+      "tol": 0.005,
+      "ok": true
+    },
+    "oof_ensemble_fusion_pooled_rmse": {
+      "got": 7.9629,
+      "want": 7.963,
+      "tol": 0.005,
+      "ok": true
+    },
+    "oof_summary_pooled_rmse": {
+      "got": 8.6603,
+      "want": 8.6603,
+      "tol": 0.005,
+      "ok": true
+    }
+  },
+  "centering_constant": {
+    "definition": "fold k 의 상수 = 나머지 4 fold 의 마스크된 지점에서의 (앙상블 예측 - 실측) 평균",
+    "global_by_fold": [
+      1.2802,
+      1.4847,
+      1.5772,
+      1.6684,
+      1.6573
+    ],
+    "global_mean": 1.5335582494735718,
+    "global_sd_pop": 0.14283126286712683,
+    "global_min": 1.2801536321640015,
+    "global_max": 1.6683746576309204,
+    "global_range": 0.38822102546691895,
+    "global_all_folds_reference": 1.5331,
+    "bin_by_fold": [
+      [
+        14.3669,
+        4.213,
+        -1.5688,
+        -2.6122
+      ],
+      [
+        15.1079,
+        4.682,
+        -1.6214,
+        -2.7581
+      ],
+      [
+        14.7396,
+        4.7316,
+        -1.8216,
+        -2.9579
+      ],
+      [
+        14.967,
+        4.1024,
+        -1.6961,
+        -2.5719
+      ],
+      [
+        14.806,
+        4.7913,
+        -1.4963,
+        -2.6792
+      ]
+    ],
+    "bin_labels": [
+      "[0,10)",
+      "[10,20)",
+      "[20,30)",
+      "[30,inf)"
+    ]
+  },
+  "w_nested_by_fold": [
+    0.29,
+    0.39,
+    0.33,
+    0.36,
+    0.27
+  ],
+  "w_refit_after_global_centering_by_fold": [
+    0.23,
+    0.33,
+    0.27,
+    0.29,
+    0.2
+  ],
+  "rows": [
+    {
+      "label": "summary (XGBoost 단독)",
+      "pooled_rmse": 8.660277366638184,
+      "pooled_mae": 6.397546291351318,
+      "eye_rmse_mean": 7.808804738521576,
+      "eye_rmse_sd_pop": 3.7447248865737266,
+      "eye_mae_mean": 6.397545442481836,
+      "eye_mae_sd_pop": 3.4221232467491727,
+      "n_eyes": 240
+    },
+    {
+      "label": "이미지 앙상블 (중심화 전)",
+      "pooled_rmse": 8.11470890045166,
+      "pooled_mae": 5.666417598724365,
+      "eye_rmse_mean": 6.956822867691517,
+      "eye_rmse_sd_pop": 4.177453357459863,
+      "eye_mae_mean": 5.666417361795903,
+      "eye_mae_sd_pop": 3.8109550358509057,
+      "n_eyes": 240
+    },
+    {
+      "label": "이미지 앙상블 (전역중심화, 학습폴드 상수)",
+      "pooled_rmse": 7.980093479156494,
+      "pooled_mae": 5.929431915283203,
+      "eye_rmse_mean": 7.0834341019392015,
+      "eye_rmse_sd_pop": 3.6751670077888177,
+      "eye_mae_mean": 5.929432422916094,
+      "eye_mae_sd_pop": 3.3820823409359755,
+      "n_eyes": 240
+    },
+    {
+      "label": "앙상블 fusion (nested w, 중심화 없음)",
+      "pooled_rmse": 7.962895393371582,
+      "pooled_mae": 5.684981822967529,
+      "eye_rmse_mean": 6.930865624050299,
+      "eye_rmse_sd_pop": 3.920561753087292,
+      "eye_mae_mean": 5.684981838365396,
+      "eye_mae_sd_pop": 3.585713853838097,
+      "n_eyes": 240
+    },
+    {
+      "label": "[참고/oracle] 이미지 앙상블 (구간중심화, 학습폴드 상수)",
+      "pooled_rmse": 4.767050266265869,
+      "pooled_mae": 3.6479759216308594,
+      "eye_rmse_mean": 4.305396521588166,
+      "eye_rmse_sd_pop": 2.046541494832965,
+      "eye_mae_mean": 3.6479757020870847,
+      "eye_mae_sd_pop": 1.9487613793810428,
+      "n_eyes": 240
+    },
+    {
+      "label": "[보조] 전역중심화 앙상블 + fusion (w 재적합)",
+      "pooled_rmse": 7.899158954620361,
+      "pooled_mae": 5.9056596755981445,
+      "eye_rmse_mean": 7.0437638570865,
+      "eye_rmse_sd_pop": 3.5752071734437076,
+      "eye_mae_mean": 5.905659683545431,
+      "eye_mae_sd_pop": 3.282988986930075,
+      "n_eyes": 240
+    }
+  ],
+  "comparisons": [
+    {
+      "a": "전역중심화 앙상블",
+      "b": "앙상블 fusion",
+      "metric": "rmse",
+      "convention": "delta = per-eye RMSE(전역중심화 앙상블) - RMSE(앙상블 fusion); 음수 = 전역중심화 앙상블 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": 0.15256847788890202,
+      "ci_lo": -0.005062126836168621,
+      "ci_hi": 0.31532891411550235,
+      "median_delta": 0.10819005966186523,
+      "p_wilcoxon": 0.03198619702753695,
+      "n_a_better": 110
+    },
+    {
+      "a": "전역중심화 앙상블",
+      "b": "앙상블 fusion",
+      "metric": "mae",
+      "convention": "delta = per-eye MAE(전역중심화 앙상블) - MAE(앙상블 fusion); 음수 = 전역중심화 앙상블 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": 0.2444505845506986,
+      "ci_lo": 0.08540929393555091,
+      "ci_hi": 0.4117914582638114,
+      "median_delta": 0.18767225742340088,
+      "p_wilcoxon": 0.0005892080587981573,
+      "n_a_better": 100
+    },
+    {
+      "a": "전역중심화 앙상블",
+      "b": "중심화 전 앙상블",
+      "metric": "rmse",
+      "convention": "delta = per-eye RMSE(전역중심화 앙상블) - RMSE(중심화 전 앙상블); 음수 = 전역중심화 앙상블 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": 0.12661123424768447,
+      "ci_lo": -0.02221584552220425,
+      "ci_hi": 0.2776552301044055,
+      "median_delta": 0.20562005043029785,
+      "p_wilcoxon": 0.037565215030350055,
+      "n_a_better": 111
+    },
+    {
+      "a": "전역중심화 후 fusion",
+      "b": "전역중심화 앙상블",
+      "metric": "rmse",
+      "convention": "delta = per-eye RMSE(전역중심화 후 fusion) - RMSE(전역중심화 앙상블); 음수 = 전역중심화 후 fusion 우세",
+      "n_eyes": 240,
+      "n_patients": 125,
+      "delta": -0.039670244852701826,
+      "ci_lo": -0.13900601489842737,
+      "ci_hi": 0.05653409713608351,
+      "median_delta": -0.055936217308044434,
+      "p_wilcoxon": 0.1202152587131341,
+      "n_a_better": 134
+    }
+  ]
+}

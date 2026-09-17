@@ -1,0 +1,70 @@
+{
+  "26_feat_baseline": {
+    "tag": "26_feat_baseline",
+    "n_features": 26,
+    "oof": {
+      "xgb_rmse": 8.660277366638184,
+      "xgb_mae": 6.397546291351318,
+      "cnn_rmse": 8.53967571258545,
+      "cnn_mae": 6.123324871063232,
+      "w0.47": {
+        "w_xgb": 0.47,
+        "fusion_rmse": 8.068803787231445,
+        "fusion_mae": 5.894312381744385,
+        "fus_vs_cnn_p": 0.0013493832733225994,
+        "fus_vs_cnn_win": "149/240",
+        "fus_vs_xgb_p": 1.2993503457930597e-10,
+        "fus_vs_xgb_win": "160/240"
+      },
+      "w_refit": {
+        "w_xgb": 0.47,
+        "fusion_rmse": 8.068803787231445,
+        "fusion_mae": 5.894312381744385,
+        "fus_vs_cnn_p": 0.0013493832733225994,
+        "fus_vs_cnn_win": "149/240",
+        "fus_vs_xgb_p": 1.2993503457930597e-10,
+        "fus_vs_xgb_win": "160/240"
+      }
+    },
+    "test": {
+      "fusion_rmse": 8.410520553588867,
+      "xgb_rmse": 8.919268608093262,
+      "fus_vs_xgb_p": 0.02640274581790436,
+      "fus_vs_xgb_win": "27/37"
+    }
+  },
+  "25_feat_no_vertcd": {
+    "tag": "25_feat_no_vertcd",
+    "n_features": 25,
+    "oof": {
+      "xgb_rmse": 8.718205451965332,
+      "xgb_mae": 6.433189868927002,
+      "cnn_rmse": 8.53967571258545,
+      "cnn_mae": 6.123324871063232,
+      "w0.47": {
+        "w_xgb": 0.47,
+        "fusion_rmse": 8.08318042755127,
+        "fusion_mae": 5.903602123260498,
+        "fus_vs_cnn_p": 0.0022243664780486607,
+        "fus_vs_cnn_win": "149/240",
+        "fus_vs_xgb_p": 9.389097764467467e-11,
+        "fus_vs_xgb_win": "162/240"
+      },
+      "w_refit": {
+        "w_xgb": 0.46,
+        "fusion_rmse": 8.082845687866211,
+        "fusion_mae": 5.901165008544922,
+        "fus_vs_cnn_p": 0.0016509564167244558,
+        "fus_vs_cnn_win": "150/240",
+        "fus_vs_xgb_p": 1.7939017976853037e-10,
+        "fus_vs_xgb_win": "162/240"
+      }
+    },
+    "test": {
+      "fusion_rmse": 8.578579902648926,
+      "xgb_rmse": 9.241109848022461,
+      "fus_vs_xgb_p": 0.01056193743715994,
+      "fus_vs_xgb_win": "26/37"
+    }
+  }
+}

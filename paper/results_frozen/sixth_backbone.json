@@ -1,0 +1,297 @@
+{
+  "note": "6번째 CNN(ResNet50) 추가 이득 대 XGB 추가 이득. 패스 B, out-of-fold. delta = per-eye M(a) - per-eye M(b), 음수 = a 우세.",
+  "tree": "/home/<user>/experiments/laterality_qfix/step4_work/B",
+  "resnet50_run": "/home/<user>/experiments/reviewer_round3/runs_r3/phasec_b0_resnet50_5fold",
+  "seed": 42,
+  "n_boot": 5000,
+  "backbones5": [
+    "IR-v2",
+    "Inception-v3",
+    "VGG16",
+    "Xception",
+    "DenseNet121"
+  ],
+  "backbones6": [
+    "IR-v2",
+    "Inception-v3",
+    "VGG16",
+    "Xception",
+    "DenseNet121",
+    "ResNet50"
+  ],
+  "guards": {
+    "oof_ensemble5_pooled_rmse_basisA": {
+      "got": 8.1147,
+      "want": 8.115,
+      "tol": 0.005,
+      "ok": true
+    },
+    "oof_ensemble5_fusion_pooled_rmse_basisA": {
+      "got": 7.9629,
+      "want": 7.963,
+      "tol": 0.005,
+      "ok": true
+    },
+    "oof_summary_pooled_rmse_basisA": {
+      "got": 8.6603,
+      "want": 8.6603,
+      "tol": 0.005,
+      "ok": true
+    }
+  },
+  "basis_shift": {
+    "basis_a_eyes": 240,
+    "basis_b_eyes": 240,
+    "basis_a_cells": 12480,
+    "basis_b_cells": 12480,
+    "eyes_dropped": 0,
+    "note": "basis B 는 ResNet50 의 키/마스크까지 교집합에 넣은 것이다."
+  },
+  "nested_w_ens5_basisB": [
+    0.29,
+    0.39,
+    0.33,
+    0.36,
+    0.27
+  ],
+  "nested_w_ens6_basisB": [
+    0.33,
+    0.42,
+    0.36,
+    0.38,
+    0.31
+  ],
+  "rows_basisB": [
+    {
+      "label": "ResNet50 단독",
+      "pooled_rmse": 9.68110179901123,
+      "pooled_mae": 6.728091239929199,
+      "eye_rmse_mean": 8.06680679321289,
+      "eye_rmse_sd_pop": 5.352603435516357,
+      "eye_mae_mean": 6.728090286254883,
+      "eye_mae_sd_pop": 5.073920249938965,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "5백본 앙상블",
+      "pooled_rmse": 8.11470890045166,
+      "pooled_mae": 5.666417598724365,
+      "eye_rmse_mean": 6.956822872161865,
+      "eye_rmse_sd_pop": 4.17745304107666,
+      "eye_mae_mean": 5.666417598724365,
+      "eye_mae_sd_pop": 3.810955047607422,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "6백본 앙상블 (+ResNet50)",
+      "pooled_rmse": 8.223194122314453,
+      "pooled_mae": 5.716362476348877,
+      "eye_rmse_mean": 7.012265682220459,
+      "eye_rmse_sd_pop": 4.295236587524414,
+      "eye_mae_mean": 5.716362476348877,
+      "eye_mae_sd_pop": 3.942376136779785,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "5백본 앙상블 + XGB fusion",
+      "pooled_rmse": 7.962895393371582,
+      "pooled_mae": 5.684981822967529,
+      "eye_rmse_mean": 6.930865287780762,
+      "eye_rmse_sd_pop": 3.9205617904663086,
+      "eye_mae_mean": 5.684981822967529,
+      "eye_mae_sd_pop": 3.5857136249542236,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "6백본 앙상블 + XGB fusion",
+      "pooled_rmse": 8.03359317779541,
+      "pooled_mae": 5.7337422370910645,
+      "eye_rmse_mean": 6.982168674468994,
+      "eye_rmse_sd_pop": 3.9734044075012207,
+      "eye_mae_mean": 5.7337422370910645,
+      "eye_mae_sd_pop": 3.645744800567627,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "summary XGB 단독",
+      "pooled_rmse": 8.660277366638184,
+      "pooled_mae": 6.397546291351318,
+      "eye_rmse_mean": 7.808805465698242,
+      "eye_rmse_sd_pop": 3.744724988937378,
+      "eye_mae_mean": 6.397545337677002,
+      "eye_mae_sd_pop": 3.4221231937408447,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "IR-v2",
+      "pooled_rmse": 8.53967571258545,
+      "pooled_mae": 6.123324871063232,
+      "eye_rmse_mean": 7.425471782684326,
+      "eye_rmse_sd_pop": 4.2176337242126465,
+      "eye_mae_mean": 6.123324394226074,
+      "eye_mae_sd_pop": 3.8289194107055664,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "Inception-v3",
+      "pooled_rmse": 9.110008239746094,
+      "pooled_mae": 6.222484588623047,
+      "eye_rmse_mean": 7.6137189865112305,
+      "eye_rmse_sd_pop": 5.002352714538574,
+      "eye_mae_mean": 6.222484111785889,
+      "eye_mae_sd_pop": 4.609070301055908,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "VGG16",
+      "pooled_rmse": 9.164873123168945,
+      "pooled_mae": 6.417478084564209,
+      "eye_rmse_mean": 7.731164455413818,
+      "eye_rmse_sd_pop": 4.921787261962891,
+      "eye_mae_mean": 6.417478084564209,
+      "eye_mae_sd_pop": 4.62217903137207,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "Xception",
+      "pooled_rmse": 8.351838111877441,
+      "pooled_mae": 5.946262359619141,
+      "eye_rmse_mean": 7.220712661743164,
+      "eye_rmse_sd_pop": 4.196963787078857,
+      "eye_mae_mean": 5.946261882781982,
+      "eye_mae_sd_pop": 3.9351437091827393,
+      "n_eyes": 240,
+      "n_cells": 12480
+    },
+    {
+      "label": "DenseNet121",
+      "pooled_rmse": 8.668922424316406,
+      "pooled_mae": 6.15525484085083,
+      "eye_rmse_mean": 7.437492370605469,
+      "eye_rmse_sd_pop": 4.453530788421631,
+      "eye_mae_mean": 6.155255317687988,
+      "eye_mae_sd_pop": 4.118579864501953,
+      "n_eyes": 240,
+      "n_cells": 12480
+    }
+  ],
+  "comparisons_basisB": [
+    {
+      "a": "6백본 앙상블",
+      "b": "5백본 앙상블",
+      "metric": "rmse",
+      "n_eyes": 240,
+      "delta": 0.05544249340891838,
+      "ci_lo": -0.003829967699021982,
+      "ci_hi": 0.11852043859111276,
+      "median_delta": 0.002399444580078125,
+      "p_wilcoxon": 0.595875655481414,
+      "n_a_better": 119
+    },
+    {
+      "a": "5백본+XGB fusion",
+      "b": "5백본 앙상블",
+      "metric": "rmse",
+      "n_eyes": 240,
+      "delta": -0.025957247242331505,
+      "ci_lo": -0.150957319462687,
+      "ci_hi": 0.09602534849900025,
+      "median_delta": -0.002321481704711914,
+      "p_wilcoxon": 0.5380332808256405,
+      "n_a_better": 120
+    },
+    {
+      "a": "6백본+XGB fusion",
+      "b": "6백본 앙상블",
+      "metric": "rmse",
+      "n_eyes": 240,
+      "delta": -0.030097154900431633,
+      "ci_lo": -0.16538119277880015,
+      "ci_hi": 0.10265917177263043,
+      "median_delta": 0.0023801326751708984,
+      "p_wilcoxon": 0.7346026109066477,
+      "n_a_better": 119
+    },
+    {
+      "a": "6백본 앙상블",
+      "b": "5백본+XGB fusion",
+      "metric": "rmse",
+      "n_eyes": 240,
+      "delta": 0.08139974623918533,
+      "ci_lo": -0.04505067040832508,
+      "ci_hi": 0.21229514029825688,
+      "median_delta": 0.009760379791259766,
+      "p_wilcoxon": 0.3203160945802206,
+      "n_a_better": 116
+    },
+    {
+      "a": "6백본 앙상블",
+      "b": "5백본 앙상블",
+      "metric": "mae",
+      "n_eyes": 240,
+      "delta": 0.04994485527276993,
+      "ci_lo": -0.010522164635926106,
+      "ci_hi": 0.11411053623831446,
+      "median_delta": -0.005747079849243164,
+      "p_wilcoxon": 0.8701503045877431,
+      "n_a_better": 121
+    },
+    {
+      "a": "5백본+XGB fusion",
+      "b": "5백본 앙상블",
+      "metric": "mae",
+      "n_eyes": 240,
+      "delta": 0.018564485013484955,
+      "ci_lo": -0.10323303448944558,
+      "ci_hi": 0.13657929141907726,
+      "median_delta": 0.01163780689239502,
+      "p_wilcoxon": 0.7919515918094513,
+      "n_a_better": 118
+    },
+    {
+      "a": "6백본+XGB fusion",
+      "b": "6백본 앙상블",
+      "metric": "mae",
+      "n_eyes": 240,
+      "delta": 0.0173797607421875,
+      "ci_lo": -0.11840785106064718,
+      "ci_hi": 0.1451749763320384,
+      "median_delta": 0.024547576904296875,
+      "p_wilcoxon": 0.5945885927637555,
+      "n_a_better": 115
+    },
+    {
+      "a": "6백본 앙상블",
+      "b": "5백본+XGB fusion",
+      "metric": "mae",
+      "n_eyes": 240,
+      "delta": 0.03138037025928497,
+      "ci_lo": -0.09156154474586642,
+      "ci_hi": 0.15935968214710167,
+      "median_delta": -0.022946476936340332,
+      "p_wilcoxon": 0.9370744561435498,
+      "n_a_better": 125
+    }
+  ],
+  "gains": {
+    "basis": "B",
+    "ens5_pooled_rmse": 8.11470890045166,
+    "gain_add_6th_cnn": 0.10848522186279297,
+    "gain_add_xgb": -0.15181350708007812,
+    "gain_add_6th_then_xgb": -0.08111572265625,
+    "note": "음수 = 개선. 두 이득을 같은 basis B, 같은 출발점(5백본 앙상블)에서 잰다."
+  },
+  "resnet50_training": {
+    "launcher": "experiments/reviewer_round3/train_r3.py",
+    "note": "train.py 를 수정하지 않고 build_image_backbone 만 런타임에 확장했다. 설정은 정본 5백본과 동일(300 epoch, RMSprop, lr 1e-4, wd 1e-5, patience 100, early_stop mae, seed 42, 증강 없음, use_deviation False)."
+  }
+}
