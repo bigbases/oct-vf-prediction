@@ -147,6 +147,32 @@ FILENAME_ALLOW = ()
 # 파일과 함께 되돌렸다. 이메일은 일부러 넣지 않았다(교신 주소는 논문에 있다)
 # — 따라서 이 면제는 실명·소속에만 적용되고 '이메일' 패턴은 여전히 살아 있다.
 BLOCKLIST_FILE_ALLOW = {'CITATION.cff'}
+EXEMPT_KIND = '블록리스트(인용 메타데이터·면제)'
+
+
+def exempt_split(rel, hits):
+    """면제 파일의 '블록리스트' 적출을 면제 라벨로 바꾸고, 전부 면제인지 알린다.
+
+    면제는 파일 단위 판단이므로 세 층(L1f 작업 트리 · L2 HEAD · L3 이력)에서
+    같아야 한다. L1f 에만 걸어 뒀더니 CITATION.cff 를 커밋하는 순간 L2·L3 만
+    PUSH 불가를 냈다 (2026-09-18).
+    """
+    if rel not in BLOCKLIST_FILE_ALLOW:
+        return hits, False
+    out = {}
+    for kind, n in hits.items():
+        k = EXEMPT_KIND if kind == '블록리스트' else kind
+        out[k] = out.get(k, 0) + n
+    return out, set(out) == {EXEMPT_KIND}
+
+
+def print_exempt(rows):
+    if not rows:
+        return
+    print(' 면제(차단 아님) — 인용 메타데이터에 저자 실명·소속이 드는 것은 정상:')
+    for r, h in sorted(rows):
+        print('   %-46s %s' % (r, ', '.join('%s %d' % kv for kv in h.items())))
+    print()
 
 TEXT_EXT = {'.py', '.md', '.txt', '.yaml', '.yml', '.json', '.sh', '.tex', '.cfg',
             '.ini', '.toml', '.cff', '.csv', '.bat', '.bib', '.log', ''}
@@ -447,12 +473,10 @@ def main():
                 if not nd.search(low):
                     collisions += loose_hits(nd, low)
                     continue
-                if r in BLOCKLIST_FILE_ALLOW and kind == '블록리스트':
-                    kind = '블록리스트(인용 메타데이터·면제)'
                 h[kind] = h.get(kind, 0) + 1
             if h:
-                (l1f_exempt if set(h) == {'블록리스트(인용 메타데이터·면제)'}
-                 else l1f).append((r, h))
+                h, only = exempt_split(r, h)
+                (l1f_exempt if only else l1f).append((r, h))
         # 파일명도 본다
         for _, r in live:
             low = r.lower().encode('utf-8')
@@ -466,11 +490,7 @@ def main():
     if collisions:
         print(' 참고 — 숫자 경계 밖 우연 일치 %d건(소수 가수 안의 숫자열). '
               '유출이 아니라 자릿수 충돌이다.\n' % collisions)
-    if l1f_exempt:
-        print(' 면제(차단 아님) — 인용 메타데이터에 저자 실명·소속이 드는 것은 정상:')
-        for r, h in l1f_exempt:
-            print('   %-46s %s' % (r, ', '.join('%s %d' % kv for kv in h.items())))
-        print()
+    print_exempt(l1f_exempt)
     unverified = not (have_bl and have_map)
 
     # ── L1g 준식별자 (가명 + laterality/날짜 동시 출현) ────────────────
@@ -494,15 +514,17 @@ def main():
     n1g = report('L1g. 준식별자 (가명 P-n 과 laterality/검사일의 동시 출현)', l1g,
                  '가명 단독은 허용. 조합은 재식별 위험이므로 적출한다.')
 
-    l2 = []
+    l2, l2_exempt = [], []
     for rel in sorted(tracked):
         if Path(rel).suffix.lower() not in TEXT_EXT:
             continue
         h = blob_hits(git('show', 'HEAD:' + rel), needles)
         if h:
-            l2.append((rel, h))
+            h, only = exempt_split(rel, h)
+            (l2_exempt if only else l2).append((rel, h))
     n2 = report('L2. HEAD — 지금 커밋돼 있는 내용', l2,
                 '작업 트리가 아니라 커밋된 blob 을 읽는다.')
+    print_exempt(l2_exempt)
 
     pairs = []
     for line in git('rev-list', '--all', '--objects').decode('utf-8', 'replace').split('\n'):
@@ -527,9 +549,16 @@ def main():
                 cur = l3.setdefault(path, {})
                 for k, v in h.items():
                     cur[k] = max(cur.get(k, 0), v)
+    l3_exempt = []
+    for path in list(l3):
+        h, only = exempt_split(path, l3[path])
+        l3[path] = h
+        if only:
+            l3_exempt.append((path, l3.pop(path)))
     report('L3. 이력 전체 (%d 커밋)' % len(git('rev-list', '--all').decode().split()),
            list(l3.items()),
            '이 저장소는 이력을 새로 시작했으므로 L3 도 깨끗해야 정상이다.')
+    print_exempt(l3_exempt)
 
     l1b, opaque = [], []
     for rel in bins:
