@@ -143,9 +143,10 @@ QUASI_DATE = re.compile(rb'(?:19|20)\d{2}[-/]?\d{2}[-/]?\d{2}')
 
 FILENAME_ALLOW = ()
 # 인용 메타데이터(CITATION.cff)에는 저자 실명·소속이 드는 것이 정상이므로
-# 여기 넣으면 차단이 아니라 면제로 보고한다. 지금은 저자 목록이 확정되지
-# 않아 파일 자체를 넣지 않았다 — 확정되면 파일과 함께 이 집합에 되돌린다.
-BLOCKLIST_FILE_ALLOW = set()
+# 여기 넣으면 차단이 아니라 면제로 보고한다. 2026-09-17 저자 목록이 확정되어
+# 파일과 함께 되돌렸다. 이메일은 일부러 넣지 않았다(교신 주소는 논문에 있다)
+# — 따라서 이 면제는 실명·소속에만 적용되고 '이메일' 패턴은 여전히 살아 있다.
+BLOCKLIST_FILE_ALLOW = {'CITATION.cff'}
 
 TEXT_EXT = {'.py', '.md', '.txt', '.yaml', '.yml', '.json', '.sh', '.tex', '.cfg',
             '.ini', '.toml', '.cff', '.csv', '.bat', '.bib', '.log', ''}

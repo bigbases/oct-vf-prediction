@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Predicting the 24-2 visual field from a single SD-OCT session"
+abstract: >-
+  Research code for predicting 52 pointwise Humphrey 24-2 threshold
+  sensitivities from one SD-OCT session, combining a convolutional branch over
+  Cirrus thickness maps with a gradient-boosted branch over report summary
+  parameters by late fusion with a single scalar weight fitted within each
+  cross-validation fold.
+type: software
+license: MIT
+repository-code: "https://github.com/bigbases/oct-vf-late-fusion"
+authors:
+  - given-names: Min-Sol
+    family-names: Kim
+    affiliation: >-
+      Department of Data Science, Seoul National University of Science and
+      Technology, Seoul 01811, Republic of Korea
+  - given-names: Bo-Young
+    family-names: Lim
+    affiliation: >-
+      Department of Data Science, Seoul National University of Science and
+      Technology, Seoul 01811, Republic of Korea
+  - given-names: Ho-Gil
+    family-names: Jung
+    affiliation: >-
+      Department of Ophthalmology, National Medical Center, Seoul 04564,
+      Republic of Korea
+  - given-names: Moon Jung
+    family-names: Kim
+    affiliation: >-
+      Department of Ophthalmology, National Medical Center, Seoul 04564,
+      Republic of Korea
+# Deliberately omitted until they exist:
+#   doi:                 Zenodo archive DOI, issued after the first release tag.
+#   preferred-citation:  journal article, after acceptance.
+# Author e-mail addresses are intentionally not listed here; correspondence
+# addresses are given in the article.
