@@ -1,0 +1,41 @@
+# Placeholder strings that must not survive in the manuscript source.
+#
+# Scanned: docs/journal_manuscript/main.tex + docs/journal_manuscript/sections/*.tex
+# This file itself is not scanned.
+#
+# Format:
+#   - id:    short name used to refer to this item from the exceptions file
+#            (required, unique)
+#     text:  the string to look for. Matched **literally** by default (not a regex)
+#     regex: set true to interpret text as a regular expression (optional)
+#     note:  why it is a violation / what it must be replaced with before
+#            submission (optional)
+#
+# An empty list makes the scan meaningless, so the gate exits with EXIT_ERROR (2)
+# rather than passing silently without having scanned anything.
+
+patterns:
+  - id: dates
+    text: "[dates]"
+    note: Enrolment window. Replace with the actual cohort collection period.
+  - id: institution
+    text: "[Institution]"
+    note: Affiliation institution name.
+  - id: city
+    text: "[City]"
+    note: Affiliation city.
+  - id: country
+    text: "[Country]"
+    note: Affiliation country.
+  - id: email
+    text: "[email]"
+    note: Corresponding author email.
+  - id: repository_url
+    text: "[repository URL]"
+    note: Public code URL. Fixed at release time.
+  - id: firstname_lastname
+    text: "Firstname Lastname"
+    note: Author name placeholder.
+  - id: author_initials
+    text: "X.X."
+    note: Initials placeholder from the MDPI authorcontributions template.

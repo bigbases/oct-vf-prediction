@@ -76,6 +76,10 @@ paper/drafts/
 # how the work was managed, not how it is reproduced, and several name people.
 docs/*
 !docs/coordinate_frame_convention.md
+# 원고 동반 명세의 §1~§4 발췌. 게이트가 프로토콜 상수와 코호트 표
+# 앵커를 여기서 읽으므로, 없으면 복제본에서 check_numbers.py 가
+# 근거 없이 MISS 를 낸다. §5~§6 은 비공개 감사 기록이라 빠져 있다.
+!docs/CANONICAL_SPEC.md
 
 # ============================================================================
 #  Public-repository curation
@@ -97,3 +101,11 @@ docs/*
 
 # Configuration. Constants only.
 !config/params.yaml
+
+# The number gate's configuration. scripts/check_numbers.py reads exactly these
+# two files under verify/ and nothing else; the rest of that directory is the
+# internal defect audit, its run logs, and a test fixture that names a real
+# institution (verify/test_gate.py:45), so it stays out.
+verify/*
+!verify/exceptions.yaml
+!verify/placeholder_patterns.yaml

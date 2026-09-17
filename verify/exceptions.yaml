@@ -1,0 +1,24 @@
+# Approved exceptions for the check_numbers.py gate.
+#
+# Only the items listed here let the gate pass while still being violations.
+# Everything else is exit 1.
+#
+# Each item requires **all four** fields below. If any is missing or blank the
+# exception is not honoured and the item falls back to a violation (MISS).
+#
+#   id:          copy the item id the gate printed, verbatim.
+#                See the id after the bracket in `python scripts/check_numbers.py`
+#                output. An id that appears neither in CANONICAL_SPEC (anchors and
+#                derived anchors) nor in this run's violation list is a
+#                configuration error and exits 2.
+#   reason:      why this violation is approved now. Empty or whitespace is rejected.
+#   approved_by: who approved it.
+#   date:        approval date (YYYY-MM-DD). After 30 days the gate warns but passes.
+#
+# Example (kept as a comment because it is not a live entry):
+#   - id: "placeholder:repository_url:docs/journal_manuscript/main.tex:79"
+#     reason: "The public code URL is issued after acceptance; filled in just before submission."
+#     approved_by: "corresponding author"
+#     date: "2026-08-27"
+
+exceptions: []

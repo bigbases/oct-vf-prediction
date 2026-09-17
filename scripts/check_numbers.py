@@ -2,7 +2,7 @@
 """원고 sections/*.tex의 모든 수치를 근거 산출물과 대조한다.
 
 근거 풀:
-  1. docs/journal_manuscript/CANONICAL_SPEC.md   (정본 명세)
+  1. docs/CANONICAL_SPEC.md                      (정본 명세 §1~§4 발췌)
   2. runs/*.json                                 (기계가 만든 산출물)
   3. 이 파일의 STRUCTURAL 허용목록            (프로토콜·하이퍼파라미터 상수)
 
@@ -62,9 +62,23 @@ class GateError(Exception):
     """
 
 
+def _spec_default(root: Path) -> Path:
+    """SPEC 을 어디서 찾을지. 저장소 사본이 우선이다.
+
+    이 저장소에는 원고 트리가 없다(README '무엇이 빠져 있나' 참조). 그래서
+    §1~§4 발췌를 `docs/CANONICAL_SPEC.md` 로 동봉한다 — 프로토콜 상수와
+    §2.1/§2.2 표 앵커가 거기 있어야 복제본에서도 게이트가 돈다.
+    `docs/journal_manuscript/` 배치는 원고 트리와 같이 쓰는 로컬 작업용으로
+    남겨 두고, 둘 다 있으면 저장소 사본을 쓴다(--manuscript 는 여전히
+    원고 쪽 것으로 덮는다).
+    """
+    here = root / 'docs/CANONICAL_SPEC.md'
+    return here if here.exists() else root / 'docs/journal_manuscript/CANONICAL_SPEC.md'
+
+
 ROOT = Path(__file__).resolve().parent.parent
 SEC = ROOT / 'docs/journal_manuscript/sections'
-SPEC = ROOT / 'docs/journal_manuscript/CANONICAL_SPEC.md'
+SPEC = _spec_default(ROOT)
 RUNS = ROOT / 'runs'
 MAIN_TEX = ROOT / 'docs/journal_manuscript/main.tex'
 VERIFY = ROOT / 'verify'
@@ -84,13 +98,60 @@ def configure(root):
     global VERIFY, EXCEPTIONS_FILE, PATTERNS_FILE, LOG_DIR
     ROOT = Path(root).resolve()
     SEC = ROOT / 'docs/journal_manuscript/sections'
-    SPEC = ROOT / 'docs/journal_manuscript/CANONICAL_SPEC.md'
+    SPEC = _spec_default(ROOT)
     RUNS = ROOT / 'runs'
     MAIN_TEX = ROOT / 'docs/journal_manuscript/main.tex'
     VERIFY = ROOT / 'verify'
     EXCEPTIONS_FILE = VERIFY / 'exceptions.yaml'
     PATTERNS_FILE = VERIFY / 'placeholder_patterns.yaml'
     LOG_DIR = VERIFY / 'logs'
+
+
+def configure_runs(path):
+    """근거 산출물 디렉터리만 갈아끼운다. 원고와 검사 설정은 그대로 둔다.
+
+    배포본(release/)에는 runs/ 가 없다 — 그 디렉터리는 PHI 를 포함해서
+    공개 트리에서 빠졌고, 공개된 근거는 paper/results_frozen/ 다. 트리
+    전체를 옮기는 --root 로는 verify/ 까지 따라가버리므로 근거 경로만
+    따로 받는다.
+    """
+    global RUNS
+    d = Path(path).resolve()
+    if not d.is_dir():
+        raise GateError(f'근거 디렉터리가 아니다: {d}')
+    if not sorted(d.glob('*.json')):
+        raise GateError(f'근거 디렉터리에 *.json 이 없다: {d}')
+    RUNS = d
+
+
+def configure_manuscript(path):
+    """원고 경로만 갈아끼운다. 산출물(runs/)과 검사 설정(verify/)은 그대로 둔다.
+
+    정본 원고는 이 저장소에 없다 (Overleaf). 저장소 안의
+    docs/journal_manuscript/sections/ 는 낡은 사본이고, 그것을 검사하면
+    게이트가 통과해도 정본을 검증한 것이 아니다. 그래서 원고 경로는
+    --root(트리 전체 이동)와 분리해서 따로 받는다.
+
+    받는 것은 *.tex 가 들어 있는 디렉터리다. 같은 디렉터리에 main.tex /
+    CANONICAL_SPEC.md 가 있으면 그것도 같이 쓴다 (없으면 저장소 것을 유지).
+    """
+    global SEC, SPEC, MAIN_TEX
+    d = Path(path).resolve()
+    if not d.is_dir():
+        raise GateError(f'원고 디렉터리가 아니다: {d}')
+    if not sorted(d.glob('*.tex')):
+        raise GateError(f'원고 디렉터리에 *.tex 가 없다: {d}')
+    SEC = d
+    # main.tex / CANONICAL_SPEC.md 는 sections/ 안이 아니라 그 부모에 있는
+    # 배치가 흔하다 (이 저장소가 그렇다). 두 곳을 다 본다.
+    for base in (d, d.parent):
+        if (base / 'main.tex').exists():
+            MAIN_TEX = base / 'main.tex'
+            break
+    for base in (d, d.parent):
+        if (base / 'CANONICAL_SPEC.md').exists():
+            SPEC = base / 'CANONICAL_SPEC.md'
+            break
 
 # ---------------------------------------------------------------------------
 # 구조 상수 허용목록.
@@ -99,8 +160,14 @@ def configure(root):
 # 새 값을 넣을 때는 반드시 근거 한 줄을 같이 적을 것. 빈칸 메우기 금지.
 # ---------------------------------------------------------------------------
 # ---------------------------------------------------------------------------
-# 앵커. 값만 대조하면 위양성이 크다 — runs/*.json 풀은 distinct 수치가 3천 개가
-# 넘어서, 무작위 숫자도 10~27% 확률로 "맞는다"(측정값, 2026-08-26).
+# 앵커. 값만 대조하면 위양성이 크다. **왜 큰지는 2026-09-17 에 다시 쟀고,
+# 그 전에 적어 둔 "10~27%" 는 틀렸다** — 풀 4,683개에 대해 원고 수치 하나가
+# 여러 곳과 맞을 확률은 최대 1.6% 다. 위험은 확률이 아니라 **주제 불일치**다.
+# scan_numbers 는 `where = paths[0]`, 즉 풀에서 먼저 맞는 값이 이긴다. 그래서
+# [OK] 는 "근거가 있다"가 아니라 "풀 어딘가에 인쇄 자릿수까지 같은 값이
+# 있다"는 뜻일 뿐이고, 실제로 severity 행수 235 는 case_profile.json 의
+# 무관한 값으로, 표 3 Pooled Δ 여섯 칸은 서로 다른 여섯 파일의 잔값으로
+# 통과하고 있었다.
 # 그래서 중요한 값은 **JSON 경로로 못 박는다.** 여기 있는 값이 원고와 다르면
 # 그건 우연 일치가 아니라 진짜 불일치다.
 # 형식: (runs 파일, 점 표기 경로, 사람이 읽을 이름)
@@ -113,7 +180,8 @@ def spec_md_table():
 
     앵커 근거를 이 스크립트 안에 상수로 박으면 정본이 두 벌이 된다.
     (그게 이번에 280쌍 오류가 통과한 원인의 축소판이다.) 그래서 값은
-    항상 SPEC에서 파싱한다. 표 형식은 `| 항목 | 280쌍 | **277쌍** |`이고
+    항상 SPEC에서 파싱한다. 표 형식은 `| Quantity | 280 pairs | **277 pairs** |`
+    이고
     정본은 굵게 표시한 세 번째 칸이다. `range` 행은 두 기준이 같아
     앵커로 쓰지 않는다.
     """
@@ -128,7 +196,8 @@ def spec_md_table():
         cells = [c.strip() for c in line.split('|')[1:-1]]
         if len(cells) != 3 or not cells[2].startswith('**'):
             continue
-        if cells[0] == '항목':   # 헤더 행. 세 번째 칸이 굵어서 걸린다.
+        # 헤더 행. 세 번째 칸이 굵어서 걸린다. 공개본은 영어라 둘 다 본다.
+        if cells[0] in ('Quantity', '항목'):
             continue
         num = re.search(r'-?\d+(?:\.\d+)?', cells[2].strip('*'))
         if num:
@@ -136,6 +205,14 @@ def spec_md_table():
             # 원고의 "271 pairs"를 못 찾는다.
             t = num.group()
             out[cells[0]] = float(t) if '.' in t else int(t)
+    # 행 이름 별칭. 공개 발췌본은 영어이고 원고 트리의 전문은 한국어라 SPEC 이
+    # 두 벌 돌아다닌다. 어느 쪽을 --manuscript 로 집어도 앵커가 풀리게 한다
+    # (안 그러면 전문 쪽에서 NOKEY → exit 2 로 멎는다. 2026-09-17 실측).
+    for a, b in (('pairs with MD', 'MD 있는 쌍'),):
+        if a not in out and b in out:
+            out[a] = out[b]
+        elif b not in out and a in out:
+            out[b] = out[a]
     return out
 
 
@@ -148,7 +225,8 @@ ANCHORS = [
     ('skeleton_numbers.json', 'split_structure.cv_fold_eye_counts.1', 'fold1 50안'),
     ('skeleton_numbers.json', 'split_structure.cv_fold_eye_counts.4', 'fold4 51안'),
     ('skeleton_numbers.json', 'split_structure.cv_fold_eye_counts.test', 'held-out 38안'),
-    ('skeleton_numbers.json', 'labels.n_cells_52pt', '14560셀'),
+    # labels.n_cells_52pt(14560) 은 뺐다. 구본에만 있던 문장이고 제출본에는
+    # 없다 — 앵커로 남겨두면 영구 STALE 이다 (2026-09-17, 사용자 승인).
     ('skeleton_numbers.json', 'oct_vf_gap_days.mean', 'OCT-VF 간격 평균'),
     ('skeleton_numbers.json', 'oct_vf_gap_days.sd', 'OCT-VF 간격 SD'),
     ('skeleton_numbers.json', 'oct_vf_gap_days.pct_same_day', '당일 촬영 80.0%'),
@@ -156,7 +234,7 @@ ANCHORS = [
     # skeleton_numbers.json의 cohort_severity_EMR_MD는 280쌍 기준이다.
     # 원고는 277쌍 기준이므로 앵커 근거를 SPEC §2.1로 옮겼다.
     # JSON은 runs/* 수정 금지 규약에 따라 그대로 둔다.
-    (SPEC_ANCHOR, 'MD 있는 쌍', 'MD 있는 271쌍'),
+    (SPEC_ANCHOR, 'pairs with MD', 'MD 있는 271쌍'),
     (SPEC_ANCHOR, 'mean', 'MD 평균 -7.39'),
     (SPEC_ANCHOR, 'SD', 'MD SD 8.70'),
     (SPEC_ANCHOR, 'median', 'MD 중앙값 -3.97'),
@@ -186,7 +264,48 @@ ANCHORS = [
     # 5-backbone ensemble (C4 null)
     ('skeleton_numbers.json', 'ensemble_5backbone.oof.ens_cnn.rmse', 'ensemble image RMSE'),
     ('skeleton_numbers.json', 'ensemble_5backbone.oof.ens_fusion_w047.rmse', 'ensemble fusion RMSE'),
-    ('skeleton_numbers.json', 'ensemble_5backbone.test.p_fus_vs_ensCNN', 'ensemble p=0.46'),
+    # held-out 앙상블 p(0.446) 는 제출본이 뺐다. 같은 자리의 문장은 이제 OOF
+    # 비교다 — "not significant (p = 0.54, fusion better in 120 of 240 eyes)".
+    #
+    # 옮길 곳을 고르는 데 함정이 있었다. skeleton_numbers.json 의
+    # ensemble_5backbone.oof.p_fus_vs_ensCNN 은 **0.593 / 115of240** 이고
+    # 원고의 0.54 / 120of240 이 아니다. 원고가 보고하는 건 sixth_backbone.json
+    # 의 basisB 비교(5백본+XGB fusion vs 5백본 앙상블)다. 파일명만 보고
+    # skeleton 의 oof 로 옮겼으면 0.59 를 0.54 로 읽는 셈이었다 (2026-09-17).
+    ('sixth_backbone.json', 'comparisons_basisB.1.p_wilcoxon', 'ensemble OOF p=0.54'),
+    ('sixth_backbone.json', 'comparisons_basisB.1.n_a_better', 'ensemble OOF 120/240'),
+    # severity 표의 행수와 고유 안구 수 (2026-09-17 추가).
+    # 235 는 그동안 무관한 case_profile.json 의 235 에 **우연히** 맞아 통과했고,
+    # 230 은 아무 데도 없어 MISS 였다. 이제 build_severity_region.py 가 둘 다
+    # 기록한다. 층별 n(93+54+29+59) 합과도 맞는다.
+    # 표 1 Ridge 행의 held-out MAE. 원고는 8.00 으로 인쇄돼 있었고 근거 풀의
+    # 무관한 문자열 속 '8.0' 에 맞아 통과하고 있었다 — 같은 행의 나머지 셋
+    # (10.07/7.42/10.50)은 근거와 정확히 일치한다. 진짜 값은 7.94 (2026-09-17).
+    ('trivial_baselines.json', 'rows.2.test.mae', '표 1 Ridge held-out MAE 7.94'),
+    ('severity_region.json', 'n_rows_severity', 'severity 행 235'),
+    # region 표 n 열 = **안구당 점 수**(24-2 52점 격자 분할: 상 26·하 26·
+    # 중심 16·주변 36). 여태 .md 표에만 찍히고 JSON 에는 없어서 셋 다 우연히
+    # 통과하고 있었다 — 36 은 case_profile.json 의 md_percentile_rank=35.74,
+    # 16 은 bias_by_bin 류 39개 값 중 아무거나였다. 하반구 26 은 상반구와
+    # 같은 값이라 따로 걸지 않는다.
+    ('severity_region.json', 'region.superior (상반구).n_points_per_eye',
+     'region 상반구 26점'),
+    ('severity_region.json', 'region.central ≤9° (중심).n_points_per_eye',
+     'region 중심 16점'),
+    ('severity_region.json', 'region.peripheral (주변).n_points_per_eye',
+     'region 주변 36점'),
+    # 좌우 미러링 절제 (§4.4). 네 수치 전부 osflip_compare.json 에 있었는데
+    # 동결이 안 돼 있었다. p 둘은 그대로 있고 delta 둘은 DERIVED(delta).
+    ('osflip_compare.json', 'paired_wilcoxon_flip_vs_noflip.oof_cnn.p',
+     '미러링 OOF CNN p=0.79'),
+    ('osflip_compare.json', 'paired_wilcoxon_flip_vs_noflip.test_cnn.p',
+     '미러링 held-out CNN p=0.19'),
+    # floor label 제거 후 held-out fusion vs summary (§4.6). 원고의 1.9e-4 는
+    # 여태 reliability_sensitivity.json 의 **vgg16 OOF fusion_vs_cnn**
+    # 1.852e-4 로 통과했다 — 백본·split·비교쌍이 전부 다른 값이다.
+    ('neg1_mask_sensitivity.json', 'splits.test.paired_excl.fusion_vs_xgb.p',
+     'floor 제거 held-out p=1.9e-4'),
+    ('severity_region.json', 'n_eyes_severity_distinct', 'severity 고유 안구 230'),
     # 신뢰도 필터
     ('reliability_sensitivity.json',
      'backbones.inception_resnet_v2.OOF.crA_FL.n_eyes', '신뢰도 필터 A 181안'),
@@ -207,6 +326,55 @@ ANCHORS = [
 #   kind='diff'     -> |a - b|. 경로를 'pathA|pathB' 로 준다.
 # ---------------------------------------------------------------------------
 DERIVED = [
+    # 표 3 'Pooled Δ' 열 — **여섯 칸 전부** 저장돼 있지 않았고 여섯 개가 전부
+    # 우연히 통과하고 있었다 (2026-09-17). 열의 정의는 cnn_pooled - xgb_pooled
+    # 이고 skeleton_numbers.json 하나에 양변이 다 있다. 원고가 쓴 자릿수는
+    # 이 파일의 반올림된 값에서 나온다 — 앙상블 -0.545 는 8.115-8.660 이고,
+    # 원시 정밀도(8.11471-8.66028)로는 -0.546 이 된다.
+    ('skeleton_numbers.json',
+     'backbones.inception_v3.oof.cnn.rmse|backbones.inception_v3.oof.xgb.rmse',
+     'delta', 'Pooled Δ Inception-v3 +0.450'),
+    ('skeleton_numbers.json',
+     'backbones.inception_resnet_v2.oof.cnn.rmse|'
+     'backbones.inception_resnet_v2.oof.xgb.rmse',
+     'delta', 'Pooled Δ IR-v2 -0.120'),
+    ('skeleton_numbers.json',
+     'backbones.vgg16.oof.cnn.rmse|backbones.vgg16.oof.xgb.rmse',
+     'delta', 'Pooled Δ VGG16 +0.505'),
+    ('skeleton_numbers.json',
+     'backbones.xception.oof.cnn.rmse|backbones.xception.oof.xgb.rmse',
+     'delta', 'Pooled Δ Xception -0.308'),
+    ('skeleton_numbers.json',
+     'backbones.densenet121.oof.cnn.rmse|backbones.densenet121.oof.xgb.rmse',
+     'delta', 'Pooled Δ DenseNet121 +0.009'),
+    ('skeleton_numbers.json',
+     'ensemble_5backbone.oof.ens_cnn.rmse|'
+     'backbones.inception_resnet_v2.oof.xgb.rmse',
+     'delta', 'Pooled Δ 5-backbone 앙상블 -0.545'),
+    # 그림 3(a) 캡션의 네 구간 격차 "1.59, 1.34, 1.38 and 1.76". 영상분기와
+    # 요약분기의 구간별 평균 잔차 차이이고, 저장된 건 두 배열뿐이라 차 자체는
+    # 어디에도 없었다. 캡션이 앙상블을 쓴다고 명시하므로 passes.B.ENSEMBLE.
+    ('bias_by_bin.json',
+     'passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.0|'
+     'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.0',
+     'delta', '구간 [0,10) 격차 1.59'),
+    ('bias_by_bin.json',
+     'passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.1|'
+     'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.1',
+     'delta', '구간 [10,20) 격차 1.34'),
+    ('bias_by_bin.json',
+     'passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.2|'
+     'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.2',
+     'delta', '구간 [20,30) 격차 1.38'),
+    ('bias_by_bin.json',
+     'passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.3|'
+     'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.3',
+     'delta', '구간 [30,inf) 격차 1.76'),
+    # 좌우 미러링 절제의 두 효과크기 (flip - noflip).
+    ('osflip_compare.json', 'flip.oof_cnn.rmse|noflip.oof_cnn.rmse',
+     'delta', '미러링 OOF CNN +0.147'),
+    ('osflip_compare.json', 'flip.test_cnn.rmse|noflip.test_cnn.rmse',
+     'delta', '미러링 held-out CNN -0.261'),
     # 14 dB floor 재학습이 바꾼 예측 분포 (04_results.tex:216-221, 05_discussion.tex:183)
     ('stepsize_sensitivity.json', 'clamp_retrain.stratified_fusion.frac_pred_below_floor',
      'pct_comp', '재학습 fusion 예측의 99.7%가 14 dB 이상'),
@@ -246,6 +414,13 @@ DERIVED = [
      'gain', 'OOF fusion 이득 0.589 dB (근거 -0.589, fus-xgb)'),
     ('skeleton_numbers.json', 'backbones.inception_resnet_v2.test.delta_fus_minus_xgb_rmse',
      'gain', 'held-out fusion 이득 0.534 dB (근거 -0.534, fus-xgb)'),
+    # 분위수 뒤집힘 (results.tex:411-412). 같은 문장의 짝인 p50(+1.088 -> "rises
+    # by 1.09")은 부호가 그대로라 통과하는데, p95 는 **-3.118 로 저장되고 원고는
+    # "falls by 3.12" 로 크기만 쓴다.** 위의 delta_fus_minus_* 와 똑같은 부호
+    # 규약 문제다. 이 값은 원고가 3.10 으로 잘못 적고 있던 자리이기도 하다
+    # (2026-09-17 정정).
+    ('heldout_mae_reversal.json', 'inception_resnet_v2.quantile_delta.p95',
+     'gain', '95백분위 하락 3.118 dB (근거 -3.118, fusion-CNN)'),
 ]
 
 
@@ -256,7 +431,7 @@ DERIVED = [
 # 6.66일이 §3.1에 "6.7"로, 근거 p=0.113이 §4.2에 "0.11"로 적혀 있다.
 # 문서 전체 스캔으로는 둘 중 하나를 고를 수 없다 — 선언 정밀도를 요구하면
 # 이 넷이 STALE로 뜨고(과교정), 자릿수를 낮춰 찾으면 무관한 문단의 "0.1"과
-# "0.5"에 걸린다(comparison_defects.md #3의 원래 결함).
+# "0.5"에 걸린다(내부 결함 등록부 #3 의 원래 결함 — 등록부는 비공개).
 #
 # 그래서 **자릿수는 원고가 정하고 위치가 오탐을 막는다.** 등록 위치 근방의
 # 토큰을 뽑아, 그 토큰의 인쇄 자릿수로 근거값을 반올림해 비교한다.
@@ -270,17 +445,56 @@ ANCHOR_LOC = {
     # §3.1 "The interval was short in practice: $6.7 \pm 18.2$ days"
     # 근거는 6.66 / 18.18. 원고가 소수 1자리로 인쇄한다.
     'anchor:skeleton_numbers.json#oct_vf_gap_days.mean':
-        ('03_methods.tex', r'interval was short in practice'),
+        ('methods.tex', r'pairs acquired on the same day'),
     'anchor:skeleton_numbers.json#oct_vf_gap_days.sd':
-        ('03_methods.tex', r'interval was short in practice'),
+        ('methods.tex', r'pairs acquired on the same day'),
     # §4.2 "the patient-level test over 19 patients gives $p = 0.11$"
     # 근거는 0.113. 본문 곳곳의 "0.1"에 걸리면 안 되므로 위치를 못 박는다.
     'anchor:skeleton_numbers.json#patient_level_ir_v2.test.p_fus_vs_xgb':
-        ('04_results.tex', r'patient-level test over 19 patients'),
-    # §4.3 "the per-eye difference is not significant ($p = 0.46$"
-    # 근거는 0.464. "0.46"은 원고에 7번 나오는데 그중 이 자리만 이 앵커다.
-    'anchor:skeleton_numbers.json#ensemble_5backbone.test.p_fus_vs_ensCNN':
-        ('04_results.tex', r'difference is not significant'),
+        ('results.tex', r'patient-level test over 19 patients'),
+    # §4.6 "the per-eye difference is not significant ($p = 0.54$,
+    # fusion better in 120 of 240 eyes)". 근거는 0.5380 / 120.
+    # 위치를 못 박지 않으면 0.54 는 **바로 위 표의 가중치 열 0.54** 에 걸린다.
+    'anchor:sixth_backbone.json#comparisons_basisB.1.p_wilcoxon':
+        ('results.tex', r'difference is not significant'),
+    'anchor:sixth_backbone.json#comparisons_basisB.1.n_a_better':
+        ('results.tex', r'fusion better in'),
+    # §4.6 표 캡션 "the severity rows total 235" / "the 235 rows come from
+    # 230 distinct eyes". 235 는 원고에 두 번 나오고 둘 다 같은 캡션이다.
+    'anchor:trivial_baselines.json#rows.2.test.mae':
+        ('results.tex', r'Ridge on summary parameters'),
+    'anchor:severity_region.json#region.superior (상반구).n_points_per_eye':
+        ('results.tex', r'Superior & '),
+    'anchor:severity_region.json#region.central ≤9° (중심).n_points_per_eye':
+        ('results.tex', r'Central \(\$\\leq'),
+    'anchor:severity_region.json#region.peripheral (주변).n_points_per_eye':
+        ('results.tex', r'Peripheral & '),
+    'anchor:osflip_compare.json#paired_wilcoxon_flip_vs_noflip.oof_cnn.p':
+        ('results.tex', r'out-of-fold CNN'),
+    'anchor:osflip_compare.json#paired_wilcoxon_flip_vs_noflip.test_cnn.p':
+        ('results.tex', r'held-out CNN'),
+    # 캡션은 2자리로 인쇄한다(1.59). delta 의 기본 자릿수는 3자리라
+    # 위치를 등록해서 원고가 자릿수를 정하게 한다.
+    'derived:bias_by_bin.json#passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.0|'
+    'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.0#delta':
+        ('results.tex', r'sits above the summary branch by'),
+    'derived:bias_by_bin.json#passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.1|'
+    'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.1#delta':
+        ('results.tex', r'sits above the summary branch by'),
+    'derived:bias_by_bin.json#passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.2|'
+    'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.2#delta':
+        ('results.tex', r'sits above the summary branch by'),
+    'derived:bias_by_bin.json#passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.3|'
+    'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.3#delta':
+        ('results.tex', r'sits above the summary branch by'),
+    'anchor:severity_region.json#n_rows_severity':
+        ('results.tex', r'severity rows total'),
+    'anchor:severity_region.json#n_eyes_severity_distinct':
+        ('results.tex', r'rows come from'),
+    # §4.4 "the 95th percentile falls by 3.12 dB". 근거는 3.118 이고 원고는
+    # 소수 2자리로 인쇄한다. 위치를 못 박아야 자릿수를 원고가 정한다.
+    'derived:heldout_mae_reversal.json#inception_resnet_v2.quantile_delta.p95#gain':
+        ('results.tex', r'95th percentile falls by'),
 }
 
 LOC_WINDOW = 160       # 문맥 매치 앞뒤로 볼 문자 수. 한 문장이 들어갈 만큼만.
@@ -314,8 +528,39 @@ STRUCTURAL = {
     5000: 'bootstrap 반복수 (patient_cluster_test.py:29)',
     95: '95% 신뢰구간',
     2026: '연도',
+    2011: '코호트 등록기간 시작 연도 (03_methods.tex, Cohort)',
     1000: "산문 표현 '1000-plus dimensions' (05_discussion.tex:91). 측정값 아님",
+    # 장비 스캔 프로토콜. Cirrus 시신경유두 큐브 200x200, 황반 큐브 512x128.
+    # 512 는 위에 regression head 로 이미 있다. 128 은 그동안 direct_test.json
+    # 에 **우연히** 맞아 통과하고 있었다 (2026-09-17).
+    200: '시신경유두 큐브 축당 A-scan 수 (장비 프로토콜, methods.tex)',
+    128: '황반 큐브 B-scan 수 512x128 (장비 프로토콜, methods.tex)',
+    # 산문 근사. "With roughly 190 pairs in each training fold" (discussion.tex:94).
+    # 235 x 4/5 = 188 을 저자가 반올림한 값이고 저장된 측정값이 아니다.
+    190: "산문 근사 'roughly 190 pairs in each training fold' (discussion.tex:94)",
 }
+
+# 소프트웨어 버전 문자열. **수치가 아니다.**
+#
+# 왜 따로 빼는가. 토큰 추출기는 "Python 3.10.18" 에서 '3.10' 을, "PyTorch
+# 1.12.1" 에서 '1.12' 를 뽑는다. 그렇게 뽑힌 여섯 개가 전부 무관한 산출물에
+# 우연히 맞아 [OK] 로 떠 있었고(1.12<-bias_by_bin_refit, 11.3<-fusion_error_
+# structure, 3.2<-aggregation_comparability, 1.26/1.15<-bias_by_bin,
+# 1.7<-aggregation_comparability), 우연을 못 찾은 '3.10' 하나만 MISS 로
+# 떨어졌다. 즉 게이트가 버전 줄 전체를 "검증했다"고 말하고 있었다.
+# 게다가 그 '3.10' 은 results.tex 의 진짜 3.10 문제와 화면에서 섞였다.
+# (2026-09-17)
+#
+# 두 갈래로만 지운다 — 넓히면 진짜 측정값을 먹는다. 원고에는 "gives 7.934",
+# "rises by 1.09" 처럼 **낱말 뒤에 오는 수치**가 널려 있어서, 일반적인
+# '낱말+점찍힌수' 규칙은 쓸 수 없다.
+#   (a) 3성분 이상(semver): 1.12.1 · 3.10.18 · 1.26.4 — 측정값은 이 모양이 없다
+#   (b) 알려진 소프트웨어 이름 바로 뒤의 2성분: "CUDA 11.3" 한 건뿐이다
+VERSION_SEMVER = re.compile(r'(?<![0-9.])[0-9]+(?:\.[0-9]+){2,}(?![0-9])')
+VERSION_NAMED = re.compile(
+    r'(?<![A-Za-z])(?:PyTorch|CUDA|cuDNN|timm|XGBoost|Python|NumPy|SciPy|'
+    r'scikit-learn|scikit-image|pandas|statsmodels|matplotlib|LightGBM|'
+    r'CatBoost|OpenCV|Pillow)\s+v?[0-9]+(?:\.[0-9]+)+(?![0-9])')
 
 # LaTeX 문법에서 나오는 수치 — 내용이 아니다.
 LATEX_NOISE = re.compile(
@@ -406,7 +651,7 @@ def load_sources():
     # 원고는 그 SPEC 을 근거로 검증된다. 실제 피해가 있었다: 원고의
     # "0.589 dB" 는 산출물 근거(-0.589)가 부호 규약 때문에 안 맞는데도
     # SPEC §4 의 "Primary effect 0.589 dB" 한 줄 때문에 통과하고 있었다
-    # (verify/comparison_defects.md #8). 산출물이 갱신돼 값이 바뀌어도
+    # (내부 결함 등록부 #8). 산출물이 갱신돼 값이 바뀌어도
     # SPEC 산문이 옛 숫자를 들고 있으면 게이트는 계속 초록이다.
     #
     # 표 행(`| ... |`)은 다르다. §2.1 MD 통계표처럼 정본이 SPEC 에만 있는
@@ -453,23 +698,34 @@ def render_match(src: float, printed: str) -> bool:
         # 124.04 / 967.58을 반올림이 아니라 잘라서 쓴 값이다.
         #
         # ⚠️ 부호를 보존한다. 양변에 abs()를 씌우면 근거가 -0.589인데 원고가
-        # 0.58로 인쇄해도 통과했다 (verify/comparison_defects.md #2).
+        # 0.58로 인쇄해도 통과했다 (내부 결함 등록부 #2).
         # 이 원고에는 부호가 의미를 갖는 값이 많다 — bin별 평균 차, CI 하한,
         # delta_fus_minus_xgb. 절사는 0 쪽으로 자른다(trunc), floor가 아니다:
         # floor(-58.9) = -59라 음수에서 자릿수 절사가 아니라 반내림이 된다.
         f = 10 ** nd
         return _m.trunc(src * f) / f == float(p)
     try:
-        if float(src) == float(p):
+        v = float(p)
+        if float(src) == v:
             return True
-        return _m.trunc(float(src)) == float(p)
+        # 정수도 소수 분기와 같게 **반올림과 절사를 모두** 받는다. 소수 쪽은
+        # 처음부터 둘 다 받았는데 정수 쪽만 절사뿐이어서, 근거 959.52를 원고가
+        # 960으로 반올림해 적은 자리가 MISS로 떴다 (제출본 §4.6 표본수 3개,
+        # 2026-09-17). 근거가 없는 게 아니라 인쇄 관례가 반대였다.
+        return _m.trunc(float(src)) == v or float(f'{float(src):.0f}') == v
     except ValueError:
         return False
 
 
 def extract(line: str):
     """한 줄에서 (인쇄문자열, 값) 목록을 뽑는다."""
-    s = line.split('%')[0]                     # LaTeX 주석 제거
+    # LaTeX 주석 제거. **이스케이프한 백분율 기호는 주석이 아니다.**
+    # 그냥 split('%') 하면 "80.0\% of pairs ... (mean $6.7 \pm 18.2$)" 에서
+    # \% 뒤가 통째로 잘려 6.7 과 18.2 가 **한 번도 검사되지 않는다**
+    # (2026-09-17, 제출본 §3.1 에서 발견. 앵커 두 개가 STALE 로 떠서 드러났다).
+    s = re.split(r'(?<!\\)%', line)[0]
+    s = VERSION_NAMED.sub(' ', s)              # "CUDA 11.3"
+    s = VERSION_SEMVER.sub(' ', s)             # "3.10.18" -> '3.10' 방지
     s = LATEX_NOISE.sub(' ', s)                # \cite{...} 등 제거
     out = []
     for mant, exp in SCI.findall(s):
@@ -479,12 +735,12 @@ def extract(line: str):
     s = re.sub(r'[A-Za-z_]+[-_]?[0-9]+(?:[._][0-9A-Za-z]+)*', ' ', s)  # v2, fig_1 같은 식별자
     # 천 단위 구분자를 한 토큰으로 읽는다. 이 대안이 없으면 원고의
     # "1,924 locations"가 1과 924 두 수로 쪼개져 1924는 **한 번도 검사되지
-    # 않고** 924는 근거 없는 MISS가 된다 (verify/comparison_defects.md #4).
+    # 않고** 924는 근거 없는 MISS가 된다 (내부 결함 등록부 #4).
     # 쉼표 뒤 세 자리를 강제하므로 "124, 967"이나 "1, 2, 3" 같은 나열은
     # 쉼표 뒤 공백 때문에 걸리지 않는다.
     # 앞의 '-?' 가 부호 하이픈이다. 이게 없으면 원고의 음수가 **한 번도
     # 추출되지 않는다** — lookbehind가 '-'를 막아 '-1.47'이 통째로 사라졌다
-    # (verify/comparison_defects.md #6). 이번 갱신에서 바뀌는 값에 음수가 많다.
+    # (내부 결함 등록부 #6). 이번 갱신에서 바뀌는 값에 음수가 많다.
     #
     # 부호로 인정하는 조건은 lookbehind 하나가 전부다: '-' 앞이 영숫자·점·
     # 밑줄·하이픈이 아닐 때. 즉 행머리·공백·여는 괄호·'$'·'=' 뒤에서만 부호다.
@@ -520,6 +776,12 @@ def derive(obj, path, kind):
     if kind == 'diff':
         a, b = path.split('|')
         return abs(float(dig(obj, a)) - float(dig(obj, b)))
+    if kind == 'delta':
+        # diff 와 달리 **부호를 살린다**. 원고가 부호로 방향을 말하는 열이
+        # 있어서다 — 표 3 'Pooled Δ' 는 +0.450 과 -0.120 이 각각 "요약분기보다
+        # 나쁘다/낫다"를 뜻한다. abs 를 씌우면 방향이 뒤집혀도 통과한다.
+        a, b = path.split('|')
+        return float(dig(obj, a)) - float(dig(obj, b))
     v = float(dig(obj, path))
     if kind == 'gain':
         # 부호 규약 변환. 근거가 진짜 그 방향인지 여기서 확인한다 —
@@ -543,7 +805,7 @@ def declared_nd(val, cap=ANCHOR_MAX_ND):
     선언하지 않으므로 원고 관례인 cap까지 요구한다.
 
     이 함수가 없으면 소수 1자리까지 폴백해서 p=0.113이 본문의 "0.1"로
-    통과한다 (verify/comparison_defects.md #3).
+    통과한다 (내부 결함 등록부 #3).
     """
     for nd in range(cap + 1):
         if abs(round(val, nd) - val) < 1e-12:
@@ -608,9 +870,18 @@ def anchor_near(val, loc, files):
     문맥이 사라졌는데 조용히 STALE/FOUND 로 떨어지면 안 된다.
     """
     fname, ctx = loc
-    hit = [f for f in files if f.name == fname]
+    # 파일명은 판본마다 다르다. 내부 판본은 'NN_' 접두사로 순서를 박아 뒀고
+    # (03_methods.tex), Overleaf 로 넘어간 제출본은 접두사 없이 methods.tex 다.
+    # 등록부는 **어느 절이냐**를 가리키지 파일명 관례를 가리키지 않으므로,
+    # 접두사를 떼고 맞춘다. 2026-09-17 제출본으로 갈아끼웠을 때 앵커 4개가
+    # 전부 NOKEY 로 떨어진 것이 이 때문이었다 — 근거가 없어서가 아니었다.
+    role = lambda n: re.sub(r'^\d+_', '', n)
+    hit = [f for f in files if role(f.name) == role(fname)]
     if not hit:
         return False, f'등록 위치의 파일이 없다: {fname}'
+    if len(hit) > 1:
+        # 두 관례가 한 트리에 섞여 있으면 어느 쪽을 읽었는지 알 수 없다.
+        return False, f'등록 위치가 모호하다: {[f.name for f in hit]}'
     text = join_wrapped_sci(hit[0].read_text())
     ms = list(re.finditer(ctx, text))
     if not ms:
@@ -626,7 +897,10 @@ def selftest():
     """회귀 테스트. 비교 로직 결함을 다시 열지 않기 위한 것.
 
     세 묶음이다 — 앵커 패턴(부분문자열·정밀도), render_match(부호·절사),
-    extract(토큰화). 각 묶음의 유래는 verify/comparison_defects.md 에 있다.
+    extract(토큰화). 각각 실제로 일어난 결함이다: 앵커가 소수 1자리까지
+    폴백해 p=0.113 이 "0.1" 로 통과했고, render_match 의 절사 분기가 부호를
+    무시했고, extract 가 "1,924" 를 1 과 924 로 쪼개고 음수 부호를
+    lookbehind 로 막아 버렸다. 번호는 비공개 결함 등록부 #2·#3·#4·#6 이다.
     """
     def hit(val, text):
         return any(re.search(p_, text) for p_ in anchor_patterns(val))
@@ -646,7 +920,7 @@ def selftest():
         (271, 'available for 2718 pairs', False, '정수도 뒤 숫자면 miss'),
         (27, 'available for 271 pairs', False, '정수 부분문자열 miss'),
         (240, 'all 240 out-of-fold pairs', True, 'OOF 240'),
-        # ── 정밀도 폴백 (comparison_defects.md #3) ──
+        # ── 정밀도 폴백 (결함 등록부 #3) ──
         (0.113, 'the p value was 0.1 overall', False,
          '0.113이 소수 1자리 "0.1"로 통과하면 안 된다'),
         (0.113, 'the p value was 0.11 here', False,
@@ -669,7 +943,7 @@ def selftest():
             bad.append((val, text, want, got, why))
         print(f'  [{mark}] {val!r:>8} in {text!r:44s} -> {got}   {why}')
 
-    # ── render_match: 부호 (comparison_defects.md #2) ──
+    # ── render_match: 부호 (결함 등록부 #2) ──
     print()
     rm_cases = [
         (-0.589, '0.58', False, '음수 근거가 양수 인쇄를 통과하면 안 된다 (절사 분기)'),
@@ -680,7 +954,7 @@ def selftest():
         (-1.47, '1.47', False, 'bin별 평균 차의 부호가 뒤집히면 miss'),
         (967.578, '967', True, '정수부 절사 — 원고가 실제로 쓰는 표기'),
         (-967.578, '967', False, '정수부 절사도 부호를 본다'),
-        # ── 천 단위 구분자 (comparison_defects.md #4) ──
+        # ── 천 단위 구분자 (결함 등록부 #4) ──
         (1924, '1,924', True, '쉼표가 든 토큰이 그대로 매칭돼야 한다'),
         (1924.0, '1,924', True, 'float 근거도 같다'),
         (1925, '1,924', False, '쉼표를 떼도 값이 다르면 miss'),
@@ -692,7 +966,7 @@ def selftest():
             bad.append((src, printed, want, got, why))
         print(f'  [{mark}] render_match({src!r}, {printed!r:>9}) -> {got}   {why}')
 
-    # ── extract: 토큰화 (comparison_defects.md #4) ──
+    # ── extract: 토큰화 (결함 등록부 #4) ──
     print()
     ex_cases = [
         ('1,924 locations', ['1,924'], '천 단위 구분자는 한 토큰이다'),
@@ -703,7 +977,7 @@ def selftest():
         ('at 240, 125 of them', ['240', '125'], '쉼표+공백 나열은 그대로 둘로'),
         ('1,9245 odd', ['1', '9245'],
          '쉼표 뒤 네 자리는 천 단위가 아니다 — 1924로 읽으면 안 된다'),
-        # ── 부호 하이픈 (comparison_defects.md #6) ──
+        # ── 부호 하이픈 (결함 등록부 #6) ──
         ('a shift of -1.47 dB', ['-1.47'], '공백 뒤 하이픈은 부호다'),
         ('the CI was $-7.39$ dB', ['-7.39'], 'LaTeX 수식 마이너스도 부호다'),
         ('($-0.261$ dB, $p = 0.19$)', ['-0.261', '0.19'],
@@ -723,7 +997,7 @@ def selftest():
             bad.append((line, want_toks, got, why))
         print(f'  [{mark}] extract({line!r:28s}) -> {got}   {why}')
 
-    # ── 등록 위치 기반 앵커 조회 (comparison_defects.md #3 과교정) ──
+    # ── 등록 위치 기반 앵커 조회 (결함 등록부 #3 의 과교정) ──
     # 자릿수는 원고가 정하고 위치가 오탐을 막는다. 여기서는 loc_match 만
     # 본다 — 실제 원고 문맥 매칭은 anchor_near 가 하고 본 실행에서 걸린다.
     print()
@@ -799,8 +1073,32 @@ def selftest():
             bad.append(('gain', want, got, why))
         print(f'  [{mark}] gain -> {got!r:>10}   {why}')
 
+    # ── 부호를 살리는 차 (DERIVED kind='delta') ──
+    print()
+    d_obj = {'cnn': {'rmse': 9.11}, 'xgb': {'rmse': 8.66},
+             'ens': {'rmse': 8.115}}
+    def _delta(path):
+        return derive(d_obj, path, 'delta')
+    d_cases = [
+        (round(_delta('cnn.rmse|xgb.rmse'), 3), 0.45,
+         '표 3 Pooled Δ 는 cnn - xgb 이고 양수면 영상분기가 더 나쁘다'),
+        (round(_delta('ens.rmse|xgb.rmse'), 3), -0.545,
+         '앙상블은 음수 — 부호가 방향을 말한다'),
+        (derive(d_obj, 'cnn.rmse|xgb.rmse', 'diff') ==
+         derive(d_obj, 'xgb.rmse|cnn.rmse', 'diff'), True,
+         'diff 는 abs 라 순서를 못 가린다 — delta 가 따로 필요한 이유'),
+        (_delta('cnn.rmse|xgb.rmse') == _delta('xgb.rmse|cnn.rmse'), False,
+         'delta 는 순서가 뒤집히면 다른 값이다'),
+        (render_match(-0.545, '-0.545'), True, '음수 그대로 원고와 맞는다'),
+    ]
+    for got, want, why in d_cases:
+        mark = 'ok  ' if got == want else 'FAIL'
+        if got != want:
+            bad.append(('delta', want, got, why))
+        print(f'  [{mark}] delta -> {got!r:>10}   {why}')
+
     n = (len(cases) + len(rm_cases) + len(ex_cases) + len(lm_cases)
-         + len(w_cases) + len(g_cases))
+         + len(w_cases) + len(g_cases) + len(d_cases))
     print()
     if bad:
         print(f'  {len(bad)}건 실패 / {n}건.')
@@ -891,11 +1189,27 @@ def check_anchors(sections=None):
         # 04_results.tex:332). 그래서 기호를 강제하지 않고 독립 토큰으로 찾는다.
         # gain 은 원고가 소수 3자리로 인쇄한다(0.589 / 0.534). 2자리로도
         # 찾으면 본문의 "0.59"·"0.53" 에 걸릴 수 있어 3자리로 못 박는다.
-        nds = (3, 4) if kind == 'diff' else (3,) if kind == 'gain' else (1, 2)
-        pats = [r'(?<![0-9.])' + re.escape(f'{v:.{nd}f}') + r'(?![0-9])' for nd in nds]
-        found = any(re.search(p_, body) for p_ in pats)
+        #
+        # 등록 위치가 있으면 위쪽 ANCHORS 루프와 똑같이 위치로 간다. 자릿수를
+        # kind 로 못 박는 위 규칙은 **원고가 그보다 적게 인쇄하면 STALE 을
+        # 낸다** — p95 하락 3.118 을 원고가 "3.12" 로 쓰는 자리가 그랬다
+        # (2026-09-17). 위치를 등록한 것만 예외로 두고, 등록 안 한 것은
+        # 종전의 엄격한 자릿수를 그대로 쓴다.
+        loc = ANCHOR_LOC.get(aid)
+        if loc:
+            found, err = anchor_near(v, loc, files)
+            if err:
+                row('NOKEY', aid, label, src, err)
+                continue
+        else:
+            nds = ((3, 4) if kind == 'diff'
+                   else (3,) if kind in ('gain', 'delta') else (1, 2))
+            pats = [r'(?<![0-9.])' + re.escape(f'{v:.{nd}f}') + r'(?![0-9])'
+                    for nd in nds]
+            found = any(re.search(p_, body) for p_ in pats)
         shown = (f'{v:.4f}' if kind == 'diff'
-                 else f'+{v:.3f}' if kind == 'gain' else f'{v:.2f}%')
+                 else f'+{v:.3f}' if kind == 'gain'
+                 else f'{v:+.3f}' if kind == 'delta' else f'{v:.2f}%')
         row('FOUND' if found else 'STALE', aid, label, src, shown)
     return rows
 
@@ -1235,6 +1549,11 @@ def run_gate(args, log_path):
     print('=== check_numbers 게이트 ===')
     print(f'  시각      : {_dt.datetime.now():%Y-%m-%d %H:%M:%S}')
     print(f'  대상 트리 : {ROOT}')
+    print(f'  원고      : {SEC}'
+          + ('' if getattr(args, 'manuscript', None)
+             else '   ** 저장소 안의 사본이다. 정본은 Overleaf 에 있다 —'
+                  ' 정본을 검사하려면 --manuscript DIR 로 지정할 것. **'))
+    print(f'  근거      : {RUNS}')
     print(f'  로그      : {log_path}')
     print(f'  예외      : {EXCEPTIONS_FILE}')
     print(f'  패턴      : {PATTERNS_FILE}')
@@ -1288,9 +1607,9 @@ def run_gate(args, log_path):
 
     print('=== [MISS] 근거 없음 ===')
     print('  runs/*.json + CANONICAL_SPEC.md 어디에도 근거가 없는 수치.')
-    print('  2026-08-26 전수 추적 결과, 아래 대부분은 산문 문서'
-          '(skeleton_notes.md, robustness_gains_20260711.md, stepsize_axis_report.md)')
-    print('  에만 있고 기계 산출물에는 없다. 즉 **재계산 근거가 없는 값**이다.')
+    print('  2026-08-26 전수 추적 결과, 아래 대부분은 배포 대상이 아닌 '
+          '내부 산문 문서에만 있고 기계 산출물에는 없다.')
+    print('  즉 **재계산 근거가 없는 값**이다.')
     print('  88명 편입 시 이 값들은 자동으로 갱신되지 않으므로 손으로 다시 내야 한다.')
     print()
     live_miss = [f for f in misses if f.id not in approved]
@@ -1302,7 +1621,8 @@ def run_gate(args, log_path):
 
     print()
     print('=== [ANCHOR] 근거 -> 원고 역방향 대조 ===')
-    print('  (값 대조는 우연 일치가 10~27%다. 아래는 JSON 경로 / SPEC 표로 못 박은 것.)')
+    print('  (값 대조만으로는 출처를 모른다 — 먼저 맞는 값이 이긴다. '
+          '아래는 JSON 경로 / SPEC 표로 못 박은 것.)')
     live_stale = [r for r in stale if r['id'] not in approved]
     if not live_stale and not unrunnable:
         print(f'  {len(anchors)}개 앵커 전부 원고에서 확인.')
@@ -1424,10 +1744,31 @@ def main():
     ap.add_argument('--json', default=None, help='위반 목록을 JSON으로 덤프할 경로')
     ap.add_argument('--root', default=None,
                     help='검사 대상 트리 (기본: 저장소 루트). 임시 픽스처 시험용')
+    ap.add_argument('--runs', default=None, metavar='DIR',
+                    help='근거 산출물 *.json 디렉터리. 배포본에는 runs/ 가 '
+                         '없다 — paper/results_frozen 을 여기에 준다.')
+    ap.add_argument('--manuscript', default=None, metavar='DIR',
+                    help='검사할 원고 *.tex 디렉터리. 정본 원고는 이 저장소에 없다 '
+                         '(Overleaf) — 내려받은 경로를 여기에 준다. 생략하면 '
+                         'docs/journal_manuscript/sections/ 의 낡은 사본을 검사한다.')
     args = ap.parse_args()
 
     if args.root:
         configure(args.root)
+    if args.runs:
+        try:
+            configure_runs(args.runs)
+        except GateError as e:
+            print(f'[ERROR] {e}', file=sys.stderr)
+            print(f'[ERROR] 검사 불능 — 통과가 아니다 (exit {EXIT_ERROR}).', file=sys.stderr)
+            return EXIT_ERROR
+    if args.manuscript:
+        try:
+            configure_manuscript(args.manuscript)
+        except GateError as e:
+            print(f'[ERROR] {e}', file=sys.stderr)
+            print(f'[ERROR] 검사 불능 — 통과가 아니다 (exit {EXIT_ERROR}).', file=sys.stderr)
+            return EXIT_ERROR
 
     if args.selftest:
         print('=== 숫자 매칭 경계 조건 회귀 테스트 ===')

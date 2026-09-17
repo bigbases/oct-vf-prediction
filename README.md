@@ -29,6 +29,9 @@ and is not a general-purpose tool.
 | `tests/` | Config-consistency and frozen-result checks |
 | `scripts/verify_no_phi.py` | The identifier scan described under Verification |
 
+Module docstrings, identifiers and this README are in English; inline comments
+are in Korean.
+
 ## What this repository does not contain
 
 - **Raw imaging data.** No report pages, no crops, no per-eye tables. Withheld
@@ -44,13 +47,17 @@ and is not a general-purpose tool.
 - **The manuscript.** LaTeX sources, the compiled PDF and the figure files are
   held separately. This repository exists to make the computation checkable, not
   to redistribute the paper.
-- **Internal working documents.** Module docstrings cite audit records under
-  `docs/` — `LATERALITY_AUDIT.md`, `FIGURE_SOURCES.md`, `CANONICAL_SPEC.md`,
-  `METRIC_SANITY.md` and others. Those are internal notes: they name people,
-  quote intermediate per-eye values, and track decisions rather than
-  computations. They are not distributed, so those citations do not resolve in a
-  clone. `docs/coordinate_frame_convention.md` is the one that is here, and it
-  carries the substance of the laterality audit.
+- **Internal working documents.** One record stays internal: the figure
+  registry binds each pseudonym printed in the paper to a study eye, so it is
+  withheld, and `experiments/case_study/case_profile.py` says so at the point
+  where it would otherwise have cited it. The manuscript's companion
+  specification is partly here — `docs/CANONICAL_SPEC.md` carries §1–§4, which
+  is what `scripts/check_numbers.py` needs in order to run from a clone. Its
+  §5 and §6 are omitted because they index internal audit records; the excerpt
+  says so at the top and keeps the reasoning that depended on them. Every other
+  citation in the source resolves inside this repository: the laterality and
+  coordinate-frame arguments point at `docs/coordinate_frame_convention.md`, and
+  the rest name a numbered section of the manuscript rather than an audit note.
 - **Development history.** The repository begins at a small number of commits;
   the day-to-day working history is not part of the release.
 
