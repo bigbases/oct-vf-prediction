@@ -20,6 +20,7 @@ and is not a general-purpose tool.
 | `config/params.yaml` | The constants this study reports: seeds, geometry, XGBoost settings, fold count, fusion grid, backbone set |
 | `scripts/` | Fusion, evaluation, statistics, the six tables and the six figures |
 | `experiments/` | One directory per ablation and robustness analysis, each writing its own JSON and a report beside it |
+| `experiments/reviewer_round3/` | The late analyses of this study: centring, summary-parameter ensembles and a sixth backbone. The name is internal shorthand for the round of self-review that prompted them, not a journal review round — this manuscript has not been through peer review. The directory keeps that name because the frozen artefacts record the paths the runs were produced under |
 | `extract_cirrus.py`, `ocr_*.py`, `cirrus_regions.json` | Report extraction: page regions, summary parameters, 24-2 thresholds |
 | `build_ml_final.py`, `merge_rnfl_into_ml_final.py`, `make_rnfl_flip.py` | Assembly of the modelling table, including the OS → OD mirroring |
 | `phase_b_build.py`, `phase_b_apply.py` | Manual review pass over the extracted thresholds |

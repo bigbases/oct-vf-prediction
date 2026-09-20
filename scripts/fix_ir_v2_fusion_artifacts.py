@@ -1,5 +1,21 @@
 #!/usr/bin/env python3
-"""IR-v2 late fusion 가중·OOF fusion 예측 고정 저장 + 층별 RMSE JSON."""
+"""Write out the late-fusion artefacts for the Inception-ResNet-v2 run: the
+per-fold and stacked out-of-fold fusion predictions at the fixed weight, the
+global weight audit, and RMSE by severity stratum.
+
+The "fix" in the file name is historical and does not mark a corrected result.
+This script is the only producer of runs/ir_v2_fusion_oof/,
+runs/ir_v2_global_fusion.json and runs/stratified_rmse_ir_v2.json, which
+build_ablation_table.py and verify_fusion_integrity.py then read. It alters no
+stored prediction: it reads the per-fold XGBoost and CNN predictions that
+already exist, fuses them at the fixed w = 0.47, and records the result. The
+optimal weight is recomputed next to the fixed one so the two can be read
+against each other. The improvement_timeline block in the strata JSON carries
+the earlier, superseded CNN numbers with the run that produced each, which is
+where the name comes from.
+
+IR-v2 late fusion 가중·OOF fusion 예측 고정 저장 + 층별 RMSE JSON.
+"""
 from __future__ import annotations
 
 import csv
