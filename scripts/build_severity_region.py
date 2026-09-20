@@ -63,10 +63,10 @@ COORDS52 = [c for i, c in enumerate(COORDS54) if i not in BLIND]  # 52-point 순
 
 XY = np.array(COORDS52, float)
 REGIONS = {
-    'superior (상반구)': XY[:, 1] > 0,
-    'inferior (하반구)': XY[:, 1] < 0,
-    'central ≤9° (중심)': (np.abs(XY[:, 0]) <= 9) & (np.abs(XY[:, 1]) <= 9),
-    'peripheral (주변)': ~((np.abs(XY[:, 0]) <= 9) & (np.abs(XY[:, 1]) <= 9)),
+    'superior hemifield': XY[:, 1] > 0,
+    'inferior hemifield': XY[:, 1] < 0,
+    'central ≤9°': (np.abs(XY[:, 0]) <= 9) & (np.abs(XY[:, 1]) <= 9),
+    'peripheral': ~((np.abs(XY[:, 0]) <= 9) & (np.abs(XY[:, 1]) <= 9)),
 }
 
 

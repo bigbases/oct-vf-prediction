@@ -288,11 +288,11 @@ ANCHORS = [
     # 통과하고 있었다 — 36 은 case_profile.json 의 md_percentile_rank=35.74,
     # 16 은 bias_by_bin 류 39개 값 중 아무거나였다. 하반구 26 은 상반구와
     # 같은 값이라 따로 걸지 않는다.
-    ('severity_region.json', 'region.superior (상반구).n_points_per_eye',
+    ('severity_region.json', 'region.superior hemifield.n_points_per_eye',
      'region 상반구 26점'),
-    ('severity_region.json', 'region.central ≤9° (중심).n_points_per_eye',
+    ('severity_region.json', 'region.central ≤9°.n_points_per_eye',
      'region 중심 16점'),
-    ('severity_region.json', 'region.peripheral (주변).n_points_per_eye',
+    ('severity_region.json', 'region.peripheral.n_points_per_eye',
      'region 주변 36점'),
     # 좌우 미러링 절제 (§4.4). 네 수치 전부 osflip_compare.json 에 있었는데
     # 동결이 안 돼 있었다. p 둘은 그대로 있고 delta 둘은 DERIVED(delta).
@@ -463,11 +463,11 @@ ANCHOR_LOC = {
     # 230 distinct eyes". 235 는 원고에 두 번 나오고 둘 다 같은 캡션이다.
     'anchor:trivial_baselines.json#rows.2.test.mae':
         ('results.tex', r'Ridge on summary parameters'),
-    'anchor:severity_region.json#region.superior (상반구).n_points_per_eye':
+    'anchor:severity_region.json#region.superior hemifield.n_points_per_eye':
         ('results.tex', r'Superior & '),
-    'anchor:severity_region.json#region.central ≤9° (중심).n_points_per_eye':
+    'anchor:severity_region.json#region.central ≤9°.n_points_per_eye':
         ('results.tex', r'Central \(\$\\leq'),
-    'anchor:severity_region.json#region.peripheral (주변).n_points_per_eye':
+    'anchor:severity_region.json#region.peripheral.n_points_per_eye':
         ('results.tex', r'Peripheral & '),
     'anchor:osflip_compare.json#paired_wilcoxon_flip_vs_noflip.oof_cnn.p':
         ('results.tex', r'out-of-fold CNN'),
