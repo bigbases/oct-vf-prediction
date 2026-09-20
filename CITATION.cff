@@ -9,7 +9,7 @@ abstract: >-
   cross-validation fold.
 type: software
 license: MIT
-repository-code: "https://github.com/bigbases/oct-vf-late-fusion"
+repository-code: "https://github.com/bigbases/oct-vf-prediction"
 authors:
   - given-names: Min-Sol
     family-names: Kim
