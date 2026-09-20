@@ -1,5 +1,5 @@
 {
-  "note": "-1 원본 지점을 마스크에서 제외한 재평가. 재학습 없음. W_FIXED=0.47.",
+  "note": "re-evaluation with the points that were -1 in the source report dropped from the mask. No model is retrained. W_FIXED=0.47.",
   "n_neg1_cells_52pt": 1792,
   "row_pairing": {
     "triple_exact": 274,

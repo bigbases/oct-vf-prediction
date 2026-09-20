@@ -1,9 +1,9 @@
 """paper/results_frozen/ must stay parseable, de-identified, and quotable.
 
 These are the numbers the manuscript prints. The tests check that the files are
-there, that the headline values are what the text says, and that the two
+there, that the headline values are what the text says, and that the three
 transforms the freezer applies -- absolute paths removed, the representative
-eye's quasi-identifier removed -- are still in force.
+eye's quasi-identifier removed, the prose translated -- are still in force.
 """
 from __future__ import annotations
 
@@ -89,3 +89,50 @@ def test_backbone_set_matches_config():
     labels = get('constants', 'backbones', 'labels')
     doc = json.loads((FROZEN / 'fusion_consistency_matrix.json').read_text(encoding='utf-8'))
     assert {r['backbone'] for r in doc['rows']} == {labels[b] for b in want}
+
+
+def freezer():
+    import sys
+
+    sys.path.insert(0, str(ROOT / 'scripts'))
+    import freeze_paper_results
+
+    return freeze_paper_results
+
+
+HANGUL = re.compile(r'[\uac00-\ud7a3]')
+
+
+@pytest.mark.parametrize('p', frozen_files(), ids=lambda p: p.name)
+def test_prose_is_in_english(p):
+    """The producers annotate in Korean; the freezer translates on the way out."""
+    text = p.read_text(encoding='utf-8')
+    assert not HANGUL.search(text), f'{p.name}: untranslated prose'
+
+
+def test_translation_table_translates():
+    """Keys are what a producer wrote, values are what a reader gets."""
+    prose = freezer().PROSE
+    for ko, en in prose.items():
+        assert HANGUL.search(ko), ko
+        assert not HANGUL.search(en), en
+
+
+def test_translation_moves_no_number():
+    """The condition on the third transform: it rewrites strings, nothing else.
+
+    Every entry of the table is fed through with numbers beside it, including
+    the shapes that turn up in these files -- integers, negatives, exponents,
+    and values whose repr is not their literal.
+    """
+    fr = freezer()
+    doc = {
+        'prose': list(fr.PROSE),
+        'nested': [{'note': ko, 'rmse': 8.0832} for ko in fr.PROSE],
+        'numbers': {'w': 0.47, 'n': 240, 'delta': -0.089, 'lr': 1e-4,
+                    'p': 1.886e-4, 'zero': 0, 'flag': True},
+    }
+    before = fr.numbers(doc)
+    out = fr.scrub(doc)
+    assert fr.numbers(out) == before
+    assert not HANGUL.search(json.dumps(out, ensure_ascii=False))

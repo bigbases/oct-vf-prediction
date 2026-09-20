@@ -1,12 +1,12 @@
 {
-  "protocol": "90d, 5-fold, seed42, IR-v2 대표, pooled RMSE/MAE(dB), 52-point masked",
+  "protocol": "90d, 5-fold, seed42, IR-v2 as the representative backbone, pooled RMSE/MAE(dB), 52-point masked",
   "w_xgb": 0.47,
   "n_oof_eyes": 240,
   "n_test_eyes": 37,
   "rows": [
     {
       "model": "grand",
-      "label": "grand-mean (상수)",
+      "label": "grand-mean (constant)",
       "oof": {
         "rmse": 10.75,
         "mae": 8.62

@@ -1,11 +1,11 @@
 {
   "split": "oof",
-  "protocol": "split=oof (OOF, CV fold별 val 예측 연결), IR-v2 + XGB. 축 1(clamp_both)·2(clamp_label)는 재학습 없는 사후 재집계, 축 3(clamp_retrain)은 정규화 타깃으로 재학습한 별도 런. Hasan 2025 normalised TS = floor 14 dB. raw 축이 본 연구의 정본.",
+  "protocol": "split=oof (OOF, the per-fold validation predictions concatenated), IR-v2 + XGB. Axes 1 (clamp_both) and 2 (clamp_label) are post-hoc re-aggregations with no retraining; axis 3 (clamp_retrain) is a separate run retrained on the normalised target. Hasan 2025 normalised TS = floor 14 dB. The raw axis is the canonical one for this study.",
   "axis_semantics": {
-    "clamp_both": "예측·라벨 동시 사후 클램프 (학습 후 예측을 눌러줌)",
-    "clamp_label": "라벨만 사후 클램프, 예측은 원본 (모델 무수정)",
-    "clamp_retrain": "정규화 타깃으로 재학습 — Hasan과 유일하게 동등",
-    "WARNING": "세 축은 하나의 값을 감싸는 구간이 아니다. 2026-08-08 XGB 실측에서 retrain(4.180) < both(4.363) < label(5.177) 로 재학습이 both보다 좋아 both를 상한이라 부를 수 없다. 각 축을 조작 내용과 함께 개별 보고할 것."
+    "clamp_both": "prediction and label clamped together after the fact (the trained predictions are pushed down)",
+    "clamp_label": "only the label is clamped after the fact, the prediction is left as produced (the model is untouched)",
+    "clamp_retrain": "retrained on the normalised target - the only setting equivalent to Hasan",
+    "WARNING": "the three axes are not an interval bracketing one value. In the XGB measurement of 2026-08-08, retrain(4.180) < both(4.363) < label(5.177): retraining beat both, so both cannot be called an upper bound. Report each axis separately, together with what it manipulates."
   },
   "label_distribution": {
     "n_points": 12480,

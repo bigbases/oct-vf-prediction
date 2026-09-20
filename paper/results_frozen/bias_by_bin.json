@@ -1,7 +1,7 @@
 {
   "seed": 42,
   "n_boot": 10000,
-  "note": "구간·MIN_PTS·w·마스크·기울기는 fusion_sensitivity_trend / fusion_eval_common 에서 import. w 재적합 없음. delta = fusion RMSE - image branch RMSE (같은 변형 안에서 비교).",
+  "note": "the bins, MIN_PTS, w, the mask and the slope are imported from fusion_sensitivity_trend / fusion_eval_common. w is not refitted. delta = fusion RMSE - image branch RMSE (compared within the same variant).",
   "passes": {
     "A": {
       "IR-v2": {

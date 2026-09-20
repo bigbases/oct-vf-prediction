@@ -1,9 +1,9 @@
 {
-  "note": "image branch 단독 vs summary branch 단독. 패스 B, 재학습 없음, 저장된 예측만 사용. delta = mean_eyes[M(image) - M(summary)], 음수 = image 우세.",
+  "note": "image branch alone vs summary branch alone. Pass B; no model is retrained, only stored predictions are used. delta = mean_eyes[M(image) - M(summary)]; negative = the image branch wins.",
   "tree": "/home/<user>/experiments/laterality_qfix/step4_work/B",
   "seed": 42,
   "n_boot": 5000,
-  "ci": "환자 군집 부트스트랩 95% percentile",
+  "ci": "patient-clustered bootstrap, 95% percentile",
   "primary_backbone": "IR-v2",
   "backbones": [
     "IR-v2",

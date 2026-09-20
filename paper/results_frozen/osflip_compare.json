@@ -1,5 +1,5 @@
 {
-  "protocol": "OS 이미지 좌우반전(OD 정규화) 유무 대조. 하이퍼파라미터 동일, seed 42, num_workers 0. test 집계 = 5-fold 예측 평균(정본).",
+  "protocol": "with and without mirroring the OS images left-right (normalising to OD). Identical hyperparameters, seed 42, num_workers 0. Test aggregation = the mean of the five fold predictions (the canonical choice).",
   "w_fixed": 0.47,
   "reference_noflip": {
     "cnn_oof_rmse": 8.54,

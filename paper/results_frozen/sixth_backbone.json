@@ -1,5 +1,5 @@
 {
-  "note": "6번째 CNN(ResNet50) 추가 이득 대 XGB 추가 이득. 패스 B, out-of-fold. delta = per-eye M(a) - per-eye M(b), 음수 = a 우세.",
+  "note": "the gain from adding a sixth CNN (ResNet50) against the gain from adding XGB. Pass B, out-of-fold. delta = per-eye M(a) - per-eye M(b); negative = a wins.",
   "tree": "/home/<user>/experiments/laterality_qfix/step4_work/B",
   "resnet50_run": "/home/<user>/experiments/reviewer_round3/runs_r3/phasec_b0_resnet50_5fold",
   "seed": 42,
@@ -45,7 +45,7 @@
     "basis_a_cells": 12480,
     "basis_b_cells": 12480,
     "eyes_dropped": 0,
-    "note": "basis B 는 ResNet50 의 키/마스크까지 교집합에 넣은 것이다."
+    "note": "basis B is the one that intersects the keys and the mask of ResNet50 as well."
   },
   "nested_w_ens5_basisB": [
     0.29,
@@ -63,7 +63,7 @@
   ],
   "rows_basisB": [
     {
-      "label": "ResNet50 단독",
+      "label": "ResNet50 alone",
       "pooled_rmse": 9.68110179901123,
       "pooled_mae": 6.728091239929199,
       "eye_rmse_mean": 8.06680679321289,
@@ -74,7 +74,7 @@
       "n_cells": 12480
     },
     {
-      "label": "5백본 앙상블",
+      "label": "five-backbone ensemble",
       "pooled_rmse": 8.11470890045166,
       "pooled_mae": 5.666417598724365,
       "eye_rmse_mean": 6.956822872161865,
@@ -85,7 +85,7 @@
       "n_cells": 12480
     },
     {
-      "label": "6백본 앙상블 (+ResNet50)",
+      "label": "six-backbone ensemble (+ResNet50)",
       "pooled_rmse": 8.223194122314453,
       "pooled_mae": 5.716362476348877,
       "eye_rmse_mean": 7.012265682220459,
@@ -96,7 +96,7 @@
       "n_cells": 12480
     },
     {
-      "label": "5백본 앙상블 + XGB fusion",
+      "label": "five-backbone ensemble + XGB fusion",
       "pooled_rmse": 7.962895393371582,
       "pooled_mae": 5.684981822967529,
       "eye_rmse_mean": 6.930865287780762,
@@ -107,7 +107,7 @@
       "n_cells": 12480
     },
     {
-      "label": "6백본 앙상블 + XGB fusion",
+      "label": "six-backbone ensemble + XGB fusion",
       "pooled_rmse": 8.03359317779541,
       "pooled_mae": 5.7337422370910645,
       "eye_rmse_mean": 6.982168674468994,
@@ -118,7 +118,7 @@
       "n_cells": 12480
     },
     {
-      "label": "summary XGB 단독",
+      "label": "summary XGB alone",
       "pooled_rmse": 8.660277366638184,
       "pooled_mae": 6.397546291351318,
       "eye_rmse_mean": 7.808805465698242,
@@ -186,8 +186,8 @@
   ],
   "comparisons_basisB": [
     {
-      "a": "6백본 앙상블",
-      "b": "5백본 앙상블",
+      "a": "six-backbone ensemble",
+      "b": "five-backbone ensemble",
       "metric": "rmse",
       "n_eyes": 240,
       "delta": 0.05544249340891838,
@@ -198,8 +198,8 @@
       "n_a_better": 119
     },
     {
-      "a": "5백본+XGB fusion",
-      "b": "5백본 앙상블",
+      "a": "five backbones + XGB fusion",
+      "b": "five-backbone ensemble",
       "metric": "rmse",
       "n_eyes": 240,
       "delta": -0.025957247242331505,
@@ -210,8 +210,8 @@
       "n_a_better": 120
     },
     {
-      "a": "6백본+XGB fusion",
-      "b": "6백본 앙상블",
+      "a": "six backbones + XGB fusion",
+      "b": "six-backbone ensemble",
       "metric": "rmse",
       "n_eyes": 240,
       "delta": -0.030097154900431633,
@@ -222,8 +222,8 @@
       "n_a_better": 119
     },
     {
-      "a": "6백본 앙상블",
-      "b": "5백본+XGB fusion",
+      "a": "six-backbone ensemble",
+      "b": "five backbones + XGB fusion",
       "metric": "rmse",
       "n_eyes": 240,
       "delta": 0.08139974623918533,
@@ -234,8 +234,8 @@
       "n_a_better": 116
     },
     {
-      "a": "6백본 앙상블",
-      "b": "5백본 앙상블",
+      "a": "six-backbone ensemble",
+      "b": "five-backbone ensemble",
       "metric": "mae",
       "n_eyes": 240,
       "delta": 0.04994485527276993,
@@ -246,8 +246,8 @@
       "n_a_better": 121
     },
     {
-      "a": "5백본+XGB fusion",
-      "b": "5백본 앙상블",
+      "a": "five backbones + XGB fusion",
+      "b": "five-backbone ensemble",
       "metric": "mae",
       "n_eyes": 240,
       "delta": 0.018564485013484955,
@@ -258,8 +258,8 @@
       "n_a_better": 118
     },
     {
-      "a": "6백본+XGB fusion",
-      "b": "6백본 앙상블",
+      "a": "six backbones + XGB fusion",
+      "b": "six-backbone ensemble",
       "metric": "mae",
       "n_eyes": 240,
       "delta": 0.0173797607421875,
@@ -270,8 +270,8 @@
       "n_a_better": 115
     },
     {
-      "a": "6백본 앙상블",
-      "b": "5백본+XGB fusion",
+      "a": "six-backbone ensemble",
+      "b": "five backbones + XGB fusion",
       "metric": "mae",
       "n_eyes": 240,
       "delta": 0.03138037025928497,
@@ -288,10 +288,10 @@
     "gain_add_6th_cnn": 0.10848522186279297,
     "gain_add_xgb": -0.15181350708007812,
     "gain_add_6th_then_xgb": -0.08111572265625,
-    "note": "음수 = 개선. 두 이득을 같은 basis B, 같은 출발점(5백본 앙상블)에서 잰다."
+    "note": "negative = improvement. Both gains are measured on the same basis B, from the same starting point (the five-backbone ensemble)."
   },
   "resnet50_training": {
     "launcher": "experiments/reviewer_round3/train_r3.py",
-    "note": "train.py 를 수정하지 않고 build_image_backbone 만 런타임에 확장했다. 설정은 정본 5백본과 동일(300 epoch, RMSprop, lr 1e-4, wd 1e-5, patience 100, early_stop mae, seed 42, 증강 없음, use_deviation False)."
+    "note": "train.py was not modified; only build_image_backbone was extended at runtime. The settings are those of the canonical five backbones (300 epochs, RMSprop, lr 1e-4, wd 1e-5, patience 100, early_stop mae, seed 42, no augmentation, use_deviation False)."
   }
 }

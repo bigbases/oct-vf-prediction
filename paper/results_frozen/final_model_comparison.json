@@ -2,7 +2,7 @@
   "protocol": "Phase C, 90d, 5-fold, seed42, ReLU-fixed linear head, masked MSE",
   "metric": "pooled RMSE/MAE (dB), 52-point masked",
   "fusion": "late fusion = w·XGB + (1-w)·image-only CNN, w tuned on OOF",
-  "xgb_note": "XGB는 백본 무관 동일 baseline",
+  "xgb_note": "the XGB baseline is the same one for every backbone",
   "rows": [
     {
       "backbone": "inception_v3",

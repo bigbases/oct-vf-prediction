@@ -1,7 +1,7 @@
 {
   "w_xgb": 0.47,
   "n_boot": 5000,
-  "note": "환자 평균 검정(양안 상관 제거) + 환자 클러스터 부트스트랩. GEE 대체(statsmodels 부재).",
+  "note": "a test on patient means (removing the correlation between the two eyes of a patient) plus a patient-clustered bootstrap. Stands in for a GEE, statsmodels not being available.",
   "OOF": {
     "n_eyes": 240,
     "n_patients": 125,

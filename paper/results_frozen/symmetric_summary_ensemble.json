@@ -1,12 +1,12 @@
 {
-  "item": "(2) 요약 분지의 대칭적 강화",
+  "item": "(2) strengthening the summary branch symmetrically",
   "tree": "/home/<user>/experiments/laterality_qfix/step4_work/B",
   "pass": "B",
   "split": "out-of-fold",
   "seed": 42,
   "n_boot": 5000,
-  "ci": "환자 군집 부트스트랩 95% percentile",
-  "note": "요약 분지만 재적합. 입력 26 파라미터·폴드·52 지점별 구조·결측 대치는 ablate_vert_cd.py 에서 import. XGB 는 XGB_KW 에서 seed 만 변경, RF/ET/Ridge/SVR 은 scikit-learn 기본값 그대로 (스케일링 없음). per-eye SD 는 모집단 분모(ddof=0).",
+  "ci": "patient-clustered bootstrap, 95% percentile",
+  "note": "only the summary branch is refitted. The 26 input parameters, the folds, the per-point structure over the 52 locations and the missing-value imputation are imported from ablate_vert_cd.py. XGB changes only the seed in XGB_KW; RF/ET/Ridge/SVR keep the scikit-learn defaults as they are (no scaling). The per-eye SD uses the population denominator (ddof=0).",
   "reference_delta_rmse_single_xgb": -0.852,
   "guards": {
     "single_xgb_pooled_rmse": {
@@ -48,10 +48,10 @@
     "ridge_s42",
     "svr_s42"
   ],
-  "sklearn_defaults_caveat": "Ridge / SVR 은 표준화 없이 원 스케일 26 입력에 적합했다. SVR 기본값(RBF, C=1, epsilon=0.1)은 이 스케일에서 사실상 상수 예측에 가깝다 — 다중 모델 앙상블 행을 읽을 때 감안할 것. 지시대로 조정하지 않았다.",
+  "sklearn_defaults_caveat": "Ridge and SVR were fitted on the 26 inputs at their original scale, without standardisation. At this scale the SVR defaults (RBF, C=1, epsilon=0.1) amount to something close to a constant prediction - bear that in mind when reading the multi-model ensemble row. They were left unadjusted, as instructed.",
   "rows": [
     {
-      "label": "summary: 단일 XGBoost (seed 42)",
+      "label": "summary: single XGBoost (seed 42)",
       "pooled_rmse": 8.660277366638184,
       "pooled_mae": 6.397546291351318,
       "eye_rmse_mean": 7.808804738521576,
@@ -61,7 +61,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary 구성원: xgb (seed 43)",
+      "label": "summary member: xgb (seed 43)",
       "pooled_rmse": 8.635265350341797,
       "pooled_mae": 6.383144378662109,
       "eye_rmse_mean": 7.783838813006878,
@@ -71,7 +71,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary 구성원: xgb (seed 44)",
+      "label": "summary member: xgb (seed 44)",
       "pooled_rmse": 8.615638732910156,
       "pooled_mae": 6.358394145965576,
       "eye_rmse_mean": 7.76837919006745,
@@ -81,7 +81,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary 구성원: rf (seed 42)",
+      "label": "summary member: rf (seed 42)",
       "pooled_rmse": 8.628896713256836,
       "pooled_mae": 6.456467628479004,
       "eye_rmse_mean": 7.722564263641834,
@@ -91,7 +91,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary 구성원: et (seed 42)",
+      "label": "summary member: et (seed 42)",
       "pooled_rmse": 8.546323776245117,
       "pooled_mae": 6.44529390335083,
       "eye_rmse_mean": 7.688619468112787,
@@ -101,7 +101,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary 구성원: ridge (seed 42)",
+      "label": "summary member: ridge (seed 42)",
       "pooled_rmse": 10.360125541687012,
       "pooled_mae": 7.677426338195801,
       "eye_rmse_mean": 8.993450904885927,
@@ -111,7 +111,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary 구성원: svr (seed 42)",
+      "label": "summary member: svr (seed 42)",
       "pooled_rmse": 9.809794425964355,
       "pooled_mae": 6.501682758331299,
       "eye_rmse_mean": 7.980783106386662,
@@ -121,7 +121,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary: XGB seed 앙상블 (42/43/44)",
+      "label": "summary: XGB seed ensemble (42/43/44)",
       "pooled_rmse": 8.584329605102539,
       "pooled_mae": 6.34519624710083,
       "eye_rmse_mean": 7.726708012322585,
@@ -131,7 +131,7 @@
       "n_eyes": 240
     },
     {
-      "label": "summary: 다중 모델 앙상블 (XGB+RF+ET+Ridge+SVR)",
+      "label": "summary: multi-model ensemble (XGB+RF+ET+Ridge+SVR)",
       "pooled_rmse": 8.56277847290039,
       "pooled_mae": 6.332603931427002,
       "eye_rmse_mean": 7.5814464310805,
@@ -141,7 +141,7 @@
       "n_eyes": 240
     },
     {
-      "label": "image: 5백본 이미지 앙상블",
+      "label": "image: five-backbone image ensemble",
       "pooled_rmse": 8.11470890045166,
       "pooled_mae": 5.666417598724365,
       "eye_rmse_mean": 6.956822867691517,
@@ -153,10 +153,10 @@
   ],
   "comparisons": [
     {
-      "image": "5백본 이미지 앙상블",
-      "summary": "단일 XGBoost (seed 42)",
+      "image": "five-backbone image ensemble",
+      "summary": "single XGBoost (seed 42)",
       "metric": "rmse",
-      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "convention": "delta = per-eye M(image) - M(summary); negative = image wins",
       "n_eyes": 240,
       "n_patients": 125,
       "delta": -0.851981870830059,
@@ -167,10 +167,10 @@
       "n_image_better": 158
     },
     {
-      "image": "5백본 이미지 앙상블",
-      "summary": "XGB seed 앙상블 (42/43/44)",
+      "image": "five-backbone image ensemble",
+      "summary": "XGB seed ensemble (42/43/44)",
       "metric": "rmse",
-      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "convention": "delta = per-eye M(image) - M(summary); negative = image wins",
       "n_eyes": 240,
       "n_patients": 125,
       "delta": -0.7698851446310679,
@@ -181,10 +181,10 @@
       "n_image_better": 151
     },
     {
-      "image": "5백본 이미지 앙상블",
-      "summary": "다중 모델 앙상블 (5종)",
+      "image": "five-backbone image ensemble",
+      "summary": "multi-model ensemble (five models)",
       "metric": "rmse",
-      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "convention": "delta = per-eye M(image) - M(summary); negative = image wins",
       "n_eyes": 240,
       "n_patients": 125,
       "delta": -0.6246235633889834,
@@ -195,10 +195,10 @@
       "n_image_better": 145
     },
     {
-      "image": "5백본 이미지 앙상블",
-      "summary": "단일 XGBoost (seed 42)",
+      "image": "five-backbone image ensemble",
+      "summary": "single XGBoost (seed 42)",
       "metric": "mae",
-      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "convention": "delta = per-eye M(image) - M(summary); negative = image wins",
       "n_eyes": 240,
       "n_patients": 125,
       "delta": -0.7311280806859334,
@@ -209,10 +209,10 @@
       "n_image_better": 160
     },
     {
-      "image": "5백본 이미지 앙상블",
-      "summary": "XGB seed 앙상블 (42/43/44)",
+      "image": "five-backbone image ensemble",
+      "summary": "XGB seed ensemble (42/43/44)",
       "metric": "mae",
-      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "convention": "delta = per-eye M(image) - M(summary); negative = image wins",
       "n_eyes": 240,
       "n_patients": 125,
       "delta": -0.678778583308061,
@@ -223,10 +223,10 @@
       "n_image_better": 160
     },
     {
-      "image": "5백본 이미지 앙상블",
-      "summary": "다중 모델 앙상블 (5종)",
+      "image": "five-backbone image ensemble",
+      "summary": "multi-model ensemble (five models)",
       "metric": "mae",
-      "convention": "delta = per-eye M(image) - M(summary); 음수 = image 우세",
+      "convention": "delta = per-eye M(image) - M(summary); negative = image wins",
       "n_eyes": 240,
       "n_patients": 125,
       "delta": -0.6661867946386337,

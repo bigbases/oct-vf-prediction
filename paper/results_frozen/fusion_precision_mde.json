@@ -1,5 +1,5 @@
 {
-  "note": "test fold 정밀도. delta = 안 단위(fusion) - 안 단위(comparator), 음수=fusion 우세. MDE 는 양측 0.05, 검정력 0.80. primary 는 sd_oof 기반(사전 정밀도 진술). sd_test 기반은 참고. n_required_80_wilcoxon 은 t 기반 필요표본을 Wilcoxon 점근효율 3/pi 로 보정한 값.",
+  "note": "precision on the test fold. delta = per-eye(fusion) - per-eye(comparator); negative = fusion wins. The MDE is two-sided at 0.05 with power 0.80. The primary figure is the one based on sd_oof (the precision stated in advance); the sd_test version is for reference. n_required_80_wilcoxon is the t-based required sample size corrected by the Wilcoxon asymptotic efficiency 3/pi.",
   "z_alpha": 1.959963985,
   "z_power": 0.841621234,
   "wilcoxon_are": 0.954929658551372,

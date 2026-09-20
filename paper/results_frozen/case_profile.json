@@ -1,5 +1,5 @@
 {
-  "note": "fig_case_representative 대표안 프로파일. 값만 산출, 그림 없음.",
+  "note": "profile of the representative eye for fig_case_representative. Values only; no figure is drawn.",
   "case": {
     "fold": 2,
     "n_valid_points": 52,
@@ -21,7 +21,7 @@
       "image": "CNN",
       "fusion": "w*XGB + (1-w)*CNN"
     },
-    "residual_sign": "prediction - measurement, 양수 = 과대예측",
+    "residual_sign": "prediction - measurement; positive = over-prediction",
     "bins": [
       "[0,10)",
       "[10,20)",

@@ -1,5 +1,5 @@
 {
-  "note": "앙상블=5백본 CNN 평균. 결정적: fus>앙상블CNN(=정량이 강한 영상에 더하나)",
+  "note": "ensemble = the mean of the five CNN backbones. The decisive question: is fusion > the CNN ensemble, i.e. do the summary parameters add anything to an already strong image branch?",
   "OOF": {
     "ensemble_cnn_rmse": 8.11470890045166,
     "ensemble_cnn_mae": 5.666417598724365,

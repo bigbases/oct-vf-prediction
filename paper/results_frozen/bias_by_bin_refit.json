@@ -38,7 +38,7 @@
       "refit_w": true
     }
   },
-  "note": "중심화 후 w 재적합(fec.fit_w, 101-그리드, 학습 폴드 RMSE 최소화)과 학습 폴드 기반 상수 추정을 적용한 재계산. 재학습 없음. delta = fusion RMSE - (중심화된) image branch RMSE.",
+  "note": "recomputed with w refitted after centring (fec.fit_w, 101-point grid, minimising RMSE on the training folds) and with the constant estimated on the training folds. No model is retrained. delta = fusion RMSE - (centred) image branch RMSE.",
   "passes": {
     "A": {
       "IR-v2": {

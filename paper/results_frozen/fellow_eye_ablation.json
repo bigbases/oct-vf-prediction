@@ -1,5 +1,5 @@
 {
-  "note": "반대편 눈 ablation. 사전등록 docs/fellow_eye_ablation_prereg.md. 주 종말점 = XGB(46) vs XGB(26) OOF RMSE. 융합(46) vs 영상단독은 정보 비대칭이므로 C5 주장에 쓰지 않는다.",
+  "note": "fellow-eye ablation, fixed in advance in the plan (manuscript §4.2). Primary endpoint = XGB(46) vs XGB(26) OOF RMSE. Fusion(46) against the image branch alone is an unequal-information comparison and is not used for the C5 claim.",
   "primary": {
     "what": "XGB(46) vs XGB(26) | OOF RMSE",
     "n": 240,
@@ -292,5 +292,5 @@
       "significant": true
     }
   ],
-  "verdict": "(C): XGB(46) ≈ XGB(26). 반대편 눈 요약값은 대상안 시야 예측에 정보를 더하지 않는다. 정량 브랜치의 천장이 피처 부족이 아니라 표현의 한계에서 온다."
+  "verdict": "(C): XGB(46) ~= XGB(26). Fellow-eye summary values add no information to the prediction of the study eye field. The ceiling of the summary branch comes from the limits of the representation, not from a shortage of features."
 }

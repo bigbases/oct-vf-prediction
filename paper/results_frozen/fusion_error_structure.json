@@ -1,5 +1,5 @@
 {
-  "note": "A=브랜치 균형 이동, B=pooled RMSE/MAE 비, C=꼬리 대 전형(안 단위 분포통계), D=평균 대 순위 검정 엇갈림. w_test_oracle 은 test 적합이므로 진단 전용이며 어떤 주장에도 쓰지 않는다.",
+  "note": "A = the shift in balance between the branches, B = the pooled RMSE/MAE ratio, C = tail against typical (per-eye distribution statistics), D = the mean and rank tests disagreeing. w_test_oracle is fitted on the test split, so it is diagnostic only and supports no claim.",
   "balance": [
     {
       "backbone": "IR-v2",

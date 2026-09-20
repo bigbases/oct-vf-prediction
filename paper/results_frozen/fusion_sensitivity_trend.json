@@ -1,5 +1,5 @@
 {
-  "note": "감도 구간별 융합 이득의 단조 추세. delta = 안·구간 단위 (fusion RMSE - CNN RMSE). 기울기는 구간 지수 1..4 에 대한 OLS. 양수 = 저감도에서 fusion 이 더 유리. 주 검정은 is_primary=true 인 한 칸이며 나머지는 보조.",
+  "note": "the monotone trend of the fusion gain across sensitivity bins. delta = per eye and per bin (fusion RMSE - CNN RMSE). The slope is an OLS fit against bin index 1..4. Positive = fusion helps more at low sensitivity. The primary test is the single cell with is_primary=true; the rest are secondary.",
   "bin_edges": [
     0.0,
     10.0,

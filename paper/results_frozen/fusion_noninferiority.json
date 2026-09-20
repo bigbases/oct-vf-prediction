@@ -1,5 +1,5 @@
 {
-  "note": "delta = eye-level(fusion) - eye-level(CNN). 음수=fusion 우세. 환자 클러스터 부트스트랩 10000회, seed 42. w=RMSE 기준, OOF는 nested.",
+  "note": "delta = eye-level(fusion) - eye-level(CNN); negative = fusion wins. Patient-clustered bootstrap, 10000 resamples, seed 42. w is fitted on RMSE, nested for OOF.",
   "margins": [
     0.25,
     0.5

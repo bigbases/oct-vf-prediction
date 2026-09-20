@@ -1,7 +1,7 @@
 {
-  "note": "ResNet50 을 5백본 앙상블에 late fusion(스칼라 w) 으로 더한 값. 패스 B, out-of-fold, 저장된 예측만 사용(재학습 없음). delta = per-eye M(a) - per-eye M(b), 음수 = a 우세.",
+  "note": "ResNet50 added to the five-backbone ensemble by late fusion (a scalar w). Pass B, out-of-fold, stored predictions only (no retraining). delta = per-eye M(a) - per-eye M(b); negative = a wins.",
   "equation": "y = w * y_ResNet50 + (1 - w) * y_5ens",
-  "w_convention": "폴드 k 의 w 는 나머지 4폴드의 유효 셀 pooled RMSE 를 최소화 (grid linspace(0,1,101)). 식 (2)/XGB 추가와 동일 규약.",
+  "w_convention": "w for fold k minimises the pooled RMSE over the valid cells of the other four folds (grid linspace(0,1,101)). The same convention as Equation (2) and the XGB addition.",
   "tree": "/home/<user>/experiments/laterality_qfix/step4_work/B",
   "resnet50_run": "/home/<user>/experiments/reviewer_round3/runs_r3/phasec_b0_resnet50_5fold",
   "seed": 42,
@@ -53,7 +53,7 @@
     "basis_a_cells": 12480,
     "basis_b_cells": 12480,
     "eyes_dropped": 0,
-    "note": "basis B 는 ResNet50 의 키/마스크까지 교집합에 넣은 것이다."
+    "note": "basis B is the one that intersects the keys and the mask of ResNet50 as well."
   },
   "nested_w_resnet50": [
     0.0,
@@ -73,7 +73,7 @@
   "nested_w_xgb_mean": 0.328,
   "rows_basisB": [
     {
-      "label": "5백본 앙상블",
+      "label": "five-backbone ensemble",
       "pooled_rmse": 8.11470890045166,
       "pooled_mae": 5.666417598724365,
       "eye_rmse_mean": 6.956822872161865,
@@ -84,7 +84,7 @@
       "n_cells": 12480
     },
     {
-      "label": "6백본 등가중 (+ResNet50)",
+      "label": "six backbones, equally weighted (+ResNet50)",
       "pooled_rmse": 8.223194122314453,
       "pooled_mae": 5.716362476348877,
       "eye_rmse_mean": 7.012265682220459,
@@ -95,7 +95,7 @@
       "n_cells": 12480
     },
     {
-      "label": "5백본 + ResNet50 late fusion (w 적합)",
+      "label": "five backbones + ResNet50 late fusion (w fitted)",
       "pooled_rmse": 8.11470890045166,
       "pooled_mae": 5.666417598724365,
       "eye_rmse_mean": 6.956822872161865,
@@ -106,7 +106,7 @@
       "n_cells": 12480
     },
     {
-      "label": "5백본 + XGB fusion (w 적합)",
+      "label": "five backbones + XGB fusion (w fitted)",
       "pooled_rmse": 7.962895393371582,
       "pooled_mae": 5.684981822967529,
       "eye_rmse_mean": 6.930865287780762,
@@ -117,7 +117,7 @@
       "n_cells": 12480
     },
     {
-      "label": "ResNet50 단독",
+      "label": "ResNet50 alone",
       "pooled_rmse": 9.68110179901123,
       "pooled_mae": 6.728091239929199,
       "eye_rmse_mean": 8.06680679321289,
@@ -128,7 +128,7 @@
       "n_cells": 12480
     },
     {
-      "label": "summary XGB 단독",
+      "label": "summary XGB alone",
       "pooled_rmse": 8.660277366638184,
       "pooled_mae": 6.397546291351318,
       "eye_rmse_mean": 7.808805465698242,
@@ -142,7 +142,7 @@
   "comparisons_basisB": [
     {
       "a": "R50 late fusion",
-      "b": "5백본 앙상블",
+      "b": "five-backbone ensemble",
       "metric": "rmse",
       "n_eyes": 240,
       "delta": 0.0,
@@ -155,7 +155,7 @@
     },
     {
       "a": "R50 late fusion",
-      "b": "6백본 등가중",
+      "b": "six backbones, equally weighted",
       "metric": "rmse",
       "n_eyes": 240,
       "delta": -0.05544249340891838,
@@ -181,7 +181,7 @@
     },
     {
       "a": "XGB fusion",
-      "b": "5백본 앙상블",
+      "b": "five-backbone ensemble",
       "metric": "rmse",
       "n_eyes": 240,
       "delta": -0.025957247242331505,
@@ -194,7 +194,7 @@
     },
     {
       "a": "R50 late fusion",
-      "b": "5백본 앙상블",
+      "b": "five-backbone ensemble",
       "metric": "mae",
       "n_eyes": 240,
       "delta": 0.0,
@@ -207,7 +207,7 @@
     },
     {
       "a": "R50 late fusion",
-      "b": "6백본 등가중",
+      "b": "six backbones, equally weighted",
       "metric": "mae",
       "n_eyes": 240,
       "delta": -0.04994485527276993,
@@ -233,7 +233,7 @@
     },
     {
       "a": "XGB fusion",
-      "b": "5백본 앙상블",
+      "b": "five-backbone ensemble",
       "metric": "mae",
       "n_eyes": 240,
       "delta": 0.018564485013484955,
@@ -251,7 +251,7 @@
     "gain_add_6th_equal": 0.10848522186279297,
     "gain_add_6th_late_fusion": 0.0,
     "gain_add_xgb": -0.15181350708007812,
-    "note": "음수 = 개선. 세 이득 전부 같은 basis B, 같은 출발점(5백본 앙상블)에서 잰다."
+    "note": "negative = improvement. All three gains are measured on the same basis B, from the same starting point (the five-backbone ensemble)."
   },
   "diagnostics": {
     "w_unconstrained_resnet50_per_fold": [
@@ -302,10 +302,10 @@
         "pooled_mae": 5.9872660636901855
       }
     ],
-    "note": "제약 없는 최소제곱 최적 w 가 음수면, 적합된 w=0 은 격자 경계에 눌린 것이 아니라 \"ResNet50 을 조금이라도 섞으면 나빠진다\"는 뜻이다. 곡선은 모든 폴드에 같은 고정 w 를 적용한 OOF 값으로, 적합 절차가 아니라 진단이다."
+    "note": "if the unconstrained least-squares optimum for w is negative, then a fitted w=0 is not pinned against the edge of the grid: it means that mixing in any ResNet50 at all makes things worse. The curve is the OOF value with one fixed w applied to every fold - a diagnostic, not a fitting procedure."
   },
   "no_retrain": {
     "resnet50_preds": "/home/<user>/experiments/reviewer_round3/runs_r3/phasec_b0_resnet50_5fold",
-    "note": "ResNet50 5-fold 예측은 2026-08-31 sixth_backbone 작업에서 이미 저장된 것을 읽기만 했다. 이번 작업에서 학습한 모델은 없다."
+    "note": "the ResNet50 five-fold predictions were only read back: they had already been stored by the sixth_backbone work of 2026-08-31. No model was trained for this analysis."
   }
 }

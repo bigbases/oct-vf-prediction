@@ -1,6 +1,6 @@
 {
-  "_note": "동일 예측을 pooled / per-eye mean±SD 두 방식으로 집계. 선행연구(Park·Shin·Abdullahi)는 per-eye mean±SD 방식이므로 그쪽 열로 비교할 것.",
-  "_jensen": "pooled >= per-eye mean (Jensen). 섞어 비교하면 본 연구가 부당하게 나빠 보인다.",
+  "_note": "The same predictions, aggregated two ways: pooled, and per-eye mean ± SD. Earlier studies (Park, Shin, Abdullahi) report the per-eye mean ± SD axis, so compare against that column.",
+  "_jensen": "pooled >= per-eye mean (Jensen). Mixing the two axes makes this study look unfairly poor.",
   "models": {
     "OOF": {
       "n_eyes": 240,
@@ -472,10 +472,10 @@
       {
         "study": "Park 2020",
         "metric": "RMSE",
-        "setting": "IR-v2 / SS-OCT / test 305안",
+        "setting": "IR-v2 / SS-OCT / 305 test eyes",
         "reported_per_eye_mean_sd": "4.44 ± 2.09",
         "pooled_equivalent_rmse": 4.91,
-        "note": "안별 RMSE → pooled 환산 가능"
+        "note": "per-eye RMSE can be converted to the pooled axis"
       },
       {
         "study": "Shin 2021",
@@ -483,7 +483,7 @@
         "setting": "SD-OCT",
         "reported_per_eye_mean_sd": "5.29 ± 2.68",
         "pooled_equivalent_rmse": 5.93,
-        "note": "안별 RMSE → pooled 환산 가능"
+        "note": "per-eye RMSE can be converted to the pooled axis"
       },
       {
         "study": "Shin 2021",
@@ -491,38 +491,38 @@
         "setting": "SS-OCT",
         "reported_per_eye_mean_sd": "4.51 ± 2.54",
         "pooled_equivalent_rmse": 5.18,
-        "note": "안별 RMSE → pooled 환산 가능"
+        "note": "per-eye RMSE can be converted to the pooled axis"
       },
       {
         "study": "Abdullahi 2026",
         "metric": "MAE",
-        "setting": "제안모델",
+        "setting": "proposed model",
         "reported_per_eye_mean_sd": "3.32 ± 2.35",
         "pooled_equivalent_rmse": null,
-        "note": "MAE는 pooled와 안별평균이 동일값이므로 환산 불필요 (본 연구 eye_mae_mean과 직접 비교)"
+        "note": "for MAE the pooled value and the per-eye mean coincide, so no conversion is needed (compare directly with this study eye_mae_mean)"
       },
       {
         "study": "Abdullahi 2026",
         "metric": "MAE",
-        "setting": "재학습 IR-v2 baseline",
+        "setting": "retrained IR-v2 baseline",
         "reported_per_eye_mean_sd": "5.77 ± 2.01",
         "pooled_equivalent_rmse": null,
-        "note": "MAE는 pooled와 안별평균이 동일값이므로 환산 불필요 (본 연구 eye_mae_mean과 직접 비교)"
+        "note": "for MAE the pooled value and the per-eye mean coincide, so no conversion is needed (compare directly with this study eye_mae_mean)"
       },
       {
         "study": "Abdullahi 2026",
         "metric": "MAE",
-        "setting": "재학습 InceptionV3 baseline",
+        "setting": "retrained InceptionV3 baseline",
         "reported_per_eye_mean_sd": "6.70 ± 2.15",
         "pooled_equivalent_rmse": null,
-        "note": "MAE는 pooled와 안별평균이 동일값이므로 환산 불필요 (본 연구 eye_mae_mean과 직접 비교)"
+        "note": "for MAE the pooled value and the per-eye mean coincide, so no conversion is needed (compare directly with this study eye_mae_mean)"
       }
     ],
-    "_caution": "위 문헌값은 사용자 2차보고 기반. 1차출처 재확인 전 원고 인용 금지."
+    "_caution": "The literature values above come from a second-hand report. Do not cite them in the manuscript until the primary sources have been checked."
   },
   "gap_decomposition_vs_literature": {
-    "_basis": "본 연구 OOF late fusion (IR-v2): pooled RMSE 8.069, 안별 RMSE 7.138 ± 3.77",
-    "_read": "explained_by_aggregation_* 는 [pooled축 기준, 안별평균축 기준] 두 값. 집계방식이 설명하는 몫은 일부일 뿐 격차 대부분은 남는다 — 과대해석 금지.",
+    "_basis": "this study, OOF late fusion (IR-v2): pooled RMSE 8.069, per-eye RMSE 7.138 ± 3.77",
+    "_read": "explained_by_aggregation_* holds two values: one on the pooled axis, one on the per-eye mean axis. The aggregation choice explains only part of the gap; most of it remains - do not over-read this.",
     "rows": [
       {
         "study": "Park 2020 (SS-OCT, IR-v2)",
@@ -586,8 +586,8 @@
       }
     ],
     "MAE_axis_note": {
-      "fact": "모든 안의 유효지점이 52로 동일하므로 pooled MAE = 안별 MAE 평균 (정확히 일치).",
-      "implication": "MAE로 보고된 선행연구(Abdullahi, Kihara PMAE)와의 비교에는 집계방식 보정이 아예 필요 없다. 이 경로는 변명 없이 그대로 성립.",
+      "fact": "every eye has the same 52 valid points, so pooled MAE equals the mean of the per-eye MAEs exactly.",
+      "implication": "comparison with the studies that report MAE (Abdullahi, Kihara PMAE) needs no aggregation correction at all. That route holds as it stands, with nothing to excuse.",
       "our_oof_fusion_mae": 5.894,
       "our_oof_cnn_irv2_mae": 6.123
     }

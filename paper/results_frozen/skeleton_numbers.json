@@ -1,5 +1,5 @@
 {
-  "_note": "raw npz/csv에서 독립 재계산. 낮을수록 우수(RMSE/MAE, dB).",
+  "_note": "recomputed independently from the raw npz/csv. Lower is better (RMSE/MAE, dB).",
   "backbones": {
     "inception_v3": {
       "label": "Inception-v3",
@@ -361,6 +361,6 @@
       "test": 38
     },
     "n_eyes_total": 280,
-    "note": "cv_fold는 280안 전체에 환자 단위로 배정(split-first) 후 양 모달 존재 안만 필터(filter-second)"
+    "note": "cv_fold is assigned patient-wise over all 280 eyes (split-first), and only then are the eyes that have both modalities kept (filter-second)"
   }
 }

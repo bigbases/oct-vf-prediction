@@ -1,5 +1,5 @@
 {
-  "note": "5백본 x {OOF,TEST} x {RMSE,MAE} = 20칸. w=RMSE기준, OOF는 nested, test는 전체 OOF 적합. 안 단위 paired Wilcoxon 양측.",
+  "note": "five backbones x {OOF, TEST} x {RMSE, MAE} = 20 cells. w is fitted on RMSE, nested for OOF and fitted on the whole OOF set for test. Per-eye paired Wilcoxon, two-sided.",
   "alpha": 0.05,
   "rows": [
     {

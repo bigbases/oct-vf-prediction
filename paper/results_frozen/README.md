@@ -43,14 +43,26 @@ exactly this reason.
 
 ## What was removed
 
-Two transforms are applied on the way in, and no number is ever rewritten:
+Three transforms are applied on the way in, and no number is ever rewritten:
 
 * absolute paths become repository-relative, with any home directory written as
   `/home/<user>`;
 * in `case_profile.json`, the pseudonym, the laterality and the examination date
   of the representative eye are dropped. Each alone is harmless; together they
   identify a study eye. The metrics and the eye's position in the cohort
-  distribution — which is what the manuscript cites — are unchanged.
+  distribution — which is what the manuscript cites — are unchanged;
+* the `note`, `protocol`, `label` and `verdict` fields were written in Korean by
+  the scripts that produced them. They are replaced with English, one whole
+  string at a time, from the table in `scripts/freeze_paper_results.py`. Only
+  string values are eligible — never a key, never a number — and the freezer
+  refuses to write a file if a Korean string is missing from the table or if any
+  numeric leaf differs between input and output. The producers were left alone,
+  so nothing had to be recomputed to publish a readable artefact.
+
+One of those strings changed meaning slightly in translation: the note on
+`fellow_eye_ablation.json` cited an internal pre-registration document that is
+not distributed, and now cites §4.2 of the manuscript, where the same plan is
+described.
 
 ## Notes worth reading before quoting a number
 
