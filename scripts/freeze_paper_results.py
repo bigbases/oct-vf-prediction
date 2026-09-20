@@ -87,7 +87,7 @@ SOURCES = {
     # 이 파일은 2026-09-17 **게이트 버그를 고치고 나서야** 필요해졌다. extract()
     # 가 LaTeX 이스케이프 `\%` 를 주석 시작으로 읽어 그 뒤를 통째로 버리던 탓에,
     # "(95\% CI $-0.089$ to $+0.238$" 의 CI 상한이 **한 번도 검사된 적이 없었다**.
-    # 실험은 사전등록(docs/fellow_eye_ablation_prereg.md)까지 돼 있었고 값은
+    # 실험은 사전에 고정한 계획(원고 §4.2)대로 돌아 있었고 값은
     # primary.{delta,ci_lo,ci_hi,p_wilcoxon} 에 그대로 있다. 패스 B.
     'fellow_eye_ablation.json':  (f'{PASS_B}/runs/fellow_eye_ablation.json', 'B'),
 

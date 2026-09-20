@@ -16,15 +16,31 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 FROZEN = ROOT / 'paper' / 'results_frozen'
 
-EXPECTED = 18
-
 
 def frozen_files():
     return sorted(FROZEN.glob('*.json'))
 
 
+def expected_names():
+    """The freezer's own source list, so the two cannot drift apart."""
+    import sys
+
+    sys.path.insert(0, str(ROOT / 'scripts'))
+    from freeze_paper_results import SOURCES
+
+    return set(SOURCES)
+
+
 def test_all_present():
-    assert len(frozen_files()) == EXPECTED
+    assert {p.name for p in frozen_files()} == expected_names()
+
+
+def test_readme_states_the_number_of_files():
+    """The count in the repository layout table is quoted, so it goes stale."""
+    text = (ROOT / 'README.md').read_text(encoding='utf-8')
+    m = re.search(r'The (\d+) JSON files the manuscript', text)
+    assert m, 'the README no longer states how many frozen files there are'
+    assert int(m.group(1)) == len(frozen_files())
 
 
 @pytest.mark.parametrize('p', frozen_files(), ids=lambda p: p.name)

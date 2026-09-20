@@ -25,7 +25,7 @@ and is not a general-purpose tool.
 | `build_ml_final.py`, `merge_rnfl_into_ml_final.py`, `make_rnfl_flip.py` | Assembly of the modelling table, including the OS → OD mirroring |
 | `phase_b_build.py`, `phase_b_apply.py` | Manual review pass over the extracted thresholds |
 | `run_*.sh`, `scripts/run_*.sh` | Launch configurations for every reported run, including the 42/43/44 seed sweeps |
-| `paper/results_frozen/` | The 18 JSON files the manuscript's tables, figures and prose numbers are read from |
+| `paper/results_frozen/` | The 31 JSON files the manuscript's tables, figures and prose numbers are read from |
 | `docs/coordinate_frame_convention.md` | On-screen vs anatomical frame, and what follows for the OS mirroring step |
 | `tests/` | Config-consistency and frozen-result checks |
 | `scripts/verify_no_phi.py` | The identifier scan described under Verification |
@@ -210,9 +210,11 @@ fix changed and by how much.
 
 ## Citation
 
-There is no `CITATION.cff` yet: the author list for the accompanying manuscript
-is not final. The file will be added once it is, rather than shipping a list
-that would have to be corrected in a public repository.
+`CITATION.cff` carries the author list, the affiliations and the repository URL.
+Two fields are deliberately absent, each with a comment saying what it waits on:
+the DOI, issued when the first release tag is archived, and the journal
+reference, added on acceptance. E-mail addresses are not listed either —
+correspondence addresses are given in the article.
 
 ## License
 
