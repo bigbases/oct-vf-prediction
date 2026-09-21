@@ -295,8 +295,8 @@ PROSE = {
         "six backbones + XGB fusion",
     "음수 = 개선. 두 이득을 같은 basis B, 같은 출발점(5백본 앙상블)에서 잰다.":
         "negative = improvement. Both gains are measured on the same basis B, from the same starting point (the five-backbone ensemble).",
-    "train.py 를 수정하지 않고 build_image_backbone 만 런타임에 확장했다. 설정은 정본 5백본과 동일(300 epoch, RMSprop, lr 1e-4, wd 1e-5, patience 100, early_stop mae, seed 42, 증강 없음, use_deviation False).":
-        "train.py was not modified; only build_image_backbone was extended at runtime. The settings are those of the canonical five backbones (300 epochs, RMSprop, lr 1e-4, wd 1e-5, patience 100, early_stop mae, seed 42, no augmentation, use_deviation False).",
+    "train.py 를 수정하지 않고 build_image_backbone 만 런타임에 확장했다. 설정은 정본 5백본과 동일(300 epoch, RMSprop, lr 1e-4, wd 1e-5, patience 100, early_stop mae, seed 42, use_deviation False, train 변환도 정본과 동일 — ColorJitter brightness/contrast 0.10, 원고 §3.5).":
+        "train.py was not modified; only build_image_backbone was extended at runtime. The settings are those of the canonical five backbones (300 epochs, RMSprop, lr 1e-4, wd 1e-5, patience 100, early_stop mae, seed 42, use_deviation False, and the same training transform - ColorJitter brightness/contrast 0.10, manuscript §3.5).",
     "raw npz/csv에서 독립 재계산. 낮을수록 우수(RMSE/MAE, dB).":
         "recomputed independently from the raw npz/csv. Lower is better (RMSE/MAE, dB).",
     "cv_fold는 280안 전체에 환자 단위로 배정(split-first) 후 양 모달 존재 안만 필터(filter-second)":

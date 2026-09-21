@@ -5,7 +5,7 @@
 아니다"라고 논증하지만, 5->6 의 앙상블 이득 포화를 통제하지 않는다. 같은 설정으로
 학습한 6번째 CNN 을 더했을 때의 이득이 유일하게 공정한 기준선이다.
 
-기존 5백본과 동일 설정으로 학습한 ResNet50 (동일 폴드/seed 42/동일 head/증강 없음/
+기존 5백본과 동일 설정으로 학습한 ResNet50 (동일 폴드/seed 42/동일 head/동일 train 변환/
 동일 optimizer) 을 읽어 6백본 앙상블을 만든다. 학습은 train_r3.py 가 했고 산출물은
 experiments/reviewer_round3/runs_r3/ 에 있다 — 정본 runs/ 밖이다.
 
@@ -232,7 +232,8 @@ payload = dict(
         launcher='experiments/reviewer_round3/train_r3.py',
         note='train.py 를 수정하지 않고 build_image_backbone 만 런타임에 확장했다. '
              '설정은 정본 5백본과 동일(300 epoch, RMSprop, lr 1e-4, wd 1e-5, '
-             'patience 100, early_stop mae, seed 42, 증강 없음, use_deviation False).'),
+             'patience 100, early_stop mae, seed 42, use_deviation False, train 변환도 '
+             '정본과 동일 — ColorJitter brightness/contrast 0.10, 원고 §3.5).'),
 )
 OUT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding='utf-8')
 print('->', OUT_JSON)

@@ -4,7 +4,7 @@
 train.py 를 복사하지 않는다. 모듈로 import 한 뒤
   - BACKBONE_CHOICES 에 'resnet50' 을 더하고
   - build_image_backbone 을 감싸 resnet50 분기만 추가한다 (나머지는 원본 호출).
-그 외 설정(head, optimizer, epochs, patience, early_stop_metric, 증강 없음, 폴드,
+그 외 설정(head, optimizer, epochs, patience, early_stop_metric, train 변환, 폴드,
 seed)은 전부 명령행으로 기존 5백본과 동일하게 준다 — 기본값을 새로 정하지 않는다.
 
 resnet50 은 densenet121 과 같은 방식으로 torchvision ImageNet 가중치를 쓰고
