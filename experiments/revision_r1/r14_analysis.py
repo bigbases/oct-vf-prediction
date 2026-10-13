@@ -30,6 +30,7 @@ import fusion_eval_common as FE                       # noqa: E402
 from oof_common import load_oof_npz                   # noqa: E402
 from floor_cells import floor_cells                   # noqa: E402
 import calibration_multiplicity as CM                 # noqa: E402
+import phi_safe                                       # noqa: E402
 
 W = 0.47
 CNN_DIRS = {0: PASS_B / 'runs/phasec_b0_inception_resnet_v2_5fold',
@@ -48,7 +49,7 @@ def aligned(d, kind, keys, split, k):
     s = 'val' if split == 'OOF' else 'test'
     z = load_oof_npz(d / (f'xgb_90d_fold{k}_{s}.npz' if kind == 'xgb' else f'{s}_preds_fold{k}.npz'))
     idx = {kk: i for i, kk in enumerate(z['keys'])}
-    return z['pred'][[idx[kk] for kk in keys]]
+    return z['pred'][phi_safe.lookup(idx, keys, f'{d.name} {s} fold {k}')]
 
 
 def assemble():
@@ -67,7 +68,7 @@ def assemble():
             keys = list(tst[0]['keys'])
             lab, mask = test_lab, test_mask.astype(bool)
             get = lambda d, kind: np.mean([aligned(d, kind, keys, 'TEST', k) for k in range(5)], 0)
-        fl = np.stack([floor[tuple(kk)] for kk in keys]) & mask
+        fl = np.stack(phi_safe.lookup(floor, [tuple(kk) for kk in keys], 'floor cells')) & mask
         pid = np.array([str(kk[0]) for kk in keys], dtype=object)
         D[split] = dict(lab=lab, mask=mask, floor=fl, pid=pid,
                         cnn={a: get(CNN_DIRS[a], 'cnn') for a in cnn_arms},
@@ -144,4 +145,5 @@ def main():
 
 
 if __name__ == '__main__':
+    phi_safe.install()
     main()

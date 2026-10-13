@@ -44,6 +44,7 @@ import sector_maps as S                               # noqa: E402  (scipy befor
 import fusion_eval_common as FE                       # noqa: E402
 from oof_common import load_oof_npz, row_key          # noqa: E402
 from cache_key import content_key                     # noqa: E402
+import phi_safe                                       # noqa: E402
 import calibration_multiplicity as CM                 # noqa: E402
 from PIL import Image                                 # noqa: E402
 
@@ -64,7 +65,7 @@ def preds(path_of, keys_by_fold, split):
     for k, f in enumerate(files):
         z = load_oof_npz(f)
         idx = {kk: i for i, kk in enumerate(z['keys'])}
-        out.append(z['pred'][[idx[kk] for kk in keys_by_fold(k)]])
+        out.append(z['pred'][phi_safe.lookup(idx, keys_by_fold(k), f.name)])
     return np.concatenate(out) if split == 'OOF' else np.mean(out, 0)
 
 
@@ -198,4 +199,5 @@ def main(backbones):
 
 
 if __name__ == '__main__':
+    phi_safe.install()
     main(sys.argv[1:] or ['inception_resnet_v2'])

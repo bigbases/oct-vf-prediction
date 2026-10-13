@@ -48,6 +48,7 @@ import export_xgb_oof as X                 # noqa: E402
 from oof_common import row_key, save_oof_npz, load_oof_npz  # noqa: E402
 from cache_key import content_key  # noqa: E402
 import annulus_fit as AF  # noqa: E402
+import phi_safe  # noqa: E402
 from xgboost import XGBRegressor           # noqa: E402
 
 sm, IP, CFG = S.sm, S.IP, S.CFG
@@ -182,7 +183,7 @@ def feature_matrix(rows, fset, feats):
             Xs = np.delete(Xs, names.index('od_vert_cd'), axis=1)  # same position for OD and OS
         return Xs
     idx = {k: i for i, k in enumerate(map(tuple, feats['keys']))}
-    return np.stack([feats[fset][idx[row_key(r)]] for r in rows]).astype(np.float32)
+    return np.stack([feats[fset][i] for i in phi_safe.lookup(idx, [row_key(r) for r in rows], 'features.npz')]).astype(np.float32)
 
 
 def fit(fsets):
@@ -226,6 +227,7 @@ def fit(fsets):
 
 
 if __name__ == '__main__':
+    phi_safe.install()
     if sys.argv[1] == 'features':
         features()
     else:

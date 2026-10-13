@@ -17,6 +17,7 @@ from PIL import Image
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import r11_xgb as R                       # noqa: E402
+import phi_safe                            # noqa: E402
 
 S, IP, sm, CFG = R.S, R.IP, R.sm, R.CFG
 
@@ -34,7 +35,7 @@ def main(sample):
     row = next(r for r in rows if (r['patient_id'], r['eye'], r['vf_date']) == key)
     index = IP.build_image_index()
     lut = S.load_lut(rows, index)
-    paths = index[key]
+    paths = phi_safe.lookup(index, [key], 'image index')[0]
     rn = IP._crop_rnfl_thickness(Image.open(paths['rnfl_os_thickness']).convert('RGB'))
     gc = IP._crop_gca_thickness(Image.open(paths['gca_os_thickness']).convert('RGB'))
 
@@ -63,4 +64,5 @@ def main(sample):
 
 
 if __name__ == '__main__':
+    phi_safe.install()
     main(sys.argv[1])

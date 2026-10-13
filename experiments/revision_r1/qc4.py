@@ -17,6 +17,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import sector_maps as S
 from cache_key import content_key
+import phi_safe
+phi_safe.install()
 
 rows = list(csv.DictReader(open(S.CSV, encoding='utf-8-sig')))
 index = S.IP.build_image_index()
@@ -39,7 +41,7 @@ for r in rows:
     if k in adjd and adjd[k]['class'] == 'a':
         bad_rows.append((adjd[k]['tile'], r))
     elif m.get('gca_status') == 'fit' and m['fit_support'] >= 0.5:
-        p = index[(r['patient_id'], r['eye'], r['vf_date'])][f"gca_{r['eye'].lower()}_thickness"]
+        p = phi_safe.lookup(index, [(r['patient_id'], r['eye'], r['vf_date'])], 'image index')[0][f"gca_{r['eye'].lower()}_thickness"]
         a = np.asarray(S.IP._crop_gca_thickness(Image.open(p).convert('RGB'))).astype(float)
         R, G, B = a[..., 0], a[..., 1], a[..., 2]
         npur = int(((B > G + 15) & (R > G + 5) & (R >= S.PURPLE_MIN_R) & ((R + G + B) / 3 < 170)).sum())

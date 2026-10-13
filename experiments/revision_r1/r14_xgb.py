@@ -29,6 +29,7 @@ import export_xgb_oof as X                 # noqa: E402
 from oof_common import row_key, save_oof_npz, load_oof_npz  # noqa: E402
 from xgboost import XGBRegressor           # noqa: E402
 from floor_cells import floor_cells, PT52  # noqa: E402
+import phi_safe                            # noqa: E402
 
 assert list(X.PT) == PT52
 CSV = PASS_B / 'ml_final_90d_excl_empty_flip.csv'
@@ -40,7 +41,7 @@ def fit_predict(rows_tr, rows_out, floor, exclude):
     va = [X.row_to_xy(r) for r in rows_out]
     X_tr = np.stack([t[0] for t in tr]); Y_tr = np.stack([t[1] for t in tr]); M_tr = np.stack([t[2] for t in tr])
     X_va = np.stack([v[0] for v in va]); Y_va = np.stack([v[1] for v in va]); M_va = np.stack([v[2] for v in va])
-    F_tr = np.stack([floor[row_key(r)] for r in rows_tr])
+    F_tr = np.stack(phi_safe.lookup(floor, [row_key(r) for r in rows_tr], 'floor cells'))
     cm = X.impute_train_stats(X_tr)
     X_tr_i, X_va_i = X.impute(X_tr, cm), X.impute(X_va, cm)
     preds = np.full((len(rows_out), X.N_PT), np.nan, dtype=np.float32)
@@ -88,4 +89,5 @@ def main():
 
 
 if __name__ == '__main__':
+    phi_safe.install()
     main()

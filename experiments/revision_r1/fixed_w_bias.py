@@ -61,4 +61,6 @@ def main():
 
 
 if __name__ == '__main__':
+    import phi_safe
+    phi_safe.install()
     main()

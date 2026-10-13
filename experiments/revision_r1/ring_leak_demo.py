@@ -15,6 +15,8 @@ from scipy import ndimage
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import sector_maps as S
+import phi_safe
+phi_safe.install()
 
 rows = list(csv.DictReader(open(S.CSV, encoding='utf-8-sig')))
 index = S.IP.build_image_index()
@@ -36,7 +38,7 @@ def ring_and_tissue(crop):
 sample = sys.argv[1] if len(sys.argv) > 1 else 'sample_02'
 priv = Path.home() / 'hvf_private' / 'revision_r1_sample_map.csv'
 key = next(tuple(r[1:]) for r in csv.reader(open(priv)) if r[0] == sample)
-crop = S.IP._crop_gca_thickness(Image.open(index[key][f'gca_{key[1].lower()}_thickness']).convert('RGB'))
+crop = S.IP._crop_gca_thickness(Image.open(phi_safe.lookup(index, [key], 'image index')[0][f'gca_{key[1].lower()}_thickness']).convert('RGB'))
 sec = np.asarray(S.sector_average(crop, 'gca', lut_rgb, lut_val)[0])
 arr, vals, ring, tissue, c = ring_and_tissue(crop)
 fixed = sec.copy()

@@ -78,6 +78,7 @@ GCA_BLACK_CENTRE_IS_TISSUE = True   # set from the 2026-10-13 location check
 
 
 from cache_key import content_key  # noqa: E402  (shared with train_r11.py)
+import phi_safe                    # noqa: E402
 
 
 def load_lut(rows, index):
@@ -456,7 +457,7 @@ def _overlay(crop, kind, centre):
 def render_sample(label, r, index, lut_rgb, lut_val, note=''):
     """One sample sheet: GCA row and RNFL row, six panels each. Returns the per-map diagnostics."""
     key = (r['patient_id'], r['eye'], r['vf_date'])
-    paths = index[key]
+    paths = phi_safe.lookup(index, [key], 'image index')[0]
     lo = r['eye'].lower()
     tiles, diags = [], {}
     S_ = 300
@@ -556,4 +557,5 @@ def samples(n=6):
 
 
 if __name__ == '__main__':
+    phi_safe.install()
     {'build': build, 'samples': samples}[sys.argv[1]]()
