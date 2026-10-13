@@ -209,3 +209,19 @@ distinguishable from refitting noise.
   three epochs) reproduces the submitted history exactly. The authors allowed the launch
   without a further review once both checks passed: Inception-ResNet-v2 first, then the
   XGBoost arm.
+* 2026-10-13, analysis code corrected before the results of the remaining backbones were
+  seen. At this point only the Inception-ResNet-v2 sector run had finished; no sector-map run
+  of Inception-v3, VGG16, Xception or DenseNet121 and no matched unmirrored rerun existed.
+  Two departures of `r11_analysis.py` from this plan were found and corrected:
+  (a) the original-map arm of VGG16, Xception and DenseNet121 read the submitted runs; it
+  now reads the matched current-code reruns (`runs/r13_noflip_<backbone>`) as item 2
+  specifies, with the submitted runs kept as reference branches only;
+  (b) the five-backbone ensemble (item 3) was not computed; it is now formed for each arm
+  when all five runs exist and reported with the same comparisons as each backbone (sector vs
+  original, sector vs XGBoost map23, fusion vs printed26, fusion sector vs fusion original).
+  Its fusion uses the ensemble-ceiling convention of the R1-3/R1-4 plan §0: nested w
+  out-of-fold, the all-fold w held-out. A new guard reproduces the submitted ensemble
+  fusion out-of-fold pooled RMSE (7.9629) through this path. An identity run with every
+  sector and rerun arm pointed at the submitted runs gives a difference of exactly 0 for all
+  five backbones and the ensemble. The Inception-ResNet-v2 results already reported are
+  unchanged (78 of 78 stored values identical: branches, comparisons, weights, guards).

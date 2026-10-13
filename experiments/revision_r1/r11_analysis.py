@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 """R1-1 analysis (plan: docs/revision_r1/prereg_R1-1.md, statistics of prereg_R1-3_R1-4.md §0).
 
-Arms. CNN: submitted run per backbone (original map) and runs/r11_sector_<backbone>
-(sector-averaged map; irv2 stands for Inception-ResNet-v2). XGBoost: submitted printed26
+Arms. CNN original map: the submitted run for IR-v2 and Inception-v3; for VGG16, Xception
+and DenseNet121 the unmirrored rerun with the current code, runs/r13_noflip_<backbone>
+(plan item 2; their submitted runs are not reproducible, R1-3 decision log), with the
+submitted run kept as a reference branch. CNN sector-averaged map: runs/r11_sector_<backbone>
+(irv2 stands for Inception-ResNet-v2). Five-backbone ensemble (plan item 3) = mean of the five
+CNN predictions of an arm, formed only when all five exist. XGBoost: submitted printed26
 (pass B runs/oof) and runs/r11_xgb/<set> for map23 (primary), map26, printed26 (refit; must
 equal the submitted one). Eyes, folds and the location mask are those of the submitted
 analysis (fusion_eval_common.load_all: 240 out-of-fold eyes, 37 held-out). Held-out
 predictions are the mean of the five fold models. Fusion of a single backbone: w fitted on
-all out-of-fold folds (grid 0-1 step 0.01, pooled RMSE), Table 3 convention. Arms
-whose predictions do not exist yet are skipped.
+all out-of-fold folds (grid 0-1 step 0.01, pooled RMSE), Table 3 convention. Fusion of the
+ensemble: nested w out-of-fold (fitted on the other four folds) and the all-fold w held-out,
+the ensemble-ceiling convention. Arms whose predictions do not exist yet are skipped.
 
-Comparisons, per-eye RMSE and MAE, paired Wilcoxon and patient-clustered bootstrap 95%
-interval of the mean difference (a - b; negative = a better):
+Comparisons per backbone and for the ensemble, per-eye RMSE and MAE, paired Wilcoxon and
+patient-clustered bootstrap 95% interval of the mean difference (a - b; negative = a better):
   cnn_sector vs cnn_original        primary for R1-1: IR-v2, out-of-fold, per-eye RMSE
   cnn_sector vs xgb_map23           same information, different model family
   xgb_map23 / xgb_map26 vs xgb_printed26
@@ -20,9 +25,10 @@ each on all eyes and, as the sensitivity analysis, without the eyes whose GCA ma
 map-mean map (cache index gca_status == 'map_mean').
 
 Guards (submitted values, pooled RMSE): out-of-fold summary 8.6603, IR-v2 8.5397; held-out
-summary 8.9193, IR-v2 8.7323, IR-v2 fusion 8.4105.
+summary 8.9193, IR-v2 8.7323, IR-v2 fusion 8.4105; submitted five-backbone ensemble fusion,
+out-of-fold, nested w 7.9629.
 
-  python r11_analysis.py [backbone ...]     # default inception_resnet_v2
+  python r11_analysis.py [backbone ...]     # default: all five
 Output: r11_analysis.json (no patient keys).
 """
 from __future__ import annotations
@@ -53,10 +59,14 @@ BACKBONES = {'inception_resnet_v2': 'IR-v2', 'inception_v3': 'Inception-v3', 'vg
              'xception': 'Xception', 'densenet121': 'DenseNet121'}
 # run directory = queue job name; the IR-v2 job was queued as r11_sector_irv2
 RUN_NAME = {'inception_resnet_v2': 'irv2'}
+# original-map arm: matched current-code rerun where the submitted run is not reproducible
+RERUN = {'vgg16', 'xception', 'densenet121'}
+ENS = 'ensemble'
 XGB_SETS = ('map23', 'map26', 'printed26')
 GUARD = {('OOF', 'xgb_printed26'): 8.6603, ('OOF', 'cnn_original'): 8.5397,
          ('TEST', 'xgb_printed26'): 8.9193, ('TEST', 'cnn_original'): 8.7323,
          ('TEST', 'fusion_original'): 8.4105}
+GUARD_ENS_SUBMITTED_OOF = 7.9629
 
 
 def preds(path_of, keys_by_fold, split):
@@ -85,6 +95,17 @@ def map_mean_keys():
     return out
 
 
+def nested_fusion(x, c, lab, mask, fold):
+    """Out-of-fold fusion with w fitted on the other four folds."""
+    out, ws = np.empty_like(c), []
+    for k in range(5):
+        tr, te = fold != k, fold == k
+        w = FE.fit_w([{'xgb': x[tr], 'cnns': {'c': c[tr]}, 'lab': lab[tr], 'mask': mask[tr]}], 'c')
+        out[te] = w * x[te] + (1 - w) * c[te]
+        ws.append(w)
+    return out, ws
+
+
 def pooled(p, l, m):
     d = (p - l)[m]
     return float(np.sqrt(np.mean(d ** 2))), float(np.mean(np.abs(d)))
@@ -101,12 +122,14 @@ def main(backbones):
         if split == 'OOF':
             kf = lambda k: oof[k]['keys']
             keys = [kk for k in range(5) for kk in oof[k]['keys']]
+            fold = np.concatenate([np.full(len(oof[k]['keys']), k) for k in range(5)])
             lab = np.concatenate([oof[k]['lab'] for k in range(5)])
             mask = np.concatenate([oof[k]['mask'] for k in range(5)]).astype(bool)
             s = 'val'
         else:
             kf = lambda k: tst[0]['keys']
             keys = list(tst[0]['keys'])
+            fold = None
             lab, mask, s = test_lab, test_mask.astype(bool), 'test'
         B = {'xgb_printed26': preds(lambda k: FE.xgb_path(k, 'val' if split == 'OOF' else 'test'), kf, split)}
         for fs in XGB_SETS:
@@ -114,11 +137,24 @@ def main(backbones):
             if p is not None:
                 B[f'xgb_{fs}_r11'] = p
         for bb in backbones:
-            B[f'{bb}:cnn_original'] = preds(lambda k: PASS_B / FE.BB[BACKBONES[bb]] / f'{s}_preds_fold{k}.npz', kf, split)
+            sub = preds(lambda k: PASS_B / FE.BB[BACKBONES[bb]] / f'{s}_preds_fold{k}.npz', kf, split)
+            if bb in RERUN:
+                B[f'{bb}:cnn_submitted'] = sub
+                sub = preds(lambda k: HERE / f'runs/r13_noflip_{bb}' / f'{s}_preds_fold{k}.npz', kf, split)
+            if sub is not None:
+                B[f'{bb}:cnn_original'] = sub
             p = preds(lambda k: HERE / f'runs/r11_sector_{RUN_NAME.get(bb, bb)}' / f'{s}_preds_fold{k}.npz', kf, split)
             if p is not None:
                 B[f'{bb}:cnn_sector'] = p
-        data[split] = dict(keys=keys, lab=lab, mask=mask, B=B,
+        # submitted five-backbone ensemble: reference and guard of the nested-w path
+        subs = [preds(lambda k: PASS_B / FE.BB[n] / f'{s}_preds_fold{k}.npz', kf, split) for n in FE.NAMES]
+        B[f'{ENS}:cnn_submitted'] = np.mean(subs, 0)
+        if set(backbones) == set(BACKBONES):
+            for arm in ('original', 'sector'):
+                arms = [B.get(f'{bb}:cnn_{arm}') for bb in BACKBONES]
+                if all(a is not None for a in arms):
+                    B[f'{ENS}:cnn_{arm}'] = np.mean(arms, 0)
+        data[split] = dict(keys=keys, fold=fold, lab=lab, mask=mask, B=B,
                            pid=np.array([str(kk[0]) for kk in keys], dtype=object),
                            keep=np.array([tuple(kk) not in mm for kk in keys]))
     # fusion weights: all out-of-fold folds, pooled RMSE, grid 0-1 step 0.01
@@ -129,12 +165,28 @@ def main(backbones):
             if c is not None:
                 folds = [{'xgb': d['B']['xgb_printed26'], 'cnns': {'c': c}, 'lab': d['lab'], 'mask': d['mask']}]
                 W[f'{bb}:{arm}'] = FE.fit_w(folds, 'c')
+    for arm in ('original', 'sector', 'submitted'):
+        c = d['B'].get(f'{ENS}:cnn_{arm}')
+        if c is not None:
+            W[f'{ENS}:{arm}'] = FE.fit_w([{'xgb': d['B']['xgb_printed26'], 'cnns': {'c': c}, 'lab': d['lab'],
+                                           'mask': d['mask']}], 'c')
+    out['fusion_w_nested_oof'] = {}
     for split, d in data.items():
         for bb in backbones:
             for arm in ('original', 'sector'):
                 if f'{bb}:{arm}' in W:
                     w = W[f'{bb}:{arm}']
                     d['B'][f'{bb}:fusion_{arm}'] = w * d['B']['xgb_printed26'] + (1 - w) * d['B'][f'{bb}:cnn_{arm}']
+        for arm in ('original', 'sector', 'submitted'):
+            if f'{ENS}:{arm}' not in W:
+                continue
+            x, c = d['B']['xgb_printed26'], d['B'][f'{ENS}:cnn_{arm}']
+            if split == 'OOF':
+                d['B'][f'{ENS}:fusion_{arm}'], out['fusion_w_nested_oof'][f'{ENS}:{arm}'] = \
+                    nested_fusion(x, c, d['lab'], d['mask'], d['fold'])
+            else:
+                w = W[f'{ENS}:{arm}']
+                d['B'][f'{ENS}:fusion_{arm}'] = w * x + (1 - w) * c
     out['fusion_w'] = W
 
     # guards
@@ -147,6 +199,11 @@ def main(backbones):
         ok = abs(got - want) <= 5e-4
         out['guards'].append({'split': split, 'branch': key, 'got': round(got, 4), 'want': want, 'ok': ok})
         print(f"guard {split} {key}: {got:.4f} vs {want} {'ok' if ok else 'FAIL'}")
+    got = pooled(data['OOF']['B'][f'{ENS}:fusion_submitted'], data['OOF']['lab'], data['OOF']['mask'])[0]
+    ok = abs(got - GUARD_ENS_SUBMITTED_OOF) <= 5e-4
+    out['guards'].append({'split': 'OOF', 'branch': f'{ENS}:fusion_submitted (nested w)', 'got': round(got, 4),
+                          'want': GUARD_ENS_SUBMITTED_OOF, 'ok': ok})
+    print(f"guard OOF {ENS}:fusion_submitted: {got:.4f} vs {GUARD_ENS_SUBMITTED_OOF} {'ok' if ok else 'FAIL'}")
     for split, d in data.items():
         if 'xgb_printed26_r11' in d['B']:
             dev = float(np.nanmax(np.abs(d['B']['xgb_printed26_r11'] - d['B']['xgb_printed26'])))
@@ -172,7 +229,7 @@ def main(backbones):
                                      'eye_mean_rmse': float(FE.eye_metric(p, lab, m, 'rmse').mean()),
                                      'eye_mean_mae': float(FE.eye_metric(p, lab, m, 'mae').mean())}
         pairs = []
-        for bb in backbones:
+        for bb in backbones + [ENS]:
             pairs += [(f'{bb}:cnn_sector', f'{bb}:cnn_original', bb == 'inception_resnet_v2'),
                       (f'{bb}:cnn_sector', 'xgb_map23_r11', False),
                       (f'{bb}:fusion_sector', 'xgb_printed26', False),
@@ -203,4 +260,4 @@ def main(backbones):
 
 if __name__ == '__main__':
     phi_safe.install()
-    main(sys.argv[1:] or ['inception_resnet_v2'])
+    main(sys.argv[1:] or list(BACKBONES))
