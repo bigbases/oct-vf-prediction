@@ -364,5 +364,7 @@ anchors:
   - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "26.7", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[30,inf).pct"}
   - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "14,404", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.points"}
   - {file: "methods.tex", contains: "pairs acquired on the same day", printed: "89", source: "skeleton_numbers.json", path: "oct_vf_gap_days.max"}
-  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.30", source: "manuscript_support_numbers.json", path: "axis_counterfactual.models.fusion.gap_at_park2020"}
-  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.49", source: "manuscript_support_numbers.json", path: "axis_counterfactual.models.fusion.gap_at_shin2021_sd_oct"}
+  # M14, authors' choice (b): the range over the three models and both published SDs is kept,
+  # with "across the three models" added to the sentence.
+  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.27", source: "manuscript_support_numbers.json", path: "axis_counterfactual.range_three_models.min"}
+  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.49", source: "manuscript_support_numbers.json", path: "axis_counterfactual.range_three_models.max"}
