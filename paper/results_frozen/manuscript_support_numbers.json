@@ -1,0 +1,238 @@
+{
+  "note": "Pass-B values for revised-manuscript sentences (see the module docstring). No patient keys.",
+  "cohort_md": {
+    "pairs_evaluated": 277,
+    "pairs_with_md": 271,
+    "n": 271,
+    "mean": -7.392509225092251,
+    "sd": 8.70344412324202,
+    "sd_pop": 8.687371267192841,
+    "median": -3.97,
+    "min": -32.16,
+    "max": 2.34,
+    "strata": {
+      "normal (MD > -3)": {
+        "n": 110,
+        "pct": 40.59040590405904
+      },
+      "early (-6 < MD <= -3)": {
+        "n": 61,
+        "pct": 22.509225092250922
+      },
+      "moderate (-12 < MD <= -6)": {
+        "n": 34,
+        "pct": 12.546125461254611
+      },
+      "advanced (MD <= -12)": {
+        "n": 66,
+        "pct": 24.354243542435423
+      }
+    },
+    "strata_boundaries_db": {
+      "normal_above": -3,
+      "early_down_to": -6,
+      "moderate_down_to": -12
+    }
+  },
+  "sensitivity_bins": {
+    "277 pairs": {
+      "points": 14404,
+      "bins": {
+        "[0,10)": {
+          "n": 2456,
+          "pct": 17.0508192168842
+        },
+        "[10,20)": {
+          "n": 1271,
+          "pct": 8.823937795056928
+        },
+        "[20,30)": {
+          "n": 6824,
+          "pct": 47.375728964176616
+        },
+        "[30,inf)": {
+          "n": 3853,
+          "pct": 26.749514023882252
+        }
+      }
+    },
+    "240 out-of-fold": {
+      "points": 12480,
+      "bins": {
+        "[0,10)": {
+          "n": 2187,
+          "pct": 17.52403846153846
+        },
+        "[10,20)": {
+          "n": 1135,
+          "pct": 9.094551282051281
+        },
+        "[20,30)": {
+          "n": 6043,
+          "pct": 48.42147435897436
+        },
+        "[30,inf)": {
+          "n": 3115,
+          "pct": 24.959935897435898
+        }
+      }
+    },
+    "37 held-out": {
+      "points": 1924,
+      "bins": {
+        "[0,10)": {
+          "n": 269,
+          "pct": 13.98128898128898
+        },
+        "[10,20)": {
+          "n": 136,
+          "pct": 7.0686070686070686
+        },
+        "[20,30)": {
+          "n": 781,
+          "pct": 40.592515592515596
+        },
+        "[30,inf)": {
+          "n": 738,
+          "pct": 38.357588357588355
+        }
+      }
+    }
+  },
+  "axis_counterfactual": {
+    "published_sd": {
+      "park2020": 2.09,
+      "shin2021_sd_oct": 2.68
+    },
+    "models": {
+      "summary_xgb": {
+        "eye_rmse_mean": 7.808805465698242,
+        "gap_at_park2020": 0.27485353262168566,
+        "gap_at_shin2021_sd_oct": 0.44709199012803147
+      },
+      "image_cnn": {
+        "eye_rmse_mean": 7.425471782684326,
+        "gap_at_park2020": 0.2885240168634766,
+        "gap_at_shin2021_sd_oct": 0.4688319355318118
+      },
+      "fusion": {
+        "eye_rmse_mean": 7.138168811798096,
+        "gap_at_park2020": 0.2996772464184252,
+        "gap_at_shin2021_sd_oct": 0.48651832838851217
+      }
+    },
+    "range_three_models": {
+      "min": 0.27485353262168566,
+      "max": 0.48651832838851217
+    },
+    "range_fusion": {
+      "min": 0.2996772464184252,
+      "max": 0.48651832838851217
+    }
+  },
+  "bland_altman": {
+    "n_eyes": 240,
+    "w_xgb": 0.47,
+    "intercept": 11.297460397929271,
+    "slope": -0.48926571454193174,
+    "eyes_outside_limits": 12,
+    "limits": {
+      "x0": {
+        "measured_db": 0,
+        "bias": 11.297460397929271,
+        "upper": 22.349548385350904,
+        "lower": 0.24537241050763825
+      },
+      "x5": {
+        "measured_db": 5,
+        "bias": 8.851131825219612,
+        "upper": 18.88449876542072,
+        "lower": -1.182235114981495
+      },
+      "x15": {
+        "measured_db": 15,
+        "bias": 3.958474679800295,
+        "upper": 11.954399525560348,
+        "lower": -4.037450165959759
+      },
+      "x25": {
+        "measured_db": 25,
+        "bias": -0.9341824656190223,
+        "upper": 5.024300285699978,
+        "lower": -6.892665216938022
+      },
+      "x30": {
+        "measured_db": 30,
+        "bias": -3.380511038328681,
+        "upper": 1.5592506657697918,
+        "lower": -8.320272742427154
+      },
+      "x32": {
+        "measured_db": 32,
+        "bias": -4.359042467412545,
+        "upper": 0.17323081779771776,
+        "lower": -8.891315752622807
+      }
+    }
+  },
+  "derived": {
+    "remaining_vs_hasan_db": {
+      "value": 1.3160725505535416,
+      "ours_floored_mae": 3.8060725505535418,
+      "hasan_floored_mae": 2.49,
+      "inputs": "stepsize_sensitivity.json clamp_retrain.fusion_w047.mae minus Hasan 2.49"
+    },
+    "target_axis_change_pct": {
+      "value": 35.428048684801915,
+      "raw_mae": 5.894312426729653,
+      "floored_mae": 3.8060725505535418,
+      "inputs": "stepsize_sensitivity.json 1 - clamp_retrain / clamp_label.raw (fusion_w047 MAE)"
+    },
+    "severity_rmse_ratio": {
+      "value": 2.4023668639053253,
+      "advanced": 12.18,
+      "normal": 5.07,
+      "inputs": "severity_region.json severity.advanced / severity.normal fusion RMSE"
+    }
+  },
+  "training_settings": {
+    "cnn": {
+      "optimizer": "rmsprop",
+      "lr": 0.0001,
+      "weight_decay": 1e-05,
+      "momentum": 0.9,
+      "batch_size": 64,
+      "epochs_max": 300,
+      "lr_exponent": -4,
+      "weight_decay_exponent": -5,
+      "patience": 100,
+      "grad_clip_max_norm": 1.0,
+      "jitter_brightness": 0.1,
+      "jitter_contrast": 0.1
+    },
+    "xgb": {
+      "n_estimators": 300,
+      "learning_rate": 0.05,
+      "max_depth": 4,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "reg_alpha": 0.1,
+      "reg_lambda": 1.0
+    }
+  },
+  "target_axis_variants": {
+    "oof": {
+      "variants": 11,
+      "p_min": 1.076943714592315e-16,
+      "p_max": 1.2993503457930597e-10,
+      "fusion_beats_summary_p_below_0_05": 11
+    },
+    "test": {
+      "variants": 11,
+      "p_min": 1.8866558093577623e-07,
+      "p_max": 0.02640274581790436,
+      "fusion_beats_summary_p_below_0_05": 11
+    },
+    "total_variants": 22
+  }
+}

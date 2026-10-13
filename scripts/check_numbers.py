@@ -768,10 +768,18 @@ def extract(line: str):
     return out
 
 
+_PATH_SEP = re.compile(r'(?<!\\)\.')
+
+
 def dig(obj, dotted):
-    """점 표기 경로로 JSON을 판다. 없으면 KeyError."""
+    """점 표기 경로로 JSON을 판다. 없으면 KeyError.
+
+    키 이름 안의 점은 '\\.' 로 쓴다 — robustness_gains.json 의 'fixed_w_0.5' 는
+    'fusion_machinery.fixed_w_0\\.5.w'. 이 표기가 없을 때는 그 키에 닿을 수 없어
+    고정 가중치 0.5 다섯 곳이 앵커 없이 남았다 (리비전 R1). YAML 에서는 작은따옴표로
+    감싸야 역슬래시가 그대로 들어온다."""
     cur = obj
-    for k in dotted.split('.'):
+    for k in (seg.replace('\\.', '.') for seg in _PATH_SEP.split(dotted)):
         if isinstance(cur, list):
             cur = cur[int(k)]
         else:

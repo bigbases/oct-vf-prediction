@@ -123,6 +123,15 @@ SOURCES = {
     #   (map geometry, QC counts, feature sets, probes, floor cells). Its r13 block grows as
     #   the mirrored runs finish and is refrozen then.
     'revision_methods_numbers.json': ('experiments/revision_r1/revision_methods_numbers.json', 'B'),
+    # manuscript_support_numbers: values the submitted text prints whose evidence was right but
+    #   unfrozen (cohort MD over 277/271 pairs, training settings, Bland-Altman limits from the
+    #   figure script's own functions, three derived quantities) and the replacement values for
+    #   the mismatches of docs/revision_r1_manuscript_changes.md (points per sensitivity bin over
+    #   277 pairs, the per-eye-axis counterfactual guarded against aggregation_axis/axis_gap.json).
+    'manuscript_support_numbers.json': ('experiments/revision_r1/manuscript_support_numbers.json', 'B'),
+    # stepsize_sensitivity_test: the held-out half of the 22 target-axis variants (results.tex
+    #   "between 1.9e-7 and 0.026 on the held-out set"); only the out-of-fold half was frozen.
+    'stepsize_sensitivity_test.json': (f'{PASS_B}/runs/stepsize_sensitivity_test.json', 'B'),
 }
 
 # keys dropped from case_profile.json: pseudonym + eye + date is re-identifying
@@ -316,6 +325,8 @@ PROSE = {
         "cv_fold is assigned patient-wise over all 280 eyes (split-first), and only then are the eyes that have both modalities kept (filter-second)",
     "split=oof (OOF, CV fold별 val 예측 연결), IR-v2 + XGB. 축 1(clamp_both)·2(clamp_label)는 재학습 없는 사후 재집계, 축 3(clamp_retrain)은 정규화 타깃으로 재학습한 별도 런. Hasan 2025 normalised TS = floor 14 dB. raw 축이 본 연구의 정본.":
         "split=oof (OOF, the per-fold validation predictions concatenated), IR-v2 + XGB. Axes 1 (clamp_both) and 2 (clamp_label) are post-hoc re-aggregations with no retraining; axis 3 (clamp_retrain) is a separate run retrained on the normalised target. Hasan 2025 normalised TS = floor 14 dB. The raw axis is the canonical one for this study.",
+    "split=test (held-out test, 5-fold 예측 평균 = 정본 집계), IR-v2 + XGB. 축 1(clamp_both)·2(clamp_label)는 재학습 없는 사후 재집계, 축 3(clamp_retrain)은 정규화 타깃으로 재학습한 별도 런. Hasan 2025 normalised TS = floor 14 dB. raw 축이 본 연구의 정본.":
+        "split=test (held-out test, the mean of the five fold models = the canonical aggregation), IR-v2 + XGB. Axes 1 (clamp_both) and 2 (clamp_label) are post-hoc re-aggregations with no retraining; axis 3 (clamp_retrain) is a separate run retrained on the normalised target. Hasan 2025 normalised TS = floor 14 dB. The raw axis is the canonical one for this study.",
     "예측·라벨 동시 사후 클램프 (학습 후 예측을 눌러줌)":
         "prediction and label clamped together after the fact (the trained predictions are pushed down)",
     "라벨만 사후 클램프, 예측은 원본 (모델 무수정)":

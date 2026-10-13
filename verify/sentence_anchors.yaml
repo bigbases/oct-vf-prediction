@@ -287,3 +287,82 @@ anchors:
     source: "skeleton_numbers.json"
     path: "backbones.inception_resnet_v2.oof.delta_fus_minus_xgb_rmse"
     kind: "gain"
+  # Revision R1, item 3: the fixed fusion weight 0.5. Its key holds a dot (fixed_w_0.5),
+  # written '\.' in the path (check_numbers.dig); single quotes keep the backslash.
+  - file: "introduction.tex"
+    contains: "a fixed weight of 0.5, pointwise weights"
+    printed: "0.5"
+    source: "robustness_gains.json"
+    path: 'fusion_machinery.fixed_w_0\.5.w'
+  - file: "methods.tex"
+    contains: "fix it at 0.5"
+    printed: "0.5"
+    source: "robustness_gains.json"
+    path: 'fusion_machinery.fixed_w_0\.5.w'
+  - file: "results.tex"
+    contains: "Fixing it at 0.5 gives"
+    printed: "0.5"
+    source: "robustness_gains.json"
+    path: 'fusion_machinery.fixed_w_0\.5.w'
+  - file: "discussion.tex"
+    contains: "replaced by 0.5, refit per fold"
+    printed: "0.5"
+    source: "robustness_gains.json"
+    path: 'fusion_machinery.fixed_w_0\.5.w'
+  # Revision R1, item 4: values that were right but had no frozen evidence
+  # (manuscript_support_numbers.json, stepsize_sensitivity_test.json).
+  # Cohort mean deviation over the 277 evaluated pairs, 271 with MD, and the strata.
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "271", source: "manuscript_support_numbers.json", path: "cohort_md.pairs_with_md"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "277", source: "manuscript_support_numbers.json", path: "cohort_md.pairs_evaluated"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-7.39", source: "manuscript_support_numbers.json", path: "cohort_md.mean"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "8.70", source: "manuscript_support_numbers.json", path: "cohort_md.sd"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-3.97", source: "manuscript_support_numbers.json", path: "cohort_md.median"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-32.16", source: "manuscript_support_numbers.json", path: "cohort_md.min"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "2.34", source: "manuscript_support_numbers.json", path: "cohort_md.max"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "40.6", source: "manuscript_support_numbers.json", path: "cohort_md.strata.normal (MD > -3).pct"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "22.5", source: "manuscript_support_numbers.json", path: "cohort_md.strata.early (-6 < MD <= -3).pct"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "12.5", source: "manuscript_support_numbers.json", path: "cohort_md.strata.moderate (-12 < MD <= -6).pct"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "24.4", source: "manuscript_support_numbers.json", path: "cohort_md.strata.advanced (MD <= -12).pct"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-3", source: "manuscript_support_numbers.json", path: "cohort_md.strata_boundaries_db.normal_above"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-6", source: "manuscript_support_numbers.json", path: "cohort_md.strata_boundaries_db.early_down_to"}
+  - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-12", source: "manuscript_support_numbers.json", path: "cohort_md.strata_boundaries_db.moderate_down_to"}
+  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "24.4", source: "manuscript_support_numbers.json", path: "cohort_md.strata.advanced (MD <= -12).pct"}
+  - {file: "related_work.tex", contains: "Every eye we analyse comes from a patient examined for glaucoma.", printed: "-7.39", source: "manuscript_support_numbers.json", path: "cohort_md.mean"}
+  - {file: "related_work.tex", contains: "Every eye we analyse comes from a patient examined for glaucoma.", printed: "-32.16", source: "manuscript_support_numbers.json", path: "cohort_md.min"}
+  # Training settings as run (submitted run arguments, train.py / image_preprocessing.py,
+  # export_xgb_oof._xgb_kwargs). Powers of ten are read by the gate as their exponents.
+  - {file: "methods.tex", contains: "We train with RMSprop at a learning rate of", printed: "-4", source: "manuscript_support_numbers.json", path: "training_settings.cnn.lr_exponent"}
+  - {file: "methods.tex", contains: "We train with RMSprop at a learning rate of", printed: "-5", source: "manuscript_support_numbers.json", path: "training_settings.cnn.weight_decay_exponent"}
+  - {file: "methods.tex", contains: "We train with RMSprop at a learning rate of", printed: "0.9", source: "manuscript_support_numbers.json", path: "training_settings.cnn.momentum"}
+  - {file: "methods.tex", contains: "mild photometric jitter", printed: "0.10", source: "manuscript_support_numbers.json", path: "training_settings.cnn.jitter_brightness"}
+  - {file: "methods.tex", contains: "gets its own XGBoost regressor", printed: "0.05", source: "manuscript_support_numbers.json", path: "training_settings.xgb.learning_rate"}
+  - {file: "methods.tex", contains: "gets its own XGBoost regressor", printed: "0.8", source: "manuscript_support_numbers.json", path: "training_settings.xgb.subsample"}
+  - {file: "methods.tex", contains: "gets its own XGBoost regressor", printed: "0.1", source: "manuscript_support_numbers.json", path: "training_settings.xgb.reg_alpha"}
+  # The 22 target-axis variants and the held-out p range.
+  - {file: "results.tex", contains: "We repeat the analysis on", printed: "22", source: "manuscript_support_numbers.json", path: "target_axis_variants.total_variants"}
+  - {file: "results.tex", contains: "We repeat the analysis on", printed: "11", source: "manuscript_support_numbers.json", path: "target_axis_variants.oof.variants"}
+  - {file: "results.tex", contains: "We repeat the analysis on", printed: "1.9e-7", source: "stepsize_sensitivity_test.json", path: "clamp_label.clamp19.paired.fusion_vs_xgb.wilcoxon_p"}
+  # Bland-Altman limits from the figure script's own functions.
+  - {file: "results.tex", contains: "At a measured mean of 5 dB the limits run from", printed: "-1.18", source: "manuscript_support_numbers.json", path: "bland_altman.limits.x5.lower"}
+  - {file: "results.tex", contains: "At a measured mean of 5 dB the limits run from", printed: "18.88", source: "manuscript_support_numbers.json", path: "bland_altman.limits.x5.upper"}
+  - {file: "results.tex", contains: "At a measured mean of 5 dB the limits run from", printed: "30", source: "manuscript_support_numbers.json", path: "bland_altman.limits.x30.measured_db"}
+  - {file: "results.tex", contains: "At a measured mean of 5 dB the limits run from", printed: "-8.32", source: "manuscript_support_numbers.json", path: "bland_altman.limits.x30.lower"}
+  - {file: "results.tex", contains: "At a measured mean of 5 dB the limits run from", printed: "1.56", source: "manuscript_support_numbers.json", path: "bland_altman.limits.x30.upper"}
+  # Derived quantities.
+  - {file: "discussion.tex", contains: "About 1.3 dB", printed: "1.3", source: "manuscript_support_numbers.json", path: "derived.remaining_vs_hasan_db.value"}
+  - {file: "discussion.tex", contains: "changes the numbers by roughly", printed: "35", source: "manuscript_support_numbers.json", path: "derived.target_axis_change_pct.value"}
+  - {file: "related_work.tex", contains: "a factor of", printed: "2.4", source: "manuscript_support_numbers.json", path: "derived.severity_rmse_ratio.value"}
+  # Revision R1, replacement values for the mismatches (docs/revision_r1_manuscript_changes.md
+  # M2, M11-M14). None of these numbers is in the submitted text, so nothing passes early;
+  # the replacements for M9 and the three-model reading of M14 wait for the revised text.
+  - {file: "discussion.tex", contains: "carries a mean residual of about", printed: "0.57", source: "fixed_w_bias.json", path: "branches.Fusion fixed w.mean_bias"}
+  - {file: "discussion.tex", contains: "carries a mean residual of about", printed: "0.54", source: "fixed_w_bias.json", path: "fixed_minus_summary.mean"}
+  - {file: "related_work.tex", contains: "Our per-eye RMSE also has a wider spread", printed: "3.77", source: "aggregation_comparability.json", path: "models.OOF.backbones.inception_resnet_v2.fusion.eye_rmse_sd"}
+  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "17.1", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[0,10).pct"}
+  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "8.8", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[10,20).pct"}
+  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "47.4", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[20,30).pct"}
+  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "26.7", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[30,inf).pct"}
+  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "14,404", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.points"}
+  - {file: "methods.tex", contains: "pairs acquired on the same day", printed: "89", source: "skeleton_numbers.json", path: "oct_vf_gap_days.max"}
+  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.30", source: "manuscript_support_numbers.json", path: "axis_counterfactual.models.fusion.gap_at_park2020"}
+  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.49", source: "manuscript_support_numbers.json", path: "axis_counterfactual.models.fusion.gap_at_shin2021_sd_oct"}
