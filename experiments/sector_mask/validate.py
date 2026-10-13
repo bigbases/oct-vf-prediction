@@ -482,7 +482,12 @@ def main():
                           f'sd=({d["sd"][0]:.3f},{d["sd"][1]:.3f}) '
                           f'|median|=({d["abs_median"][0]:.3f},{d["abs_median"][1]:.3f})')
 
-    dump_masks([(c['patient_id'], c['eye'], c['rnfl_map'], c['gca_map']) for c in cohort[:4]],
+    # Overlay file names carry a per-run serial, never the patient number: the
+    # number would put an identifier in a file name (2026-10-13 incident).
+    serial = {}
+    for c in cohort[:4]:
+        serial.setdefault(c['patient_id'], f's{len(serial) + 1:02d}')
+    dump_masks([(serial[c['patient_id']], c['eye'], c['rnfl_map'], c['gca_map']) for c in cohort[:4]],
                lut_rgb, lut_val, os.path.join(HERE, 'masks'))
 
     txt = '\n'.join(report)
