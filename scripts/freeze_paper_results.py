@@ -110,6 +110,11 @@ SOURCES = {
     #   flip - noflip 차라 DERIVED 로 등록한다.
     'neg1_mask_sensitivity.json': (f'{PASS_B}/runs/neg1_mask_sensitivity.json', 'B'),
     'osflip_compare.json':       (f'{PASS_B}/runs/osflip_compare.json', 'B'),
+
+    # Revision round 1 (added 2026-10-13). Each entry has a plan committed under
+    # docs/revision_r1/ before its producer was run. R1-5/R1-6 reuse the pass-B
+    # predictions without refitting; the producer guards the frozen branch values.
+    'calibration_multiplicity.json': ('experiments/revision_r1/calibration_multiplicity.json', 'B'),
 }
 
 # keys dropped from case_profile.json: pseudonym + eye + date is re-identifying
