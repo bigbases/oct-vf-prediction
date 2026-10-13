@@ -1,0 +1,19 @@
+# Registered literature values for the check_numbers.py gate.
+#
+# A number printed in a paragraph that cites a reference used to pass without any check
+# when it did not match the evidence pool. Since revision round 1 it is a LIT violation
+# unless it is registered here, with the reference it comes from.
+#
+# Each item requires all four fields:
+#   file:      manuscript section file name, e.g. related_work.tex
+#   contains:  a fragment of the paragraph the number is printed in (exact text)
+#   value:     the number as printed, e.g. "2.93"
+#   cite:      the BibTeX key of the source, checked against the paper itself
+#
+# Example (comment, not a live entry):
+#   - file: "related_work.tex"
+#     contains: "on the raw threshold scale"
+#     value: "2.93"
+#     cite: "park2020"
+
+literature: []

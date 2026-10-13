@@ -112,6 +112,9 @@ verify/*
 
 # Revision round 1: plans are published, outputs are not (they carry patient keys).
 !docs/revision_r1/
+!verify/literature_values.yaml
+!verify/sentence_anchors.yaml
+!verify/provenance_baseline.json
 experiments/revision_r1/runs/
 experiments/revision_r1/probes/
 experiments/revision_r1/logs/

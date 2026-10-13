@@ -41,6 +41,7 @@ import json
 import os
 import re
 import sys
+import hashlib
 from collections import namedtuple
 from pathlib import Path
 
@@ -84,6 +85,9 @@ MAIN_TEX = ROOT / 'docs/journal_manuscript/main.tex'
 VERIFY = ROOT / 'verify'
 EXCEPTIONS_FILE = VERIFY / 'exceptions.yaml'
 PATTERNS_FILE = VERIFY / 'placeholder_patterns.yaml'
+LITERATURE_FILE = VERIFY / 'literature_values.yaml'
+SENTENCE_ANCHORS_FILE = VERIFY / 'sentence_anchors.yaml'
+PROVENANCE_FILE = VERIFY / 'provenance_baseline.json'
 LOG_DIR = VERIFY / 'logs'
 
 
@@ -96,6 +100,7 @@ def configure(root):
     """
     global ROOT, SEC, SPEC, RUNS, MAIN_TEX
     global VERIFY, EXCEPTIONS_FILE, PATTERNS_FILE, LOG_DIR
+    global LITERATURE_FILE, SENTENCE_ANCHORS_FILE, PROVENANCE_FILE
     ROOT = Path(root).resolve()
     SEC = ROOT / 'docs/journal_manuscript/sections'
     SPEC = _spec_default(ROOT)
@@ -104,6 +109,9 @@ def configure(root):
     VERIFY = ROOT / 'verify'
     EXCEPTIONS_FILE = VERIFY / 'exceptions.yaml'
     PATTERNS_FILE = VERIFY / 'placeholder_patterns.yaml'
+    LITERATURE_FILE = VERIFY / 'literature_values.yaml'
+    SENTENCE_ANCHORS_FILE = VERIFY / 'sentence_anchors.yaml'
+    PROVENANCE_FILE = VERIFY / 'provenance_baseline.json'
     LOG_DIR = VERIFY / 'logs'
 
 
@@ -1471,6 +1479,78 @@ def load_exceptions(known_ids):
 # ---------------------------------------------------------------------------
 # 로그. stdout에 찍는 것과 **같은 내용**을 파일에도 남긴다.
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# 리비전 R1 (2026-10-13) — 게이트 결함 3건 수정
+#
+# (1) 인용 문단도 검사한다. 종전에는 \cite 가 있는 문단에서 근거 풀과 안 맞는
+#     수치를 문헌값으로 보고 **검사 없이** 통과시켰다(CITE). Bland-Altman 캡션의
+#     한계값 세 개가 Krouwer 인용과 같은 문단이라는 이유만으로 근거 없이 통과했다.
+#     이제 그런 수치는 LIT 위반이고, 문헌값이면 literature_values.yaml 에 출처와
+#     함께 등록해야 통과한다.
+# (2) 근거 변경 경고. [OK] 는 "풀 어딘가와 인쇄 자릿수까지 맞는다"는 뜻일 뿐이라,
+#     동결 파일을 추가하면 기존 수치의 출처가 무관한 새 값으로 조용히 바뀐다
+#     (리비전 동결 후 -8.32 가 새 파일 값과 절사로 맞았다). 수치마다 맞는 근거
+#     전체 집합을 provenance_baseline.json 과 비교해 바뀌면 PROV 경고를 낸다.
+# (3) 소수 한 자리 수치는 문장 앵커로만 통과한다. 한 자리로 인쇄한 값은 풀
+#     수천 개 중 어딘가와 거의 항상 맞는다 — 한계 절 "+0.8 dB" 는 출처가 없는데도
+#     무관한 0.851 과 절사로 맞아 통과했다. sentence_anchors.yaml 에 (파일, 문장
+#     조각, 인쇄값) -> (근거 파일, JSON 경로) 를 적어야 하고, 그 값이 인쇄값과
+#     맞아야 한다. 없으면 ONE-DP 위반.
+# ---------------------------------------------------------------------------
+ONE_DP = re.compile(r'-?[0-9]+\.[0-9]')
+
+
+def _registry(path, key, fields, what):
+    """없으면 빈 목록. 있는데 필드가 빠졌으면 GateError (= exit 2)."""
+    if not path.exists():
+        return []
+    doc = load_yaml_doc(path, what)
+    items = doc.get(key) or []
+    out = []
+    for i, e in enumerate(items, 1):
+        miss = [f for f in fields if not str(e.get(f, '')).strip()]
+        if miss:
+            raise GateError(f'{what} {i}번째 항목에 필드가 없다: {", ".join(miss)}')
+        out.append({k: str(v).strip() if isinstance(v, str) else v for k, v in e.items()})
+    return out
+
+
+def load_literature():
+    return _registry(LITERATURE_FILE, 'literature', ('file', 'contains', 'value', 'cite'), '문헌값 등록부')
+
+
+def load_sentence_anchors():
+    return _registry(SENTENCE_ANCHORS_FILE, 'anchors', ('file', 'contains', 'printed', 'source', 'path'),
+                     '문장 앵커')
+
+
+def sentence_anchor_value(a):
+    """문장 앵커가 가리키는 근거 값. 실패하면 (None, 이유)."""
+    jf = RUNS / a['source']
+    if not jf.exists():
+        return None, f'근거 파일 없음: {a["source"]}'
+    try:
+        obj = json.loads(jf.read_text())
+        kind = a.get('kind')
+        v = derive(obj, a['path'], kind) if kind else dig(obj, a['path'])
+        return float(v), None
+    except Exception as e:  # noqa: BLE001 — 사유를 그대로 보고한다
+        return None, f'경로 해석 실패: {a["path"]} ({type(e).__name__})'
+
+
+def all_sources(num_src, printed, _cache={}):
+    """인쇄값과 맞는 풀 근거 **전부** (정렬). [OK] 의 출처는 그중 첫 번째일 뿐이다."""
+    key = (id(num_src), printed)
+    if key not in _cache:
+        _cache[key] = sorted({w for v, paths in num_src.items() if render_match(v, printed) for w in paths})
+    return _cache[key]
+
+
+def provenance_key(fname, line, printed):
+    norm = re.sub(r'\s+', ' ', line.strip())
+    return f'{fname}#{printed}#{hashlib.sha1(norm.encode()).hexdigest()[:10]}'
+
+
 class _Tee:
     def __init__(self, *streams):
         self.streams = streams
@@ -1494,8 +1574,12 @@ def open_log():
         raise GateError(f'로그 파일을 열 수 없다: {LOG_DIR} ({e})')
 
 
-def scan_numbers(files, num_src):
-    """섹션의 수치를 근거 풀과 대조한다. (misses, oks, 카운트) 반환."""
+def scan_numbers(files, num_src, literature=(), sanchors=(), provenance=None):
+    """섹션의 수치를 근거 풀과 대조한다. (misses, oks, 카운트) 반환.
+
+    misses 에는 MISS 와 함께 LIT / ONE-DP 위반이 들어간다 (리비전 R1 수정, 위 주석).
+    provenance 에 dict 를 주면 [OK] 수치마다 맞는 근거 전체를 채운다.
+    """
     n_ok = n_cite = n_struct = 0
     misses, oks = [], []
     LIT = re.compile(r'\\cite|[A-Z][a-z]+\s+et\s+al')
@@ -1509,10 +1593,14 @@ def scan_numbers(files, num_src):
         # 그래서 빈 줄로 끊은 문단 안에 \cite 또는 "<Name> et al"이 있으면
         # 그 문단의 수치는 문헌값 후보로 본다.
         para_lit = [False] * (len(lines) + 1)
+        para_txt = [''] * (len(lines) + 1)
         start = 0
         for i in range(len(lines) + 1):
             if i == len(lines) or not lines[i].strip():
                 blob = '\n'.join(lines[start:i])
+                flat = re.sub(r'\s+', ' ', blob)
+                for j in range(start, i):
+                    para_txt[j + 1] = flat
                 if LIT.search(blob):
                     for j in range(start, i):
                         para_lit[j + 1] = True
@@ -1521,8 +1609,43 @@ def scan_numbers(files, num_src):
         for ln, line in enumerate(lines, 1):
             has_cite = para_lit[ln]
             for printed, val in extract(line):
+                pk = provenance_key(f.name, line, printed)
+                if provenance is not None:
+                    provenance[pk] = {'line': ln, 'status': 'STRUCT', 'sources': []}
                 if val in STRUCTURAL and float(val).is_integer():
                     n_struct += 1
+                    continue
+                ctx = para_txt[ln]
+                if any(e['file'] == f.name and str(e['value']) == printed and e['contains'] in ctx
+                       for e in literature):
+                    n_cite += 1          # 등록된 문헌값: 출처(cite)가 등록부에 있다
+                    if provenance is not None:
+                        provenance[pk]['status'] = 'CITE'
+                    continue
+                if ONE_DP.fullmatch(printed):
+                    hits = [a for a in sanchors if a['file'] == f.name and str(a['printed']) == printed
+                            and a['contains'] in ctx]
+                    if not hits:
+                        if provenance is not None:
+                            provenance[pk]['status'] = 'ONE-DP'
+                        misses.append(Finding(
+                            kind='ONE-DP', id=f'onedp:{f.name}:{ln}#{printed}', label=printed,
+                            where=f'{f.name}:{ln}',
+                            detail='소수 한 자리 수치 — 문장 앵커(sentence_anchors.yaml) 없음: ' + line.strip()))
+                        continue
+                    a = hits[0]
+                    v, why = sentence_anchor_value(a)
+                    if v is None or not render_match(v, printed):
+                        misses.append(Finding(
+                            kind='ONE-DP', id=f'onedp:{f.name}:{ln}#{printed}', label=printed,
+                            where=f'{f.name}:{ln}',
+                            detail=(why or f'앵커 근거 {a["source"]}:{a["path"]} = {v} 가 인쇄값과 안 맞는다')
+                            + ' | ' + line.strip()))
+                        continue
+                    n_ok += 1
+                    oks.append((f.name, ln, printed, f'{a["source"]}:{a["path"]} (문장 앵커)'))
+                    if provenance is not None:
+                        provenance[pk] = {'line': ln, 'status': 'OK', 'sources': [f'{a["source"]}:{a["path"]}']}
                     continue
                 where = None
                 for src, paths in num_src.items():
@@ -1532,8 +1655,16 @@ def scan_numbers(files, num_src):
                 if where:
                     n_ok += 1
                     oks.append((f.name, ln, printed, where))
+                    if provenance is not None:
+                        provenance[pk] = {'line': ln, 'status': 'OK', 'sources': all_sources(num_src, printed)}
                 elif has_cite:
-                    n_cite += 1
+                    if provenance is not None:
+                        provenance[pk]['status'] = 'LIT'
+                    misses.append(Finding(
+                        kind='LIT', id=f'lit:{f.name}:{ln}#{printed}', label=printed,
+                        where=f'{f.name}:{ln}',
+                        detail='인용 문단의 수치인데 근거도 문헌값 등록(literature_values.yaml)도 없다: '
+                               + line.strip()))
                 else:
                     misses.append(Finding(
                         kind='MISS',
@@ -1575,7 +1706,39 @@ def run_gate(args, log_path):
         print()
 
     num_src, _ = load_sources()
-    misses, oks, n_ok, n_cite, n_struct = scan_numbers(files, num_src)
+    literature = load_literature()
+    sanchors = load_sentence_anchors()
+    prov = {}
+    misses, oks, n_ok, n_cite, n_struct = scan_numbers(files, num_src, literature, sanchors, prov)
+
+    # 근거 변경 경고 — 기준선과 비교 (경고만, 차단하지 않는다)
+    # 경고 대상은 둘이다. (ㄱ) 기준선의 근거가 사라진 [OK] 수치 — 근거 값이 바뀌었다.
+    # (ㄴ) 기준선에서 검증되지 않던 수치가 이제 [OK] — 새 근거와 우연히 맞았을 수 있다.
+    # 근거가 **추가만** 된 경우는 파일 하나만 늘어도 수백 건이라 개수만 낸다.
+    prov_warn, prov_new, prov_gone, prov_added = [], 0, 0, 0
+    if PROVENANCE_FILE.exists() and not partial:
+        base = json.loads(PROVENANCE_FILE.read_text(encoding='utf-8'))
+        for k, cur in prov.items():
+            old = base.get(k)
+            if old is None:
+                prov_new += 1          # 원고 문장이 바뀌었거나 새로 생긴 수치
+                continue
+            if cur['status'] != 'OK':
+                continue
+            if old.get('status', 'OK') != 'OK':
+                prov_warn.append((k, cur['line'], f"새로 통과(전: {old.get('status')})", cur['sources']))
+                continue
+            rem = sorted(set(old['sources']) - set(cur['sources']))
+            if rem:
+                prov_warn.append((k, cur['line'], '근거 소실', rem))
+            elif set(cur['sources']) - set(old['sources']):
+                prov_added += 1
+        prov_gone = sum(1 for k in base if k not in prov)
+    if getattr(args, 'write_provenance', False):
+        if partial:
+            raise GateError('--write-provenance 는 부분 검사(--file)와 같이 쓸 수 없다')
+        PROVENANCE_FILE.write_text(json.dumps(prov, ensure_ascii=False, indent=1, sort_keys=True) + '\n',
+                                   encoding='utf-8')
 
     # 앵커는 **항상 원고 전체**를 본다. --file로 좁히면 다른 섹션에 인쇄된
     # 값이 전부 STALE로 뜬다 — 부분 검사의 목적이 아니다.
@@ -1604,6 +1767,37 @@ def run_gate(args, log_path):
         for fn, ln, pr, w in oks:
             print(f'  {fn}:{ln}  {pr:>12}  <- {w}')
         print()
+
+    live_lit = [f for f in misses if f.kind == 'LIT' and f.id not in approved]
+    live_odp = [f for f in misses if f.kind == 'ONE-DP' and f.id not in approved]
+    misses = [f for f in misses if f.kind == 'MISS']
+    print('=== [LIT] 인용 문단의 미검증 수치 ===')
+    print('  근거 풀과 안 맞고 문헌값 등록(verify/literature_values.yaml)도 없다.')
+    if not live_lit:
+        print('  없음.')
+    for f in live_lit:
+        print(f'  {f.where}  {f.label:>12}   | {f.detail[:110]}')
+    print()
+    print('=== [ONE-DP] 문장 앵커 없는 소수 한 자리 수치 ===')
+    print('  한 자리 인쇄값은 풀 어딘가와 거의 항상 맞는다. verify/sentence_anchors.yaml 에 근거를 적어야 한다.')
+    if not live_odp:
+        print('  없음.')
+    for f in live_odp:
+        print(f'  {f.where}  {f.label:>12}   | {f.detail[:110]}')
+    print()
+    print('=== [PROV] 근거 변경 경고 (차단 아님) ===')
+    if not PROVENANCE_FILE.exists():
+        print(f'  기준선 없음: {PROVENANCE_FILE.name}. --write-provenance 로 만든다.')
+    else:
+        print(f'  근거만 추가된 [OK] 수치 {prov_added}건(목록 생략) · 문장이 바뀐/새 수치 {prov_new} · '
+              f'기준선에만 있는 수치 {prov_gone}')
+        if not prov_warn:
+            print('  근거 소실·새로 통과 없음.')
+    for k, ln, what, srcs in prov_warn:
+        print(f'  {k.split("#")[0]}:{ln}  {k.split("#")[1]:>10}  [{what}] {srcs}')
+    if getattr(args, 'write_provenance', False):
+        print(f'  기준선을 새로 썼다: {PROVENANCE_FILE} ({len(prov)}개 수치)')
+    print()
 
     print('=== [MISS] 근거 없음 ===')
     print('  runs/*.json + CANONICAL_SPEC.md 어디에도 근거가 없는 수치.')
@@ -1674,6 +1868,8 @@ def run_gate(args, log_path):
     n_miss_b = sum(1 for f in blocking if f.kind == 'MISS')
     n_stale_b = sum(1 for f in blocking if f.kind == 'STALE')
     n_ph_b = sum(1 for f in blocking if f.kind == 'PLACEHOLDER')
+    n_lit_b = sum(1 for f in blocking if f.kind == 'LIT')
+    n_odp_b = sum(1 for f in blocking if f.kind == 'ONE-DP')
 
     if unrunnable:
         code = EXIT_ERROR
@@ -1690,13 +1886,16 @@ def run_gate(args, log_path):
     print(bar)
     print(f'  {"[OK]":<22}{n_ok:>8}   근거 산출물/SPEC에서 확인')
     print(f'  {"[STRUCT]":<22}{n_struct:>8}   프로토콜 상수 허용목록')
-    print(f'  {"[CITE]":<22}{n_cite:>8}   \\cite 문단의 수치 — 자동검증 대상 아님')
+    print(f'  {"[CITE]":<22}{n_cite:>8}   문헌값 등록부에 출처와 함께 등록된 수치')
     print(f'  {"[ANCHOR-FOUND]":<22}{len(anchors) - len(stale) - len(unrunnable):>8}'
           f'   /{len(anchors)} 근거값이 원고에서 확인됨')
     print(bar)
     print(f'  {"[MISS]":<22}{n_miss_b:>8}   근거 없음 (미승인)')
     print(f'  {"[STALE]":<22}{n_stale_b:>8}   앵커가 원고에 없음 (미승인)')
     print(f'  {"[PLACEHOLDER]":<22}{n_ph_b:>8}   자리표시자 잔존 (미승인)')
+    print(f'  {"[LIT]":<22}{n_lit_b:>8}   인용 문단의 미검증 수치 (미승인)')
+    print(f'  {"[ONE-DP]":<22}{n_odp_b:>8}   문장 앵커 없는 소수 한 자리 (미승인)')
+    print(f'  {"[PROV] 경고":<20}{len(prov_warn):>8}   기준선 대비 근거 집합 변경 (차단 아님)')
     print(f'  {"[EXCEPTED]":<22}{len(excepted):>8}   승인된 예외로 통과')
     print(f'  {"[INVALID EXC]":<22}{len(invalid):>8}   무효 예외 (덮지 못함)')
     print(f'  {"[UNRUNNABLE]":<22}{len(unrunnable):>8}   검사 불능')
@@ -1718,6 +1917,7 @@ def run_gate(args, log_path):
             'exit_code': code,
             'counts': {'ok': n_ok, 'struct': n_struct, 'cite': n_cite,
                        'miss': n_miss_b, 'stale': n_stale_b,
+                       'lit': n_lit_b, 'one_dp': n_odp_b, 'prov_warn': len(prov_warn),
                        'placeholder': n_ph_b, 'excepted': len(excepted),
                        'invalid_exceptions': len(invalid),
                        'unrunnable': len(unrunnable)},
@@ -1751,6 +1951,8 @@ def main():
                     help='검사할 원고 *.tex 디렉터리. 정본 원고는 이 저장소에 없다 '
                          '(Overleaf) — 내려받은 경로를 여기에 준다. 생략하면 '
                          'docs/journal_manuscript/sections/ 의 낡은 사본을 검사한다.')
+    ap.add_argument('--write-provenance', action='store_true',
+                    help='현재 [OK] 수치의 근거 집합을 verify/provenance_baseline.json 에 기준선으로 쓴다')
     args = ap.parse_args()
 
     if args.root:

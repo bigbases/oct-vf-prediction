@@ -1,0 +1,23 @@
+# Sentence anchors for one-decimal numbers (check_numbers.py, revision round 1).
+#
+# A number printed with one decimal place matches some value in the evidence pool
+# almost always, so a pool match proves nothing. Such a number passes only when it is
+# anchored here to the artefact value it was printed from, and that value still rounds
+# (or truncates) to the printed digits.
+#
+# Each item requires:
+#   file:      manuscript section file name
+#   contains:  a fragment of the paragraph the number is printed in (exact text)
+#   printed:   the number as printed, e.g. "0.8"
+#   source:    the frozen artefact, e.g. calibration_multiplicity.json
+#   path:      dotted JSON path inside it
+#   kind:      optional; a derived quantity as in DERIVED (e.g. pct, delta)
+#
+# Example (comment, not a live entry):
+#   - file: "methods.tex"
+#     contains: "pairs acquired on the same day"
+#     printed: "6.7"
+#     source: "skeleton_numbers.json"
+#     path: "oct_vf_gap_days.mean"
+
+anchors: []
