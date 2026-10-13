@@ -71,3 +71,14 @@ adjustment within that family, OOF and held-out separately. The submitted trend 
 `experiments/revision_r1/calibration_multiplicity.py` → `calibration_multiplicity.json`
 (producer), frozen through `freeze_paper_results.py` and checked by `check_numbers.py`
 before any number enters the response or the manuscript.
+
+## Decision log
+
+* 2026-10-13, authors. The sensitivity-bin analyses are reported in the revision as
+  exploratory, with the Holm adjustment above, and are not described as pre-specified.
+  Reason: the bin edges, the minimum of three locations per bin and the primary trend cell
+  are written into `fusion_sensitivity_trend.py` from its first saved version and never
+  changed afterwards, but that first saved version (2026-08-14 16:32, from the editor's
+  local history; the working tree was not under version control then) is the same moment
+  at which the memo reporting the bin-level results was first saved. No record shows the
+  definitions fixed before the results were seen.

@@ -139,5 +139,16 @@ loading runs in the main process.
     and endpoint 4 compares mirrored with this matched rerun. The rerun vs the submitted run
     is reported separately, as the size of the reproduction gap. These reruns are queued last.
   - VGG16 endpoint-4 differences include run-to-run noise, which is reported as such.
-* (pending, before the first R1-3 endpoint is computed) Primary frame of the revised
-  manuscript: mirrored or unmirrored.
+* 2026-10-13, authors. The matched unmirrored reruns of VGG16, Xception and DenseNet121
+  are approved; VGG16 run-to-run noise is reported separately.
+* 2026-10-13, authors, before any R1-3 endpoint was computed (the first mirrored run was
+  still in fold 0). Primary frame of the revised manuscript: the submitted primary analysis
+  (unmirrored image branch) is kept. The full mirrored-frame replication — fusion vs summary
+  per backbone, the five-backbone ensemble ceiling, and the sensitivity-bin analysis — is
+  reported alongside it whatever its result. Subject to confirmation by the senior author;
+  any change will be recorded here.
+* 2026-10-13. GPU 0 is not available to this project; all runs are queued on GPU 1 in this
+  order: R1-3 mirrored Inception-v3 (running), R1-1 Inception-ResNet-v2 once its sample maps
+  are approved, R1-4 exclusion, R1-3 mirrored Xception / DenseNet121 / VGG16, R1-4 censored,
+  the three matched unmirrored reruns, the remaining R1-1 backbones. The R1-4 exclusion run
+  started on GPU 0 was stopped at fold 0 and restarts from scratch on GPU 1.
