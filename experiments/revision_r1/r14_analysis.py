@@ -8,6 +8,12 @@ run is not used. Arms whose predictions do not exist yet are skipped and reporte
 
 Guards (arm 0 must reproduce neg1_mask_sensitivity.json, non-floor cells):
   OOF  fusion 6.3327, CNN 6.7669, XGB 7.1605;  held-out  fusion 6.4404, CNN 6.0834, XGB 7.6697
+and, on all cells, the submitted main comparison (fusion - summary, per-eye RMSE, OOF) of
+forest_rows.json: delta, 95% CI and Wilcoxon p.
+
+Comparisons marked added=True are not in the plan: fusion vs summary within each floor
+rule (arm 0 on non-floor cells as the reference), added on 2026-10-13 at the authors'
+request after the arm-1 results had been seen.
 
 Output: r14_analysis.json (no patient keys).
 """
@@ -36,6 +42,7 @@ W = 0.47
 CNN_DIRS = {0: PASS_B / 'runs/phasec_b0_inception_resnet_v2_5fold',
             1: HERE / 'runs/r14_exclude_irv2', 2: HERE / 'runs/r14_censored_irv2'}
 XGB_DIRS = {0: PASS_B / 'runs/oof', 1: HERE / 'runs/r14_xgb/arm1'}
+FROZEN = REPO / 'release/paper/results_frozen'
 GUARD = {('OOF', 'fusion'): 6.3327, ('OOF', 'cnn'): 6.7669, ('OOF', 'xgb'): 7.1605,
          ('TEST', 'fusion'): 6.4404, ('TEST', 'cnn'): 6.0834, ('TEST', 'xgb'): 7.6697}
 
@@ -94,16 +101,25 @@ def main():
             out['guards'].append({'split': split, 'branch': name, 'got': round(got, 4),
                                   'want': GUARD[(split, name)], 'ok': ok})
             print(f"guard {split} {name}: {got:.4f} vs {GUARD[(split, name)]} {'ok' if ok else 'FAIL'}")
-    if not all(x['ok'] for x in out['guards']):
-        raise SystemExit('guard failed; nothing computed')
-
-    Wp = CM.Wp_factory() if hasattr(CM, 'Wp_factory') else None
     rng_cache = {}
 
     def Wboot(n):
         if n not in rng_cache:
             rng_cache[n] = CM.boot_weights(n, np.random.default_rng(CM.SEED))
         return rng_cache[n]
+
+    ref = next(r for r in json.load(open(FROZEN / 'forest_rows.json'))['rows'] if r['group'] == 'primary')
+    d = D['OOF']
+    fus = W * d['xgb'][0] + (1 - W) * d['cnn'][0]
+    r = CM.paired(FE.eye_metric(fus, d['lab'], d['mask'], 'rmse'), FE.eye_metric(d['xgb'][0], d['lab'], d['mask'], 'rmse'),
+                  d['pid'], Wboot)
+    for name, got, want in (('delta', r['mean_delta'], ref['delta']), ('ci_lo', r['ci'][0], ref['ci_lo']),
+                            ('ci_hi', r['ci'][1], ref['ci_hi']), ('p_wilcoxon', r['p_wilcoxon'], ref['p_wilcoxon'])):
+        ok = abs(got - want) <= 1e-6 * max(1.0, abs(want)) if name != 'p_wilcoxon' else abs(got / want - 1) <= 1e-6
+        out['guards'].append({'split': 'OOF', 'branch': f'main comparison all cells {name}', 'got': got, 'want': want, 'ok': ok})
+        print(f"guard OOF main comparison {name}: {got:.6g} vs {want:.6g} {'ok' if ok else 'FAIL'}")
+    if not all(x['ok'] for x in out['guards']):
+        raise SystemExit('guard failed; nothing computed')
 
     for split, d in D.items():
         lab, m, fl, pid = d['lab'], d['mask'], d['floor'], d['pid']
@@ -125,19 +141,22 @@ def main():
                 'mean_prediction_at_floor_cells': float(p[fl].mean()),
             }
         comps = []
-        pairs = [('fusion_c1x1', 'fusion_c0x0', True), ('cnn1', 'cnn0', False), ('xgb1', 'xgb0', False),
-                 ('cnn2', 'cnn0', False), ('cnn2', 'cnn1', False), ('fusion_c2x1', 'fusion_c0x0', False)]
-        for a, b, primary in pairs:
+        pairs = [('fusion_c1x1', 'fusion_c0x0', True, False), ('cnn1', 'cnn0', False, False),
+                 ('xgb1', 'xgb0', False, False), ('cnn2', 'cnn0', False, False), ('cnn2', 'cnn1', False, False),
+                 ('fusion_c2x1', 'fusion_c0x0', False, False),
+                 ('fusion_c0x0', 'xgb0', False, True), ('fusion_c1x1', 'xgb1', False, True),
+                 ('fusion_c2x1', 'xgb1', False, True)]
+        for a, b, primary, added in pairs:
             if a in branches and b in branches:
                 for kind in ('rmse', 'mae'):
                     ea = FE.eye_metric(branches[a], lab, nf, kind)
                     eb = FE.eye_metric(branches[b], lab, nf, kind)
                     r = CM.paired(ea, eb, pid, Wboot)
                     r.update(a=a, b=b, metric=f'per-eye {kind} on non-floor cells',
-                             primary=bool(primary and kind == 'rmse' and split == 'OOF'))
+                             primary=bool(primary and kind == 'rmse' and split == 'OOF'), added=added)
                     comps.append(r)
             else:
-                comps.append({'a': a, 'b': b, 'status': 'arm not available yet'})
+                comps.append({'a': a, 'b': b, 'status': 'arm not available yet', 'added': added})
         rec['comparisons'] = comps
         out['splits'][split] = rec
     (HERE / 'r14_analysis.json').write_text(json.dumps(out, indent=1, default=float) + '\n')

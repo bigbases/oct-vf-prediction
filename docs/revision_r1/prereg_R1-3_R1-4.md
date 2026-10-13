@@ -152,3 +152,10 @@ loading runs in the main process.
   are approved, R1-4 exclusion, R1-3 mirrored Xception / DenseNet121 / VGG16, R1-4 censored,
   the three matched unmirrored reruns, the remaining R1-1 backbones. The R1-4 exclusion run
   started on GPU 0 was stopped at fold 0 and restarts from scratch on GPU 1.
+* 2026-10-13, authors, after the R1-4 exclusion results (CNN arm 1, XGBoost arm 1) had been
+  seen. Added, not pre-specified: fusion vs summary parameters within each floor rule, in the
+  form of the submitted main comparison — fusion (CNN arm A + XGBoost arm B, w = 0.47) minus
+  XGBoost arm B, per-eye RMSE and MAE on non-floor cells, OOF and held-out; arm 0 on the same
+  cells as the reference; the censored arm against XGBoost arm 1 once it completes. Reported
+  as an added analysis. Where the clustered-bootstrap CI and the Wilcoxon p disagree, both
+  are reported.
