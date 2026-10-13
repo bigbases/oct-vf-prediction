@@ -1622,23 +1622,28 @@ def scan_numbers(files, num_src, literature=(), sanchors=(), provenance=None):
                     if provenance is not None:
                         provenance[pk]['status'] = 'CITE'
                     continue
-                if ONE_DP.fullmatch(printed):
+                need_anchor = has_cite or ONE_DP.fullmatch(printed)
+                if need_anchor:
+                    # 인용 문단의 수치와 소수 한 자리 수치는 풀 일치로 통과하지 않는다.
+                    # 문헌값이면 literature_values.yaml, 우리 결과면 sentence_anchors.yaml.
+                    kind = 'LIT' if has_cite else 'ONE-DP'
                     hits = [a for a in sanchors if a['file'] == f.name and str(a['printed']) == printed
                             and a['contains'] in ctx]
                     if not hits:
                         if provenance is not None:
-                            provenance[pk]['status'] = 'ONE-DP'
+                            provenance[pk]['status'] = kind
+                        what = ('인용 문단의 수치 — 문헌 등록(literature_values.yaml)이나 문장 앵커가 없다: '
+                                if has_cite else '소수 한 자리 수치 — 문장 앵커(sentence_anchors.yaml) 없음: ')
                         misses.append(Finding(
-                            kind='ONE-DP', id=f'onedp:{f.name}:{ln}#{printed}', label=printed,
-                            where=f'{f.name}:{ln}',
-                            detail='소수 한 자리 수치 — 문장 앵커(sentence_anchors.yaml) 없음: ' + line.strip()))
+                            kind=kind, id=f'{kind.lower().replace("-", "")}:{f.name}:{ln}#{printed}',
+                            label=printed, where=f'{f.name}:{ln}', detail=what + line.strip()))
                         continue
                     a = hits[0]
                     v, why = sentence_anchor_value(a)
                     if v is None or not render_match(v, printed):
                         misses.append(Finding(
-                            kind='ONE-DP', id=f'onedp:{f.name}:{ln}#{printed}', label=printed,
-                            where=f'{f.name}:{ln}',
+                            kind=kind, id=f'{kind.lower().replace("-", "")}:{f.name}:{ln}#{printed}',
+                            label=printed, where=f'{f.name}:{ln}',
                             detail=(why or f'앵커 근거 {a["source"]}:{a["path"]} = {v} 가 인쇄값과 안 맞는다')
                             + ' | ' + line.strip()))
                         continue
@@ -1657,14 +1662,6 @@ def scan_numbers(files, num_src, literature=(), sanchors=(), provenance=None):
                     oks.append((f.name, ln, printed, where))
                     if provenance is not None:
                         provenance[pk] = {'line': ln, 'status': 'OK', 'sources': all_sources(num_src, printed)}
-                elif has_cite:
-                    if provenance is not None:
-                        provenance[pk]['status'] = 'LIT'
-                    misses.append(Finding(
-                        kind='LIT', id=f'lit:{f.name}:{ln}#{printed}', label=printed,
-                        where=f'{f.name}:{ln}',
-                        detail='인용 문단의 수치인데 근거도 문헌값 등록(literature_values.yaml)도 없다: '
-                               + line.strip()))
                 else:
                     misses.append(Finding(
                         kind='MISS',

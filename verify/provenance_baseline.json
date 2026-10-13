@@ -15,7 +15,7 @@
  "conclusions.tex#0.5#5b66cc95d6": {
   "line": 41,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "conclusions.tex#0.51#2bfa3c88a9": {
   "line": 18,
@@ -50,7 +50,7 @@
  "conclusions.tex#0.6#5b66cc95d6": {
   "line": 41,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "conclusions.tex#0.852#30714c9bb3": {
   "line": 27,
@@ -371,7 +371,7 @@
  "discussion.tex#0.5#24363de2fa": {
   "line": 214,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#0.5#a0a4163ff6": {
   "line": 101,
@@ -381,7 +381,7 @@
  "discussion.tex#0.5#ef7cbdac77": {
   "line": 208,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#0.509#3766ce9b06": {
   "line": 6,
@@ -394,17 +394,8 @@
  },
  "discussion.tex#0.51#477d3ba563": {
   "line": 273,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/forest_rows.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/osflip_compare.json",
-   "runs/robustness_gains.json",
-   "runs/skeleton_numbers.json:backbones.inception_resnet_v2.test.delta_fus_minus_xgb_rmse (gain)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#0.51#4e51b8e81b": {
   "line": 124,
@@ -496,12 +487,12 @@
  "discussion.tex#0.6#8624be84a5": {
   "line": 269,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#0.6#ef7cbdac77": {
   "line": 208,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#0.60#08a50dfd03": {
   "line": 119,
@@ -568,12 +559,12 @@
  "discussion.tex#1.3#bb0dfd9328": {
   "line": 178,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#1.8#34eca889fb": {
   "line": 161,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#10#3df07a45cb": {
   "line": 123,
@@ -592,25 +583,13 @@
  },
  "discussion.tex#11#3bedf7eed9": {
   "line": 274,
-  "sources": [
-   "runs/backbone_matrix_table.json",
-   "runs/fusion_error_structure.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/severity_region.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#11#f73eaa0278": {
   "line": 191,
-  "sources": [
-   "runs/backbone_matrix_table.json",
-   "runs/fusion_error_structure.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/severity_region.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#12.18#0924cc22e3": {
   "line": 279,
@@ -629,51 +608,18 @@
  },
  "discussion.tex#14#066881970a": {
   "line": 177,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#14#209f8e3a56": {
   "line": 188,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#14#23f56bb1a2": {
   "line": 192,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#14#c5e028fe34": {
   "line": 286,
@@ -693,19 +639,8 @@
  },
  "discussion.tex#14#cc241eeb48": {
   "line": 187,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#144#88a6cd7265": {
   "line": 263,
@@ -737,7 +672,7 @@
  "discussion.tex#2.1#34eca889fb": {
   "line": 161,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#2.49#21030dda28": {
   "line": 176,
@@ -782,12 +717,8 @@
  },
  "discussion.tex#226#718e303f48": {
   "line": 175,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/fusion_sensitivity_trend.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#26#83e5bf308b": {
   "line": 159,
@@ -819,10 +750,8 @@
  },
  "discussion.tex#3.806#bb0dfd9328": {
   "line": 178,
-  "sources": [
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#3.806#c5e028fe34": {
   "line": 286,
@@ -845,40 +774,23 @@
  },
  "discussion.tex#33#cfc0681e4e": {
   "line": 275,
-  "sources": [
-   "runs/case_profile.json",
-   "runs/fusion_precision_mde.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#33#f73eaa0278": {
   "line": 191,
-  "sources": [
-   "runs/case_profile.json",
-   "runs/fusion_precision_mde.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#34#83e5bf308b": {
   "line": 159,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#35#66e507a53b": {
   "line": 186,
-  "sources": [
-   "runs/case_profile.json",
-   "runs/fusion_precision_mde.json",
-   "runs/skeleton_numbers.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#37#1e294663ca": {
   "line": 85,
@@ -908,11 +820,8 @@
  },
  "discussion.tex#45#4b912490ae": {
   "line": 179,
-  "sources": [
-   "runs/fusion_precision_mde.json",
-   "runs/symmetric_summary_ensemble.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#494#21030dda28": {
   "line": 176,
@@ -922,37 +831,17 @@
  "discussion.tex#5.5#f73eaa0278": {
   "line": 191,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "discussion.tex#5.894#1ed7541246": {
   "line": 216,
-  "sources": [
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#5.894#bb0dfd9328": {
   "line": 178,
-  "sources": [
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#5.894#c5e028fe34": {
   "line": 286,
@@ -1002,21 +891,8 @@
  },
  "discussion.tex#8.069#1ed7541246": {
   "line": 216,
-  "sources": [
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/forest_rows.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/robustness_gains.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "discussion.tex#8.115#33fa6f01aa": {
   "line": 46,
@@ -1066,7 +942,7 @@
  "discussion.tex#99.7#cc241eeb48": {
   "line": 187,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "introduction.tex#0.06#7ee8d47c4e": {
   "line": 113,
@@ -1174,14 +1050,8 @@
  },
  "introduction.tex#11#a980c6a2e3": {
   "line": 8,
-  "sources": [
-   "runs/backbone_matrix_table.json",
-   "runs/fusion_error_structure.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/severity_region.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "introduction.tex#161#3d3a4b8756": {
   "line": 23,
@@ -1305,19 +1175,13 @@
  },
  "introduction.tex#33#a980c6a2e3": {
   "line": 8,
-  "sources": [
-   "runs/case_profile.json",
-   "runs/fusion_precision_mde.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "introduction.tex#45#de8b142463": {
   "line": 49,
-  "sources": [
-   "runs/fusion_precision_mde.json",
-   "runs/symmetric_summary_ensemble.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "introduction.tex#4747#b68e7c2050": {
   "line": 7,
@@ -1327,19 +1191,12 @@
  "introduction.tex#5.5#a980c6a2e3": {
   "line": 8,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "introduction.tex#5.77#fa5b7f45f8": {
   "line": 119,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/multiseed_fusion.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "introduction.tex#52#243c36fbb8": {
   "line": 24,
@@ -1373,10 +1230,8 @@
  },
  "introduction.tex#6.70#fa5b7f45f8": {
   "line": 119,
-  "sources": [
-   "runs/aggregation_comparability.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "introduction.tex#6437#4da63e52c8": {
   "line": 35,
@@ -1410,134 +1265,68 @@
  },
  "methods.tex#-12#75142be4a4": {
   "line": 24,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-12#e60863f797": {
   "line": 26,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-12#f41db9bcca": {
   "line": 25,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-3#009fc36df7": {
   "line": 27,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/neg1_mask_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-3#75142be4a4": {
   "line": 24,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/neg1_mask_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-3#cdd38c8bdd": {
   "line": 23,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/neg1_mask_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-3.97#3510afa595": {
   "line": 21,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-32.16#3510afa595": {
   "line": 21,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/skeleton_numbers.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-4#0f1f84ec8a": {
   "line": 138,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/skeleton_numbers.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-5#cce17d239f": {
   "line": 139,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/case_profile.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-6#75142be4a4": {
   "line": 24,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/case_profile.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-6#e60863f797": {
   "line": 26,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/case_profile.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#-7.39#3510afa595": {
   "line": 21,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#0#25f80148b8": {
   "line": 105,
@@ -1571,25 +1360,8 @@
  },
  "methods.tex#0.05#a29080c042": {
   "line": 156,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/final_model_comparison.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/multiseed_fusion.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#0.082#107caeb8fd": {
   "line": 233,
@@ -1605,34 +1377,17 @@
  "methods.tex#0.1#0ba2c46f3f": {
   "line": 158,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#0.10#e46aa2d431": {
   "line": 150,
-  "sources": [
-   "runs/backbone_matrix_table.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/patient_cluster_stats.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json",
-   "runs/symmetric_summary_ensemble.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#0.2#fe268f9842": {
   "line": 35,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#0.31#06c346bae1": {
   "line": 117,
@@ -1703,12 +1458,12 @@
  "methods.tex#0.8#0ba2c46f3f": {
   "line": 158,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#0.9#cce17d239f": {
   "line": 139,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#1#04aa6e7661": {
   "line": 180,
@@ -1785,7 +1540,7 @@
  "methods.tex#12.5#538318b411": {
   "line": 22,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#128#3f9b1f2f44": {
   "line": 60,
@@ -1868,13 +1623,8 @@
  },
  "methods.tex#2.34#3510afa595": {
   "line": 21,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/skeleton_numbers.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#200#3f9b1f2f44": {
   "line": 60,
@@ -1901,12 +1651,12 @@
  "methods.tex#22.4#94ecc5d325": {
   "line": 46,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#22.5#538318b411": {
   "line": 22,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#24#1d21c97777": {
   "line": 121,
@@ -1931,7 +1681,7 @@
  "methods.tex#24.4#538318b411": {
   "line": 22,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#240#51d5bb4a01": {
   "line": 207,
@@ -2004,14 +1754,12 @@
  "methods.tex#26.1#e186ab5eee": {
   "line": 45,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#271#c22d2b933b": {
   "line": 19,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#272#b9501077ce": {
   "line": 13,
@@ -2042,17 +1790,13 @@
  },
  "methods.tex#277#c22d2b933b": {
   "line": 19,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#277#d8536887ce": {
   "line": 43,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#280#e0a746de22": {
   "line": 203,
@@ -2164,7 +1908,7 @@
  "methods.tex#40.6#538318b411": {
   "line": 22,
   "sources": [],
-  "status": "ONE-DP"
+  "status": "LIT"
  },
  "methods.tex#47#7fe4f02a3f": {
   "line": 204,
@@ -2248,38 +1992,8 @@
  },
  "methods.tex#6#e7004597a3": {
   "line": 44,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/ensemble_decisive.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/final_model_comparison.json",
-   "runs/forest_rows.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json",
-   "runs/symmetric_summary_ensemble.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#6.7#e267d67d63": {
   "line": 10,
@@ -2293,69 +2007,13 @@
  },
  "methods.tex#7#e7004597a3": {
   "line": 44,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/ensemble_decisive.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/final_model_comparison.json",
-   "runs/forest_rows.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json",
-   "runs/symmetric_summary_ensemble.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#8#e7004597a3": {
   "line": 44,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/ensemble_decisive.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/final_model_comparison.json",
-   "runs/forest_rows.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/robustness_gains.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json",
-   "runs/symmetric_summary_ensemble.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#8.069#97cf6e0a13": {
   "line": 186,
@@ -2385,11 +2043,8 @@
  },
  "methods.tex#8.70#3510afa595": {
   "line": 21,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/reliability_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "methods.tex#80.0#b2ecfbe970": {
   "line": 9,
@@ -2413,15 +2068,8 @@
  },
  "related_work.tex#-0.72#9048c8abc7": {
   "line": 69,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/direct_test.json",
-   "runs/forest_rows.json",
-   "runs/neg1_mask_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#-12#019e0b8ec5": {
   "line": 58,
@@ -2437,18 +2085,13 @@
  },
  "related_work.tex#-3.70#fa5ba5a64f": {
   "line": 70,
-  "sources": [
-   "runs/fusion_error_structure.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#-32.16#f1ae21aeca": {
   "line": 71,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/skeleton_numbers.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#-7.03#7c52cd2dd4": {
   "line": 68,
@@ -2464,68 +2107,33 @@
  },
  "related_work.tex#-7.39#7c52cd2dd4": {
   "line": 68,
-  "sources": [
-   "CANONICAL_SPEC.md (표)"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#0.060#99e9e01fda": {
   "line": 132,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/fellow_eye_ablation.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#0.27#63182ca80a": {
   "line": 51,
-  "sources": [
-   "runs/backbone_matrix_table.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/centred_ensemble.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/forest_rows.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/robustness_gains.json",
-   "runs/sixth_backbone.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#0.49#63182ca80a": {
   "line": 51,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/forest_rows.json",
-   "runs/fusion_error_structure.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/robustness_gains.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#0.93#f26e665123": {
   "line": 48,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/fusion_precision_mde.json",
-   "runs/sixth_backbone.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#1.12#f26e665123": {
   "line": 48,
-  "sources": [
-   "runs/bias_by_bin_refit.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#10#55c4c2540c": {
   "line": 59,
@@ -2542,26 +2150,13 @@
  },
  "related_work.tex#127#f0fd59759e": {
   "line": 66,
-  "sources": [
-   "runs/reliability_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#14#4d622104c2": {
   "line": 107,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#17.5#55c4c2540c": {
   "line": 59,
@@ -2570,36 +2165,23 @@
  },
  "related_work.tex#2.01#6c2a378c6b": {
   "line": 31,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#2.09#7b4a3dc28f": {
   "line": 75,
-  "sources": [
-   "runs/aggregation_comparability.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#2.15#d88e150b30": {
   "line": 32,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/fusion_precision_mde.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#2.35#d88e150b30": {
   "line": 32,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#2.4#c6aba03342": {
   "line": 61,
@@ -2613,11 +2195,8 @@
  },
  "related_work.tex#2.68#7b4a3dc28f": {
   "line": 75,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/fusion_error_structure.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#2.93#d5e6611b28": {
   "line": 106,
@@ -2631,12 +2210,8 @@
  },
  "related_work.tex#226#71b671390c": {
   "line": 67,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/fusion_sensitivity_trend.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#24#316d868ca8": {
   "line": 21,
@@ -2655,36 +2230,8 @@
  },
  "related_work.tex#240#2ad9fd3aa0": {
   "line": 73,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/ensemble_decisive.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/final_model_comparison.json",
-   "runs/forest_rows.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/robustness_gains.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json",
-   "runs/symmetric_summary_ensemble.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#241#3e417337cf": {
   "line": 30,
@@ -2703,39 +2250,23 @@
  },
  "related_work.tex#3.32#d88e150b30": {
   "line": 32,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#3.75#7b4a3dc28f": {
   "line": 75,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/bias_by_bin_refit.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#34#5825c29575": {
   "line": 49,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#45#313271b969": {
   "line": 101,
-  "sources": [
-   "runs/fusion_precision_mde.json",
-   "runs/symmetric_summary_ensemble.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#494#71b671390c": {
   "line": 67,
@@ -2761,30 +2292,13 @@
  },
  "related_work.tex#5.77#6c2a378c6b": {
   "line": 31,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/multiseed_fusion.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#5.894#a731fef21c": {
   "line": 34,
-  "sources": [
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#52#46a66208f3": {
   "line": 84,
@@ -2818,43 +2332,18 @@
  },
  "related_work.tex#6.08#631b4c1de3": {
   "line": 96,
-  "sources": [
-   "runs/aggregation_comparability.json",
-   "runs/final_model_comparison.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/heldout_mae_reversal.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#6.123#a731fef21c": {
   "line": 34,
-  "sources": [
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/backbone_matrix_table.json",
-   "runs/direct_test.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/reliability_sensitivity.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#6.70#d88e150b30": {
   "line": 32,
-  "sources": [
-   "runs/aggregation_comparability.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "related_work.tex#6437#c47fe925bc": {
   "line": 130,
@@ -3225,13 +2714,8 @@
  },
  "results.tex#-1.18#5dc0c13d2f": {
   "line": 642,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/fusion_error_structure.json",
-   "runs/neg1_mask_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#-1.204#3b3de577a1": {
   "line": 146,
@@ -3706,25 +3190,8 @@
  },
  "results.tex#0.026#1b2052eb1d": {
   "line": 244,
-  "sources": [
-   "runs/ablation_vert_cd.json",
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/final_model_comparison.json",
-   "runs/forest_rows.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/robustness_gains.json",
-   "runs/skeleton_numbers.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#0.026#88fe359c9f": {
   "line": 92,
@@ -4926,10 +4393,8 @@
  },
  "results.tex#1.1e-16#2e512afc91": {
   "line": 243,
-  "sources": [
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#1.1e-8#6134ec5472": {
   "line": 289,
@@ -4970,18 +4435,8 @@
  },
  "results.tex#1.3e-10#2e512afc91": {
   "line": 243,
-  "sources": [
-   "runs/ablation_vert_cd.json",
-   "runs/forest_rows.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#1.3e-10#3f4772ef9a": {
   "line": 260,
@@ -5066,12 +4521,8 @@
  },
  "results.tex#1.56#275c8abce2": {
   "line": 643,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/fusion_precision_mde.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#1.59#bc185665df": {
   "line": 482,
@@ -5241,14 +4692,8 @@
  },
  "results.tex#11#1d64fa64a4": {
   "line": 241,
-  "sources": [
-   "runs/backbone_matrix_table.json",
-   "runs/fusion_error_structure.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/severity_region.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#11#4d83aab4fe": {
   "line": 531,
@@ -5263,22 +4708,13 @@
  },
  "results.tex#11#f830542b98": {
   "line": 620,
-  "sources": [
-   "runs/backbone_matrix_table.json",
-   "runs/fusion_error_structure.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/severity_region.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#12.18#c480f07267": {
   "line": 618,
-  "sources": [
-   "runs/fusion_error_structure.json",
-   "runs/severity_region.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#12.18#cf03c0b2d6": {
   "line": 607,
@@ -5420,19 +4856,8 @@
  },
  "results.tex#14#62eaece2cf": {
   "line": 238,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#14#f450268ef8": {
   "line": 249,
@@ -5452,19 +4877,8 @@
  },
  "results.tex#14#f8162f6394": {
   "line": 237,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#14.8#0386fe4703": {
   "line": 499,
@@ -5780,42 +5194,18 @@
  },
  "results.tex#22#0522035a92": {
   "line": 240,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/direct_test.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#22#2e512afc91": {
   "line": 243,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/direct_test.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#22#6938f67cc2": {
   "line": 242,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/bias_by_bin.json",
-   "runs/direct_test.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/reliability_sensitivity.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#226#1529108b63": {
   "line": 459,
@@ -5965,36 +5355,8 @@
  },
  "results.tex#240#7c8a957089": {
   "line": 644,
-  "sources": [
-   "CANONICAL_SPEC.md (표)",
-   "runs/ablation_vert_cd.json",
-   "runs/aggregation_comparability.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/direct_test.json",
-   "runs/ensemble_decisive.json",
-   "runs/fellow_eye_ablation.json",
-   "runs/final_model_comparison.json",
-   "runs/forest_rows.json",
-   "runs/fusion_consistency_matrix.json",
-   "runs/fusion_error_structure.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json",
-   "runs/multiseed_fusion.json",
-   "runs/neg1_mask_sensitivity.json",
-   "runs/osflip_compare.json",
-   "runs/patient_cluster_stats.json",
-   "runs/reliability_sensitivity.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/robustness_gains.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/stepsize_sensitivity.json",
-   "runs/symmetric_summary_ensemble.json",
-   "runs/trivial_baselines.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#240#b16e77dee2": {
   "line": 347,
@@ -6326,15 +5688,8 @@
  },
  "results.tex#30#275c8abce2": {
   "line": 643,
-  "sources": [
-   "runs/bias_by_bin.json",
-   "runs/bias_by_bin_refit.json",
-   "runs/case_profile.json",
-   "runs/centred_ensemble.json",
-   "runs/fusion_precision_mde.json",
-   "runs/fusion_sensitivity_trend.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#30#5c93bb926b": {
   "line": 453,
@@ -6809,15 +6164,8 @@
  },
  "results.tex#5.07#c480f07267": {
   "line": 618,
-  "sources": [
-   "runs/bias_by_bin_refit.json",
-   "runs/fusion_error_structure.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/severity_region.json",
-   "runs/sixth_backbone.json",
-   "runs/stepsize_sensitivity.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#5.38#0113fb4758": {
   "line": 604,
@@ -7679,13 +7027,8 @@
  },
  "results.tex#7.963#b0e77bfd33": {
   "line": 362,
-  "sources": [
-   "runs/centred_ensemble.json",
-   "runs/forest_rows.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/sixth_backbone.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#7.963#dc0e0c8dfc": {
   "line": 515,
@@ -7978,15 +7321,8 @@
  },
  "results.tex#8.115#207a9d6ae1": {
   "line": 360,
-  "sources": [
-   "runs/centred_ensemble.json",
-   "runs/ensemble_decisive.json",
-   "runs/resnet50_late_fusion.json",
-   "runs/sixth_backbone.json",
-   "runs/skeleton_numbers.json",
-   "runs/symmetric_summary_ensemble.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#8.115#dc0e0c8dfc": {
   "line": 515,
@@ -8078,11 +7414,8 @@
  },
  "results.tex#8.223#36624a79aa": {
   "line": 357,
-  "sources": [
-   "runs/resnet50_late_fusion.json",
-   "runs/sixth_backbone.json"
-  ],
-  "status": "OK"
+  "sources": [],
+  "status": "LIT"
  },
  "results.tex#8.255#726cebd8b6": {
   "line": 91,
