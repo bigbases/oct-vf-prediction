@@ -124,5 +124,20 @@ loading runs in the main process.
   differ from the submitted runs from epoch 1 on. Per §1 those three are not launched. A
   repeat probe tests whether the current code is deterministic run to run; the outcome and
   any change to R1-3 that follows will be recorded here before those runs start.
+* 2026-10-13, repeat probe. Xception and DenseNet121: two probes of the current code agree
+  exactly with each other and both differ from the submitted run, so the current code is
+  deterministic but does not reproduce those runs. VGG16: the two probes differ from each
+  other, so VGG16 training is not deterministic run to run. The July training script
+  (recovered from the editor's local history) differs from the current one only in how the
+  held-out set is handled, which cannot affect epoch 1; the cause is not established.
+  Decision:
+  - Endpoints 1-3 of R1-3 are computed among mirrored runs only, so they do not depend on
+    reproducing the submitted unmirrored runs. The mirrored VGG16, Xception and DenseNet121
+    runs are launched as planned.
+  - Endpoint 4 (mirrored vs unmirrored) would mix mirroring with the reproduction gap for
+    these three. Each of them is therefore also retrained unmirrored with the current code,
+    and endpoint 4 compares mirrored with this matched rerun. The rerun vs the submitted run
+    is reported separately, as the size of the reproduction gap. These reruns are queued last.
+  - VGG16 endpoint-4 differences include run-to-run noise, which is reported as such.
 * (pending, before the first R1-3 endpoint is computed) Primary frame of the revised
   manuscript: mirrored or unmirrored.
