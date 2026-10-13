@@ -109,3 +109,11 @@ docs/*
 verify/*
 !verify/exceptions.yaml
 !verify/placeholder_patterns.yaml
+
+# Revision round 1: plans are published, outputs are not (they carry patient keys).
+!docs/revision_r1/
+experiments/revision_r1/runs/
+experiments/revision_r1/probes/
+experiments/revision_r1/logs/
+experiments/revision_r1/cache/
+experiments/revision_r1/samples/
