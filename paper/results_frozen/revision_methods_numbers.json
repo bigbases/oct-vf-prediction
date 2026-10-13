@@ -1,0 +1,314 @@
+{
+  "note": "Numbers for the revised Methods (R1-1, R1-3, R1-4); constants read from the code that ran, counts from the artefacts. No patient keys.",
+  "r11_regions": {
+    "rnfl": {
+      "n_wedges": 12,
+      "wedge_deg": 30,
+      "centre": "optic disc (centroid of the grey disc overlay)",
+      "centre_detection_failures": 0,
+      "border_band_frac_of_width": [
+        9,
+        271
+      ],
+      "border_rgb": [
+        53,
+        169,
+        224
+      ]
+    },
+    "gca": {
+      "n_regions": 8,
+      "n_annulus_sectors": 6,
+      "sector_width_deg": 60,
+      "inner_axes_mm": [
+        1.2,
+        1.0
+      ],
+      "outer_axes_mm": [
+        4.8,
+        4.0
+      ],
+      "map_extent_mm": 6.0,
+      "ring_band_halfwidth_px": 1.5,
+      "contour_band_px": 2.5,
+      "ring_rgb": [
+        101,
+        113,
+        155
+      ],
+      "border_band_frac_of_width": [
+        4,
+        343
+      ],
+      "border_rgb": [
+        86,
+        133,
+        195
+      ]
+    },
+    "ramp": {
+      "entries": 271,
+      "step_um": 1.2963,
+      "colorbar_um": [
+        350.0,
+        175.0,
+        0.0
+      ],
+      "max_rgb_distance": 42.0,
+      "panels_checked": 40,
+      "max_rgb_diff_between_panels": 0.0
+    },
+    "non_thickness": {
+      "grey_saturation_max": 0.12,
+      "grey_max_between": [
+        40,
+        250
+      ],
+      "black_max": 40,
+      "fringe_px": 1
+    },
+    "min_region_px": 30,
+    "build": {
+      "maps": 557,
+      "by_kind": {
+        "gca": 280,
+        "rnfl": 277
+      },
+      "thickness_fraction_median": {
+        "gca": 0.9044,
+        "rnfl": 0.8129
+      },
+      "regions_filled_from_map_mean": 2,
+      "roundtrip_max_err_um": 0.6481
+    },
+    "band_recount": {
+      "gca": {
+        "maps_with_one_band_colour": 280,
+        "band_px": 1599316
+      },
+      "rnfl": {
+        "maps_with_one_band_colour": 277,
+        "band_px": 2612664
+      }
+    }
+  },
+  "r11_qc": {
+    "fit_support_min": 0.35,
+    "gca_maps": 280,
+    "flagged": 16,
+    "adjudication": {
+      "a/bad_scan": 6,
+      "b/refit": 4,
+      "b/refit_failed": 4,
+      "normal/normal": 2
+    },
+    "gca_status": {
+      "fit": 266,
+      "refit": 4,
+      "map_mean": 10
+    },
+    "map_mean_eyes": {
+      "n": 10,
+      "n_with_md": 10,
+      "median": -17.46,
+      "min": -24.12,
+      "max": -1.94,
+      "oof": 9,
+      "test": 1
+    },
+    "class_a_eyes": {
+      "n": 6,
+      "n_with_md": 6,
+      "median": -19.505,
+      "min": -24.12,
+      "max": -2.55,
+      "oof": 6,
+      "test": 0
+    },
+    "cohort_evaluated_eyes": {
+      "n": 277,
+      "n_with_md": 271,
+      "median": -3.97,
+      "min": -32.16,
+      "max": 2.34
+    }
+  },
+  "r11_xgb": {
+    "sets": {
+      "map23": {
+        "n_features": 23,
+        "region_means": 20,
+        "disc_measures": 3
+      },
+      "map26": {
+        "n_features": 26,
+        "cirrus_geometry": 25,
+        "vertical_cd": 1
+      },
+      "printed26": {
+        "n_features": 26
+      }
+    },
+    "rnfl_circle_diameter_mm": 3.46,
+    "rnfl_band_width_mm": 0.2,
+    "gca_min_spokes": 360,
+    "cup_grey_min": 160,
+    "rows": 280,
+    "evaluated_rows": 277,
+    "evaluated_rows_with_missing_map23": 0,
+    "evaluated_rows_with_missing_map26": 5,
+    "missing_map26_values_per_such_row": [
+      1,
+      1,
+      1,
+      4,
+      8
+    ],
+    "r_map_vcd_vs_printed": {
+      "r": 0.8029091900120146,
+      "n": 277
+    }
+  },
+  "r13": {
+    "mirrored_runs": {
+      "IR-v2": {
+        "args_changed": {},
+        "args_absent_in_submitted_run": {
+          "flip_os_images": true
+        },
+        "flip_os_images": true,
+        "epochs_per_fold": [
+          196,
+          300,
+          182,
+          259,
+          231
+        ],
+        "epochs_total": 1168
+      },
+      "Inception-v3": {
+        "args_changed": {
+          "dump_test_preds": [
+            false,
+            true
+          ]
+        },
+        "args_absent_in_submitted_run": {
+          "backbone": "inception_v3",
+          "flip_os_images": true
+        },
+        "flip_os_images": true,
+        "epochs_per_fold": [
+          178,
+          300,
+          300,
+          234,
+          176
+        ],
+        "epochs_total": 1188
+      },
+      "Xception": {
+        "status": "run not complete"
+      },
+      "DenseNet121": {
+        "status": "run not complete"
+      },
+      "VGG16": {
+        "status": "run not complete"
+      }
+    },
+    "probes_fold0": {
+      "IR-v2": {
+        "vs_submitted": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 0
+        }
+      },
+      "Inception-v3": {
+        "vs_submitted": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 0
+        }
+      },
+      "Xception": {
+        "vs_submitted": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 15
+        },
+        "repeat_vs_first": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 0
+        }
+      },
+      "DenseNet121": {
+        "vs_submitted": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 15
+        },
+        "repeat_vs_first": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 0
+        }
+      },
+      "VGG16": {
+        "vs_submitted": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 15
+        },
+        "repeat_vs_first": {
+          "epochs": 3,
+          "values": 15,
+          "mismatches": 15
+        }
+      }
+    },
+    "probe_setting": {
+      "fold": 0,
+      "epochs": 3,
+      "history_fields": [
+        "train_loss",
+        "train_mae",
+        "val_mse",
+        "val_rmse",
+        "val_mae"
+      ]
+    },
+    "unmirrored_reruns_current_code": [
+      "VGG16",
+      "Xception",
+      "DenseNet121"
+    ]
+  },
+  "r14": {
+    "floor_cells": 1792,
+    "cells": 14560,
+    "floor_pct": 12.31,
+    "rows": 280,
+    "rows_matched_exactly": 274,
+    "rows_matched_unique_candidate": 6,
+    "evaluation_floor_cells": {
+      "oof": {
+        "cells_dropped": 1573,
+        "dropped_pct": 12.6,
+        "n_eyes": 240
+      },
+      "test": {
+        "cells_dropped": 204,
+        "dropped_pct": 10.6,
+        "n_eyes": 37
+      }
+    },
+    "rules": {
+      "exclude": "floor cells masked out of the training loss and of the validation MAE that selects the checkpoint",
+      "censored": "floor cells kept; penalised only above 0 dB: max(pred, 0)^2 in the loss, max(pred, 0) in the validation MAE",
+      "xgb_exclude": "per location, training rows whose cell is a floor cell are left out"
+    }
+  }
+}

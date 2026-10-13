@@ -115,6 +115,14 @@ SOURCES = {
     # docs/revision_r1/ before its producer was run. R1-5/R1-6 reuse the pass-B
     # predictions without refitting; the producer guards the frozen branch values.
     'calibration_multiplicity.json': ('experiments/revision_r1/calibration_multiplicity.json', 'B'),
+    # fixed_w_bias: the limitations-paragraph correction (+0.57 dB, 0.54 dB above the summary
+    #   branch). calibration_multiplicity.json holds the out-of-fold fusion with nested w only;
+    #   this is the fixed Table 3 weight, guarded against the frozen Summary and nested values.
+    'fixed_w_bias.json': ('experiments/revision_r1/fixed_w_bias.json', 'B'),
+    # revision_methods_numbers: numbers the revised Methods prints for R1-1 / R1-3 / R1-4
+    #   (map geometry, QC counts, feature sets, probes, floor cells). Its r13 block grows as
+    #   the mirrored runs finish and is refrozen then.
+    'revision_methods_numbers.json': ('experiments/revision_r1/revision_methods_numbers.json', 'B'),
 }
 
 # keys dropped from case_profile.json: pseudonym + eye + date is re-identifying

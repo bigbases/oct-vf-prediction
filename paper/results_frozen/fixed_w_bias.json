@@ -1,0 +1,57 @@
+{
+  "note": "IR-v2 fusion mean residual (prediction - label, dB) out-of-fold at the fixed Table 3 weight; differences are fusion - Summary. Same cells and clustered bootstrap (5000, seed 42) as calibration_multiplicity.json.",
+  "split": "OOF",
+  "w_fixed": 0.47000000000000003,
+  "n_cells": 12480,
+  "guards": [
+    {
+      "branch": "Summary",
+      "got": 0.026589832108061984,
+      "want": 0.026589832108061984,
+      "ok": true
+    },
+    {
+      "branch": "Fusion nested w",
+      "got": 0.5808126246317826,
+      "want": 0.5808126246317826,
+      "ok": true
+    }
+  ],
+  "branches": {
+    "Summary": {
+      "mean_bias": 0.026589832108061984,
+      "mean_bias_ci": [
+        -0.8885714895676448,
+        0.9424828536587198
+      ]
+    },
+    "Fusion nested w": {
+      "mean_bias": 0.5808126246317826,
+      "mean_bias_ci": [
+        -0.2339743560115959,
+        1.4391621134043047
+      ]
+    },
+    "Fusion fixed w": {
+      "mean_bias": 0.5701924621533507,
+      "mean_bias_ci": [
+        -0.2452715340458966,
+        1.4244933137268367
+      ]
+    }
+  },
+  "fixed_minus_summary": {
+    "mean": 0.5436026300452887,
+    "ci": [
+      0.1723944160264522,
+      0.8972987505043349
+    ]
+  },
+  "nested_minus_summary": {
+    "mean": 0.5542227925237206,
+    "ci": [
+      0.17853924592715878,
+      0.9139937238053164
+    ]
+  }
+}
