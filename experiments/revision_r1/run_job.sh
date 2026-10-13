@@ -8,6 +8,8 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 REPO="${HVF_ROOT:-$(cd "$HERE/../.." && pwd)}"
 PY="${PY:-python}"
 GPU="$1"; NAME="$2"; LAUNCHER="$3"; shift 3
+# Only GPU 1 is allocated to this project; GPU 0 belongs to another user.
+case " ${R1_ALLOWED_GPUS:-1} " in *" $GPU "*) ;; *) echo "refusing GPU $GPU (allowed: ${R1_ALLOWED_GPUS:-1})" >&2; exit 3 ;; esac
 SUB=runs; [ "${R1_PROBE:-0}" = 1 ] && SUB=probes
 OUT="$HERE/$SUB/$NAME"
 LOG="$HERE/logs/$NAME.log"
