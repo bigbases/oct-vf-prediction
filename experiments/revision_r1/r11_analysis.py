@@ -2,12 +2,13 @@
 """R1-1 analysis (plan: docs/revision_r1/prereg_R1-1.md, statistics of prereg_R1-3_R1-4.md §0).
 
 Arms. CNN: submitted run per backbone (original map) and runs/r11_sector_<backbone>
-(sector-averaged map). XGBoost: submitted printed26 (pass B runs/oof) and runs/r11_xgb/<set>
-for map23 (primary), map26, printed26 (refit; must equal the submitted one). Eyes, folds and
-the location mask are those of the submitted analysis (fusion_eval_common.load_all: 240
-out-of-fold eyes, 37 held-out). Held-out predictions are the mean of the five fold models.
-Fusion of a single backbone: w fitted on all out-of-fold folds (grid 0-1 step 0.01, pooled
-RMSE), Table 3 convention. Arms whose predictions do not exist yet are skipped.
+(sector-averaged map; irv2 stands for Inception-ResNet-v2). XGBoost: submitted printed26
+(pass B runs/oof) and runs/r11_xgb/<set> for map23 (primary), map26, printed26 (refit; must
+equal the submitted one). Eyes, folds and the location mask are those of the submitted
+analysis (fusion_eval_common.load_all: 240 out-of-fold eyes, 37 held-out). Held-out
+predictions are the mean of the five fold models. Fusion of a single backbone: w fitted on
+all out-of-fold folds (grid 0-1 step 0.01, pooled RMSE), Table 3 convention. Arms
+whose predictions do not exist yet are skipped.
 
 Comparisons, per-eye RMSE and MAE, paired Wilcoxon and patient-clustered bootstrap 95%
 interval of the mean difference (a - b; negative = a better):
@@ -50,6 +51,8 @@ from PIL import Image                                 # noqa: E402
 
 BACKBONES = {'inception_resnet_v2': 'IR-v2', 'inception_v3': 'Inception-v3', 'vgg16': 'VGG16',
              'xception': 'Xception', 'densenet121': 'DenseNet121'}
+# run directory = queue job name; the IR-v2 job was queued as r11_sector_irv2
+RUN_NAME = {'inception_resnet_v2': 'irv2'}
 XGB_SETS = ('map23', 'map26', 'printed26')
 GUARD = {('OOF', 'xgb_printed26'): 8.6603, ('OOF', 'cnn_original'): 8.5397,
          ('TEST', 'xgb_printed26'): 8.9193, ('TEST', 'cnn_original'): 8.7323,
@@ -112,7 +115,7 @@ def main(backbones):
                 B[f'xgb_{fs}_r11'] = p
         for bb in backbones:
             B[f'{bb}:cnn_original'] = preds(lambda k: PASS_B / FE.BB[BACKBONES[bb]] / f'{s}_preds_fold{k}.npz', kf, split)
-            p = preds(lambda k: HERE / f'runs/r11_sector_{bb}' / f'{s}_preds_fold{k}.npz', kf, split)
+            p = preds(lambda k: HERE / f'runs/r11_sector_{RUN_NAME.get(bb, bb)}' / f'{s}_preds_fold{k}.npz', kf, split)
             if p is not None:
                 B[f'{bb}:cnn_sector'] = p
         data[split] = dict(keys=keys, lab=lab, mask=mask, B=B,
