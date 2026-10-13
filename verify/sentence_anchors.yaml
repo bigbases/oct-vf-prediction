@@ -20,4 +20,17 @@
 #     source: "skeleton_numbers.json"
 #     path: "oct_vf_gap_days.mean"
 
-anchors: []
+anchors:
+  # Revision R1 (manuscript change M8): results.tex "Floor label rule." paragraph. The
+  # submitted text gives 12.31% (1,792 / 14,560 cells of the 280-pair dataset) as the share
+  # of points dropped; the re-evaluation actually drops 12.6% out-of-fold and 10.6% held-out.
+  - file: "results.tex"
+    contains: "Floor label rule."
+    printed: "12.6"
+    source: "neg1_mask_sensitivity.json"
+    path: "splits.oof.dropped_pct"
+  - file: "results.tex"
+    contains: "Floor label rule."
+    printed: "10.6"
+    source: "neg1_mask_sensitivity.json"
+    path: "splits.test.dropped_pct"
