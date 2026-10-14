@@ -1,0 +1,191 @@
+{
+  "note": "OCT signal strength (Cirrus, 0-10) over the 277 evaluated pairs; counting rules in the producer docstring. No patient keys, no dates.",
+  "input": {
+    "sha256": "4157f4ca5b5d4180f0a6a120a8ef72f59c82af7b26dbdb45e00ceb103cdb61d2",
+    "rows": 340,
+    "report_sessions": 178,
+    "sessions_with_repeated_rows": 162,
+    "repeated_rows_consistent": true
+  },
+  "pairs_evaluated": {
+    "total": 277,
+    "out_of_fold": 240,
+    "held_out": 37
+  },
+  "threshold": 6,
+  "rules": {
+    "own_eye": {
+      "optic_disc": {
+        "pairs": 277,
+        "available": 272,
+        "unavailable": 5,
+        "median": 7.0,
+        "min": 0,
+        "max": 10,
+        "below_6": {
+          "n": 72,
+          "pct": 26.470588235294116
+        },
+        "histogram": {
+          "0": 1,
+          "1": 4,
+          "2": 16,
+          "3": 25,
+          "4": 19,
+          "5": 7,
+          "6": 27,
+          "7": 49,
+          "8": 55,
+          "9": 55,
+          "10": 14
+        }
+      },
+      "macular": {
+        "pairs": 277,
+        "available": 271,
+        "unavailable": 6,
+        "median": 8,
+        "min": 1,
+        "max": 10,
+        "below_6": {
+          "n": 61,
+          "pct": 22.509225092250922
+        },
+        "histogram": {
+          "1": 2,
+          "2": 9,
+          "3": 19,
+          "4": 13,
+          "5": 18,
+          "6": 13,
+          "7": 23,
+          "8": 42,
+          "9": 48,
+          "10": 84
+        }
+      }
+    },
+    "own_eye_zero_excluded": {
+      "optic_disc": {
+        "pairs": 277,
+        "available": 271,
+        "unavailable": 6,
+        "median": 7,
+        "min": 1,
+        "max": 10,
+        "below_6": {
+          "n": 71,
+          "pct": 26.199261992619927
+        },
+        "histogram": {
+          "1": 4,
+          "2": 16,
+          "3": 25,
+          "4": 19,
+          "5": 7,
+          "6": 27,
+          "7": 49,
+          "8": 55,
+          "9": 55,
+          "10": 14
+        }
+      },
+      "macular": {
+        "pairs": 277,
+        "available": 271,
+        "unavailable": 6,
+        "median": 8,
+        "min": 1,
+        "max": 10,
+        "below_6": {
+          "n": 61,
+          "pct": 22.509225092250922
+        },
+        "histogram": {
+          "1": 2,
+          "2": 9,
+          "3": 19,
+          "4": 13,
+          "5": 18,
+          "6": 13,
+          "7": 23,
+          "8": 42,
+          "9": 48,
+          "10": 84
+        }
+      }
+    },
+    "single_value_fill": {
+      "optic_disc": {
+        "pairs": 277,
+        "available": 276,
+        "unavailable": 1,
+        "median": 7.0,
+        "min": 1,
+        "max": 10,
+        "below_6": {
+          "n": 72,
+          "pct": 26.08695652173913
+        },
+        "histogram": {
+          "1": 4,
+          "2": 16,
+          "3": 26,
+          "4": 19,
+          "5": 7,
+          "6": 27,
+          "7": 51,
+          "8": 55,
+          "9": 57,
+          "10": 14
+        }
+      },
+      "macular": {
+        "pairs": 277,
+        "available": 277,
+        "unavailable": 0,
+        "median": 8,
+        "min": 1,
+        "max": 10,
+        "below_6": {
+          "n": 62,
+          "pct": 22.382671480144403
+        },
+        "histogram": {
+          "1": 2,
+          "2": 9,
+          "3": 19,
+          "4": 14,
+          "5": 18,
+          "6": 13,
+          "7": 23,
+          "8": 43,
+          "9": 49,
+          "10": 87
+        }
+      }
+    }
+  },
+  "single_value_cases": {
+    "optic_disc": {
+      "own_column_blank": 5,
+      "by_eye": {
+        "OS": 5
+      },
+      "other_column_present": 5,
+      "other_eye_of_session_evaluated": 0,
+      "filled_value_below_6": 1,
+      "filled_value_zero": 0
+    },
+    "macular": {
+      "own_column_blank": 6,
+      "by_eye": {
+        "OS": 6
+      },
+      "other_column_present": 6,
+      "other_eye_of_session_evaluated": 0,
+      "filled_value_below_6": 1,
+      "filled_value_zero": 0
+    }
+  }
+}

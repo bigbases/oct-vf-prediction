@@ -368,3 +368,17 @@ anchors:
   # with "across the three models" added to the sentence.
   - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.27", source: "manuscript_support_numbers.json", path: "axis_counterfactual.range_three_models.min"}
   - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.49", source: "manuscript_support_numbers.json", path: "axis_counterfactual.range_three_models.max"}
+  # M15 (revertible): methods.tex Cohort, OCT signal strength over the 277 evaluated pairs
+  # (signal_strength_summary.json). The submitted values come from rule single_value_fill, in
+  # which 5 disc / 6 macular pairs with a blank own column take the report's one read value,
+  # whose eye the stage-10 reader does not record; the own-eye rules give 272 or 271 / 271 and
+  # 26.5 or 26.2 / 22.5. The "6" is the threshold of the cited studies, a literature value, and
+  # is deliberately not anchored to our own threshold field. If M15 stands the fragment is gone
+  # and these entries match nothing.
+  - {file: "methods.tex", contains: "Signal strength is available", printed: "276", source: "signal_strength_summary.json", path: "rules.single_value_fill.optic_disc.available"}
+  - {file: "methods.tex", contains: "Signal strength is available", printed: "277", source: "signal_strength_summary.json", path: "rules.single_value_fill.optic_disc.pairs"}
+  - {file: "methods.tex", contains: "Signal strength is available", printed: "277", source: "signal_strength_summary.json", path: "rules.single_value_fill.macular.available"}
+  - {file: "methods.tex", contains: "Signal strength is available", printed: "7", source: "signal_strength_summary.json", path: "rules.single_value_fill.optic_disc.median"}
+  - {file: "methods.tex", contains: "Signal strength is available", printed: "8", source: "signal_strength_summary.json", path: "rules.single_value_fill.macular.median"}
+  - {file: "methods.tex", contains: "Signal strength is available", printed: "26.1", source: "signal_strength_summary.json", path: "rules.single_value_fill.optic_disc.below_6.pct"}
+  - {file: "methods.tex", contains: "Signal strength is available", printed: "22.4", source: "signal_strength_summary.json", path: "rules.single_value_fill.macular.below_6.pct"}

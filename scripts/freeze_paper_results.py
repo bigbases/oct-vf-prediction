@@ -132,6 +132,12 @@ SOURCES = {
     # stepsize_sensitivity_test: the held-out half of the 22 target-axis variants (results.tex
     #   "between 1.9e-7 and 0.026 on the held-out set"); only the out-of-fold half was frozen.
     'stepsize_sensitivity_test.json': (f'{PASS_B}/runs/stepsize_sensitivity_test.json', 'B'),
+    # signal_strength_summary: methods.tex Cohort "Signal strength is available for 276 of the 277
+    #   ..." (change M15). Counts over the 277 evaluated pairs from the sister pipeline's stage-10
+    #   signal_strength.csv (kept outside the repository, sha256 guarded). Three counting rules; the
+    #   submitted sentence is single_value_fill, which gives a blank own column the report's one read
+    #   value of unknown eye (5 disc / 6 macular pairs). The pass-B evaluated keys select the pairs.
+    'signal_strength_summary.json': ('experiments/revision_r1/signal_strength_summary.json', 'B'),
 }
 
 # keys dropped from case_profile.json: pseudonym + eye + date is re-identifying
