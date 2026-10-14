@@ -1,0 +1,4055 @@
+{
+  "note": "R1-1 analysis; delta = a - b, negative = a better. No patient keys.",
+  "backbones": [
+    "inception_resnet_v2",
+    "inception_v3",
+    "vgg16",
+    "xception",
+    "densenet121"
+  ],
+  "n_map_mean_eyes_total": 10,
+  "guards": [
+    {
+      "split": "OOF",
+      "branch": "xgb_printed26",
+      "got": 8.6603,
+      "want": 8.6603,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "inception_resnet_v2:cnn_original",
+      "got": 8.5397,
+      "want": 8.5397,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "xgb_printed26",
+      "got": 8.9193,
+      "want": 8.9193,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "inception_resnet_v2:cnn_original",
+      "got": 8.7323,
+      "want": 8.7323,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "inception_resnet_v2:fusion_original",
+      "got": 8.4105,
+      "want": 8.4105,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "ensemble:fusion_submitted (nested w)",
+      "got": 7.9629,
+      "want": 7.9629,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "xgb_printed26_r11 = submitted",
+      "max_abs_diff": 0.0,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "xgb_printed26_r11 = submitted",
+      "max_abs_diff": 0.0,
+      "ok": true
+    }
+  ],
+  "splits": {
+    "OOF": {
+      "n_eyes": 240,
+      "n_eyes_map_mean": 9,
+      "branches": {
+        "xgb_printed26": {
+          "pooled_rmse": 8.660277366638184,
+          "pooled_mae": 6.397546291351318,
+          "eye_mean_rmse": 7.808805465698242,
+          "eye_mean_mae": 6.397545337677002
+        },
+        "xgb_map23_r11": {
+          "pooled_rmse": 8.670504570007324,
+          "pooled_mae": 6.4401092529296875,
+          "eye_mean_rmse": 7.879319190979004,
+          "eye_mean_mae": 6.4401092529296875
+        },
+        "xgb_map26_r11": {
+          "pooled_rmse": 9.05031681060791,
+          "pooled_mae": 6.69917631149292,
+          "eye_mean_rmse": 8.152825355529785,
+          "eye_mean_mae": 6.6991753578186035
+        },
+        "xgb_printed26_r11": {
+          "pooled_rmse": 8.660277366638184,
+          "pooled_mae": 6.397546291351318,
+          "eye_mean_rmse": 7.808805465698242,
+          "eye_mean_mae": 6.397545337677002
+        },
+        "inception_resnet_v2:cnn_original": {
+          "pooled_rmse": 8.53967571258545,
+          "pooled_mae": 6.123324871063232,
+          "eye_mean_rmse": 7.425471782684326,
+          "eye_mean_mae": 6.123324394226074
+        },
+        "inception_resnet_v2:cnn_sector": {
+          "pooled_rmse": 8.57736587524414,
+          "pooled_mae": 6.1202616691589355,
+          "eye_mean_rmse": 7.415853023529053,
+          "eye_mean_mae": 6.1202616691589355
+        },
+        "inception_v3:cnn_original": {
+          "pooled_rmse": 9.110008239746094,
+          "pooled_mae": 6.222484588623047,
+          "eye_mean_rmse": 7.6137189865112305,
+          "eye_mean_mae": 6.222484111785889
+        },
+        "inception_v3:cnn_sector": {
+          "pooled_rmse": 8.939459800720215,
+          "pooled_mae": 6.207289218902588,
+          "eye_mean_rmse": 7.594885349273682,
+          "eye_mean_mae": 6.20728874206543
+        },
+        "vgg16:cnn_submitted": {
+          "pooled_rmse": 9.164873123168945,
+          "pooled_mae": 6.417478084564209,
+          "eye_mean_rmse": 7.731164455413818,
+          "eye_mean_mae": 6.417478084564209
+        },
+        "vgg16:cnn_original": {
+          "pooled_rmse": 8.802839279174805,
+          "pooled_mae": 6.369544982910156,
+          "eye_mean_rmse": 7.606980323791504,
+          "eye_mean_mae": 6.369544506072998
+        },
+        "vgg16:cnn_sector": {
+          "pooled_rmse": 8.832074165344238,
+          "pooled_mae": 6.418831825256348,
+          "eye_mean_rmse": 7.648143291473389,
+          "eye_mean_mae": 6.418832302093506
+        },
+        "xception:cnn_submitted": {
+          "pooled_rmse": 8.351838111877441,
+          "pooled_mae": 5.946262359619141,
+          "eye_mean_rmse": 7.220712661743164,
+          "eye_mean_mae": 5.946261882781982
+        },
+        "xception:cnn_original": {
+          "pooled_rmse": 8.644617080688477,
+          "pooled_mae": 6.252009391784668,
+          "eye_mean_rmse": 7.584632873535156,
+          "eye_mean_mae": 6.25200891494751
+        },
+        "xception:cnn_sector": {
+          "pooled_rmse": 8.336586952209473,
+          "pooled_mae": 5.980888366699219,
+          "eye_mean_rmse": 7.235039234161377,
+          "eye_mean_mae": 5.980888843536377
+        },
+        "densenet121:cnn_submitted": {
+          "pooled_rmse": 8.668922424316406,
+          "pooled_mae": 6.15525484085083,
+          "eye_mean_rmse": 7.437492370605469,
+          "eye_mean_mae": 6.155255317687988
+        },
+        "densenet121:cnn_original": {
+          "pooled_rmse": 8.918475151062012,
+          "pooled_mae": 6.407878875732422,
+          "eye_mean_rmse": 7.637740135192871,
+          "eye_mean_mae": 6.407878398895264
+        },
+        "densenet121:cnn_sector": {
+          "pooled_rmse": 8.829611778259277,
+          "pooled_mae": 6.343742370605469,
+          "eye_mean_rmse": 7.605589866638184,
+          "eye_mean_mae": 6.343742847442627
+        },
+        "ensemble:cnn_submitted": {
+          "pooled_rmse": 8.11470890045166,
+          "pooled_mae": 5.666417598724365,
+          "eye_mean_rmse": 6.956822872161865,
+          "eye_mean_mae": 5.666417598724365
+        },
+        "ensemble:cnn_original": {
+          "pooled_rmse": 8.227779388427734,
+          "pooled_mae": 5.821627140045166,
+          "eye_mean_rmse": 7.0869221687316895,
+          "eye_mean_mae": 5.821627616882324
+        },
+        "ensemble:cnn_sector": {
+          "pooled_rmse": 8.087542533874512,
+          "pooled_mae": 5.807345390319824,
+          "eye_mean_rmse": 7.038453578948975,
+          "eye_mean_mae": 5.807345390319824
+        },
+        "inception_resnet_v2:fusion_original": {
+          "pooled_rmse": 8.068803787231445,
+          "pooled_mae": 5.894312381744385,
+          "eye_mean_rmse": 7.138168811798096,
+          "eye_mean_mae": 5.894312381744385
+        },
+        "inception_resnet_v2:fusion_sector": {
+          "pooled_rmse": 8.08985424041748,
+          "pooled_mae": 5.881048202514648,
+          "eye_mean_rmse": 7.126696586608887,
+          "eye_mean_mae": 5.881048679351807
+        },
+        "inception_v3:fusion_original": {
+          "pooled_rmse": 8.254837036132812,
+          "pooled_mae": 5.95160436630249,
+          "eye_mean_rmse": 7.255707740783691,
+          "eye_mean_mae": 5.95160436630249
+        },
+        "inception_v3:fusion_sector": {
+          "pooled_rmse": 8.302214622497559,
+          "pooled_mae": 6.056938171386719,
+          "eye_mean_rmse": 7.339348316192627,
+          "eye_mean_mae": 6.056938171386719
+        },
+        "vgg16:fusion_original": {
+          "pooled_rmse": 8.266205787658691,
+          "pooled_mae": 6.023176670074463,
+          "eye_mean_rmse": 7.266533851623535,
+          "eye_mean_mae": 6.023176193237305
+        },
+        "vgg16:fusion_sector": {
+          "pooled_rmse": 8.224626541137695,
+          "pooled_mae": 6.056880950927734,
+          "eye_mean_rmse": 7.270462989807129,
+          "eye_mean_mae": 6.056881427764893
+        },
+        "xception:fusion_original": {
+          "pooled_rmse": 8.068108558654785,
+          "pooled_mae": 5.916487693786621,
+          "eye_mean_rmse": 7.171945571899414,
+          "eye_mean_mae": 5.916487693786621
+        },
+        "xception:fusion_sector": {
+          "pooled_rmse": 7.94875955581665,
+          "pooled_mae": 5.796230792999268,
+          "eye_mean_rmse": 7.0184454917907715,
+          "eye_mean_mae": 5.796230792999268
+        },
+        "densenet121:fusion_original": {
+          "pooled_rmse": 8.234343528747559,
+          "pooled_mae": 6.019716739654541,
+          "eye_mean_rmse": 7.2638397216796875,
+          "eye_mean_mae": 6.019716262817383
+        },
+        "densenet121:fusion_sector": {
+          "pooled_rmse": 8.150376319885254,
+          "pooled_mae": 5.991550445556641,
+          "eye_mean_rmse": 7.217331886291504,
+          "eye_mean_mae": 5.991549491882324
+        },
+        "ensemble:fusion_original": {
+          "pooled_rmse": 8.037810325622559,
+          "pooled_mae": 5.796706676483154,
+          "eye_mean_rmse": 7.033003807067871,
+          "eye_mean_mae": 5.796706676483154
+        },
+        "ensemble:fusion_sector": {
+          "pooled_rmse": 7.959359645843506,
+          "pooled_mae": 5.78762149810791,
+          "eye_mean_rmse": 6.997520446777344,
+          "eye_mean_mae": 5.787621021270752
+        },
+        "ensemble:fusion_submitted": {
+          "pooled_rmse": 7.962895393371582,
+          "pooled_mae": 5.684981822967529,
+          "eye_mean_rmse": 6.930865287780762,
+          "eye_mean_mae": 5.684981822967529
+        }
+      },
+      "comparisons": [
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.00961887463927269,
+          "median_delta": -0.14088106155395508,
+          "ci": [
+            -0.3275365071690497,
+            0.31982597010138286
+          ],
+          "p_wilcoxon": 0.8847963715851189,
+          "n_a_better": 125,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": true
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.0030628570821136236,
+          "median_delta": -0.09242451190948486,
+          "ci": [
+            -0.3316946255145842,
+            0.34185313585734056
+          ],
+          "p_wilcoxon": 0.80558148534712,
+          "n_a_better": 124,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.04513762518763542,
+          "median_delta": -0.06310415267944336,
+          "ci": [
+            -0.2800135593056847,
+            0.3687915013059153
+          ],
+          "p_wilcoxon": 0.8610330516489888,
+          "n_a_better": 119,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.05091055482625961,
+          "median_delta": -0.0061109066009521484,
+          "ci": [
+            -0.29508623831801944,
+            0.39698808449262385
+          ],
+          "p_wilcoxon": 0.9099511968711912,
+          "n_a_better": 117,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.46346625685691833,
+          "median_delta": -0.2970069646835327,
+          "ci": [
+            -0.8667631699913247,
+            -0.05590604412866234
+          ],
+          "p_wilcoxon": 0.014765437921680035,
+          "n_a_better": 139,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.31984758377075195,
+          "median_delta": -0.2334611415863037,
+          "ci": [
+            -0.7016778189798951,
+            0.06832230042539583
+          ],
+          "p_wilcoxon": 0.05825037230908248,
+          "n_a_better": 138,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.42359280586242676,
+          "median_delta": -0.29488658905029297,
+          "ci": [
+            -0.8348128681039273,
+            -0.02002173649339844
+          ],
+          "p_wilcoxon": 0.029817564954964303,
+          "n_a_better": 132,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.27614399790763855,
+          "median_delta": -0.22597932815551758,
+          "ci": [
+            -0.6692828479562164,
+            0.11030837974463109
+          ],
+          "p_wilcoxon": 0.106125409431251,
+          "n_a_better": 131,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.6821077466011047,
+          "median_delta": -0.446713924407959,
+          "ci": [
+            -0.8976366564005362,
+            -0.4635093359108874
+          ],
+          "p_wilcoxon": 2.854075552634357e-10,
+          "n_a_better": 161,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.5164967775344849,
+          "median_delta": -0.4051152467727661,
+          "ci": [
+            -0.7234562628055392,
+            -0.3081902951682776
+          ],
+          "p_wilcoxon": 8.36210318042836e-08,
+          "n_a_better": 156,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.6469508409500122,
+          "median_delta": -0.44194984436035156,
+          "ci": [
+            -0.8578391447772391,
+            -0.4369417636428906
+          ],
+          "p_wilcoxon": 1.1736566104710062e-09,
+          "n_a_better": 155,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.5018506050109863,
+          "median_delta": -0.39995622634887695,
+          "ci": [
+            -0.7081218699784312,
+            -0.29662629024178433
+          ],
+          "p_wilcoxon": 1.303648078394283e-07,
+          "n_a_better": 151,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.01147190760821104,
+          "median_delta": -0.05166947841644287,
+          "ci": [
+            -0.1925167537479341,
+            0.1722995053842254
+          ],
+          "p_wilcoxon": 0.7606372218414401,
+          "n_a_better": 125,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.013263744302093983,
+          "median_delta": -0.11024641990661621,
+          "ci": [
+            -0.20213893718665532,
+            0.17748592195446986
+          ],
+          "p_wilcoxon": 0.5282690995507002,
+          "n_a_better": 135,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.034491218626499176,
+          "median_delta": -0.02398395538330078,
+          "ci": [
+            -0.1418905871907598,
+            0.21180215521213577
+          ],
+          "p_wilcoxon": 0.8695414160238932,
+          "n_a_better": 118,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.019369149580597878,
+          "median_delta": -0.09882640838623047,
+          "ci": [
+            -0.168670619017494,
+            0.20534056912616444
+          ],
+          "p_wilcoxon": 0.7762376015819816,
+          "n_a_better": 128,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.018834415823221207,
+          "median_delta": -4.279613494873047e-05,
+          "ci": [
+            -0.536518799525917,
+            0.46088769289809034
+          ],
+          "p_wilcoxon": 0.6671729704586011,
+          "n_a_better": 120,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.015195313841104507,
+          "median_delta": -0.17150568962097168,
+          "ci": [
+            -0.5213969973132078,
+            0.45477006410508175
+          ],
+          "p_wilcoxon": 0.4314647157766468,
+          "n_a_better": 127,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.05995878577232361,
+          "median_delta": -0.00759577751159668,
+          "ci": [
+            -0.5598259436868523,
+            0.41491927067186424
+          ],
+          "p_wilcoxon": 0.6042535108010867,
+          "n_a_better": 116,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.057981159538030624,
+          "median_delta": -0.17451977729797363,
+          "ci": [
+            -0.5555375515570554,
+            0.4123931534396202
+          ],
+          "p_wilcoxon": 0.377147535354309,
+          "n_a_better": 123,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.284434050321579,
+          "median_delta": -0.5259168148040771,
+          "ci": [
+            -0.6674088962896152,
+            0.1407699320147513
+          ],
+          "p_wilcoxon": 0.0008606658241492551,
+          "n_a_better": 153,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.2328203171491623,
+          "median_delta": -0.62345290184021,
+          "ci": [
+            -0.6008531589796514,
+            0.19163485984719691
+          ],
+          "p_wilcoxon": 0.002032441232505497,
+          "n_a_better": 148,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.27845606207847595,
+          "median_delta": -0.5471415519714355,
+          "ci": [
+            -0.691158104568668,
+            0.16940864786900395
+          ],
+          "p_wilcoxon": 0.00043335915234073955,
+          "n_a_better": 149,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.21594759821891785,
+          "median_delta": -0.6337227821350098,
+          "ci": [
+            -0.620696192322882,
+            0.23882196395950098
+          ],
+          "p_wilcoxon": 0.0015728146816066635,
+          "n_a_better": 144,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.46945661306381226,
+          "median_delta": -0.38635551929473877,
+          "ci": [
+            -0.6530178926218091,
+            -0.27218163949862706
+          ],
+          "p_wilcoxon": 6.474063243368812e-09,
+          "n_a_better": 163,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.3406074643135071,
+          "median_delta": -0.3009378910064697,
+          "ci": [
+            -0.5161380317405606,
+            -0.14561301156459852
+          ],
+          "p_wilcoxon": 8.14373970799022e-07,
+          "n_a_better": 166,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.47509798407554626,
+          "median_delta": -0.38263773918151855,
+          "ci": [
+            -0.669707402280751,
+            -0.27696747597524457
+          ],
+          "p_wilcoxon": 3.4679271816710904e-09,
+          "n_a_better": 158,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.3471142053604126,
+          "median_delta": -0.30031800270080566,
+          "ci": [
+            -0.5396383540008379,
+            -0.14639108678236265
+          ],
+          "p_wilcoxon": 5.123097317515097e-07,
+          "n_a_better": 161,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.08364036679267883,
+          "median_delta": 0.009342432022094727,
+          "ci": [
+            -0.11674544380913258,
+            0.27450960568562444
+          ],
+          "p_wilcoxon": 0.5856149402102455,
+          "n_a_better": 120,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.10533356666564941,
+          "median_delta": 0.028972923755645752,
+          "ci": [
+            -0.09587744446910969,
+            0.30136408211571664
+          ],
+          "p_wilcoxon": 0.4079228020178768,
+          "n_a_better": 116,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.07057168334722519,
+          "median_delta": 0.018925189971923828,
+          "ci": [
+            -0.12876662927988738,
+            0.26330406858130184
+          ],
+          "p_wilcoxon": 0.6229034690360379,
+          "n_a_better": 115,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.08978593349456787,
+          "median_delta": 0.022896528244018555,
+          "ci": [
+            -0.11246592990881923,
+            0.2859347380177742
+          ],
+          "p_wilcoxon": 0.470977076981949,
+          "n_a_better": 112,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.041162919253110886,
+          "median_delta": -0.03480076789855957,
+          "ci": [
+            -0.37797420460488884,
+            0.42656454694668394
+          ],
+          "p_wilcoxon": 0.9859204082522369,
+          "n_a_better": 123,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.049287572503089905,
+          "median_delta": -0.04475665092468262,
+          "ci": [
+            -0.37129648409489185,
+            0.43342736877500926
+          ],
+          "p_wilcoxon": 0.8431757948785115,
+          "n_a_better": 124,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.05777885764837265,
+          "median_delta": -0.0370640754699707,
+          "ci": [
+            -0.33579404699661486,
+            0.46034196789088233
+          ],
+          "p_wilcoxon": 0.9929377669808643,
+          "n_a_better": 119,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.0466693714261055,
+          "median_delta": -0.07862401008605957,
+          "ci": [
+            -0.3463300035381639,
+            0.4531602110207442
+          ],
+          "p_wilcoxon": 0.747757508076253,
+          "n_a_better": 121,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.2311757355928421,
+          "median_delta": -0.39188241958618164,
+          "ci": [
+            -0.6471623174972453,
+            0.18794825869853837
+          ],
+          "p_wilcoxon": 0.01631200626126986,
+          "n_a_better": 140,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.021276958286762238,
+          "median_delta": -0.22400140762329102,
+          "ci": [
+            -0.4165371983184156,
+            0.3791189260779136
+          ],
+          "p_wilcoxon": 0.18939042393972816,
+          "n_a_better": 134,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.23902083933353424,
+          "median_delta": -0.39792394638061523,
+          "ci": [
+            -0.6653253177050449,
+            0.2032386014689783
+          ],
+          "p_wilcoxon": 0.012112311390855876,
+          "n_a_better": 136,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.023298436775803566,
+          "median_delta": -0.2181396484375,
+          "ci": [
+            -0.42912834411132544,
+            0.4100863352398644
+          ],
+          "p_wilcoxon": 0.16855220735802234,
+          "n_a_better": 129,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.5383422374725342,
+          "median_delta": -0.5227494239807129,
+          "ci": [
+            -0.7398764610000461,
+            -0.33776626769622675
+          ],
+          "p_wilcoxon": 2.6799962945215423e-11,
+          "n_a_better": 165,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.34066420793533325,
+          "median_delta": -0.35107529163360596,
+          "ci": [
+            -0.5340267358485111,
+            -0.1328619208089786
+          ],
+          "p_wilcoxon": 9.890212814677955e-07,
+          "n_a_better": 159,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.5478878021240234,
+          "median_delta": -0.535830020904541,
+          "ci": [
+            -0.7483247055106809,
+            -0.3436958179991137
+          ],
+          "p_wilcoxon": 2.8480695238778652e-11,
+          "n_a_better": 159,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.35696232318878174,
+          "median_delta": -0.38376808166503906,
+          "ci": [
+            -0.5626782983396347,
+            -0.1504817947025621
+          ],
+          "p_wilcoxon": 4.4599606505956835e-07,
+          "n_a_better": 155,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.003928200341761112,
+          "median_delta": -0.05518031120300293,
+          "ci": [
+            -0.20073632498645752,
+            0.19734200919415315
+          ],
+          "p_wilcoxon": 0.416926434366662,
+          "n_a_better": 130,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.03370510786771774,
+          "median_delta": -0.05002737045288086,
+          "ci": [
+            -0.17648251680793198,
+            0.23137308152842087
+          ],
+          "p_wilcoxon": 0.6705544349039563,
+          "n_a_better": 125,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.006104671396315098,
+          "median_delta": -0.05646920204162598,
+          "ci": [
+            -0.184429441472584,
+            0.194651788104942
+          ],
+          "p_wilcoxon": 0.43660911270322045,
+          "n_a_better": 126,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.029775822535157204,
+          "median_delta": -0.050606727600097656,
+          "ci": [
+            -0.16619840313557105,
+            0.22769669719149493
+          ],
+          "p_wilcoxon": 0.6104423149072443,
+          "n_a_better": 121,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.34959325194358826,
+          "median_delta": -0.20525622367858887,
+          "ci": [
+            -0.7121092180603246,
+            -0.00994707135764265
+          ],
+          "p_wilcoxon": 0.10056802806878457,
+          "n_a_better": 134,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.27112045884132385,
+          "median_delta": -0.11547696590423584,
+          "ci": [
+            -0.6680115677303565,
+            0.09879976789977982
+          ],
+          "p_wilcoxon": 0.27431065959325796,
+          "n_a_better": 130,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.28771811723709106,
+          "median_delta": -0.17765235900878906,
+          "ci": [
+            -0.6449922370413278,
+            0.06517237142252515
+          ],
+          "p_wilcoxon": 0.18169161356547547,
+          "n_a_better": 127,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.23661582171916962,
+          "median_delta": -0.1020205020904541,
+          "ci": [
+            -0.6127029353786576,
+            0.13565140520868613
+          ],
+          "p_wilcoxon": 0.35575352847634656,
+          "n_a_better": 124,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.6442796587944031,
+          "median_delta": -0.5926682949066162,
+          "ci": [
+            -1.065161410962873,
+            -0.22468874080000378
+          ],
+          "p_wilcoxon": 0.000440495147204354,
+          "n_a_better": 150,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.4592209458351135,
+          "median_delta": -0.5542176961898804,
+          "ci": [
+            -0.8606605384819583,
+            -0.06035490374178633
+          ],
+          "p_wilcoxon": 0.004667859705181785,
+          "n_a_better": 142,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.6140289902687073,
+          "median_delta": -0.5359888076782227,
+          "ci": [
+            -1.0500857244933017,
+            -0.17761855892334594
+          ],
+          "p_wilcoxon": 0.0014748458658567184,
+          "n_a_better": 142,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.4324950575828552,
+          "median_delta": -0.45499515533447266,
+          "ci": [
+            -0.8574864612763262,
+            -0.01326699610570135
+          ],
+          "p_wilcoxon": 0.011200107749146034,
+          "n_a_better": 134,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.790359616279602,
+          "median_delta": -0.5392283201217651,
+          "ci": [
+            -1.0387464468553662,
+            -0.5395481001248623
+          ],
+          "p_wilcoxon": 3.5589599698702427e-11,
+          "n_a_better": 165,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.6013147830963135,
+          "median_delta": -0.4929758310317993,
+          "ci": [
+            -0.8400881771767811,
+            -0.36355619204852985
+          ],
+          "p_wilcoxon": 8.86718093408616e-09,
+          "n_a_better": 161,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.7791770696640015,
+          "median_delta": -0.5388519763946533,
+          "ci": [
+            -1.0217223663191148,
+            -0.5370455042202886
+          ],
+          "p_wilcoxon": 1.3352485170820106e-10,
+          "n_a_better": 159,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.6063368320465088,
+          "median_delta": -0.5041799545288086,
+          "ci": [
+            -0.8397311138772329,
+            -0.3737982477045922
+          ],
+          "p_wilcoxon": 1.274665929668477e-08,
+          "n_a_better": 156,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.15350022912025452,
+          "median_delta": -0.04342389106750488,
+          "ci": [
+            -0.3594720411886854,
+            0.037518981838980794
+          ],
+          "p_wilcoxon": 0.25444088604601944,
+          "n_a_better": 124,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.120256707072258,
+          "median_delta": -0.0863417387008667,
+          "ci": [
+            -0.338335824077824,
+            0.08306382372242485
+          ],
+          "p_wilcoxon": 0.33827176415991644,
+          "n_a_better": 128,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.1538904756307602,
+          "median_delta": -0.04564857482910156,
+          "ci": [
+            -0.3470629121340238,
+            0.035706724773945105
+          ],
+          "p_wilcoxon": 0.22377027294025809,
+          "n_a_better": 120,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.12819819152355194,
+          "median_delta": -0.08921146392822266,
+          "ci": [
+            -0.33104325952753033,
+            0.07219452435991355
+          ],
+          "p_wilcoxon": 0.26684912933734006,
+          "n_a_better": 124,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.03215092793107033,
+          "median_delta": -0.1271381378173828,
+          "ci": [
+            -0.46847962242491703,
+            0.4226446782714798
+          ],
+          "p_wilcoxon": 0.8134998500158754,
+          "n_a_better": 129,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.06413677334785461,
+          "median_delta": -0.09268510341644287,
+          "ci": [
+            -0.529863723869728,
+            0.40008582871408743
+          ],
+          "p_wilcoxon": 0.769141075041492,
+          "n_a_better": 127,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.08205544203519821,
+          "median_delta": -0.12892436981201172,
+          "ci": [
+            -0.5558916964368784,
+            0.3847990757567636
+          ],
+          "p_wilcoxon": 0.6580799691181978,
+          "n_a_better": 125,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.12219779193401337,
+          "median_delta": -0.11079120635986328,
+          "ci": [
+            -0.6187830083615742,
+            0.3623538331839173
+          ],
+          "p_wilcoxon": 0.5770952498432396,
+          "n_a_better": 124,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.2737296521663666,
+          "median_delta": -0.37485742568969727,
+          "ci": [
+            -0.7255435081673974,
+            0.18210613467576134
+          ],
+          "p_wilcoxon": 0.026684645131232473,
+          "n_a_better": 138,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.09636708348989487,
+          "median_delta": -0.2857467532157898,
+          "ci": [
+            -0.5321726748065825,
+            0.3515832026287203
+          ],
+          "p_wilcoxon": 0.16497098240307229,
+          "n_a_better": 142,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.2960698902606964,
+          "median_delta": -0.39438724517822266,
+          "ci": [
+            -0.7537445993416044,
+            0.1665474254475339
+          ],
+          "p_wilcoxon": 0.02274221390833285,
+          "n_a_better": 133,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.10568606108427048,
+          "median_delta": -0.2793067693710327,
+          "ci": [
+            -0.5534070284339953,
+            0.3481937762650642
+          ],
+          "p_wilcoxon": 0.1587389195927278,
+          "n_a_better": 137,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.5914732217788696,
+          "median_delta": -0.5366553068161011,
+          "ci": [
+            -0.8114470705838672,
+            -0.3743481418294589
+          ],
+          "p_wilcoxon": 7.558422146572584e-09,
+          "n_a_better": 159,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.4059954583644867,
+          "median_delta": -0.4921940565109253,
+          "ci": [
+            -0.6139455960969489,
+            -0.19197588621086123
+          ],
+          "p_wilcoxon": 9.287523216792643e-06,
+          "n_a_better": 157,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.5958269834518433,
+          "median_delta": -0.5432820320129395,
+          "ci": [
+            -0.8195941916787309,
+            -0.3792867950823796
+          ],
+          "p_wilcoxon": 3.6374129241553326e-09,
+          "n_a_better": 155,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.4150230884552002,
+          "median_delta": -0.5046372413635254,
+          "ci": [
+            -0.624092419579817,
+            -0.19806760801952839
+          ],
+          "p_wilcoxon": 5.37545263562232e-06,
+          "n_a_better": 153,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.04650869220495224,
+          "median_delta": -0.10078632831573486,
+          "ci": [
+            -0.2569286285929962,
+            0.1628576231250839
+          ],
+          "p_wilcoxon": 0.5355837680051917,
+          "n_a_better": 131,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.02816595695912838,
+          "median_delta": -0.06765174865722656,
+          "ci": [
+            -0.24680887093244686,
+            0.1911860728300506
+          ],
+          "p_wilcoxon": 0.6114184337135445,
+          "n_a_better": 127,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.07664897292852402,
+          "median_delta": -0.12111520767211914,
+          "ci": [
+            -0.3004355957972959,
+            0.13957348711820902
+          ],
+          "p_wilcoxon": 0.3268252195885971,
+          "n_a_better": 129,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.05762149766087532,
+          "median_delta": -0.0876302719116211,
+          "ci": [
+            -0.2918304382292499,
+            0.1650429376594632
+          ],
+          "p_wilcoxon": 0.4182831966648982,
+          "n_a_better": 125,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.048468299210071564,
+          "median_delta": -0.03145170211791992,
+          "ci": [
+            -0.2868793375477731,
+            0.18324515707716804
+          ],
+          "p_wilcoxon": 0.7919515918094513,
+          "n_a_better": 124,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.014282019808888435,
+          "median_delta": 0.010807275772094727,
+          "ci": [
+            -0.2555893694296544,
+            0.2198332853956507
+          ],
+          "p_wilcoxon": 0.8344650785226033,
+          "n_a_better": 117,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.05308673903346062,
+          "median_delta": -0.030742645263671875,
+          "ci": [
+            -0.3047890358335479,
+            0.19014889936955603
+          ],
+          "p_wilcoxon": 0.8126424635196455,
+          "n_a_better": 119,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.028849899768829346,
+          "median_delta": 0.009333133697509766,
+          "ci": [
+            -0.2809657221610917,
+            0.21687044206877804
+          ],
+          "p_wilcoxon": 0.9357240491326393,
+          "n_a_better": 113,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.8408651351928711,
+          "median_delta": -0.629810094833374,
+          "ci": [
+            -1.170327792348334,
+            -0.4904331292166212
+          ],
+          "p_wilcoxon": 1.0979217009150242e-08,
+          "n_a_better": 164,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.6327639222145081,
+          "median_delta": -0.6316788196563721,
+          "ci": [
+            -0.9412839833907629,
+            -0.3069160160646228
+          ],
+          "p_wilcoxon": 1.8481934862261208e-06,
+          "n_a_better": 156,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.8169658780097961,
+          "median_delta": -0.5929690599441528,
+          "ci": [
+            -1.1679745992940818,
+            -0.4728951773248244
+          ],
+          "p_wilcoxon": 6.229490059065125e-08,
+          "n_a_better": 157,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.614474892616272,
+          "median_delta": -0.636073112487793,
+          "ci": [
+            -0.9482438108755156,
+            -0.2853842941520021
+          ],
+          "p_wilcoxon": 7.169320836655975e-06,
+          "n_a_better": 148,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.8112843036651611,
+          "median_delta": -0.5847983360290527,
+          "ci": [
+            -1.045931921318596,
+            -0.5699046060122623
+          ],
+          "p_wilcoxon": 5.624212655665777e-12,
+          "n_a_better": 166,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.6099245548248291,
+          "median_delta": -0.49037033319473267,
+          "ci": [
+            -0.8306067295562694,
+            -0.38226873789801336
+          ],
+          "p_wilcoxon": 8.439070865185041e-09,
+          "n_a_better": 158,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.8098067045211792,
+          "median_delta": -0.5588258504867554,
+          "ci": [
+            -1.04851758378131,
+            -0.5810395901161051
+          ],
+          "p_wilcoxon": 1.1141814669178055e-11,
+          "n_a_better": 160,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.6230644583702087,
+          "median_delta": -0.5023384094238281,
+          "ci": [
+            -0.8459556111167328,
+            -0.3995261401318135
+          ],
+          "p_wilcoxon": 6.6482660970260084e-09,
+          "n_a_better": 154,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.03548344597220421,
+          "median_delta": -0.03214120864868164,
+          "ci": [
+            -0.19693370128973942,
+            0.11927628678911215
+          ],
+          "p_wilcoxon": 0.6671729704586011,
+          "n_a_better": 129,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": -0.009085988625884056,
+          "median_delta": -0.0025179386138916016,
+          "ci": [
+            -0.1713071434809905,
+            0.1479779576071555
+          ],
+          "p_wilcoxon": 0.9333813276058451,
+          "n_a_better": 123,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.044266365468502045,
+          "median_delta": -0.03226184844970703,
+          "ci": [
+            -0.21085181433510866,
+            0.11257812596198419
+          ],
+          "p_wilcoxon": 0.6028820553509986,
+          "n_a_better": 125,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": -0.024612506851553917,
+          "median_delta": -0.009007930755615234,
+          "ci": [
+            -0.19435932616595755,
+            0.13523060412030258
+          ],
+          "p_wilcoxon": 0.747757508076253,
+          "n_a_better": 120,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.07051431387662888,
+          "median_delta": 0.025708913803100586,
+          "ci": [
+            -0.23575280910550925,
+            0.38349073017316965
+          ],
+          "p_wilcoxon": 0.7402070986042366,
+          "n_a_better": 113,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.04256394878029823,
+          "median_delta": 0.04832422733306885,
+          "ci": [
+            -0.2584441897907287,
+            0.3452536243229156
+          ],
+          "p_wilcoxon": 0.917149653770221,
+          "n_a_better": 118,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.03982289507985115,
+          "median_delta": 0.020987987518310547,
+          "ci": [
+            -0.27345418339034644,
+            0.3492834006933016
+          ],
+          "p_wilcoxon": 0.8811679259411308,
+          "n_a_better": 110,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.00018437702965456992,
+          "median_delta": 0.022573232650756836,
+          "ci": [
+            -0.30619496544346136,
+            0.3096921029801727
+          ],
+          "p_wilcoxon": 0.8672194116321715,
+          "n_a_better": 115,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.34402039647102356,
+          "median_delta": 0.20063841342926025,
+          "ci": [
+            0.1577077172974317,
+            0.535799401313497
+          ],
+          "p_wilcoxon": 0.000515141382496998,
+          "n_a_better": 100,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 240,
+          "n_patients": 125,
+          "mean_delta": 0.3016303479671478,
+          "median_delta": 0.21224582195281982,
+          "ci": [
+            0.13498865517698755,
+            0.4733889111297269
+          ],
+          "p_wilcoxon": 0.000892810119843085,
+          "n_a_better": 96,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.30559858679771423,
+          "median_delta": 0.20859932899475098,
+          "ci": [
+            0.13856783770746384,
+            0.4734321010522608
+          ],
+          "p_wilcoxon": 0.0005267643806560449,
+          "n_a_better": 95,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 231,
+          "n_patients": 123,
+          "mean_delta": 0.2609325349330902,
+          "median_delta": 0.19848251342773438,
+          "ci": [
+            0.10586857488391896,
+            0.41851451430163034
+          ],
+          "p_wilcoxon": 0.0014062911845835653,
+          "n_a_better": 93,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        }
+      ]
+    },
+    "TEST": {
+      "n_eyes": 37,
+      "n_eyes_map_mean": 1,
+      "branches": {
+        "xgb_printed26": {
+          "pooled_rmse": 8.919268608093262,
+          "pooled_mae": 6.8320231437683105,
+          "eye_mean_rmse": 7.947113990783691,
+          "eye_mean_mae": 6.832022666931152
+        },
+        "xgb_map23_r11": {
+          "pooled_rmse": 8.517369270324707,
+          "pooled_mae": 6.668389320373535,
+          "eye_mean_rmse": 7.667383193969727,
+          "eye_mean_mae": 6.668389320373535
+        },
+        "xgb_map26_r11": {
+          "pooled_rmse": 8.877642631530762,
+          "pooled_mae": 6.900129318237305,
+          "eye_mean_rmse": 7.92795467376709,
+          "eye_mean_mae": 6.900129318237305
+        },
+        "xgb_printed26_r11": {
+          "pooled_rmse": 8.919268608093262,
+          "pooled_mae": 6.8320231437683105,
+          "eye_mean_rmse": 7.947113990783691,
+          "eye_mean_mae": 6.832022666931152
+        },
+        "inception_resnet_v2:cnn_original": {
+          "pooled_rmse": 8.732285499572754,
+          "pooled_mae": 6.032829761505127,
+          "eye_mean_rmse": 7.229787349700928,
+          "eye_mean_mae": 6.032830238342285
+        },
+        "inception_resnet_v2:cnn_sector": {
+          "pooled_rmse": 8.867279052734375,
+          "pooled_mae": 6.218540668487549,
+          "eye_mean_rmse": 7.332167148590088,
+          "eye_mean_mae": 6.218541145324707
+        },
+        "inception_v3:cnn_original": {
+          "pooled_rmse": 9.170318603515625,
+          "pooled_mae": 6.147950172424316,
+          "eye_mean_rmse": 7.5025954246521,
+          "eye_mean_mae": 6.147950649261475
+        },
+        "inception_v3:cnn_sector": {
+          "pooled_rmse": 9.002625465393066,
+          "pooled_mae": 6.842326641082764,
+          "eye_mean_rmse": 7.762679576873779,
+          "eye_mean_mae": 6.842326641082764
+        },
+        "vgg16:cnn_submitted": {
+          "pooled_rmse": 8.50216293334961,
+          "pooled_mae": 5.831594944000244,
+          "eye_mean_rmse": 6.995715141296387,
+          "eye_mean_mae": 5.831594944000244
+        },
+        "vgg16:cnn_original": {
+          "pooled_rmse": 8.468846321105957,
+          "pooled_mae": 5.950395584106445,
+          "eye_mean_rmse": 7.082599639892578,
+          "eye_mean_mae": 5.950395107269287
+        },
+        "vgg16:cnn_sector": {
+          "pooled_rmse": 9.033493041992188,
+          "pooled_mae": 6.599776744842529,
+          "eye_mean_rmse": 7.625956058502197,
+          "eye_mean_mae": 6.599776268005371
+        },
+        "xception:cnn_submitted": {
+          "pooled_rmse": 8.96301555633545,
+          "pooled_mae": 6.34878396987915,
+          "eye_mean_rmse": 7.479063987731934,
+          "eye_mean_mae": 6.34878396987915
+        },
+        "xception:cnn_original": {
+          "pooled_rmse": 8.543610572814941,
+          "pooled_mae": 6.018913269042969,
+          "eye_mean_rmse": 7.167046546936035,
+          "eye_mean_mae": 6.0189127922058105
+        },
+        "xception:cnn_sector": {
+          "pooled_rmse": 9.197162628173828,
+          "pooled_mae": 6.563444137573242,
+          "eye_mean_rmse": 7.606879234313965,
+          "eye_mean_mae": 6.5634446144104
+        },
+        "densenet121:cnn_submitted": {
+          "pooled_rmse": 8.557165145874023,
+          "pooled_mae": 5.710036277770996,
+          "eye_mean_rmse": 6.833453178405762,
+          "eye_mean_mae": 5.710035800933838
+        },
+        "densenet121:cnn_original": {
+          "pooled_rmse": 8.754638671875,
+          "pooled_mae": 6.139348030090332,
+          "eye_mean_rmse": 7.200692653656006,
+          "eye_mean_mae": 6.139348983764648
+        },
+        "densenet121:cnn_sector": {
+          "pooled_rmse": 9.504581451416016,
+          "pooled_mae": 7.0915937423706055,
+          "eye_mean_rmse": 8.092925071716309,
+          "eye_mean_mae": 7.091593265533447
+        },
+        "ensemble:cnn_submitted": {
+          "pooled_rmse": 8.601716995239258,
+          "pooled_mae": 5.840874671936035,
+          "eye_mean_rmse": 7.04067325592041,
+          "eye_mean_mae": 5.840874671936035
+        },
+        "ensemble:cnn_original": {
+          "pooled_rmse": 8.55700397491455,
+          "pooled_mae": 5.923285961151123,
+          "eye_mean_rmse": 7.106322288513184,
+          "eye_mean_mae": 5.923285961151123
+        },
+        "ensemble:cnn_sector": {
+          "pooled_rmse": 8.99964714050293,
+          "pooled_mae": 6.566733360290527,
+          "eye_mean_rmse": 7.5720415115356445,
+          "eye_mean_mae": 6.566733360290527
+        },
+        "inception_resnet_v2:fusion_original": {
+          "pooled_rmse": 8.410520553588867,
+          "pooled_mae": 6.271999359130859,
+          "eye_mean_rmse": 7.306462287902832,
+          "eye_mean_mae": 6.271999835968018
+        },
+        "inception_resnet_v2:fusion_sector": {
+          "pooled_rmse": 8.510099411010742,
+          "pooled_mae": 6.327471733093262,
+          "eye_mean_rmse": 7.349551677703857,
+          "eye_mean_mae": 6.327471733093262
+        },
+        "inception_v3:fusion_original": {
+          "pooled_rmse": 8.606440544128418,
+          "pooled_mae": 6.390605926513672,
+          "eye_mean_rmse": 7.472507953643799,
+          "eye_mean_mae": 6.390605926513672
+        },
+        "inception_v3:fusion_sector": {
+          "pooled_rmse": 8.685114860534668,
+          "pooled_mae": 6.700196743011475,
+          "eye_mean_rmse": 7.6374006271362305,
+          "eye_mean_mae": 6.700196266174316
+        },
+        "vgg16:fusion_original": {
+          "pooled_rmse": 8.34782600402832,
+          "pooled_mae": 6.21826171875,
+          "eye_mean_rmse": 7.2339372634887695,
+          "eye_mean_mae": 6.21826171875
+        },
+        "vgg16:fusion_sector": {
+          "pooled_rmse": 8.653566360473633,
+          "pooled_mae": 6.531719207763672,
+          "eye_mean_rmse": 7.512265682220459,
+          "eye_mean_mae": 6.5317182540893555
+        },
+        "xception:fusion_original": {
+          "pooled_rmse": 8.29414176940918,
+          "pooled_mae": 6.201037883758545,
+          "eye_mean_rmse": 7.218641757965088,
+          "eye_mean_mae": 6.201037883758545
+        },
+        "xception:fusion_sector": {
+          "pooled_rmse": 8.744239807128906,
+          "pooled_mae": 6.523706436157227,
+          "eye_mean_rmse": 7.4885358810424805,
+          "eye_mean_mae": 6.523706436157227
+        },
+        "densenet121:fusion_original": {
+          "pooled_rmse": 8.52116584777832,
+          "pooled_mae": 6.364187240600586,
+          "eye_mean_rmse": 7.368027210235596,
+          "eye_mean_mae": 6.364187717437744
+        },
+        "densenet121:fusion_sector": {
+          "pooled_rmse": 8.830228805541992,
+          "pooled_mae": 6.760605812072754,
+          "eye_mean_rmse": 7.712217807769775,
+          "eye_mean_mae": 6.760605812072754
+        },
+        "ensemble:fusion_original": {
+          "pooled_rmse": 8.36117172241211,
+          "pooled_mae": 6.11707878112793,
+          "eye_mean_rmse": 7.164139270782471,
+          "eye_mean_mae": 6.117079257965088
+        },
+        "ensemble:fusion_sector": {
+          "pooled_rmse": 8.712493896484375,
+          "pooled_mae": 6.520416736602783,
+          "eye_mean_rmse": 7.4736552238464355,
+          "eye_mean_mae": 6.520417213439941
+        },
+        "ensemble:fusion_submitted": {
+          "pooled_rmse": 8.384937286376953,
+          "pooled_mae": 6.04709529876709,
+          "eye_mean_rmse": 7.109299182891846,
+          "eye_mean_mae": 6.047095775604248
+        }
+      },
+      "comparisons": [
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.10237953811883926,
+          "median_delta": -0.036608219146728516,
+          "ci": [
+            -0.5569452014748936,
+            0.805068051597178
+          ],
+          "p_wilcoxon": 0.8697589171642903,
+          "n_a_better": 19,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.18571075797080994,
+          "median_delta": -0.05710411071777344,
+          "ci": [
+            -0.5269639492840381,
+            0.9398922502210266
+          ],
+          "p_wilcoxon": 0.5808596221904736,
+          "n_a_better": 19,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.07400806993246078,
+          "median_delta": -0.08326959609985352,
+          "ci": [
+            -0.5845365557017014,
+            0.7880213126473053
+          ],
+          "p_wilcoxon": 0.969057968002744,
+          "n_a_better": 19,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.1467915177345276,
+          "median_delta": -0.06149935722351074,
+          "ci": [
+            -0.5581703792686935,
+            0.9105175483226775
+          ],
+          "p_wilcoxon": 0.7268787069479004,
+          "n_a_better": 19,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "inception_resnet_v2:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.3352162539958954,
+          "median_delta": -0.2626481056213379,
+          "ci": [
+            -1.2816257228722443,
+            0.5527753967987861
+          ],
+          "p_wilcoxon": 0.5209127473499393,
+          "n_a_better": 21,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.44984880089759827,
+          "median_delta": -0.27808141708374023,
+          "ci": [
+            -1.3685415583751448,
+            0.38412823049645645
+          ],
+          "p_wilcoxon": 0.36964457044086885,
+          "n_a_better": 21,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.3655233681201935,
+          "median_delta": -0.3891122341156006,
+          "ci": [
+            -1.3565253323978848,
+            0.5464858925020367
+          ],
+          "p_wilcoxon": 0.46011761703994125,
+          "n_a_better": 21,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.5067131519317627,
+          "median_delta": -0.2897615432739258,
+          "ci": [
+            -1.4553354021575715,
+            0.3576820181073649
+          ],
+          "p_wilcoxon": 0.27855437609832734,
+          "n_a_better": 21,
+          "a": "inception_resnet_v2:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.5975626111030579,
+          "median_delta": -0.3413214683532715,
+          "ci": [
+            -1.188502818129819,
+            -0.011708490472091153
+          ],
+          "p_wilcoxon": 0.0508637986931717,
+          "n_a_better": 24,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.504551351070404,
+          "median_delta": -0.2115875482559204,
+          "ci": [
+            -1.1019490153785039,
+            0.07223307580701883
+          ],
+          "p_wilcoxon": 0.11045151318830904,
+          "n_a_better": 22,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.6216519474983215,
+          "median_delta": -0.3516554832458496,
+          "ci": [
+            -1.2268026790103397,
+            -0.0221313129405724
+          ],
+          "p_wilcoxon": 0.042525613389443606,
+          "n_a_better": 24,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.5587841868400574,
+          "median_delta": -0.2556968331336975,
+          "ci": [
+            -1.1550994233081215,
+            0.03813368850434565
+          ],
+          "p_wilcoxon": 0.07175399383413605,
+          "n_a_better": 22,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.04308849573135376,
+          "median_delta": -0.03552126884460449,
+          "ci": [
+            -0.31741586643004277,
+            0.4259184710077336
+          ],
+          "p_wilcoxon": 0.9881085285160225,
+          "n_a_better": 20,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.055472154170274734,
+          "median_delta": 0.09845542907714844,
+          "ci": [
+            -0.3266687673312408,
+            0.45597433434393136
+          ],
+          "p_wilcoxon": 0.7541953267646022,
+          "n_a_better": 18,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.035549238324165344,
+          "median_delta": -0.06549298763275146,
+          "ci": [
+            -0.3235730940415189,
+            0.4290179145179295
+          ],
+          "p_wilcoxon": 0.9566913228773046,
+          "n_a_better": 20,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.03838128596544266,
+          "median_delta": 0.026020050048828125,
+          "ci": [
+            -0.33916499133672084,
+            0.4474851133213156
+          ],
+          "p_wilcoxon": 0.8705704759049695,
+          "n_a_better": 18,
+          "a": "inception_resnet_v2:fusion_sector",
+          "b": "inception_resnet_v2:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.2600856125354767,
+          "median_delta": 0.2962918281555176,
+          "ci": [
+            -0.6221366804999274,
+            1.0908026838781395
+          ],
+          "p_wilcoxon": 0.4372216142655816,
+          "n_a_better": 17,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.6943760514259338,
+          "median_delta": 0.732026219367981,
+          "ci": [
+            -0.285904959863738,
+            1.6374422264595823
+          ],
+          "p_wilcoxon": 0.06301736610475928,
+          "n_a_better": 13,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.21813493967056274,
+          "median_delta": 0.24402594566345215,
+          "ci": [
+            -0.6558982274016818,
+            1.0571182173215037
+          ],
+          "p_wilcoxon": 0.5290791585575789,
+          "n_a_better": 17,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.6102549433708191,
+          "median_delta": 0.6555572152137756,
+          "ci": [
+            -0.34283966827288004,
+            1.5132135631407007
+          ],
+          "p_wilcoxon": 0.09779572318075225,
+          "n_a_better": 13,
+          "a": "inception_v3:cnn_sector",
+          "b": "inception_v3:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.09529776126146317,
+          "median_delta": -0.06610679626464844,
+          "ci": [
+            -0.5993966941770754,
+            0.746939532210428
+          ],
+          "p_wilcoxon": 0.7884267252520658,
+          "n_a_better": 20,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.1739368885755539,
+          "median_delta": -0.04579973220825195,
+          "ci": [
+            -0.4986110368714394,
+            0.7940724217600389
+          ],
+          "p_wilcoxon": 0.6224952509219293,
+          "n_a_better": 20,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.08337511122226715,
+          "median_delta": -0.09050369262695312,
+          "ci": [
+            -0.631370772322019,
+            0.7533099435056941
+          ],
+          "p_wilcoxon": 0.8219589346845169,
+          "n_a_better": 20,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.14144685864448547,
+          "median_delta": -0.11832809448242188,
+          "ci": [
+            -0.5330408638605522,
+            0.7714201585919688
+          ],
+          "p_wilcoxon": 0.7385739113087766,
+          "n_a_better": 20,
+          "a": "inception_v3:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.30971384048461914,
+          "median_delta": -0.2726874351501465,
+          "ci": [
+            -0.7014517014048687,
+            0.07544440965394691
+          ],
+          "p_wilcoxon": 0.08274610359512735,
+          "n_a_better": 22,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.13182635605335236,
+          "median_delta": -0.2279949188232422,
+          "ci": [
+            -0.5135132526384818,
+            0.24707931664217214
+          ],
+          "p_wilcoxon": 0.42841404819046147,
+          "n_a_better": 21,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.3187301456928253,
+          "median_delta": -0.30882906913757324,
+          "ci": [
+            -0.7161583678758391,
+            0.07711095704751854
+          ],
+          "p_wilcoxon": 0.07973560818936676,
+          "n_a_better": 22,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.1626669466495514,
+          "median_delta": -0.24755644798278809,
+          "ci": [
+            -0.5323597943399385,
+            0.21342643693397453
+          ],
+          "p_wilcoxon": 0.3225523410656024,
+          "n_a_better": 21,
+          "a": "inception_v3:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.16489219665527344,
+          "median_delta": 0.07560253143310547,
+          "ci": [
+            -0.17630958784355716,
+            0.4794064373946657
+          ],
+          "p_wilcoxon": 0.2363829233654542,
+          "n_a_better": 15,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.3095911145210266,
+          "median_delta": 0.28212833404541016,
+          "ci": [
+            -0.08020018370527969,
+            0.6661187350820926
+          ],
+          "p_wilcoxon": 0.01971972340834327,
+          "n_a_better": 12,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.16513323783874512,
+          "median_delta": 0.04579901695251465,
+          "ci": [
+            -0.18104654672644385,
+            0.49418020351594216
+          ],
+          "p_wilcoxon": 0.2515454127569683,
+          "n_a_better": 15,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.2861819863319397,
+          "median_delta": 0.26076745986938477,
+          "ci": [
+            -0.09336281494613279,
+            0.6405751010349815
+          ],
+          "p_wilcoxon": 0.030796389473835006,
+          "n_a_better": 12,
+          "a": "inception_v3:fusion_sector",
+          "b": "inception_v3:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.5433562994003296,
+          "median_delta": 0.37583208084106445,
+          "ci": [
+            -0.07826086572698644,
+            1.1983943392833072
+          ],
+          "p_wilcoxon": 0.11392522342794109,
+          "n_a_better": 13,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.6493809819221497,
+          "median_delta": 0.33914613723754883,
+          "ci": [
+            -0.07726692698503794,
+            1.4546942073751137
+          ],
+          "p_wilcoxon": 0.12485022521286737,
+          "n_a_better": 13,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.5400657653808594,
+          "median_delta": 0.29099035263061523,
+          "ci": [
+            -0.08189796308676402,
+            1.234507899381966
+          ],
+          "p_wilcoxon": 0.13898503431119025,
+          "n_a_better": 13,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.5889642834663391,
+          "median_delta": 0.22405743598937988,
+          "ci": [
+            -0.11285308073548708,
+            1.3837201965284776
+          ],
+          "p_wilcoxon": 0.181412478297716,
+          "n_a_better": 13,
+          "a": "vgg16:cnn_sector",
+          "b": "vgg16:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.04142645373940468,
+          "median_delta": -0.40454673767089844,
+          "ci": [
+            -0.8270802790757433,
+            0.7682986326653443
+          ],
+          "p_wilcoxon": 0.5605308069789317,
+          "n_a_better": 25,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.06861314177513123,
+          "median_delta": -0.39452552795410156,
+          "ci": [
+            -0.8134411151091565,
+            0.6776556197050446
+          ],
+          "p_wilcoxon": 0.6015187961311312,
+          "n_a_better": 23,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.03714606538414955,
+          "median_delta": -0.4735403060913086,
+          "ci": [
+            -0.8441360397366483,
+            0.796847843770329
+          ],
+          "p_wilcoxon": 0.6137056066945661,
+          "n_a_better": 24,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.08097917586565018,
+          "median_delta": -0.41255104541778564,
+          "ci": [
+            -0.8578993255490656,
+            0.6886427847316131
+          ],
+          "p_wilcoxon": 0.5920094623870682,
+          "n_a_better": 23,
+          "a": "vgg16:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.43484920263290405,
+          "median_delta": -0.3331642150878906,
+          "ci": [
+            -0.9004153407237552,
+            0.04200051097032045
+          ],
+          "p_wilcoxon": 0.047265768895158544,
+          "n_a_better": 25,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.3003044128417969,
+          "median_delta": -0.21422195434570312,
+          "ci": [
+            -0.7703040956487333,
+            0.17699283661200976
+          ],
+          "p_wilcoxon": 0.2022527121589519,
+          "n_a_better": 22,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.4467582106590271,
+          "median_delta": -0.3553927540779114,
+          "ci": [
+            -0.9122060252516939,
+            0.04312773757926605
+          ],
+          "p_wilcoxon": 0.049643930775346234,
+          "n_a_better": 24,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.3292805552482605,
+          "median_delta": -0.2668144702911377,
+          "ci": [
+            -0.7981659898081341,
+            0.16123978261538183
+          ],
+          "p_wilcoxon": 0.15220749407308176,
+          "n_a_better": 22,
+          "a": "vgg16:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.2783277928829193,
+          "median_delta": 0.08629417419433594,
+          "ci": [
+            -0.063023442029953,
+            0.6490695744976616
+          ],
+          "p_wilcoxon": 0.12485022521286737,
+          "n_a_better": 14,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.31345677375793457,
+          "median_delta": 0.14642763137817383,
+          "ci": [
+            -0.07973170844920159,
+            0.7357232780002795
+          ],
+          "p_wilcoxon": 0.08274610359512735,
+          "n_a_better": 14,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.2875291407108307,
+          "median_delta": 0.09984683990478516,
+          "ci": [
+            -0.06330405722061794,
+            0.677488928939308
+          ],
+          "p_wilcoxon": 0.11888994762557559,
+          "n_a_better": 13,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.2953876256942749,
+          "median_delta": 0.11361145973205566,
+          "ci": [
+            -0.08948288728390728,
+            0.7271146923773452
+          ],
+          "p_wilcoxon": 0.11888994762557559,
+          "n_a_better": 14,
+          "a": "vgg16:fusion_sector",
+          "b": "vgg16:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.4398328363895416,
+          "median_delta": 0.06677055358886719,
+          "ci": [
+            -0.09889822561489908,
+            1.023895608653893
+          ],
+          "p_wilcoxon": 0.27429112170648295,
+          "n_a_better": 15,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.5445314645767212,
+          "median_delta": 0.1571216583251953,
+          "ci": [
+            -0.02841629249572056,
+            1.1666914187848645
+          ],
+          "p_wilcoxon": 0.1916960332018789,
+          "n_a_better": 16,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.5103309154510498,
+          "median_delta": 0.10681867599487305,
+          "ci": [
+            -0.0750691542351568,
+            1.1810130290248813
+          ],
+          "p_wilcoxon": 0.17125909560127184,
+          "n_a_better": 14,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.6231670379638672,
+          "median_delta": 0.16244983673095703,
+          "ci": [
+            0.0060767756926046875,
+            1.3378674119173937
+          ],
+          "p_wilcoxon": 0.11150411100243218,
+          "n_a_better": 15,
+          "a": "xception:cnn_sector",
+          "b": "xception:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.06050336733460426,
+          "median_delta": -0.27782154083251953,
+          "ci": [
+            -1.0582149035400814,
+            0.9041922246939257
+          ],
+          "p_wilcoxon": 0.8230616791406646,
+          "n_a_better": 20,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.10494544357061386,
+          "median_delta": -0.2356395721435547,
+          "ci": [
+            -1.0724361720541293,
+            0.7952527552249591
+          ],
+          "p_wilcoxon": 0.8463444494118448,
+          "n_a_better": 19,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.05327923968434334,
+          "median_delta": -0.1762378215789795,
+          "ci": [
+            -1.077474303971556,
+            0.9415857077685611
+          ],
+          "p_wilcoxon": 0.8828056627244223,
+          "n_a_better": 19,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.11460060626268387,
+          "median_delta": -0.3587024211883545,
+          "ci": [
+            -1.088773830071801,
+            0.8151217454717167
+          ],
+          "p_wilcoxon": 0.8340569073625375,
+          "n_a_better": 19,
+          "a": "xception:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.45858001708984375,
+          "median_delta": -0.31142234802246094,
+          "ci": [
+            -1.106518110005479,
+            0.19742460412843074
+          ],
+          "p_wilcoxon": 0.16240851052862126,
+          "n_a_better": 22,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.3083171248435974,
+          "median_delta": -0.37766075134277344,
+          "ci": [
+            -0.9454712485330203,
+            0.3293478316238681
+          ],
+          "p_wilcoxon": 0.3859146132308524,
+          "n_a_better": 21,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.47162172198295593,
+          "median_delta": -0.3956174850463867,
+          "ci": [
+            -1.115331990484832,
+            0.2050907528684249
+          ],
+          "p_wilcoxon": 0.16152671779855154,
+          "n_a_better": 22,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.34500613808631897,
+          "median_delta": -0.3964165449142456,
+          "ci": [
+            -0.969721928073037,
+            0.3013302611753062
+          ],
+          "p_wilcoxon": 0.30002931610215455,
+          "n_a_better": 21,
+          "a": "xception:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.2698926031589508,
+          "median_delta": 0.02360820770263672,
+          "ci": [
+            -0.06072613395549155,
+            0.600271381961332
+          ],
+          "p_wilcoxon": 0.20768325998506043,
+          "n_a_better": 15,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.3226679861545563,
+          "median_delta": 0.2180161476135254,
+          "ci": [
+            -0.0006487228760593791,
+            0.653957992896699
+          ],
+          "p_wilcoxon": 0.08837102910911199,
+          "n_a_better": 13,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.28917789459228516,
+          "median_delta": 0.0835312008857727,
+          "ci": [
+            -0.0557147181517369,
+            0.6649769113944454
+          ],
+          "p_wilcoxon": 0.14770023614983074,
+          "n_a_better": 14,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.35373637080192566,
+          "median_delta": 0.23344922065734863,
+          "ci": [
+            0.010239799634406445,
+            0.7292204442620276
+          ],
+          "p_wilcoxon": 0.05156775642535649,
+          "n_a_better": 12,
+          "a": "xception:fusion_sector",
+          "b": "xception:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.8922302722930908,
+          "median_delta": 0.7674617767333984,
+          "ci": [
+            0.24310803225165922,
+            1.5871502727523272
+          ],
+          "p_wilcoxon": 0.00794298057735432,
+          "n_a_better": 14,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.9522450566291809,
+          "median_delta": 0.6524581909179688,
+          "ci": [
+            0.24504307759223587,
+            1.7382633407843529
+          ],
+          "p_wilcoxon": 0.012130871502449736,
+          "n_a_better": 15,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.8285282850265503,
+          "median_delta": 0.6805148124694824,
+          "ci": [
+            0.21278184565069438,
+            1.5240475101130346
+          ],
+          "p_wilcoxon": 0.01392684379243292,
+          "n_a_better": 14,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.8603184819221497,
+          "median_delta": 0.5845139026641846,
+          "ci": [
+            0.19378951778798773,
+            1.6231263206285573
+          ],
+          "p_wilcoxon": 0.02096025293576531,
+          "n_a_better": 15,
+          "a": "densenet121:cnn_sector",
+          "b": "densenet121:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.4255405366420746,
+          "median_delta": -0.18507909774780273,
+          "ci": [
+            -0.3877538989390339,
+            1.2934595522042864
+          ],
+          "p_wilcoxon": 0.7092871580534847,
+          "n_a_better": 21,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.4232039451599121,
+          "median_delta": 0.04166841506958008,
+          "ci": [
+            -0.3629610048619937,
+            1.2333627603991684
+          ],
+          "p_wilcoxon": 0.4026039693708299,
+          "n_a_better": 18,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.38201427459716797,
+          "median_delta": -0.23951995372772217,
+          "ci": [
+            -0.45516897644315446,
+            1.274848228361871
+          ],
+          "p_wilcoxon": 0.8461933203216176,
+          "n_a_better": 21,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.35477960109710693,
+          "median_delta": 0.015032052993774414,
+          "ci": [
+            -0.4484278466665384,
+            1.170494341066009
+          ],
+          "p_wilcoxon": 0.5393326855264604,
+          "n_a_better": 18,
+          "a": "densenet121:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.23489686846733093,
+          "median_delta": -0.177032470703125,
+          "ci": [
+            -0.6892873664965501,
+            0.24412119574732907
+          ],
+          "p_wilcoxon": 0.4461299913964467,
+          "n_a_better": 21,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.07141739875078201,
+          "median_delta": -0.0801992416381836,
+          "ci": [
+            -0.5292649616797765,
+            0.40607130703851474
+          ],
+          "p_wilcoxon": 0.9050843829900259,
+          "n_a_better": 19,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.25151896476745605,
+          "median_delta": -0.2296990156173706,
+          "ci": [
+            -0.7083159526406215,
+            0.24332757370697458
+          ],
+          "p_wilcoxon": 0.4051484461815562,
+          "n_a_better": 21,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.1213291585445404,
+          "median_delta": -0.08857458829879761,
+          "ci": [
+            -0.5667795056158358,
+            0.3539299981012227
+          ],
+          "p_wilcoxon": 0.7503284176054876,
+          "n_a_better": 19,
+          "a": "densenet121:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.34418994188308716,
+          "median_delta": 0.24878931045532227,
+          "ci": [
+            0.057105117633536054,
+            0.6704656742714545
+          ],
+          "p_wilcoxon": 0.02863003379025031,
+          "n_a_better": 16,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.396418035030365,
+          "median_delta": 0.19225168228149414,
+          "ci": [
+            0.07775566870706123,
+            0.7619216236998051
+          ],
+          "p_wilcoxon": 0.02534491643018555,
+          "n_a_better": 17,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.33894312381744385,
+          "median_delta": 0.24829459190368652,
+          "ci": [
+            0.0504613496161796,
+            0.6752924948054201
+          ],
+          "p_wilcoxon": 0.042525613389443606,
+          "n_a_better": 16,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.3649669885635376,
+          "median_delta": 0.16980338096618652,
+          "ci": [
+            0.05991094484819288,
+            0.7212017911606257
+          ],
+          "p_wilcoxon": 0.042525613389443606,
+          "n_a_better": 17,
+          "a": "densenet121:fusion_sector",
+          "b": "densenet121:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.465718150138855,
+          "median_delta": 0.19689440727233887,
+          "ci": [
+            -0.009478409824224049,
+            1.0103425570896691
+          ],
+          "p_wilcoxon": 0.07234661412076093,
+          "n_a_better": 14,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.6434470415115356,
+          "median_delta": 0.2560577392578125,
+          "ci": [
+            0.10084422982314177,
+            1.2902663670681613
+          ],
+          "p_wilcoxon": 0.022383201663615182,
+          "n_a_better": 13,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.4377308189868927,
+          "median_delta": 0.1600254774093628,
+          "ci": [
+            -0.017887808274408827,
+            0.9818433772991678
+          ],
+          "p_wilcoxon": 0.11150411100243218,
+          "n_a_better": 14,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.5962037444114685,
+          "median_delta": 0.24111652374267578,
+          "ci": [
+            0.08543255581512108,
+            1.2239965414374812
+          ],
+          "p_wilcoxon": 0.03775702390703373,
+          "n_a_better": 13,
+          "a": "ensemble:cnn_sector",
+          "b": "ensemble:cnn_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.09534201771020889,
+          "median_delta": -0.48113346099853516,
+          "ci": [
+            -0.8977602694485638,
+            0.6895503759384145
+          ],
+          "p_wilcoxon": 0.5808596221904736,
+          "n_a_better": 23,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.10165650397539139,
+          "median_delta": -0.4028615951538086,
+          "ci": [
+            -0.8564166860805975,
+            0.6268861689277595
+          ],
+          "p_wilcoxon": 0.7541953267646022,
+          "n_a_better": 23,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.11043153703212738,
+          "median_delta": -0.5164780616760254,
+          "ci": [
+            -0.9410107789768113,
+            0.6975242365364192
+          ],
+          "p_wilcoxon": 0.5706635903334245,
+          "n_a_better": 23,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.1398553103208542,
+          "median_delta": -0.4060439467430115,
+          "ci": [
+            -0.8994466597399516,
+            0.609361909336987
+          ],
+          "p_wilcoxon": 0.6246803064132109,
+          "n_a_better": 23,
+          "a": "ensemble:cnn_sector",
+          "b": "xgb_map23_r11",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.47345858812332153,
+          "median_delta": -0.40628814697265625,
+          "ci": [
+            -1.164576352798849,
+            0.23093995534711373
+          ],
+          "p_wilcoxon": 0.21885200531687587,
+          "n_a_better": 21,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.3116057217121124,
+          "median_delta": -0.2725353240966797,
+          "ci": [
+            -0.9922772011474559,
+            0.37267472697673576
+          ],
+          "p_wilcoxon": 0.4734511827555252,
+          "n_a_better": 21,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.5020058155059814,
+          "median_delta": -0.4226703643798828,
+          "ci": [
+            -1.194287506373305,
+            0.22147476908706468
+          ],
+          "p_wilcoxon": 0.18664936278946698,
+          "n_a_better": 21,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.37689149379730225,
+          "median_delta": -0.29242563247680664,
+          "ci": [
+            -1.0410448084811907,
+            0.3102463434724235
+          ],
+          "p_wilcoxon": 0.36241441484889947,
+          "n_a_better": 21,
+          "a": "ensemble:fusion_sector",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.30951714515686035,
+          "median_delta": 0.1847362518310547,
+          "ci": [
+            -0.01921432638278557,
+            0.6720028602593654
+          ],
+          "p_wilcoxon": 0.06084334148908965,
+          "n_a_better": 13,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.4033381938934326,
+          "median_delta": 0.28159594535827637,
+          "ci": [
+            0.044365803544458605,
+            0.8128101084638645
+          ],
+          "p_wilcoxon": 0.022383201663615182,
+          "n_a_better": 13,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.29904258251190186,
+          "median_delta": 0.1813979148864746,
+          "ci": [
+            -0.023746845962708457,
+            0.6697893113208309
+          ],
+          "p_wilcoxon": 0.08840414276346564,
+          "n_a_better": 13,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.37113484740257263,
+          "median_delta": 0.22845208644866943,
+          "ci": [
+            0.03113366363195328,
+            0.7656732928133627
+          ],
+          "p_wilcoxon": 0.03626942803384736,
+          "n_a_better": 13,
+          "a": "ensemble:fusion_sector",
+          "b": "ensemble:fusion_original",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.2797314524650574,
+          "median_delta": -0.09891462326049805,
+          "ci": [
+            -1.0148929801426436,
+            0.4229890069630149
+          ],
+          "p_wilcoxon": 0.6545244270091644,
+          "n_a_better": 19,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.1636335402727127,
+          "median_delta": 0.10757207870483398,
+          "ci": [
+            -0.8874187656139073,
+            0.5155228708919718
+          ],
+          "p_wilcoxon": 1.0,
+          "n_a_better": 17,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.32009363174438477,
+          "median_delta": -0.10388350486755371,
+          "ci": [
+            -1.0612486949092463,
+            0.4052354972578573
+          ],
+          "p_wilcoxon": 0.560126525873784,
+          "n_a_better": 19,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.2278190702199936,
+          "median_delta": 0.07761454582214355,
+          "ci": [
+            -0.9453562664358239,
+            0.45966662199873654
+          ],
+          "p_wilcoxon": 0.8340569073625375,
+          "n_a_better": 17,
+          "a": "xgb_map23_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.01916002668440342,
+          "median_delta": -0.0554201602935791,
+          "ci": [
+            -0.34977542788087046,
+            0.2920367177466899
+          ],
+          "p_wilcoxon": 0.8697589171642903,
+          "n_a_better": 19,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.06810619682073593,
+          "median_delta": -0.08944082260131836,
+          "ci": [
+            -0.23392662953837473,
+            0.364576159296809
+          ],
+          "p_wilcoxon": 0.7541953267646022,
+          "n_a_better": 20,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "all eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": -0.023005656898021698,
+          "median_delta": -0.06621706485748291,
+          "ci": [
+            -0.3586535769539911,
+            0.3040020688232921
+          ],
+          "p_wilcoxon": 0.8461933203216176,
+          "n_a_better": 19,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye rmse",
+          "subset": "without map-mean eyes",
+          "primary": false
+        },
+        {
+          "n_eyes": 36,
+          "n_patients": 19,
+          "mean_delta": 0.04955197870731354,
+          "median_delta": -0.1136312484741211,
+          "ci": [
+            -0.2486697561390049,
+            0.34633221329238784
+          ],
+          "p_wilcoxon": 0.8828056627244223,
+          "n_a_better": 20,
+          "a": "xgb_map26_r11",
+          "b": "xgb_printed26",
+          "metric": "per-eye mae",
+          "subset": "without map-mean eyes",
+          "primary": false
+        }
+      ]
+    }
+  },
+  "fusion_w_nested_oof": {
+    "ensemble:original": [
+      0.35000000000000003,
+      0.44,
+      0.32,
+      0.4,
+      0.32
+    ],
+    "ensemble:sector": [
+      0.32,
+      0.35000000000000003,
+      0.3,
+      0.36,
+      0.24
+    ],
+    "ensemble:submitted": [
+      0.29,
+      0.39,
+      0.33,
+      0.36,
+      0.27
+    ]
+  },
+  "fusion_w": {
+    "inception_resnet_v2:original": 0.47000000000000003,
+    "inception_resnet_v2:sector": 0.48,
+    "inception_v3:original": 0.6,
+    "inception_v3:sector": 0.5700000000000001,
+    "vgg16:original": 0.54,
+    "vgg16:sector": 0.54,
+    "xception:original": 0.5,
+    "xception:sector": 0.42,
+    "densenet121:original": 0.56,
+    "densenet121:sector": 0.54,
+    "ensemble:original": 0.37,
+    "ensemble:sector": 0.31,
+    "ensemble:submitted": 0.33
+  }
+}

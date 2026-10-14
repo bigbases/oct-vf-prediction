@@ -148,6 +148,11 @@ SOURCES = {
     #   submitted runs the current code does not reproduce (added, decision log 2026-10-14).
     'r13_analysis.json': ('experiments/revision_r1/r13_analysis.json', 'B'),
     'r13_rerun_frame.json': ('experiments/revision_r1/r13_rerun_frame.json', 'B'),
+    # r11_analysis: R1-1 representation vs model family (docs/revision_r1/prereg_R1-1.md), all
+    #   five sector-averaged runs complete. Originals are the submitted runs for IR-v2 and
+    #   Inception-v3 and the matched reruns for VGG16, Xception and DenseNet121; the five-backbone
+    #   ensemble and the XGBoost map feature sets (map23, map26) against the printed 26.
+    'r11_analysis.json': ('experiments/revision_r1/r11_analysis.json', 'B'),
 }
 
 # keys dropped from case_profile.json: pseudonym + eye + date is re-identifying
