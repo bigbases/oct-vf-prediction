@@ -159,3 +159,14 @@ loading runs in the main process.
   cells as the reference; the censored arm against XGBoost arm 1 once it completes. Reported
   as an added analysis. Where the clustered-bootstrap CI and the Wilcoxon p disagree, both
   are reported.
+* 2026-10-14, authors, after the mirrored-frame endpoints 1-3 had been seen and with the
+  Xception matched rerun complete (the DenseNet121 and VGG16 reruns still queued). Added, not
+  pre-specified: the submitted analyses (endpoints 1-3, unmirrored) recomputed with the matched
+  current-code reruns in place of the submitted VGG16, Xception and DenseNet121 runs, which the
+  current code does not reproduce. IR-v2 and Inception-v3 keep the submitted runs, which their
+  reruns match bit for bit (`experiments/revision_r1/r13_rerun_frame.py`, same computation as
+  `r13_analysis.endpoints`, only the prediction directories change). The question is whether
+  the main conclusions depend on the non-reproducible submitted predictions. Per-backbone rows
+  are computed as each rerun finishes; the ensemble ceiling and the ensemble trend wait for all
+  three. Committed before the DenseNet121 and VGG16 rerun results; the Xception rows had been
+  seen. `postrun_watch.sh` re-runs the analyses when a queued run ends; it never freezes.
