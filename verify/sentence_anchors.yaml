@@ -121,11 +121,6 @@ anchors:
     source: "sixth_backbone.json"
     path: "rows_basisB.3.pooled_rmse"
   - file: "results.tex"
-    contains: "non-inferiority margin against the image branch in all ten"
-    printed: "0.5"
-    source: "fusion_noninferiority.json"
-    path: "margins.1"
-  - file: "results.tex"
     contains: "percent of measured locations"
     printed: "17.5"
     source: "fusion_sensitivity_trend.json"
@@ -185,46 +180,6 @@ anchors:
     printed: "240"
     source: "skeleton_numbers.json"
     path: "backbones.inception_resnet_v2.oof.n_eyes"
-  - file: "related_work.tex"
-    contains: "Our image branch uses the first of those backbones"
-    printed: "6.123"
-    source: "skeleton_numbers.json"
-    path: "backbones.inception_resnet_v2.oof.cnn.mae"
-  - file: "related_work.tex"
-    contains: "Our image branch uses the first of those backbones"
-    printed: "5.894"
-    source: "skeleton_numbers.json"
-    path: "backbones.inception_resnet_v2.oof.fusion.mae"
-  - file: "related_work.tex"
-    contains: "Placing our values on their per-eye axis"
-    printed: "0.93"
-    source: "aggregation_comparability.json"
-    path: "gap_decomposition_vs_literature.rows.0.explained_by_aggregation_dB.1"
-  - file: "related_work.tex"
-    contains: "Placing our values on their per-eye axis"
-    printed: "34"
-    source: "aggregation_comparability.json"
-    path: "gap_decomposition_vs_literature.rows.1.explained_by_aggregation_pct.1"
-  - file: "related_work.tex"
-    contains: "The third is training set size."
-    printed: "240"
-    source: "skeleton_numbers.json"
-    path: "backbones.inception_resnet_v2.oof.n_eyes"
-  - file: "discussion.tex"
-    contains: "separates the three contributions to that gap"
-    printed: "34"
-    source: "aggregation_comparability.json"
-    path: "gap_decomposition_vs_literature.rows.1.explained_by_aggregation_pct.1"
-  - file: "discussion.tex"
-    contains: "separates the three contributions to that gap"
-    printed: "1.8"
-    source: "aggregation_comparability.json"
-    path: "gap_decomposition_vs_literature.rows.1.gap_same_axis_eye_mean"
-  - file: "discussion.tex"
-    contains: "separates the three contributions to that gap"
-    printed: "2.1"
-    source: "aggregation_comparability.json"
-    path: "gap_decomposition_vs_literature.rows.1.gap_same_axis_pooled"
   - file: "discussion.tex"
     contains: "Two differences account for most of that distance"
     printed: "5.894"
@@ -275,18 +230,6 @@ anchors:
     source: "bias_by_bin.json"
     path: "passes.B.ENSEMBLE.OOF.variants.original.per_bin.0.mean_delta"
     kind: "gain"
-  - file: "conclusions.tex"
-    contains: "The improvement of 0.5 to 0.6 dB"
-    printed: "0.5"
-    source: "skeleton_numbers.json"
-    path: "backbones.inception_resnet_v2.test.delta_fus_minus_xgb_rmse"
-    kind: "gain"
-  - file: "conclusions.tex"
-    contains: "The improvement of 0.5 to 0.6 dB"
-    printed: "0.6"
-    source: "skeleton_numbers.json"
-    path: "backbones.inception_resnet_v2.oof.delta_fus_minus_xgb_rmse"
-    kind: "gain"
   # Revision R1, item 3: the fixed fusion weight 0.5. Its key holds a dot (fixed_w_0.5),
   # written '\.' in the path (check_numbers.dig); single quotes keep the backslash.
   - file: "introduction.tex"
@@ -326,9 +269,6 @@ anchors:
   - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-3", source: "manuscript_support_numbers.json", path: "cohort_md.strata_boundaries_db.normal_above"}
   - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-6", source: "manuscript_support_numbers.json", path: "cohort_md.strata_boundaries_db.early_down_to"}
   - {file: "methods.tex", contains: "Mean deviation is available for", printed: "-12", source: "manuscript_support_numbers.json", path: "cohort_md.strata_boundaries_db.moderate_down_to"}
-  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "24.4", source: "manuscript_support_numbers.json", path: "cohort_md.strata.advanced (MD <= -12).pct"}
-  - {file: "related_work.tex", contains: "Every eye we analyse comes from a patient examined for glaucoma.", printed: "-7.39", source: "manuscript_support_numbers.json", path: "cohort_md.mean"}
-  - {file: "related_work.tex", contains: "Every eye we analyse comes from a patient examined for glaucoma.", printed: "-32.16", source: "manuscript_support_numbers.json", path: "cohort_md.min"}
   # Training settings as run (submitted run arguments, train.py / image_preprocessing.py,
   # export_xgb_oof._xgb_kwargs). Powers of ten are read by the gate as their exponents.
   - {file: "methods.tex", contains: "We train with RMSprop at a learning rate of", printed: "-4", source: "manuscript_support_numbers.json", path: "training_settings.cnn.lr_exponent"}
@@ -351,23 +291,14 @@ anchors:
   # Derived quantities.
   - {file: "discussion.tex", contains: "About 1.3 dB", printed: "1.3", source: "manuscript_support_numbers.json", path: "derived.remaining_vs_hasan_db.value"}
   - {file: "discussion.tex", contains: "changes the numbers by roughly", printed: "35", source: "manuscript_support_numbers.json", path: "derived.target_axis_change_pct.value"}
-  - {file: "related_work.tex", contains: "a factor of", printed: "2.4", source: "manuscript_support_numbers.json", path: "derived.severity_rmse_ratio.value"}
   # Revision R1, replacement values for the mismatches (docs/revision_r1_manuscript_changes.md
   # M2, M11-M14). None of these numbers is in the submitted text, so nothing passes early;
   # the replacements for M9 and the three-model reading of M14 wait for the revised text.
   - {file: "discussion.tex", contains: "carries a mean residual of about", printed: "0.57", source: "fixed_w_bias.json", path: "branches.Fusion fixed w.mean_bias"}
   - {file: "discussion.tex", contains: "carries a mean residual of about", printed: "0.54", source: "fixed_w_bias.json", path: "fixed_minus_summary.mean"}
-  - {file: "related_work.tex", contains: "Our per-eye RMSE also has a wider spread", printed: "3.77", source: "aggregation_comparability.json", path: "models.OOF.backbones.inception_resnet_v2.fusion.eye_rmse_sd"}
-  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "17.1", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[0,10).pct"}
-  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "8.8", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[10,20).pct"}
-  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "47.4", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[20,30).pct"}
-  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "26.7", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.bins.[30,inf).pct"}
-  - {file: "related_work.tex", contains: "Our cohort has a mean", printed: "14,404", source: "manuscript_support_numbers.json", path: "sensitivity_bins.277 pairs.points"}
   - {file: "methods.tex", contains: "pairs acquired on the same day", printed: "89", source: "skeleton_numbers.json", path: "oct_vf_gap_days.max"}
   # M14, authors' choice (b): the range over the three models and both published SDs is kept,
   # with "across the three models" added to the sentence.
-  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.27", source: "manuscript_support_numbers.json", path: "axis_counterfactual.range_three_models.min"}
-  - {file: "related_work.tex", contains: "at the spreads the published studies report", printed: "0.49", source: "manuscript_support_numbers.json", path: "axis_counterfactual.range_three_models.max"}
   # M15, authors' choice (b): methods.tex Cohort, OCT signal strength over the 277 evaluated
   # pairs (signal_strength_summary.json), sentence kept and numbers replaced by the own-eye values
   # with 0 counted as unavailable (rule own_eye_zero_excluded). The submitted 276 / 277 / 26.1 /
@@ -384,3 +315,12 @@ anchors:
   - {file: "methods.tex", contains: "Signal strength is available", printed: "8", source: "signal_strength_summary.json", path: "rules.own_eye_zero_excluded.macular.median"}
   - {file: "methods.tex", contains: "Signal strength is available", printed: "26.2", source: "signal_strength_summary.json", path: "rules.own_eye_zero_excluded.optic_disc.below_6.pct"}
   - {file: "methods.tex", contains: "Signal strength is available", printed: "22.5", source: "signal_strength_summary.json", path: "rules.own_eye_zero_excluded.macular.below_6.pct"}
+
+  # Submitted manuscript (Overleaf final handed over 2026-10-14, docs/journal_manuscript_submitted/).
+  # The comparison with published errors moved from related_work.tex (cut before submission) into
+  # this discussion.tex paragraph; same values, same paths as the retired related_work entries.
+  - {file: "discussion.tex", contains: "placing our values on their axis accounts for", printed: "34", source: "aggregation_comparability.json", path: "gap_decomposition_vs_literature.rows.1.explained_by_aggregation_pct.1"}
+  - {file: "discussion.tex", contains: "we train on 240 eyes", printed: "240", source: "skeleton_numbers.json", path: "backbones.inception_resnet_v2.oof.n_eyes"}
+  - {file: "discussion.tex", contains: "remains after the axis conversion", printed: "1.8", source: "aggregation_comparability.json", path: "gap_decomposition_vs_literature.rows.1.gap_same_axis_eye_mean"}
+  - {file: "discussion.tex", contains: "remains after the axis conversion", printed: "2.1", source: "aggregation_comparability.json", path: "gap_decomposition_vs_literature.rows.1.gap_same_axis_pooled"}
+  - {file: "discussion.tex", contains: "our cohort mean deviation of $-7.39$ dB", printed: "-7.39", source: "manuscript_support_numbers.json", path: "cohort_md.mean"}

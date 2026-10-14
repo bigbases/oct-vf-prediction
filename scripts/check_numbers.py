@@ -397,13 +397,10 @@ DERIVED = [
     ('fusion_sensitivity_trend.json', 'bin_distribution.OOF.frac_by_bin.1', 'pct', '[10,20) 9.1%'),
     ('fusion_sensitivity_trend.json', 'bin_distribution.OOF.frac_by_bin.2', 'pct', '[20,30) 48.4%'),
     ('fusion_sensitivity_trend.json', 'bin_distribution.OOF.frac_by_bin.3', 'pct', '[30,inf) 25.0%'),
-    # early stopping 낙관 검사 — 원고의 0.055 는 두 이득의 차이다
-    # (03_methods.tex:217, 05_discussion.tex:280). 두 항은 각각 근거가 있으나
-    # 차이 자체는 어디에도 저장돼 있지 않아 MISS 로 떨어졌다(2026-08-26).
-    ('skeleton_numbers.json',
-     'backbones.inception_resnet_v2.oof.delta_fus_minus_xgb_rmse|'
-     'backbones.inception_resnet_v2.test.delta_fus_minus_xgb_rmse',
-     'diff', 'OOF 이득 0.589 - held-out 이득 0.534 = 0.055 dB'),
+    # (퇴역 2026-10-14) early stopping 낙관 검사의 두 이득 차이(OOF − held-out, 지금 값 0.082)는
+    # 투고본(Overleaf 최종본)에서 그 문장이 빠져 역방향 대조가 STALE 로만 남았다. 항목을 뺐다.
+    # 다시 쓰면 skeleton_numbers.json backbones.inception_resnet_v2.{oof,test}.delta_fus_minus_xgb_rmse
+    # 의 diff 로 되살린다.
     # 부호 규약: 산출물은 차이(fusion - xgb)라 음수로 저장하고, 원고는 이득을
     # 양의 크기로 쓴다. 같은 양이고 부호 규약만 반대다.
     # (03_methods.tex:216-217, 05_discussion.tex:25, 05_discussion.tex:297-298)
