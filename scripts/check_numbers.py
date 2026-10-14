@@ -1627,11 +1627,16 @@ def scan_numbers(files, num_src, literature=(), sanchors=(), provenance=None):
                     if provenance is not None:
                         provenance[pk]['status'] = 'CITE'
                     continue
-                need_anchor = has_cite or ONE_DP.fullmatch(printed)
+                # pin: true 인 문장 앵커는 자리수와 무관하게 강제한다. 풀의 무관한 값과 우연히 맞아
+                # 통과하던 수치(results.tex 동측안 문단의 0.08 이 OOF−held-out 이득 차 0.082 와 맞았던 일,
+                # 2026-10-14)를 막는다. 고정 앵커가 값과 안 맞으면 MISS 로 보고한다.
+                pinned = any(a.get('pin') is True and a['file'] == f.name and str(a['printed']) == printed
+                             and a['contains'] in ctx for a in sanchors)
+                need_anchor = has_cite or ONE_DP.fullmatch(printed) or pinned
                 if need_anchor:
                     # 인용 문단의 수치와 소수 한 자리 수치는 풀 일치로 통과하지 않는다.
                     # 문헌값이면 literature_values.yaml, 우리 결과면 sentence_anchors.yaml.
-                    kind = 'LIT' if has_cite else 'ONE-DP'
+                    kind = 'LIT' if has_cite else ('ONE-DP' if ONE_DP.fullmatch(printed) else 'MISS')
                     hits = [a for a in sanchors if a['file'] == f.name and str(a['printed']) == printed
                             and a['contains'] in ctx]
                     if not hits:

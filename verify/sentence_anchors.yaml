@@ -12,6 +12,8 @@
 #   source:    the frozen artefact, e.g. calibration_multiplicity.json
 #   path:      dotted JSON path inside it
 #   kind:      optional; a derived quantity as in DERIVED (e.g. pct, delta)
+#   pin:       optional, true: the anchor is enforced for any number, not only for one-decimal
+#              numbers and numbers in citing paragraphs (which otherwise pass on any pool match)
 #
 # Example (comment, not a live entry):
 #   - file: "methods.tex"
@@ -324,3 +326,10 @@ anchors:
   - {file: "discussion.tex", contains: "remains after the axis conversion", printed: "1.8", source: "aggregation_comparability.json", path: "gap_decomposition_vs_literature.rows.1.gap_same_axis_eye_mean"}
   - {file: "discussion.tex", contains: "remains after the axis conversion", printed: "2.1", source: "aggregation_comparability.json", path: "gap_decomposition_vs_literature.rows.1.gap_same_axis_pooled"}
   - {file: "discussion.tex", contains: "our cohort mean deviation of $-7.39$ dB", printed: "-7.39", source: "manuscript_support_numbers.json", path: "cohort_md.mean"}
+
+  # Revision R1 (manuscript change M16): results.tex fellow-eye paragraph. The submitted
+  # "0.02 to 0.08 dB worse" is pass A (0.016-0.078); pass B gives 0.0027-0.0621 over the ten fused
+  # configurations (five backbones x RMSE/MAE, fusion(46) - fusion(26), per-eye mean). Revised text:
+  # "0.003 to 0.062 dB worse". Pinned: three-decimal values would otherwise pass on any pool match.
+  - {file: "results.tex", contains: "Every fused configuration is likewise", printed: "0.003", source: "fellow_eye_ablation.json", path: "secondary.11.delta", pin: true}
+  - {file: "results.tex", contains: "Every fused configuration is likewise", printed: "0.062", source: "fellow_eye_ablation.json", path: "secondary.8.delta", pin: true}
