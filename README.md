@@ -25,7 +25,7 @@ and is not a general-purpose tool.
 | `build_ml_final.py`, `merge_rnfl_into_ml_final.py`, `make_rnfl_flip.py` | Assembly of the modelling table, including the OS → OD mirroring |
 | `phase_b_build.py`, `phase_b_apply.py` | Manual review pass over the extracted thresholds |
 | `run_*.sh`, `scripts/run_*.sh` | Launch configurations for every reported run, including the 42/43/44 seed sweeps |
-| `paper/results_frozen/` | The 38 JSON files the manuscript's tables, figures and prose numbers are read from, including the revision-round analyses planned in `docs/revision_r1/` |
+| `paper/results_frozen/` | The 40 JSON files the manuscript's tables, figures and prose numbers are read from, including the revision-round analyses planned in `docs/revision_r1/` |
 | `docs/coordinate_frame_convention.md` | On-screen vs anatomical frame, and what follows for the OS mirroring step |
 | `tests/` | Config-consistency and frozen-result checks |
 | `scripts/verify_no_phi.py` | The identifier scan described under Verification |
@@ -187,6 +187,18 @@ flags no operation in them.
 torchvision 0.13.1 and timm 1.0.27 were unchanged from before the first submitted run to the
 revision runs, and each backbone has a single pretrained-weight file, downloaded before its
 submitted run.
+
+**How far the reruns move, and whether the conclusions depend on them.** Rerun with
+`--num_workers 0`, the five-fold image branch differs from the submitted run in per-eye RMSE
+out-of-fold by +0.36 dB for Xception (95% CI 0.07 to 0.65, p = 0.0023), +0.20 dB for
+DenseNet121 (95% CI -0.25 to 0.63, p = 0.30) and -0.12 dB for VGG16 (95% CI -0.41 to 0.16,
+p = 0.72); for VGG16 this is run-to-run variation. These differences show how much the image
+branch varies from training noise alone. Repeating the submitted analyses with the three
+reruns in place of the submitted runs (`experiments/revision_r1/r13_rerun_frame.py`, frozen as
+`paper/results_frozen/r13_rerun_frame.json`) leaves the conclusions unchanged: fusion beats the
+summary-parameter model out-of-fold for every backbone (per-eye RMSE -0.54 to -0.67 dB,
+p <= 1.2e-9), and the five-backbone ensemble ceiling stays indistinguishable from zero
+(-0.05 dB, 95% CI -0.20 to 0.09, p = 0.47).
 
 The revision-round runs (`docs/revision_r1/`) use `--num_workers 0` for every backbone
 (plan §0). Their Xception and DenseNet121 runs are therefore compared with matched reruns

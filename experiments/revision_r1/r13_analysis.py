@@ -162,6 +162,17 @@ def cnn_vs(ref_map, new_map):
     return out
 
 
+def finite(o):
+    """NaN -> null (a p-value is undefined when every paired difference is zero), so the file is strict JSON."""
+    if isinstance(o, dict):
+        return {k: finite(v) for k, v in o.items()}
+    if isinstance(o, list):
+        return [finite(v) for v in o]
+    if isinstance(o, (float, np.floating)) and not np.isfinite(o):
+        return None
+    return o
+
+
 def main():
     sub, *_ = endpoints(SUBMITTED)
     g = guards(sub)
@@ -175,7 +186,7 @@ def main():
     doc['mirrored_vs_unmirrored_cnn'] = cnn_vs(UNMIRRORED_REF, MIRRORED)
     doc['rerun_vs_submitted_cnn'] = cnn_vs(SUBMITTED, UNMIRRORED_REF)
     FE.BB.clear(); FE.BB.update(SUBMITTED)
-    (HERE / 'r13_analysis.json').write_text(json.dumps(doc, indent=1, default=float) + '\n')
+    (HERE / 'r13_analysis.json').write_text(json.dumps(finite(doc), indent=1, default=float, allow_nan=False) + '\n')
     print('mirrored runs missing:', missing or 'none')
 
 

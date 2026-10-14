@@ -208,13 +208,64 @@
         "epochs_total": 1188
       },
       "Xception": {
-        "status": "run not complete"
+        "args_changed": {
+          "num_workers": [
+            4,
+            0
+          ]
+        },
+        "args_absent_in_submitted_run": {
+          "flip_os_images": true
+        },
+        "flip_os_images": true,
+        "epochs_per_fold": [
+          120,
+          230,
+          300,
+          230,
+          264
+        ],
+        "epochs_total": 1144
       },
       "DenseNet121": {
-        "status": "run not complete"
+        "args_changed": {
+          "num_workers": [
+            4,
+            0
+          ]
+        },
+        "args_absent_in_submitted_run": {
+          "flip_os_images": true
+        },
+        "flip_os_images": true,
+        "epochs_per_fold": [
+          173,
+          272,
+          197,
+          252,
+          122
+        ],
+        "epochs_total": 1016
       },
       "VGG16": {
-        "status": "run not complete"
+        "args_changed": {
+          "dump_test_preds": [
+            false,
+            true
+          ]
+        },
+        "args_absent_in_submitted_run": {
+          "flip_os_images": true
+        },
+        "flip_os_images": true,
+        "epochs_per_fold": [
+          224,
+          300,
+          186,
+          161,
+          300
+        ],
+        "epochs_total": 1171
       }
     },
     "probes_fold0": {

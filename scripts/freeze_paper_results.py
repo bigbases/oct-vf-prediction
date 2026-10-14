@@ -142,6 +142,12 @@ SOURCES = {
     #   arms complete (CNN 0/1/2, XGBoost 0/1). Comparisons 12-17 (fusion vs summary within each
     #   rule) were added after the first results and are flagged `added` in the file.
     'r14_analysis.json': ('experiments/revision_r1/r14_analysis.json', 'B'),
+    # r13_analysis: R1-3 common coordinate frame (plan section 2): the submitted analyses with the
+    #   left-eye images mirrored, all five mirrored runs and the three matched unmirrored reruns.
+    # r13_rerun_frame: the submitted analyses with the matched reruns in place of the three
+    #   submitted runs the current code does not reproduce (added, decision log 2026-10-14).
+    'r13_analysis.json': ('experiments/revision_r1/r13_analysis.json', 'B'),
+    'r13_rerun_frame.json': ('experiments/revision_r1/r13_rerun_frame.json', 'B'),
 }
 
 # keys dropped from case_profile.json: pseudonym + eye + date is re-identifying

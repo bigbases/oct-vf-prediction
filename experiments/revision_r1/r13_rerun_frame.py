@@ -48,7 +48,7 @@ def main():
                             'partial': True}
         doc['rerun_backbones'] = sorted(keep) if not doc['rerun'].get('partial') else done
     R.FE.BB.clear(); R.FE.BB.update(R.SUBMITTED)
-    (R.HERE / 'r13_rerun_frame.json').write_text(json.dumps(doc, indent=1, default=float) + '\n')
+    (R.HERE / 'r13_rerun_frame.json').write_text(json.dumps(R.finite(doc), indent=1, default=float, allow_nan=False) + '\n')
     print('reruns used:', done or 'none', '| missing:', doc['reruns_missing'] or 'none')
 
 
