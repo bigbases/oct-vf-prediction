@@ -225,7 +225,7 @@ literature:
   # threshold in Shin 2021, so this sentence cites hasan2025 alone and shin2021 stays on the next
   # sentence. The fragment includes the citation, so the entry passes only after that change.
   - file: "methods.tex"
-    contains: 'Applying the minimum of 6 used in comparable work \cite{hasan2025}'
+    contains: 'Applying the minimum of 6 \rev{used by Hasan et al.\ \cite{hasan2025}}'
     value: "6"
     cite: "hasan2025"
     checked: "checked against the original by the authors, 2026-10-14: Hasan 2025, Cirrus signal strength 6 or above on the 1-10 scale"

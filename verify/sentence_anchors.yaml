@@ -296,9 +296,9 @@ anchors:
   # Revision R1, replacement values for the mismatches (docs/revision_r1_manuscript_changes.md
   # M2, M11-M14). None of these numbers is in the submitted text, so nothing passes early;
   # the replacements for M9 and the three-model reading of M14 wait for the revised text.
-  - {file: "discussion.tex", contains: "carries a mean residual of about", printed: "0.57", source: "fixed_w_bias.json", path: "branches.Fusion fixed w.mean_bias"}
-  - {file: "discussion.tex", contains: "carries a mean residual of about", printed: "0.54", source: "fixed_w_bias.json", path: "fixed_minus_summary.mean"}
-  - {file: "methods.tex", contains: "pairs acquired on the same day", printed: "89", source: "skeleton_numbers.json", path: "oct_vf_gap_days.max"}
+  - {file: "discussion.tex", contains: "carries a mean residual of", printed: "0.57", source: "fixed_w_bias.json", path: "branches.Fusion fixed w.mean_bias", pin: true}
+  - {file: "discussion.tex", contains: "carries a mean residual of", printed: "0.54", source: "fixed_w_bias.json", path: "fixed_minus_summary.mean", pin: true}
+  - {file: "methods.tex", contains: "pairs acquired on the same day", printed: "89", source: "skeleton_numbers.json", path: "oct_vf_gap_days.max", pin: true}
   # M14, authors' choice (b): the range over the three models and both published SDs is kept,
   # with "across the three models" added to the sentence.
   # M15, authors' choice (b): methods.tex Cohort, OCT signal strength over the 277 evaluated
@@ -333,3 +333,129 @@ anchors:
   # "0.003 to 0.062 dB worse". Pinned: three-decimal values would otherwise pass on any pool match.
   - {file: "results.tex", contains: "Every fused configuration is likewise", printed: "0.003", source: "fellow_eye_ablation.json", path: "secondary.11.delta", pin: true}
   - {file: "results.tex", contains: "Every fused configuration is likewise", printed: "0.062", source: "fellow_eye_ablation.json", path: "secondary.8.delta", pin: true}
+
+  # Revised manuscript (interim, docs/revision_manuscript/, 2026-10-14). Every number the revision added,
+  # mapped by meaning to its frozen value and pinned: without pin, numbers that are not one-decimal pass on
+  # any pool match, and most of these were matching unrelated files.
+  # M9 (results.tex floor-label paragraph): pooled RMSE drop, all minus non-floor cells, by branch.
+  - {file: "results.tex", contains: "Floor label rule.", printed: "1.5", source: "neg1_mask_sensitivity.json", path: "splits.oof.xgb.d_rmse", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Floor label rule.", printed: "1.8", source: "neg1_mask_sensitivity.json", path: "splits.oof.cnn.d_rmse", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Floor label rule.", printed: "1.2", source: "neg1_mask_sensitivity.json", path: "splits.test.xgb.d_rmse", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Floor label rule.", printed: "2.6", source: "neg1_mask_sensitivity.json", path: "splits.test.cnn.d_rmse", kind: "gain", pin: true}
+  # R1-4 retraining (results.tex): fusion - summary per-eye RMSE on non-floor cells, printed as the gain; CNN branch out-of-fold for 14.5/20.7/8.540/9.562.
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "0.570", source: "r14_analysis.json", path: "splits.OOF.comparisons.14.mean_delta", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "0.418", source: "r14_analysis.json", path: "splits.OOF.comparisons.14.ci.1", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "0.724", source: "r14_analysis.json", path: "splits.OOF.comparisons.14.ci.0", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "3.3e-16", source: "r14_analysis.json", path: "splits.OOF.comparisons.14.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "0.626", source: "r14_analysis.json", path: "splits.TEST.comparisons.14.mean_delta", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "5.3e-4", source: "r14_analysis.json", path: "splits.TEST.comparisons.14.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "0.476", source: "r14_analysis.json", path: "splits.OOF.comparisons.16.mean_delta", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "5.3e-7", source: "r14_analysis.json", path: "splits.OOF.comparisons.16.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "0.603", source: "r14_analysis.json", path: "splits.TEST.comparisons.16.mean_delta", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "0.0012", source: "r14_analysis.json", path: "splits.TEST.comparisons.16.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "14.5", source: "r14_analysis.json", path: "splits.OOF.branches.cnn0.mean_prediction_at_floor_cells", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "20.7", source: "r14_analysis.json", path: "splits.OOF.branches.cnn1.mean_prediction_at_floor_cells", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "8.540", source: "r14_analysis.json", path: "splits.OOF.branches.cnn0.all_rmse", pin: true}
+  - {file: "results.tex", contains: "Retraining under the alternative rules", printed: "9.562", source: "r14_analysis.json", path: "splits.OOF.branches.cnn1.all_rmse", pin: true}
+  # R1-6 Holm-adjusted bin-level p, ensemble fusion vs ensemble, [0,10) and [30,inf).
+  - {file: "results.tex", contains: "all four differences remain significant after Holm adjustment", printed: "0.0037", source: "calibration_multiplicity.json", path: "bin_level_comparisons.OOF.4.p_holm", pin: true}
+  - {file: "results.tex", contains: "all four differences remain significant after Holm adjustment", printed: "0.0013", source: "calibration_multiplicity.json", path: "bin_level_comparisons.OOF.7.p_holm", pin: true}
+  - {file: "results.tex", contains: "all four differences remain significant after Holm adjustment", printed: "0.041", source: "calibration_multiplicity.json", path: "bin_level_comparisons.TEST.4.p_holm", pin: true}
+  - {file: "results.tex", contains: "all four differences remain significant after Holm adjustment", printed: "0.027", source: "calibration_multiplicity.json", path: "bin_level_comparisons.TEST.7.p_holm", pin: true}
+  # R1-5 calibration paragraph (results.tex).
+  - {file: "results.tex", contains: "reports calibration directly", printed: "0.03", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "1.05", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "1.53", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "0.58", source: "calibration_multiplicity.json", path: "calibration.OOF.Fusion.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "0.875", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.slope", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "1.159", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble fusion.all.slope", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "13.2", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.measured [0,10).mean_bias", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "14.2", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.measured [0,10).mean_bias", pin: true}
+  - {file: "results.tex", contains: "reports calibration directly", printed: "14.8", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.measured [0,10).mean_bias", pin: true}
+  # R1-5 Table 7 (tab:calibration). The gate matches anchors by paragraph, so a value printed twice in the table is checked against the first anchor only; both rows were verified when entered (2026-10-14).
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.47", source: "calibration_multiplicity.json", path: "weights_and_constants.w_fusion_test", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.33", source: "calibration_multiplicity.json", path: "weights_and_constants.w_ensfusion_test", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.03", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.89", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.94", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.875", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.780", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.960", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-1.26", source: "calibration_multiplicity.json", path: "calibration.TEST.Summary.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-3.76", source: "calibration_multiplicity.json", path: "calibration.TEST.Summary.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.53", source: "calibration_multiplicity.json", path: "calibration.TEST.Summary.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.846", source: "calibration_multiplicity.json", path: "calibration.TEST.Summary.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.475", source: "calibration_multiplicity.json", path: "calibration.TEST.Summary.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.128", source: "calibration_multiplicity.json", path: "calibration.TEST.Summary.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.05", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.19", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.96", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.937", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.812", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.051", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.29", source: "calibration_multiplicity.json", path: "calibration.TEST.IR-v2.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.81", source: "calibration_multiplicity.json", path: "calibration.TEST.IR-v2.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "3.79", source: "calibration_multiplicity.json", path: "calibration.TEST.IR-v2.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.279", source: "calibration_multiplicity.json", path: "calibration.TEST.IR-v2.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.849", source: "calibration_multiplicity.json", path: "calibration.TEST.IR-v2.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.645", source: "calibration_multiplicity.json", path: "calibration.TEST.IR-v2.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.71", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "2.40", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.119", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.005", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.225", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.40", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.67", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "4.01", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.284", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.915", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.618", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.00", source: "calibration_multiplicity.json", path: "calibration.OOF.Centred ensemble.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.83", source: "calibration_multiplicity.json", path: "calibration.OOF.Centred ensemble.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.86", source: "calibration_multiplicity.json", path: "calibration.OOF.Centred ensemble.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.118", source: "calibration_multiplicity.json", path: "calibration.OOF.Centred ensemble.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.13", source: "calibration_multiplicity.json", path: "calibration.TEST.Centred ensemble.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-2.20", source: "calibration_multiplicity.json", path: "calibration.TEST.Centred ensemble.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "2.48", source: "calibration_multiplicity.json", path: "calibration.TEST.Centred ensemble.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.58", source: "calibration_multiplicity.json", path: "calibration.OOF.Fusion.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.23", source: "calibration_multiplicity.json", path: "calibration.OOF.Fusion.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.44", source: "calibration_multiplicity.json", path: "calibration.OOF.Fusion.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.087", source: "calibration_multiplicity.json", path: "calibration.OOF.Fusion.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.979", source: "calibration_multiplicity.json", path: "calibration.OOF.Fusion.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.186", source: "calibration_multiplicity.json", path: "calibration.OOF.Fusion.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.09", source: "calibration_multiplicity.json", path: "calibration.TEST.Fusion.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-2.11", source: "calibration_multiplicity.json", path: "calibration.TEST.Fusion.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "2.66", source: "calibration_multiplicity.json", path: "calibration.TEST.Fusion.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.204", source: "calibration_multiplicity.json", path: "calibration.TEST.Fusion.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.792", source: "calibration_multiplicity.json", path: "calibration.TEST.Fusion.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.513", source: "calibration_multiplicity.json", path: "calibration.TEST.Fusion.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.04", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble fusion.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.22", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble fusion.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.89", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble fusion.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.159", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble fusion.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.054", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble fusion.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.258", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble fusion.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.52", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-1.64", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "3.20", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.234", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.837", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.549", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.slope_ci.1", pin: true}
+  # M3 centred-ensemble sentence (results.tex).
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.244", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.3.mean_delta", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "5.9e-4", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.3.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.0024", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.3.p_holm", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.153", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.2.mean_delta", kind: "gain", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.032", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.2.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.096", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.2.p_holm", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.60", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.0.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.76", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.1.p_wilcoxon", pin: true}
+  # R1-1 Methods section "Matched comparison of representation and model family".
+  - {file: "methods.tex", contains: "To separate the effect of the representation", printed: "12", source: "revision_methods_numbers.json", path: "r11_regions.rnfl.n_wedges", pin: true}
+  - {file: "methods.tex", contains: "To separate the effect of the representation", printed: "30", source: "revision_methods_numbers.json", path: "r11_regions.rnfl.wedge_deg", pin: true}
+  - {file: "methods.tex", contains: "To separate the effect of the representation", printed: "10", source: "revision_methods_numbers.json", path: "r11_qc.gca_status.map_mean", pin: true}
+  - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "20", source: "revision_methods_numbers.json", path: "r11_xgb.sets.map23.region_means", pin: true}
+  - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "23", source: "revision_methods_numbers.json", path: "r11_xgb.sets.map23.n_features", pin: true}
+  - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "0.80", source: "revision_methods_numbers.json", path: "r11_xgb.r_map_vcd_vs_printed.r", pin: true}
+  - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "277", source: "revision_methods_numbers.json", path: "r11_xgb.r_map_vcd_vs_printed.n", pin: true}
+  - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "25", source: "revision_methods_numbers.json", path: "r11_xgb.sets.map26.cirrus_geometry", pin: true}
