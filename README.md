@@ -151,13 +151,55 @@ differences are of the order of 0.01 dB. Anyone reusing this code on new data
 should upgrade and re-validate; anyone reproducing the reported values should
 install exactly these versions.
 
+## Reproducing the CNN runs
+
+The five image backbones do not reproduce in the same way. A run counts as reproduced bit
+for bit when fold 0 of the current code gives the same value in every logged field (training
+loss and MAE, validation MSE, RMSE and MAE) for each of the first three epochs, compared by
+`experiments/revision_r1/probe_compare.py` against the submitted run.
+
+| Backbone | Submitted run launched by | Data-loader workers | Reproduces bit for bit |
+|---|---|---|---|
+| Inception-ResNet-v2 | `scripts/run_backbone_5fold_three.sh` | `--num_workers 0` | yes |
+| Inception-v3 | same arguments as above (default backbone) | `--num_workers 0` | yes |
+| VGG16 | `scripts/run_backbone_5fold_three.sh` | `--num_workers 0` | no — not even two runs of the same code |
+| Xception | `scripts/run_backbone_matrix.sh` | `--num_workers 4` | yes, with `--num_workers 4` only |
+| DenseNet121 | `scripts/run_backbone_matrix.sh` | `--num_workers 4` | yes, with `--num_workers 4` only |
+
+**The number of data-loader workers is part of the configuration.** The only augmentation
+is a colour jitter, which draws from PyTorch's random generator. With `--num_workers 0` it
+draws from the main process, so these draws also move the next epoch's shuffle; with
+`--num_workers 4` each worker draws from its own seeded generator. The first epoch is
+therefore shuffled identically, but the jitter differs from the first batch and the runs
+separate from epoch 2 on. Reproducing a submitted run requires the worker count it was
+launched with (the table above; both launch scripts state it). Launched with four workers,
+the current code matches the submitted Xception and DenseNet121 runs exactly over the first
+three epochs of fold 0; a full five-fold rerun with four workers was not made.
+
+**VGG16 is not deterministic on the GPU.** At the paper's input size (161 × 322) the VGG16
+feature map is 5 × 10, which timm's `ConvMlp` pools adaptively up to 7 × 10, so the pooling
+windows overlap. The CUDA backward pass of `adaptive_avg_pool2d` then accumulates with atomic
+additions whose order varies, and two runs of the same code already differ in the first
+epoch. The other four backbones end in a 1 × 1 global pool and PyTorch's determinism check
+flags no operation in them.
+
+**Library versions and weights were not the cause.** PyTorch 1.12.1 + CUDA 11.3,
+torchvision 0.13.1 and timm 1.0.27 were unchanged from before the first submitted run to the
+revision runs, and each backbone has a single pretrained-weight file, downloaded before its
+submitted run.
+
+The revision-round runs (`docs/revision_r1/`) use `--num_workers 0` for every backbone
+(plan §0). Their Xception and DenseNet121 runs are therefore compared with matched reruns
+under the same setting, not with the submitted runs.
+
 ## Design rules the code follows
 
 1. No identifying data in the repository. Per-eye tables and predictions stay
    local; the two figures that embed a study eye take its identifiers as
    arguments.
-2. Deterministic execution: seeds and library versions are pinned, and the fold
-   assignment is patient-level and fixed.
+2. Deterministic execution where the hardware allows it: seeds, library versions and the
+   number of data-loader workers are pinned, and the fold assignment is patient-level and
+   fixed. VGG16 is the exception on the GPU; see "Reproducing the CNN runs".
 3. The fusion weight is fitted inside the fold, never on the evaluation split.
    `scripts/verify_fusion_integrity.py` checks this.
 4. No absolute paths: every root comes from `paths.py` and the environment.

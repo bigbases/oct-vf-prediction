@@ -12,6 +12,8 @@ export HVF_ROOT="$ROOT"
 GPU="$1"; shift
 export CUDA_VISIBLE_DEVICES="$GPU"
 
+# --num_workers 4 는 투고 Xception·DenseNet121 런(runs/phasec_b0_{xception,densenet121}_5fold)의 기록값이다.
+# 0 으로 돌리면 ColorJitter 난수 흐름이 달라져 투고 런과 비트 단위로 같아지지 않는다(README "Reproducing the CNN runs").
 COMMON="--csv ml_final_90d_excl_empty_flip.csv --input_geometry paper \
 --epochs 300 --batch_size 64 --lr 1e-4 --weight_decay 1e-5 \
 --optimizer rmsprop --momentum 0.9 --patience 100 --early_stop_metric mae \

@@ -14,6 +14,9 @@ COMMON=(
   --patience 100
   --batch_size 64
   --dump_val_preds
+  # 투고 런 기록값(results.json args). 기본값과 같지만 명시한다: 데이터 로더 워커 수가 바뀌면
+  # ColorJitter 난수 흐름이 달라져 같은 시드로도 다른 런이 된다(README "Reproducing the CNN runs").
+  --num_workers 0
 )
 
 run_one() {
@@ -39,6 +42,8 @@ run_one inception_resnet_v2 runs/phasec_b0_inception_resnet_v2_5fold
 run_one vgg16 runs/phasec_b0_vgg16_5fold
 
 echo ""
+# Inception-v3 투고 런(runs/phasec_b0_clip_mse_5fold)은 위 COMMON 과 같은 인자(기본 백본 inception_v3,
+# --num_workers 0)로 학습된 것이다(results.json args 대조). 다시 학습하려면 run_one inception_v3 <새 출력>.
 echo "========== Inception-v3: 기존 phasec_b0_clip_mse_5fold 재사용 (재현) =========="
 "$PY" -c "
 import json, numpy as np
