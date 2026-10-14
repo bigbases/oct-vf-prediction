@@ -138,6 +138,10 @@ SOURCES = {
     #   submitted sentence is single_value_fill, which gives a blank own column the report's one read
     #   value of unknown eye (5 disc / 6 macular pairs). The pass-B evaluated keys select the pairs.
     'signal_strength_summary.json': ('experiments/revision_r1/signal_strength_summary.json', 'B'),
+    # r14_analysis: R1-4 floor-label rule (docs/revision_r1/prereg_R1-3_R1-4.md section 3), all
+    #   arms complete (CNN 0/1/2, XGBoost 0/1). Comparisons 12-17 (fusion vs summary within each
+    #   rule) were added after the first results and are flagged `added` in the file.
+    'r14_analysis.json': ('experiments/revision_r1/r14_analysis.json', 'B'),
 }
 
 # keys dropped from case_profile.json: pseudonym + eye + date is re-identifying

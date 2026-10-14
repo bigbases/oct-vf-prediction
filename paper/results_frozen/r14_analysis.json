@@ -1,0 +1,917 @@
+{
+  "note": "R1-4 floor-label analysis; non-floor = cells not recorded below 0 dB.",
+  "arms_available": {
+    "cnn": [
+      0,
+      1,
+      2
+    ],
+    "xgb": [
+      0,
+      1
+    ]
+  },
+  "w_fixed": 0.47,
+  "guards": [
+    {
+      "split": "OOF",
+      "branch": "cnn",
+      "got": 6.7669,
+      "want": 6.7669,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "xgb",
+      "got": 7.1605,
+      "want": 7.1605,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "fusion",
+      "got": 6.3327,
+      "want": 6.3327,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "cnn",
+      "got": 6.0834,
+      "want": 6.0834,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "xgb",
+      "got": 7.6697,
+      "want": 7.6697,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "fusion",
+      "got": 6.4404,
+      "want": 6.4404,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "main comparison all cells delta",
+      "got": -0.6706358194351196,
+      "want": -0.6706357990701993,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "main comparison all cells ci_lo",
+      "got": -0.8995847212515138,
+      "want": -0.8995847212515138,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "main comparison all cells ci_hi",
+      "got": -0.43875053484519694,
+      "want": -0.43875053484519694,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "main comparison all cells p_wilcoxon",
+      "got": 1.2993503457930597e-10,
+      "want": 1.2993503457930597e-10,
+      "ok": true
+    }
+  ],
+  "splits": {
+    "OOF": {
+      "n_eyes": 240,
+      "cells": 12480,
+      "floor_cells": 1573,
+      "branches": {
+        "cnn0": {
+          "nonfloor_rmse": 6.7668657302856445,
+          "nonfloor_mae": 4.911714553833008,
+          "all_rmse": 8.53967571258545,
+          "all_mae": 6.123324871063232,
+          "lowest_bin_bias_rule_applied": 14.170403480529785,
+          "lowest_bin_bias_floor_excluded": 13.32578182220459,
+          "mean_prediction_at_floor_cells": 14.500089645385742
+        },
+        "cnn1": {
+          "nonfloor_rmse": 6.310001373291016,
+          "nonfloor_mae": 4.33377742767334,
+          "all_rmse": 9.562393188476562,
+          "all_mae": 6.401656627655029,
+          "lowest_bin_bias_rule_applied": 19.69719123840332,
+          "lowest_bin_bias_floor_excluded": 17.025388717651367,
+          "mean_prediction_at_floor_cells": 20.740093231201172
+        },
+        "cnn2": {
+          "nonfloor_rmse": 7.081982135772705,
+          "nonfloor_mae": 5.175839900970459,
+          "all_rmse": 8.887870788574219,
+          "all_mae": 6.435082912445068,
+          "lowest_bin_bias_rule_applied": 14.690125465393066,
+          "lowest_bin_bias_floor_excluded": 13.469633102416992,
+          "mean_prediction_at_floor_cells": 15.166528701782227
+        },
+        "xgb0": {
+          "nonfloor_rmse": 7.160543441772461,
+          "nonfloor_mae": 5.349615097045898,
+          "all_rmse": 8.660277366638184,
+          "all_mae": 6.397546291351318,
+          "lowest_bin_bias_rule_applied": 13.211138725280762,
+          "lowest_bin_bias_floor_excluded": 12.097813606262207,
+          "mean_prediction_at_floor_cells": 13.645710945129395
+        },
+        "xgb1": {
+          "nonfloor_rmse": 6.5959062576293945,
+          "nonfloor_mae": 4.742440223693848,
+          "all_rmse": 9.450247764587402,
+          "all_mae": 6.598063945770264,
+          "lowest_bin_bias_rule_applied": 18.61350440979004,
+          "lowest_bin_bias_floor_excluded": 16.432727813720703,
+          "mean_prediction_at_floor_cells": 19.464744567871094
+        },
+        "fusion_c0x0": {
+          "nonfloor_rmse": 6.332740783691406,
+          "nonfloor_mae": 4.711105823516846,
+          "all_rmse": 8.068803787231445,
+          "all_mae": 5.894312381744385,
+          "lowest_bin_bias_rule_applied": 13.719548225402832,
+          "lowest_bin_bias_floor_excluded": 12.748637199401855,
+          "mean_prediction_at_floor_cells": 14.098530769348145
+        },
+        "fusion_c0x1": {
+          "nonfloor_rmse": 6.126555442810059,
+          "nonfloor_mae": 4.442739009857178,
+          "all_rmse": 8.49616527557373,
+          "all_mae": 6.004488468170166,
+          "lowest_bin_bias_rule_applied": 16.25865936279297,
+          "lowest_bin_bias_floor_excluded": 14.78604507446289,
+          "mean_prediction_at_floor_cells": 16.833477020263672
+        },
+        "fusion_c1x0": {
+          "nonfloor_rmse": 6.040091037750244,
+          "nonfloor_mae": 4.372781753540039,
+          "all_rmse": 8.54139232635498,
+          "all_mae": 6.015476226806641,
+          "lowest_bin_bias_rule_applied": 16.648746490478516,
+          "lowest_bin_bias_floor_excluded": 14.709426879882812,
+          "mean_prediction_at_floor_cells": 17.405733108520508
+        },
+        "fusion_c1x1": {
+          "nonfloor_rmse": 6.062564849853516,
+          "nonfloor_mae": 4.220779895782471,
+          "all_rmse": 9.233874320983887,
+          "all_mae": 6.227351188659668,
+          "lowest_bin_bias_rule_applied": 19.187856674194336,
+          "lowest_bin_bias_floor_excluded": 16.746835708618164,
+          "mean_prediction_at_floor_cells": 20.14068031311035
+        },
+        "fusion_c2x0": {
+          "nonfloor_rmse": 6.417306900024414,
+          "nonfloor_mae": 4.794022560119629,
+          "all_rmse": 8.168628692626953,
+          "all_mae": 6.0113420486450195,
+          "lowest_bin_bias_rule_applied": 13.995001792907715,
+          "lowest_bin_bias_floor_excluded": 12.82487678527832,
+          "mean_prediction_at_floor_cells": 14.451744079589844
+        },
+        "fusion_c2x1": {
+          "nonfloor_rmse": 6.222688674926758,
+          "nonfloor_mae": 4.524953842163086,
+          "all_rmse": 8.628461837768555,
+          "all_mae": 6.1208600997924805,
+          "lowest_bin_bias_rule_applied": 16.534114837646484,
+          "lowest_bin_bias_floor_excluded": 14.862287521362305,
+          "mean_prediction_at_floor_cells": 17.186691284179688
+        }
+      },
+      "comparisons": [
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.12241341918706894,
+          "median_delta": -0.20112824440002441,
+          "ci": [
+            -0.41682374133952954,
+            0.1707920339770968
+          ],
+          "p_wilcoxon": 0.0333468482848275,
+          "n_a_better": 129,
+          "a": "fusion_c1x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": true,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.2721869647502899,
+          "median_delta": -0.29345154762268066,
+          "ci": [
+            -0.5659617713018346,
+            0.02289018406320975
+          ],
+          "p_wilcoxon": 0.0001947025366352101,
+          "n_a_better": 144,
+          "a": "fusion_c1x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.20144003629684448,
+          "median_delta": -0.21273469924926758,
+          "ci": [
+            -0.5890501401059912,
+            0.18340397862399477
+          ],
+          "p_wilcoxon": 0.0399250795498259,
+          "n_a_better": 130,
+          "a": "cnn1",
+          "b": "cnn0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.33729174733161926,
+          "median_delta": -0.2070251703262329,
+          "ci": [
+            -0.7386990832610387,
+            0.06290770428604746
+          ],
+          "p_wilcoxon": 0.0031789776044508643,
+          "n_a_better": 137,
+          "a": "cnn1",
+          "b": "cnn0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.3877183496952057,
+          "median_delta": -0.24453306198120117,
+          "ci": [
+            -0.6593344809752869,
+            -0.1175536084077743
+          ],
+          "p_wilcoxon": 0.00018478349574533654,
+          "n_a_better": 143,
+          "a": "xgb1",
+          "b": "xgb0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.4198349416255951,
+          "median_delta": -0.28086209297180176,
+          "ci": [
+            -0.6745010821553651,
+            -0.16513951911483102
+          ],
+          "p_wilcoxon": 1.290405079554747e-06,
+          "n_a_better": 153,
+          "a": "xgb1",
+          "b": "xgb0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": 0.3513922393321991,
+          "median_delta": 0.19333529472351074,
+          "ci": [
+            0.048441820476661644,
+            0.6456574584796912
+          ],
+          "p_wilcoxon": 0.0201519678336565,
+          "n_a_better": 106,
+          "a": "cnn2",
+          "b": "cnn0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": 0.3081583082675934,
+          "median_delta": 0.15720129013061523,
+          "ci": [
+            -0.0066128559166290695,
+            0.607188188489461
+          ],
+          "p_wilcoxon": 0.06290822046400768,
+          "n_a_better": 109,
+          "a": "cnn2",
+          "b": "cnn0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": 0.5528323650360107,
+          "median_delta": 0.25096261501312256,
+          "ci": [
+            0.21416747894138097,
+            0.8777543971551947
+          ],
+          "p_wilcoxon": 0.0012577644926974431,
+          "n_a_better": 102,
+          "a": "cnn2",
+          "b": "cnn1",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": 0.6454499959945679,
+          "median_delta": 0.41309529542922974,
+          "ci": [
+            0.31820541482791886,
+            0.9675074022701835
+          ],
+          "p_wilcoxon": 3.436390048996101e-05,
+          "n_a_better": 94,
+          "a": "cnn2",
+          "b": "cnn1",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.02811272069811821,
+          "median_delta": -0.023295879364013672,
+          "ci": [
+            -0.24366627502433094,
+            0.17943409640786254
+          ],
+          "p_wilcoxon": 0.5369455094116579,
+          "n_a_better": 123,
+          "a": "fusion_c2x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.09684646129608154,
+          "median_delta": -0.12436628341674805,
+          "ci": [
+            -0.31348018928692417,
+            0.11814826727832288
+          ],
+          "p_wilcoxon": 0.1374060122956701,
+          "n_a_better": 127,
+          "a": "fusion_c2x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.8354225754737854,
+          "median_delta": -0.7150882482528687,
+          "ci": [
+            -1.0708218121425608,
+            -0.5876634954769319
+          ],
+          "p_wilcoxon": 3.406770163055555e-14,
+          "n_a_better": 165,
+          "a": "fusion_c0x0",
+          "b": "xgb0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.6518213748931885,
+          "median_delta": -0.5327659845352173,
+          "ci": [
+            -0.8781675655717023,
+            -0.4153343922985087
+          ],
+          "p_wilcoxon": 2.6691186297664617e-10,
+          "n_a_better": 158,
+          "a": "fusion_c0x0",
+          "b": "xgb0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.5701175332069397,
+          "median_delta": -0.5083848237991333,
+          "ci": [
+            -0.7235239499498837,
+            -0.41751969739033
+          ],
+          "p_wilcoxon": 3.3173283751918303e-16,
+          "n_a_better": 177,
+          "a": "fusion_c1x1",
+          "b": "xgb1",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.5041733980178833,
+          "median_delta": -0.4812479615211487,
+          "ci": [
+            -0.6611892116251185,
+            -0.34920448878978166
+          ],
+          "p_wilcoxon": 1.930066362487046e-14,
+          "n_a_better": 175,
+          "a": "fusion_c1x1",
+          "b": "xgb1",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.47581687569618225,
+          "median_delta": -0.4287182092666626,
+          "ci": [
+            -0.722376068707128,
+            -0.24818218481527798
+          ],
+          "p_wilcoxon": 5.323295019514013e-07,
+          "n_a_better": 154,
+          "a": "fusion_c2x1",
+          "b": "xgb1",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 238,
+          "n_patients": 125,
+          "mean_delta": -0.3288329243659973,
+          "median_delta": -0.31832098960876465,
+          "ci": [
+            -0.572469544582909,
+            -0.09754056352538372
+          ],
+          "p_wilcoxon": 0.0003639020941059841,
+          "n_a_better": 143,
+          "a": "fusion_c2x1",
+          "b": "xgb1",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": true
+        }
+      ]
+    },
+    "TEST": {
+      "n_eyes": 37,
+      "cells": 1924,
+      "floor_cells": 204,
+      "branches": {
+        "cnn0": {
+          "nonfloor_rmse": 6.0834126472473145,
+          "nonfloor_mae": 4.4242143630981445,
+          "all_rmse": 8.732285499572754,
+          "all_mae": 6.032829761505127,
+          "lowest_bin_bias_rule_applied": 19.021535873413086,
+          "lowest_bin_bias_floor_excluded": 17.219655990600586,
+          "mean_prediction_at_floor_cells": 19.59566307067871
+        },
+        "cnn1": {
+          "nonfloor_rmse": 5.935177803039551,
+          "nonfloor_mae": 4.11894416809082,
+          "all_rmse": 9.591914176940918,
+          "all_mae": 6.196556091308594,
+          "lowest_bin_bias_rule_applied": 22.6851806640625,
+          "lowest_bin_bias_floor_excluded": 19.45728302001953,
+          "mean_prediction_at_floor_cells": 23.71367835998535
+        },
+        "cnn2": {
+          "nonfloor_rmse": 6.09749174118042,
+          "nonfloor_mae": 4.339280128479004,
+          "all_rmse": 8.854470252990723,
+          "all_mae": 6.008610248565674,
+          "lowest_bin_bias_rule_applied": 19.425552368164062,
+          "lowest_bin_bias_floor_excluded": 17.361053466796875,
+          "mean_prediction_at_floor_cells": 20.083362579345703
+        },
+        "xgb0": {
+          "nonfloor_rmse": 7.669726371765137,
+          "nonfloor_mae": 5.951957702636719,
+          "all_rmse": 8.919268608093262,
+          "all_mae": 6.8320231437683105,
+          "lowest_bin_bias_rule_applied": 14.052525520324707,
+          "lowest_bin_bias_floor_excluded": 13.433446884155273,
+          "mean_prediction_at_floor_cells": 14.249780654907227
+        },
+        "xgb1": {
+          "nonfloor_rmse": 6.651402473449707,
+          "nonfloor_mae": 5.003507137298584,
+          "all_rmse": 9.10020637512207,
+          "all_mae": 6.536494731903076,
+          "lowest_bin_bias_rule_applied": 18.941253662109375,
+          "lowest_bin_bias_floor_excluded": 17.30790138244629,
+          "mean_prediction_at_floor_cells": 19.46168327331543
+        },
+        "fusion_c0x0": {
+          "nonfloor_rmse": 6.440407752990723,
+          "nonfloor_mae": 4.989752769470215,
+          "all_rmse": 8.410520553588867,
+          "all_mae": 6.271999359130859,
+          "lowest_bin_bias_rule_applied": 16.686100006103516,
+          "lowest_bin_bias_floor_excluded": 15.440136909484863,
+          "mean_prediction_at_floor_cells": 17.083099365234375
+        },
+        "fusion_c0x1": {
+          "nonfloor_rmse": 6.12936544418335,
+          "nonfloor_mae": 4.57503080368042,
+          "all_rmse": 8.722807884216309,
+          "all_mae": 6.160977363586426,
+          "lowest_bin_bias_rule_applied": 18.983800888061523,
+          "lowest_bin_bias_floor_excluded": 17.261131286621094,
+          "mean_prediction_at_floor_cells": 19.53269386291504
+        },
+        "fusion_c1x0": {
+          "nonfloor_rmse": 6.309290409088135,
+          "nonfloor_mae": 4.788931846618652,
+          "all_rmse": 8.765937805175781,
+          "all_mae": 6.323884963989258,
+          "lowest_bin_bias_rule_applied": 18.627832412719727,
+          "lowest_bin_bias_floor_excluded": 16.62607765197754,
+          "mean_prediction_at_floor_cells": 19.26564598083496
+        },
+        "fusion_c1x1": {
+          "nonfloor_rmse": 6.076398849487305,
+          "nonfloor_mae": 4.403261184692383,
+          "all_rmse": 9.184080123901367,
+          "all_mae": 6.238834381103516,
+          "lowest_bin_bias_rule_applied": 20.925535202026367,
+          "lowest_bin_bias_floor_excluded": 18.44707489013672,
+          "mean_prediction_at_floor_cells": 21.715238571166992
+        },
+        "fusion_c2x0": {
+          "nonfloor_rmse": 6.391122341156006,
+          "nonfloor_mae": 4.880031585693359,
+          "all_rmse": 8.434168815612793,
+          "all_mae": 6.201317310333252,
+          "lowest_bin_bias_rule_applied": 16.900226593017578,
+          "lowest_bin_bias_floor_excluded": 15.515077590942383,
+          "mean_prediction_at_floor_cells": 17.341577529907227
+        },
+        "fusion_c2x1": {
+          "nonfloor_rmse": 6.100713729858398,
+          "nonfloor_mae": 4.477531433105469,
+          "all_rmse": 8.765657424926758,
+          "all_mae": 6.101222991943359,
+          "lowest_bin_bias_rule_applied": 19.19793128967285,
+          "lowest_bin_bias_floor_excluded": 17.336071014404297,
+          "mean_prediction_at_floor_cells": 19.79117202758789
+        }
+      },
+      "comparisons": [
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.3141186535358429,
+          "median_delta": -0.44396305084228516,
+          "ci": [
+            -0.8103211772285009,
+            0.17571863859667777
+          ],
+          "p_wilcoxon": 0.05468219784961548,
+          "n_a_better": 26,
+          "a": "fusion_c1x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.43954476714134216,
+          "median_delta": -0.45265209674835205,
+          "ci": [
+            -0.964506193341916,
+            0.05655386378890521
+          ],
+          "p_wilcoxon": 0.011586945489398204,
+          "n_a_better": 27,
+          "a": "fusion_c1x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.08717214316129684,
+          "median_delta": -0.28195667266845703,
+          "ci": [
+            -0.5481729392603485,
+            0.3973564978492882
+          ],
+          "p_wilcoxon": 0.45513832481810823,
+          "n_a_better": 22,
+          "a": "cnn1",
+          "b": "cnn0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.1750805377960205,
+          "median_delta": -0.39192914962768555,
+          "ci": [
+            -0.6186714617647822,
+            0.318070667740461
+          ],
+          "p_wilcoxon": 0.2946861638483824,
+          "n_a_better": 22,
+          "a": "cnn1",
+          "b": "cnn0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.7231245636940002,
+          "median_delta": -0.37557387351989746,
+          "ci": [
+            -1.425589123987202,
+            -0.09461300150089938
+          ],
+          "p_wilcoxon": 0.01971972340834327,
+          "n_a_better": 23,
+          "a": "xgb1",
+          "b": "xgb0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.7761808633804321,
+          "median_delta": -0.2808340787887573,
+          "ci": [
+            -1.5335271073555623,
+            -0.11920882890353386
+          ],
+          "p_wilcoxon": 0.003334198161610402,
+          "n_a_better": 27,
+          "a": "xgb1",
+          "b": "xgb0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.039221614599227905,
+          "median_delta": 0.04545021057128906,
+          "ci": [
+            -0.25189421218539043,
+            0.30934435505616026
+          ],
+          "p_wilcoxon": 0.9643358970351983,
+          "n_a_better": 17,
+          "a": "cnn2",
+          "b": "cnn0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.08610423654317856,
+          "median_delta": -0.10413718223571777,
+          "ci": [
+            -0.3990094776089127,
+            0.2082840199402546
+          ],
+          "p_wilcoxon": 0.3460336370189907,
+          "n_a_better": 21,
+          "a": "cnn2",
+          "b": "cnn0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.12639375030994415,
+          "median_delta": 0.11876606941223145,
+          "ci": [
+            -0.36958835498240394,
+            0.6780087261607772
+          ],
+          "p_wilcoxon": 0.6653440464724554,
+          "n_a_better": 16,
+          "a": "cnn2",
+          "b": "cnn1",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": 0.08897627145051956,
+          "median_delta": 0.041235923767089844,
+          "ci": [
+            -0.3779397169269665,
+            0.5686703653709659
+          ],
+          "p_wilcoxon": 0.8346853836119408,
+          "n_a_better": 17,
+          "a": "cnn2",
+          "b": "cnn1",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.2914341390132904,
+          "median_delta": -0.2964625358581543,
+          "ci": [
+            -0.6965547566351138,
+            0.04929102612169164
+          ],
+          "p_wilcoxon": 0.05667693595751189,
+          "n_a_better": 25,
+          "a": "fusion_c2x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.4203247129917145,
+          "median_delta": -0.32256221771240234,
+          "ci": [
+            -0.862196137292965,
+            -0.05505916323316743
+          ],
+          "p_wilcoxon": 0.005618049297481775,
+          "n_a_better": 27,
+          "a": "fusion_c2x1",
+          "b": "fusion_c0x0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": false
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -1.034909725189209,
+          "median_delta": -0.7163636684417725,
+          "ci": [
+            -1.6087115579529814,
+            -0.4832338059270709
+          ],
+          "p_wilcoxon": 0.00018856643873732537,
+          "n_a_better": 29,
+          "a": "fusion_c0x0",
+          "b": "xgb0",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.8881239891052246,
+          "median_delta": -0.6487174034118652,
+          "ci": [
+            -1.4446327069209324,
+            -0.3484824249574119
+          ],
+          "p_wilcoxon": 0.0006844939780421555,
+          "n_a_better": 28,
+          "a": "fusion_c0x0",
+          "b": "xgb0",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.6259036660194397,
+          "median_delta": -0.53334641456604,
+          "ci": [
+            -0.9776528283953667,
+            -0.2907978155994201
+          ],
+          "p_wilcoxon": 0.0005286230589263141,
+          "n_a_better": 29,
+          "a": "fusion_c1x1",
+          "b": "xgb1",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.551487922668457,
+          "median_delta": -0.37195730209350586,
+          "ci": [
+            -0.8728487657131375,
+            -0.2367634625808972
+          ],
+          "p_wilcoxon": 0.00021763458789791912,
+          "n_a_better": 30,
+          "a": "fusion_c1x1",
+          "b": "xgb1",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.6032193303108215,
+          "median_delta": -0.6474323272705078,
+          "ci": [
+            -0.9567701692774631,
+            -0.22005737895766897
+          ],
+          "p_wilcoxon": 0.0011958314280491322,
+          "n_a_better": 27,
+          "a": "fusion_c2x1",
+          "b": "xgb1",
+          "metric": "per-eye rmse on non-floor cells",
+          "primary": false,
+          "added": true
+        },
+        {
+          "n_eyes": 37,
+          "n_patients": 19,
+          "mean_delta": -0.5322678089141846,
+          "median_delta": -0.5602278709411621,
+          "ci": [
+            -0.8801162655161929,
+            -0.1768257250541886
+          ],
+          "p_wilcoxon": 0.0016086057148640975,
+          "n_a_better": 26,
+          "a": "fusion_c2x1",
+          "b": "xgb1",
+          "metric": "per-eye mae on non-floor cells",
+          "primary": false,
+          "added": true
+        }
+      ]
+    }
+  }
+}

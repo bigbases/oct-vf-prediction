@@ -25,7 +25,7 @@ and is not a general-purpose tool.
 | `build_ml_final.py`, `merge_rnfl_into_ml_final.py`, `make_rnfl_flip.py` | Assembly of the modelling table, including the OS → OD mirroring |
 | `phase_b_build.py`, `phase_b_apply.py` | Manual review pass over the extracted thresholds |
 | `run_*.sh`, `scripts/run_*.sh` | Launch configurations for every reported run, including the 42/43/44 seed sweeps |
-| `paper/results_frozen/` | The 37 JSON files the manuscript's tables, figures and prose numbers are read from, including the revision-round analyses planned in `docs/revision_r1/` |
+| `paper/results_frozen/` | The 38 JSON files the manuscript's tables, figures and prose numbers are read from, including the revision-round analyses planned in `docs/revision_r1/` |
 | `docs/coordinate_frame_convention.md` | On-screen vs anatomical frame, and what follows for the OS mirroring step |
 | `tests/` | Config-consistency and frozen-result checks |
 | `scripts/verify_no_phi.py` | The identifier scan described under Verification |
