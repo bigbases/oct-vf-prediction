@@ -165,8 +165,10 @@ RING_RGB = (101, 113, 155)
 # GCA annulus fit (annulus_fit.py). A fit whose ellipses run along a drawn line at fewer
 # than FIT_SUPPORT_MIN of their points is a detection failure. Fixed on 2026-10-13 from the
 # QC of all GCA maps, before any R1-1 result: visually correct fits had support 0.49-0.83,
-# the six visibly wrong ones (decentred scans) 0.11-0.21. A failed map keeps its original
-# pixels in the sector-averaged condition too; the eye is dropped from R1-1 evaluation.
+# the six visibly wrong ones (decentred scans) 0.11-0.21. A failed map that the visual
+# adjudication below does not recover is not kept original: every pixel outside the frame
+# band and the no-data black takes the map-wide mean thickness (_map_mean_gca), and the eye
+# stays in R1-1 training and evaluation (analyses excluding these eyes are a sensitivity check).
 FIT_SUPPORT_MIN = 0.35
 # Maps flagged by FIT_SUPPORT_MIN were adjudicated visually (cache/fit_adjudication.json,
 # before any R1-1 result): thin advanced maps have low line contrast, so a low support does
