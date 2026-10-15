@@ -82,3 +82,9 @@ before any number enters the response or the manuscript.
   local history; the working tree was not under version control then) is the same moment
   at which the memo reporting the bin-level results was first saved. No record shows the
   definitions fixed before the results were seen.
+* 2026-10-14, authors. On the authors' confirmation that the sensitivity bins were fixed
+  before the analysis, the manuscript keeps the statement that they were fixed before the
+  analysis. Because the repository record does not demonstrate this, neither the manuscript
+  nor the response to the reviewers cites the repository record as evidence. The choice of
+  the primary cell is described neutrally. This decision supersedes the 2026-10-13
+  decision above to reclassify the analyses as exploratory.
