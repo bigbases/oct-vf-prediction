@@ -372,7 +372,7 @@ anchors:
   - {file: "results.tex", contains: "reports calibration directly", printed: "13.2", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.measured [0,10).mean_bias", pin: true}
   - {file: "results.tex", contains: "reports calibration directly", printed: "14.2", source: "calibration_multiplicity.json", path: "calibration.OOF.IR-v2.measured [0,10).mean_bias", pin: true}
   - {file: "results.tex", contains: "reports calibration directly", printed: "14.8", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.measured [0,10).mean_bias", pin: true}
-  # R1-5 Table 7 (tab:calibration). The gate matches anchors by paragraph, so a value printed twice in the table is checked against the first anchor only; both rows were verified when entered (2026-10-14).
+  # R1-5 Table 9 (tab:calibration; Table 7 in the 2026-10-14 interim manuscript). The gate matches anchors by paragraph, so a value printed twice in the table is checked against the first anchor only; both rows were verified when entered (2026-10-14).
   - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.47", source: "calibration_multiplicity.json", path: "weights_and_constants.w_fusion_test", pin: true}
   - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.33", source: "calibration_multiplicity.json", path: "weights_and_constants.w_ensfusion_test", pin: true}
   - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.03", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.all.mean_bias", pin: true}

@@ -5,7 +5,8 @@ and Inception-v3, the matched current-code reruns for VGG16, Xception and DenseN
 Mirrored frame: r13_analysis.json, block 'mirrored'. Rows: fusion - summary per backbone
 (per-eye RMSE), then the ensemble ceiling (ensemble fusion - ensemble image, per-eye RMSE)
 and the ensemble sensitivity-bin slope; each with its p, out-of-fold and held-out, the two
-frames side by side. A row the frozen files do not hold is printed as a dash and footnoted.
+frames side by side. Fusion - summary has no ensemble row: the frozen analyses do not compute
+one, and none is computed here (authors' decision, 2026-10-16).
 
 After writing, the file is parsed back and every printed number is compared with the JSON.
 
@@ -30,8 +31,7 @@ SPLITS = (('OOF', 'Out-of-fold', 'n_eyes_oof'), ('TEST', 'Held-out', 'n_eyes_tes
 RERUN = ('VGG16', 'Xception', 'DenseNet121')
 # JSON name -> table name; the primary backbone first.
 BACKBONES = [('IR-v2', 'Inception-ResNet-v2'), ('Inception-v3', 'Inception-v3'),
-             ('VGG16', 'VGG16'), ('Xception', 'Xception'), ('DenseNet121', 'DenseNet121'),
-             ('ENSEMBLE', 'Ensemble of the five')]
+             ('VGG16', 'VGG16'), ('Xception', 'Xception'), ('DenseNet121', 'DenseNet121')]
 CEILING, SLOPE = 'Ensemble fusion $-$ ensemble image', 'Sensitivity-bin slope, ensemble'
 
 
@@ -59,7 +59,8 @@ def cells(blocks, row):
     for split, _, _ in SPLITS:
         for frame in FRAMES:
             v = value(blocks, row, frame, split)
-            out += ['---', '---'] if v is None else [num(v[0]), pval(v[1])]
+            assert v is not None, (row, frame, split)
+            out += [num(v[0]), pval(v[1])]
     return out
 
 
@@ -81,8 +82,6 @@ def load():
 
 
 def render(blocks, digests):
-    missing = [name for bb, name in BACKBONES
-               if any(value(blocks, bb, fr, s) is None for fr in FRAMES for s, _, _ in SPLITS)]
     n = {s: {blocks[fr][k] for fr in FRAMES} for s, _, k in SPLITS}
     assert all(len(v) == 1 for v in n.values()), n
     slope_n = {s: {one(blocks[fr]['trend'], split=s, backbone='ENSEMBLE')['n_eyes_with_slope']
@@ -97,9 +96,9 @@ def render(blocks, digests):
         '\\newcolumntype{C}{>{\\centering\\arraybackslash}X}',
         '\\caption{Main analyses in the unmirrored and in the mirrored (right-eye) frame. '
         'Differences in per-eye RMSE, in decibels; negative values favour fusion.\\label{tab:frame}}',
-        '\\small',
-        '\\setlength{\\tabcolsep}{4pt}',
-        '\\begin{tabularx}{\\fulllength}{lCCCCCCCC}',
+        '\\footnotesize',
+        '\\setlength{\\tabcolsep}{3pt}',
+        '\\begin{tabular*}{\\fulllength}{@{\\extracolsep{\\fill}}lcccccccc}',
         '\\toprule',
         ' & ' + ' & '.join(f'\\multicolumn{{4}}{{c}}{{\\textbf{{{t} ({n[s].pop()} eyes)}}}}'
                            for s, t, _ in SPLITS) + ' \\\\',
@@ -111,41 +110,39 @@ def render(blocks, digests):
         '\\multicolumn{9}{l}{\\textit{Fusion $-$ summary branch}} \\\\',
     ]
     for bb, name in BACKBONES:
-        mark = '$^{a}$' if bb in RERUN else '$^{b}$' if name in missing else ''
+        mark = '$^{a}$' if bb in RERUN else ''
         lines.append(f'\\quad {name}{mark} & ' + ' & '.join(cells(blocks, bb)) + ' \\\\')
     lines.append('\\midrule')
     lines.append(f'{CEILING} & ' + ' & '.join(cells(blocks, CEILING)) + ' \\\\')
-    lines.append(f'{SLOPE}$^{{c}}$ & ' + ' & '.join(cells(blocks, SLOPE)) + ' \\\\')
+    lines.append(f'{SLOPE}$^{{b}}$ & ' + ' & '.join(cells(blocks, SLOPE)) + ' \\\\')
     so, st = slope_n['OOF'].pop(), slope_n['TEST'].pop()
     foot = ('$\\Delta$ is the mean over eyes of the per-eye difference; $p$ values are two-sided '
             'Wilcoxon signed-rank tests. The fusion weight is fitted within each frame. '
             '$^{a}$~Unmirrored values come from runs retrained without mirroring using the same code '
             'as the mirrored runs; the unmirrored ensemble includes these runs. ')
-    if missing:
-        foot += f"$^{{b}}$~Not computed in the frozen analysis. "
-    foot += ('$^{c}$~Per-eye regression of the fusion minus image-branch RMSE on the '
+    foot += ('$^{b}$~Per-eye regression of the fusion minus image-branch RMSE on the '
              'sensitivity-bin index, averaged over eyes, in decibels per bin; a positive slope means '
              'the fusion advantage grows as sensitivity falls. '
              f'Eyes with a slope: {so} out-of-fold, {st} held-out.')
-    lines += ['\\bottomrule', '\\end{tabularx}', '\\end{adjustwidth}',
+    lines += ['\\bottomrule', '\\end{tabular*}', '\\end{adjustwidth}',
               '\\noindent{\\footnotesize{' + foot + '}}', '\\end{table}']
     return '\n'.join(lines) + '\n'
 
 
 # -- read-back check, independent of render() ---------------------------------------------
-TOK = r'(---|\$[+-]?\d+\.\d{3}\$|\d\.\d{3}|\$\d\.\d\\times10\^\{-\d+\}\$)'
+TOK = r'(\$[+-]?\d+\.\d{3}\$|\d\.\d{3}|\$\d\.\d\\times10\^\{-\d+\}\$)'
 ROW = re.compile(r'^(?:\\quad )?(.+?) & ' + ' & '.join([TOK] * 8) + r' \\\\$')
 
 
 def check(tex, blocks):
     names = {name: bb for bb, name in BACKBONES}
-    names.update({CEILING: CEILING, SLOPE + '$^{c}$': SLOPE})
+    names.update({CEILING: CEILING, SLOPE + '$^{b}$': SLOPE})
     seen = 0
     for line in tex.splitlines():
         m = ROW.match(line)
         if not m:
             continue
-        label = re.sub(r'\$\^\{[ab]\}\$$', '', m.group(1))
+        label = re.sub(r'\$\^\{a\}\$$', '', m.group(1))
         row = names[label]
         toks = m.groups()[1:]
         k = 0
@@ -154,9 +151,6 @@ def check(tex, blocks):
                 est, p = toks[k], toks[k + 1]
                 k += 2
                 v = value(blocks, row, frame, split)
-                if v is None:
-                    assert est == p == '---', line
-                    continue
                 assert abs(float(est.strip('$')) - v[0]) <= 0.0005 + 1e-12, (line, est, v[0])
                 pb = p_back(p.strip('$') if 'times' not in p else p)
                 tol = 0.0005 if v[1] >= 1e-3 else 0.05 * 10 ** int(f'{v[1]:.1e}'.split('e')[1])
