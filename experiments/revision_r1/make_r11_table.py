@@ -22,9 +22,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / 'paper/results_frozen/r11_analysis.json'
 
-# Order and names of the backbone table in the manuscript (tab:backbones).
-BACKBONES = [('inception_v3', 'Inception-v3'),
-             ('inception_resnet_v2', 'Inception-ResNet-v2'),
+# Names as in the backbone table of the manuscript (tab:backbones); the primary backbone first.
+BACKBONES = [('inception_resnet_v2', 'Inception-ResNet-v2'),
+             ('inception_v3', 'Inception-v3'),
              ('vgg16', 'VGG16'),
              ('xception', 'Xception'),
              ('densenet121', 'DenseNet121'),
@@ -82,7 +82,6 @@ def cell(c):
 
 def build(d):
     lines = []
-    marks = []
     for split, title in SPLITS:
         sp = d['splits'][split]
         lines.append('\\midrule')
@@ -92,12 +91,8 @@ def build(d):
             rows = BACKBONES if per_bb else [(None, '---')]
             for bb, name in rows:
                 cs = [lookup(sp['comparisons'], a, b, m, bb) for m in METRICS]
-                label = name + ('$^{\\dagger}$' if cs[0].get('primary') else '')
-                if cs[0].get('primary'):
-                    marks.append(cs[0])
                 cells = [x for c in cs for x in cell(c)]
-                lines.append(f'\\quad {label} & ' + ' & '.join(cells) + ' \\\\')
-    assert len(marks) == 1, 'expected exactly one primary comparison'
+                lines.append(f'\\quad {name} & ' + ' & '.join(cells) + ' \\\\')
     return lines
 
 
@@ -129,8 +124,8 @@ def render(d, digest):
         'A single backbone is fused with the weight fitted on all out-of-fold folds; the ensemble '
         'is fused with the nested weight out-of-fold and the all-fold weight on the held-out set. '
         f"The {d['n_map_mean_eyes_total']} eyes whose GCIPL panel took the map mean "
-        f"({oof['n_eyes_map_mean']} out-of-fold, {test['n_eyes_map_mean']} held-out) are included. "
-        '$^{\\dagger}$~Primary comparison.}}',
+        f"({oof['n_eyes_map_mean']} out-of-fold, {test['n_eyes_map_mean']} held-out) are included."
+        '}}',
         '\\end{table}',
     ]
     return '\n'.join(head + build(d) + foot) + '\n'
@@ -164,7 +159,7 @@ def check(tex, d):
             assert not line.startswith('\\quad'), f'unparsed row: {line}'
             continue
         a, b, per_bb, _ = CONTRASTS[contrast]
-        name = m.group(1).replace('$^{\\dagger}$', '')
+        name = m.group(1)
         bb = names[name] if per_bb else None
         assert per_bb or name == '---', line
         g = m.groups()[1:]
