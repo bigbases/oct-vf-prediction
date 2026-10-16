@@ -117,3 +117,13 @@ pass-B predictions above.
   their six-test values are reported as well.
 * **Output**: `experiments/revision_r1/centred_irv2.py` → `centred_irv2.json`, frozen through
   `freeze_paper_results.py` and checked by `check_numbers.py`.
+
+Decision log for the addendum:
+
+* 2026-10-16, authors. The six-test Holm family is adopted in the manuscript: the
+  Holm-adjusted p of ensemble fusion vs the centred ensemble on per-eye MAE (out-of-fold)
+  is reported as 0.0029 (six tests) instead of 0.0024 (four tests); the RMSE value (0.096)
+  is the same under both. The share of the pooled-RMSE fusion gain that centring alone
+  recovers, (image − centred) / (image − fusion), was added to `centred_irv2.json` for the
+  manuscript sentence after the results were seen, RMSE only (on held-out MAE fusion is worse
+  than the image branch, so the ratio has no meaning there); no other value changed.

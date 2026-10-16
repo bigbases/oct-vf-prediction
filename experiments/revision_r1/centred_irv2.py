@@ -80,6 +80,14 @@ def pooled(B, data):
     return out
 
 
+def share(pl):
+    """Fraction of the pooled-RMSE gain of fusion over the image branch that centring alone
+    recovers: (image - centred) / (image - fusion); the ensemble counterpart is the 89% of the text.
+    RMSE only: on held-out MAE fusion is worse than the image branch, so the ratio has no meaning."""
+    return {s: {'pooled_rmse': (pl[s][IRV2]['rmse'] - pl[s][NEW]['rmse']) / (pl[s][IRV2]['rmse'] - pl[s]['Fusion']['rmse'])}
+            for s in SPLITS}
+
+
 def main():
     frozen = json.loads((FROZEN / 'calibration_multiplicity.json').read_bytes())
     B, data, meta = CM.assemble()
@@ -128,6 +136,7 @@ def main():
                        'four) and fusion vs the centred Inception-ResNet-v2 branch, each on RMSE and MAE',
         'pooled': pooled(B, data),
     }
+    doc['centring_share_of_fusion_gain'] = share(doc['pooled'])
     OUT.write_text(json.dumps(doc, indent=1, default=float) + '\n')
     print(f'wrote {OUT.name}')
 

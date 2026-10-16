@@ -441,13 +441,25 @@ anchors:
   - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.234", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.slope", pin: true}
   - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.837", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.slope_ci.0", pin: true}
   - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.549", source: "calibration_multiplicity.json", path: "calibration.TEST.Ensemble fusion.all.slope_ci.1", pin: true}
+  # R1-5 addendum (2026-10-16): Table 9 row "Centred image (IR-v2)", from make_r15_row.py. Not anchored: the
+  # out-of-fold mean bias "+0.00" (the gate skips a printed zero as structural) and the held-out slope
+  # "1.279 [0.849, 1.645]", which is printed identically in the "Image (IR-v2)" row and so is checked against that
+  # row's anchors (a constant shift leaves the held-out slope unchanged); the generator's read-back checks both.
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-0.86", source: "centred_irv2.json", path: "calibration.OOF.Centred IR-v2.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.92", source: "centred_irv2.json", path: "calibration.OOF.Centred IR-v2.all.mean_bias_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.935", source: "centred_irv2.json", path: "calibration.OOF.Centred IR-v2.all.slope", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.809", source: "centred_irv2.json", path: "calibration.OOF.Centred IR-v2.all.slope_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "1.049", source: "centred_irv2.json", path: "calibration.OOF.Centred IR-v2.all.slope_ci.1", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "0.24", source: "centred_irv2.json", path: "calibration.TEST.Centred IR-v2.all.mean_bias", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "-1.86", source: "centred_irv2.json", path: "calibration.TEST.Centred IR-v2.all.mean_bias_ci.0", pin: true}
+  - {file: "results.tex", contains: '\label{tab:calibration}', printed: "2.74", source: "centred_irv2.json", path: "calibration.TEST.Centred IR-v2.all.mean_bias_ci.1", pin: true}
   # M3 centred-ensemble sentence (results.tex).
   - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.244", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.3.mean_delta", kind: "gain", pin: true}
   - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "5.9e-4", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.3.p_wilcoxon", pin: true}
-  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.0024", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.3.p_holm", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.0029", source: "centred_irv2.json", path: "comparisons.OOF.3.p_holm", pin: true}
   - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.153", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.2.mean_delta", kind: "gain", pin: true}
   - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.032", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.2.p_wilcoxon", pin: true}
-  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.096", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.2.p_holm", pin: true}
+  - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.096", source: "centred_irv2.json", path: "comparisons.OOF.2.p_holm", pin: true}
   - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.60", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.0.p_wilcoxon", pin: true}
   - {file: "results.tex", contains: "fusion beats the centred ensemble per eye", printed: "0.76", source: "calibration_multiplicity.json", path: "centred_ensemble_comparisons.OOF.1.p_wilcoxon", pin: true}
   # R1-1 Methods section "Matched comparison of representation and model family".

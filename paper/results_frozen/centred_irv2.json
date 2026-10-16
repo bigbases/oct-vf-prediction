@@ -592,5 +592,13 @@
         "mae": 6.271999581687911
       }
     }
+  },
+  "centring_share_of_fusion_gain": {
+    "OOF": {
+      "pooled_rmse": 0.12244640063466967
+    },
+    "TEST": {
+      "pooled_rmse": 0.2893141712086491
+    }
   }
 }
