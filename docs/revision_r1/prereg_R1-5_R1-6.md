@@ -88,3 +88,32 @@ before any number enters the response or the manuscript.
   nor the response to the reviewers cites the repository record as evidence. The choice of
   the primary cell is described neutrally. This decision supersedes the 2026-10-13
   decision above to reclassify the analyses as exploratory.
+
+## Addendum 2026-10-16 — centred single-backbone image branch (R1-5)
+
+Written and committed before the analysis below was run, but after the R1-5 results above
+had been seen. The reviewer asks that the centred image branch be included as a main
+comparator; the analyses above centre only the image ensemble. This addendum gives the
+primary backbone the same treatment. No model is trained or refitted; the inputs are the
+pass-B predictions above.
+
+* **Centred image branch (Inception-ResNet-v2)**: Inception-ResNet-v2 minus one constant,
+  computed by the rule of the centred ensemble. OOF fold k: the mean residual (prediction −
+  measurement) of Inception-ResNet-v2 over the masked locations of the other four folds.
+  Held-out: the mean residual over all five OOF folds (no held-out data used).
+* **Calibration**: mean bias, slope and intercept of the new branch in every stratum of the
+  R1-5 section, OOF and held-out, with the patient-clustered bootstrap of that section
+  (5000 resamples, seed 42) on the same resamples as the frozen branches. Before adding the
+  branch, the producer recomputes `calibration_multiplicity.json` and stops unless every
+  calibration and comparison value is reproduced exactly.
+* **Comparison**: fusion (Inception-ResNet-v2 + summary, weights as above) vs the centred
+  Inception-ResNet-v2 branch, per-eye RMSE and MAE, OOF and held-out; two-sided Wilcoxon
+  signed-rank test and the patient-clustered bootstrap interval of the mean difference, as
+  above.
+* **Multiplicity**: the two new tests join the R1-5 family of their split, which becomes six
+  tests (three fusion–centred pairs × two metrics). Holm-adjusted p values are reported over
+  the six. The four-test adjusted values in `calibration_multiplicity.json` stay frozen and
+  unchanged; enlarging the family changes the adjustment of the existing four tests, so
+  their six-test values are reported as well.
+* **Output**: `experiments/revision_r1/centred_irv2.py` → `centred_irv2.json`, frozen through
+  `freeze_paper_results.py` and checked by `check_numbers.py`.
