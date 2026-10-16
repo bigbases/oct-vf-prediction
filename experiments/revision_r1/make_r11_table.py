@@ -38,7 +38,7 @@ CONTRASTS = [
     ('cnn_sector', 'cnn_original', True,
      'Image branch: sector-averaged map $-$ original map'),
     ('cnn_sector', 'xgb_map23_r11', True,
-     'Sector-averaged map: image branch $-$ gradient boosting on the 23 regional values'),
+     'Sector-averaged map: image branch $-$ gradient boosting on the 23 map-derived values'),
     ('fusion_sector', 'xgb_printed26', True,
      'Fusion on the sector-averaged map $-$ summary branch (26 printed parameters)'),
     ('xgb_map23_r11', 'xgb_printed26', False,
