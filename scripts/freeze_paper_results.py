@@ -115,6 +115,10 @@ SOURCES = {
     # docs/revision_r1/ before its producer was run. R1-5/R1-6 reuse the pass-B
     # predictions without refitting; the producer guards the frozen branch values.
     'calibration_multiplicity.json': ('experiments/revision_r1/calibration_multiplicity.json', 'B'),
+    # centred_irv2: R1-5 addendum (plan addendum 2026-10-16), the Inception-ResNet-v2 image branch
+    #   centred by the same rule, its calibration and fusion vs the centred branch, with the Holm
+    #   family of R1-5 grown to six tests; the producer reproduces calibration_multiplicity.json first.
+    'centred_irv2.json': ('experiments/revision_r1/centred_irv2.json', 'B'),
     # fixed_w_bias: the limitations-paragraph correction (+0.57 dB, 0.54 dB above the summary
     #   branch). calibration_multiplicity.json holds the out-of-fold fusion with nested w only;
     #   this is the fixed Table 3 weight, guarded against the frozen Summary and nested values.

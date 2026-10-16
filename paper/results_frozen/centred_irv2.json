@@ -1,0 +1,596 @@
+{
+  "note": "R1-5 addendum: Inception-ResNet-v2 image branch centred by the rule of the centred ensemble, its calibration, and fusion vs the centred branch. Plan: docs/revision_r1/prereg_R1-5_R1-6.md, addendum 2026-10-16. Pass B predictions, no refitting; same bootstrap resamples as calibration_multiplicity.json.",
+  "pass": "B",
+  "n_boot": 5000,
+  "seed": 42,
+  "centring": {
+    "centring_const_irv2_by_fold": [
+      0.9556924104690552,
+      1.073696255683899,
+      1.3284024000167847,
+      0.9543212056159973,
+      0.9471017718315125
+    ],
+    "centring_const_irv2_test": 1.052256464958191
+  },
+  "guards": [
+    {
+      "split": "OOF",
+      "branch": "Summary",
+      "got": 8.6603,
+      "want": 8.6603,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "IR-v2",
+      "got": 8.5397,
+      "want": 8.5397,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "Ensemble",
+      "got": 8.1147,
+      "want": 8.1147,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "Ensemble fusion",
+      "got": 7.9629,
+      "want": 7.9629,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "Centred ensemble",
+      "got": 7.9801,
+      "want": 7.9801,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "Summary",
+      "got": 8.9193,
+      "want": 8.9193,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "IR-v2",
+      "got": 8.7323,
+      "want": 8.7323,
+      "ok": true
+    },
+    {
+      "split": "TEST",
+      "branch": "Fusion",
+      "got": 8.4105,
+      "want": 8.4105,
+      "ok": true
+    },
+    {
+      "split": "OOF",
+      "branch": "per_bin[0,10) fusion-IRv2 mean delta",
+      "got": -0.6202,
+      "want": -0.6202,
+      "ok": true
+    },
+    {
+      "split": "both",
+      "branch": "calibration_multiplicity.calibration, all branches and strata",
+      "ok": true,
+      "rule": "exact equality"
+    },
+    {
+      "split": "both",
+      "branch": "calibration_multiplicity.centred_ensemble_comparisons, all values except p_holm",
+      "ok": true,
+      "rule": "exact equality"
+    }
+  ],
+  "calibration": {
+    "OOF": {
+      "Centred IR-v2": {
+        "all": {
+          "n_cells": 12480,
+          "mean_bias": 0.002068528346715226,
+          "mean_bias_ci": [
+            -0.8636429437245232,
+            0.9169618676479036
+          ],
+          "slope": 0.9351079748198644,
+          "slope_ci": [
+            0.8088613316276366,
+            1.0493108741819197
+          ],
+          "intercept": 1.4208389537658341,
+          "intercept_ci": [
+            -1.5322713328655466,
+            4.6298023187326045
+          ]
+        },
+        "measured [0,10)": {
+          "n_cells": 2187,
+          "mean_bias": 13.127207509965508,
+          "mean_bias_ci": [
+            11.65594940147564,
+            14.779555383020734
+          ]
+        },
+        "measured [10,20)": {
+          "n_cells": 1135,
+          "mean_bias": 3.6117550429268537,
+          "mean_bias_ci": [
+            2.2282420343920104,
+            4.946561252860494
+          ]
+        },
+        "measured [20,30)": {
+          "n_cells": 6043,
+          "mean_bias": -3.093116715996743,
+          "mean_bias_ci": [
+            -3.8437994107444022,
+            -2.3654708328685197
+          ]
+        },
+        "measured [30,inf)": {
+          "n_cells": 3115,
+          "mean_bias": -4.523603611390435,
+          "mean_bias_ci": [
+            -5.045323128896583,
+            -4.037080929594617
+          ]
+        },
+        "predicted [0,10)": {
+          "n_cells": 971,
+          "mean_bias": -0.9565327468910372,
+          "mean_bias_ci": [
+            -4.001108309451419,
+            1.4887791283378897
+          ],
+          "slope": 0.5687343982178572,
+          "slope_ci": [
+            0.06298324009452569,
+            1.086824893364093
+          ],
+          "intercept": 3.693007017100882,
+          "intercept_ci": [
+            -0.9602044385458098,
+            9.023670917535075
+          ]
+        },
+        "predicted [10,20)": {
+          "n_cells": 2898,
+          "mean_bias": -0.27466537904706634,
+          "mean_bias_ci": [
+            -1.963968535527861,
+            1.4432190348636456
+          ],
+          "slope": 0.9497659419668513,
+          "slope_ci": [
+            0.6182076187331073,
+            1.2474670676113961
+          ],
+          "intercept": 1.0655661233786322,
+          "intercept_ci": [
+            -4.110697577015302,
+            7.137250874320853
+          ]
+        },
+        "predicted [20,30)": {
+          "n_cells": 7719,
+          "mean_bias": 0.06063709315865751,
+          "mean_bias_ci": [
+            -0.7945885329072124,
+            0.983602664416675
+          ],
+          "slope": 1.0072296137817864,
+          "slope_ci": [
+            0.7901093291589695,
+            1.232999014546487
+          ],
+          "intercept": -0.24317108036435542,
+          "intercept_ci": [
+            -6.338995857608906,
+            5.618965376777176
+          ]
+        },
+        "predicted [30,inf)": {
+          "n_cells": 861,
+          "mean_bias": 1.5870644949315995,
+          "mean_bias_ci": [
+            0.40778363433179365,
+            2.976185368432945
+          ],
+          "slope": 0.5295925901657264,
+          "slope_ci": [
+            0.16015159695502718,
+            0.877936499604663
+          ],
+          "intercept": 13.177206136374874,
+          "intercept_ci": [
+            2.241861775208769,
+            24.65301314728736
+          ]
+        }
+      }
+    },
+    "TEST": {
+      "Centred IR-v2": {
+        "all": {
+          "n_cells": 1924,
+          "mean_bias": 0.24228358318305254,
+          "mean_bias_ci": [
+            -1.8642066695067547,
+            2.739024043146872
+          ],
+          "slope": 1.2790017051976328,
+          "slope_ci": [
+            0.8492969391138663,
+            1.6453875693749536
+          ],
+          "intercept": -6.99519120596041,
+          "intercept_ci": [
+            -17.18937603510046,
+            4.661286683079102
+          ]
+        },
+        "measured [0,10)": {
+          "n_cells": 269,
+          "mean_bias": 17.969279094256432,
+          "mean_bias_ci": [
+            15.909662490107648,
+            19.9584319966241
+          ]
+        },
+        "measured [10,20)": {
+          "n_cells": 136,
+          "mean_bias": 6.18540121527279,
+          "mean_bias_ci": [
+            2.369743053231714,
+            9.40189201240182
+          ]
+        },
+        "measured [20,30)": {
+          "n_cells": 781,
+          "mean_bias": -2.227259278144789,
+          "mean_bias_ci": [
+            -3.7215411390879565,
+            -0.7337407448000984
+          ]
+        },
+        "measured [30,inf)": {
+          "n_cells": 738,
+          "mean_bias": -4.7009587145756235,
+          "mean_bias_ci": [
+            -5.43205217279274,
+            -3.826869621130903
+          ]
+        },
+        "predicted [0,10)": {
+          "n_cells": 16,
+          "mean_bias": -0.3793368339538574,
+          "mean_bias_ci": [
+            -9.541982105800082,
+            7.540319851466588
+          ],
+          "slope": 3.306401960292665,
+          "slope_ci": [
+            -0.26177489359865197,
+            12.080760896091096
+          ],
+          "intercept": -19.215077346201156,
+          "intercept_ci": [
+            -108.9183750205547,
+            13.852562190196096
+          ]
+        },
+        "predicted [10,20)": {
+          "n_cells": 344,
+          "mean_bias": 3.0355889298195073,
+          "mean_bias_ci": [
+            -1.9644275117124834,
+            7.740009370416412
+          ],
+          "slope": 1.5544572370510348,
+          "slope_ci": [
+            1.0978622517650818,
+            2.1711138429462946
+          ],
+          "intercept": -12.377939664584233,
+          "intercept_ci": [
+            -24.55844293994209,
+            -0.5967567712554854
+          ]
+        },
+        "predicted [20,30)": {
+          "n_cells": 1460,
+          "mean_bias": -0.3250411281846972,
+          "mean_bias_ci": [
+            -2.238563438056304,
+            2.0281340891731814
+          ],
+          "slope": 1.1696912982840666,
+          "slope_ci": [
+            0.7451785695768957,
+            1.5980630326171257
+          ],
+          "intercept": -4.024569907332413,
+          "intercept_ci": [
+            -16.35372685950136,
+            7.565487831763568
+          ]
+        },
+        "predicted [30,inf)": {
+          "n_cells": 104,
+          "mean_bias": -0.9371109742384682,
+          "mean_bias_ci": [
+            -3.091162275698374,
+            1.5436342959409803
+          ],
+          "slope": 0.0378226777226033,
+          "slope_ci": [
+            -2.120970824414664,
+            1.2004706237115963
+          ],
+          "intercept": 30.658587668851467,
+          "intercept_ci": [
+            -4.440027827839538,
+            95.69328276071221
+          ]
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "OOF": [
+      {
+        "n_eyes": 240,
+        "n_patients": 125,
+        "mean_delta": 0.08085959404706955,
+        "median_delta": 0.05762958526611328,
+        "ci": [
+          -0.13356666855192242,
+          0.28700353546700175
+        ],
+        "p_wilcoxon": 0.5978086271440923,
+        "n_a_better": 113,
+        "a": "Fusion",
+        "b": "Centred ensemble",
+        "metric": "rmse",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 1.0
+      },
+      {
+        "n_eyes": 240,
+        "n_patients": 125,
+        "mean_delta": -0.013967792503535748,
+        "median_delta": -0.021489381790161133,
+        "ci": [
+          -0.2334896285095328,
+          0.1980210626572057
+        ],
+        "p_wilcoxon": 0.7634686841006584,
+        "n_a_better": 121,
+        "a": "Fusion",
+        "b": "Centred ensemble",
+        "metric": "mae",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 1.0
+      },
+      {
+        "n_eyes": 240,
+        "n_patients": 125,
+        "mean_delta": -0.1525684893131256,
+        "median_delta": -0.10819005966186523,
+        "ci": [
+          -0.3153289141155024,
+          0.005062126836168592
+        ],
+        "p_wilcoxon": 0.03198619702753695,
+        "n_a_better": 130,
+        "a": "Ensemble fusion",
+        "b": "Centred ensemble",
+        "metric": "rmse",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 0.09595859108261086
+      },
+      {
+        "n_eyes": 240,
+        "n_patients": 125,
+        "mean_delta": -0.24445058405399323,
+        "median_delta": -0.18767225742340088,
+        "ci": [
+          -0.4117914582638115,
+          -0.08540929393555109
+        ],
+        "p_wilcoxon": 0.0005892080587981573,
+        "n_a_better": 140,
+        "a": "Ensemble fusion",
+        "b": "Centred ensemble",
+        "metric": "mae",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 0.0029460402939907866
+      },
+      {
+        "n_eyes": 240,
+        "n_patients": 125,
+        "mean_delta": -0.3424387574195862,
+        "median_delta": -0.21821212768554688,
+        "ci": [
+          -0.5826410185849341,
+          -0.11432969069516102
+        ],
+        "p_wilcoxon": 0.0008868841585229643,
+        "n_a_better": 133,
+        "a": "Fusion",
+        "b": "Centred IR-v2",
+        "metric": "rmse",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 0.003547536634091857
+      },
+      {
+        "n_eyes": 240,
+        "n_patients": 125,
+        "mean_delta": -0.3661210834980011,
+        "median_delta": -0.15217220783233643,
+        "ci": [
+          -0.6124949397187399,
+          -0.1356357329802552
+        ],
+        "p_wilcoxon": 0.0004238514412409924,
+        "n_a_better": 143,
+        "a": "Fusion",
+        "b": "Centred IR-v2",
+        "metric": "mae",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 0.0025431086474459546
+      }
+    ],
+    "TEST": [
+      {
+        "n_eyes": 37,
+        "n_patients": 19,
+        "mean_delta": 0.01225337479263544,
+        "median_delta": -0.2524909973144531,
+        "ci": [
+          -0.4256619617342949,
+          0.4755726519558161
+        ],
+        "p_wilcoxon": 0.9881085285160225,
+        "n_a_better": 23,
+        "a": "Fusion",
+        "b": "Centred ensemble",
+        "metric": "rmse",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 1.0
+      },
+      {
+        "n_eyes": 37,
+        "n_patients": 19,
+        "mean_delta": -0.010527191683650017,
+        "median_delta": -0.3207869529724121,
+        "ci": [
+          -0.4393370497129211,
+          0.4823937514850069
+        ],
+        "p_wilcoxon": 0.7204289893124951,
+        "n_a_better": 21,
+        "a": "Fusion",
+        "b": "Centred ensemble",
+        "metric": "mae",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 1.0
+      },
+      {
+        "n_eyes": 37,
+        "n_patients": 19,
+        "mean_delta": -0.18491031229496002,
+        "median_delta": -0.2889995574951172,
+        "ci": [
+          -0.4422253538380589,
+          0.08430482680733066
+        ],
+        "p_wilcoxon": 0.12112347882066388,
+        "n_a_better": 24,
+        "a": "Ensemble fusion",
+        "b": "Centred ensemble",
+        "metric": "rmse",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 0.6056173941033194
+      },
+      {
+        "n_eyes": 37,
+        "n_patients": 19,
+        "mean_delta": -0.23543192446231842,
+        "median_delta": -0.3850069046020508,
+        "ci": [
+          -0.4952569118392247,
+          0.05291165016792913
+        ],
+        "p_wilcoxon": 0.06755298051575664,
+        "n_a_better": 24,
+        "a": "Ensemble fusion",
+        "b": "Centred ensemble",
+        "metric": "mae",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 0.40531788309453987
+      },
+      {
+        "n_eyes": 37,
+        "n_patients": 19,
+        "mean_delta": -0.12780660390853882,
+        "median_delta": -0.13363265991210938,
+        "ci": [
+          -0.6574403866602664,
+          0.39086650092350783
+        ],
+        "p_wilcoxon": 0.6982056890265085,
+        "n_a_better": 20,
+        "a": "Fusion",
+        "b": "Centred IR-v2",
+        "metric": "rmse",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 1.0
+      },
+      {
+        "n_eyes": 37,
+        "n_patients": 19,
+        "mean_delta": -0.10457310825586319,
+        "median_delta": -0.1407632827758789,
+        "ci": [
+          -0.5798842448909003,
+          0.38959638127476826
+        ],
+        "p_wilcoxon": 0.5209127473499393,
+        "n_a_better": 21,
+        "a": "Fusion",
+        "b": "Centred IR-v2",
+        "metric": "mae",
+        "convention": "delta = per-eye a - b; negative favours a",
+        "p_holm": 1.0
+      }
+    ]
+  },
+  "holm_family": "six tests per split, in list order: fusion and ensemble fusion vs the centred ensemble (as frozen in calibration_multiplicity.json, where the family is these four) and fusion vs the centred Inception-ResNet-v2 branch, each on RMSE and MAE",
+  "pooled": {
+    "OOF": {
+      "Summary": {
+        "rmse": 8.66027690819872,
+        "mae": 6.397545462114832
+      },
+      "IR-v2": {
+        "rmse": 8.53967601087602,
+        "mae": 6.123324599150473
+      },
+      "Centred IR-v2": {
+        "rmse": 8.485936715480648,
+        "mae": 6.281585658876559
+      },
+      "Fusion": {
+        "rmse": 8.100795855013304,
+        "mae": 5.9154646765775025
+      }
+    },
+    "TEST": {
+      "Summary": {
+        "rmse": 8.919268140346194,
+        "mae": 6.832023080972773
+      },
+      "IR-v2": {
+        "rmse": 8.732285757495546,
+        "mae": 6.032829852213235
+      },
+      "Centred IR-v2": {
+        "rmse": 8.639194603933605,
+        "mae": 6.376572896437932
+      },
+      "Fusion": {
+        "rmse": 8.410520829171986,
+        "mae": 6.271999581687911
+      }
+    }
+  }
+}
