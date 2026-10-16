@@ -1,15 +1,18 @@
 """R1-1 results table (LaTeX), generated straight from the frozen analysis.
 
-Reads paper/results_frozen/r11_analysis.json only and writes one MDPI full-width table
-with two panels, out-of-fold and held-out. Rows: the five backbones and their ensemble
-for three contrasts, and the one backbone-free contrast between the two gradient-boosting
-feature sets. Cells: mean per-eye difference a - b with its patient-clustered 95% interval
-and the two-sided Wilcoxon p, for RMSE and for MAE; all eyes (the map-mean eyes included).
+Reads paper/results_frozen/r11_analysis.json only and writes one MDPI full-width table,
+compact form (authors, 2026-10-16): per-eye RMSE only, out-of-fold and held-out side by
+side. Rows: the five backbones and their ensemble for three contrasts, and the one
+backbone-free contrast between the two gradient-boosting feature sets. Cells: mean per-eye
+difference a - b with its patient-clustered 95% interval and the two-sided Wilcoxon p; all
+eyes (the map-mean eyes included). The per-eye MAE comparisons stay in the frozen file.
 
 After writing, the file is parsed back without the formatting code and every printed
 number is compared with the JSON value, so a row or column slip stops the script.
+With --anchors, the gate's sentence anchors for the printed cells are written as YAML
+(tokens read with check_numbers.extract, so they are what the gate will see).
 
-    python experiments/revision_r1/make_r11_table.py --out <table.tex>
+    python experiments/revision_r1/make_r11_table.py --out <table.tex> [--anchors <anchors.yaml>]
 """
 from __future__ import annotations
 
@@ -17,6 +20,7 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -40,7 +44,7 @@ CONTRASTS = [
     ('xgb_map23_r11', 'xgb_printed26', False,
      'Gradient boosting: 23 map-derived values $-$ 26 printed parameters'),
 ]
-METRICS = ('per-eye rmse', 'per-eye mae')
+METRIC = 'per-eye rmse'
 SPLITS = (('OOF', 'Out-of-fold'), ('TEST', 'Held-out'))
 SUBSET = 'all eyes'
 
@@ -80,19 +84,24 @@ def cell(c):
     return f"{num(c['mean_delta'])} [{num(lo)}, {num(hi)}]", pval(c['p_wilcoxon'])
 
 
+def rows(d):
+    """(contrast index, row name, {split: comparison}) in table order."""
+    out = []
+    for k, (a, b, per_bb, _) in enumerate(CONTRASTS):
+        for bb, name in (BACKBONES if per_bb else [(None, '---')]):
+            out.append((k, name, {s: lookup(d['splits'][s]['comparisons'], a, b, METRIC, bb)
+                                  for s, _ in SPLITS}))
+    return out
+
+
 def build(d):
-    lines = []
-    for split, title in SPLITS:
-        sp = d['splits'][split]
-        lines.append('\\midrule')
-        lines.append(f"\\multicolumn{{5}}{{l}}{{\\textbf{{{title} ({sp['n_eyes']} eyes)}}}} \\\\")
-        for a, b, per_bb, heading in CONTRASTS:
-            lines.append(f'\\multicolumn{{5}}{{l}}{{\\textit{{{heading}}}}} \\\\')
-            rows = BACKBONES if per_bb else [(None, '---')]
-            for bb, name in rows:
-                cs = [lookup(sp['comparisons'], a, b, m, bb) for m in METRICS]
-                cells = [x for c in cs for x in cell(c)]
-                lines.append(f'\\quad {name} & ' + ' & '.join(cells) + ' \\\\')
+    lines, last = [], None
+    for k, name, cs in rows(d):
+        if k != last:
+            lines.append(f'\\multicolumn{{5}}{{l}}{{\\textit{{{CONTRASTS[k][3]}}}}} \\\\')
+            last = k
+        cells = [x for s, _ in SPLITS for x in cell(cs[s])]
+        lines.append(f'\\quad {name} & ' + ' & '.join(cells) + ' \\\\')
     return lines
 
 
@@ -103,20 +112,22 @@ def render(d, digest):
         f'% paper/results_frozen/r11_analysis.json (sha256 {digest[:16]}). Do not edit the numbers by hand.',
         '\\begin{table}[H]',
         '\\begin{adjustwidth}{-\\extralength}{0cm}',
-        '\\newcolumntype{C}{>{\\centering\\arraybackslash}X}',
         '\\caption{Matched comparison of representation and model family '
-        '(Section~\\ref{sec:matched}). Differences in per-eye error, in decibels; '
+        '(Section~\\ref{sec:matched}). Differences in per-eye RMSE, in decibels; '
         'negative values favour the first-named model.\\label{tab:matched}}',
-        '\\small',
-        '\\begin{tabularx}{\\fulllength}{lCcCc}',
+        '\\footnotesize',
+        '\\setlength{\\tabcolsep}{3pt}',
+        '\\begin{tabular*}{\\fulllength}{@{\\extracolsep{\\fill}}lcccc}',
         '\\toprule',
-        '& \\multicolumn{2}{c}{\\textbf{Per-eye RMSE}} & \\multicolumn{2}{c}{\\textbf{Per-eye MAE}} \\\\',
+        ' & ' + ' & '.join(f"\\multicolumn{{2}}{{c}}{{\\textbf{{{t} ({d['splits'][s]['n_eyes']} eyes)}}}}"
+                           for s, t in SPLITS) + ' \\\\',
         '\\cmidrule(lr){2-3} \\cmidrule(lr){4-5}',
         '\\textbf{Backbone} & $\\Delta$ [95\\% CI] & $p$ & $\\Delta$ [95\\% CI] & $p$ \\\\',
+        '\\midrule',
     ]
     foot = [
         '\\bottomrule',
-        '\\end{tabularx}',
+        '\\end{tabular*}',
         '\\end{adjustwidth}',
         '\\noindent{\\footnotesize{$\\Delta = a - b$, the mean over eyes of the per-eye difference. '
         'Intervals are patient-clustered bootstrap 95\\% intervals of that mean; $p$ values are '
@@ -134,8 +145,8 @@ def render(d, digest):
 # -- read-back check: parse the written file independently of build() --------------------
 NUM = r'\$([+-]?\d+\.\d{3})\$'
 P = r'(\d\.\d{3}|\$\d\.\d\\times10\^\{-\d+\}\$)'
-ROW = re.compile(r'^\\quad (.+?) & ' + NUM + r' \[' + NUM + ', ' + NUM + r'\] & ' + P
-                 + ' & ' + NUM + r' \[' + NUM + ', ' + NUM + r'\] & ' + P + r' \\\\$')
+HALF = NUM + r' \[' + NUM + ', ' + NUM + r'\] & ' + P
+ROW = re.compile(r'^\\quad (.+?) & ' + HALF + ' & ' + HALF + r' \\\\$')
 
 
 def p_back(s):
@@ -145,12 +156,9 @@ def p_back(s):
 
 def check(tex, d):
     names = {n: bb for bb, n in BACKBONES}
-    split = contrast = None
+    contrast = None
     n_rows = 0
     for line in tex.splitlines():
-        for s, title in SPLITS:
-            if line.startswith(f'\\multicolumn{{5}}{{l}}{{\\textbf{{{title} '):
-                split, contrast = s, None
         for k, (_, _, _, heading) in enumerate(CONTRASTS):
             if line == f'\\multicolumn{{5}}{{l}}{{\\textit{{{heading}}}}} \\\\':
                 contrast = k
@@ -163,29 +171,70 @@ def check(tex, d):
         bb = names[name] if per_bb else None
         assert per_bb or name == '---', line
         g = m.groups()[1:]
-        for metric, vals in zip(METRICS, (g[:4], g[4:])):
-            c = lookup(d['splits'][split]['comparisons'], a, b, metric, bb)
+        for (split, _), vals in zip(SPLITS, (g[:4], g[4:])):
+            c = lookup(d['splits'][split]['comparisons'], a, b, METRIC, bb)
             for printed, true in zip(vals[:3], (c['mean_delta'], *c['ci'])):
                 assert abs(float(printed) - true) <= 0.0005 + 1e-12, (line, printed, true)
             p, true = p_back(vals[3]), c['p_wilcoxon']
             tol = 0.0005 if true >= 1e-3 else 0.05 * 10 ** int(f'{true:.1e}'.split('e')[1])
             assert abs(p - true) <= tol + 1e-15, (line, vals[3], true)
         n_rows += 1
-    want = 2 * sum(len(BACKBONES) if c[2] else 1 for c in CONTRASTS)
+    want = sum(len(BACKBONES) if c[2] else 1 for c in CONTRASTS)
     assert n_rows == want, (n_rows, want)
     return n_rows
+
+
+# -- sentence anchors for the gate ---------------------------------------------------------
+def anchors(tex, d, file):
+    """One pinned anchor per distinct printed token of the table. The gate matches anchors by
+    paragraph and uses the first one for a repeated token, so a repeated token is anchored once;
+    every repeat is checked here to round to the same printed value. A printed zero is skipped
+    by the gate as structural and gets no anchor."""
+    sys.path.insert(0, str(ROOT / 'scripts'))
+    from check_numbers import extract, render_match
+    first, out = {}, []
+    lines = [ln for ln in tex.splitlines() if ln.startswith('\\quad ')]
+    for line, (_, _, cs) in zip(lines, rows(d)):
+        # extract() lists scientific-notation tokens first; read cell by cell to keep the order,
+        # and require the same tokens as the gate's own reading of the whole line.
+        toks = [t for part in line[len('\\quad '):].split(' & ')[1:] for t in extract(part)]
+        assert sorted(toks) == sorted(extract(line)), (line, toks)
+        want = []
+        for s, _ in SPLITS:
+            c = cs[s]
+            i = next(j for j, x in enumerate(d['splits'][s]['comparisons']) if x is c)
+            base = f'splits.{s}.comparisons.{i}'
+            want += [(c['mean_delta'], f'{base}.mean_delta'), (c['ci'][0], f'{base}.ci.0'),
+                     (c['ci'][1], f'{base}.ci.1'), (c['p_wilcoxon'], f'{base}.p_wilcoxon')]
+        assert len(toks) == len(want), (line, toks)
+        for (printed, _), (v, path) in zip(toks, want):
+            assert render_match(v, printed), (line, printed, v)
+            if float(printed) == 0 or printed in first:
+                continue
+            first[printed] = path
+            out.append(f'  - {{file: "{file}", contains: \'\\label{{tab:matched}}\', printed: "{printed}", '
+                       f'source: "r11_analysis.json", path: "{path}", pin: true}}')
+    return out
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--out', required=True, type=Path)
+    ap.add_argument('--anchors', type=Path, help='write the gate anchors for the table here')
+    ap.add_argument('--anchor-file', default='results.tex', help='manuscript section file of the table')
     args = ap.parse_args()
     raw = SRC.read_bytes()
     d = json.loads(raw)
     tex = render(d, hashlib.sha256(raw).hexdigest())
     args.out.write_text(tex, encoding='utf-8')
-    n = check(args.out.read_text(encoding='utf-8'), d)
-    print(f'wrote {args.out}: {n} rows, every number matches {SRC.relative_to(ROOT)}')
+    back = args.out.read_text(encoding='utf-8')
+    n = check(back, d)
+    msg = f'wrote {args.out}: {n} rows, every number matches {SRC.relative_to(ROOT)}'
+    if args.anchors:
+        a = anchors(back, d, args.anchor_file)
+        args.anchors.write_text('\n'.join(a) + '\n', encoding='utf-8')
+        msg += f'; {len(a)} anchors to {args.anchors}'
+    print(msg)
 
 
 if __name__ == '__main__':
