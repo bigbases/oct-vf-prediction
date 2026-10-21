@@ -174,8 +174,12 @@ def print_exempt(rows):
         print('   %-46s %s' % (r, ', '.join('%s %d' % kv for kv in h.items())))
     print()
 
+# 확장자로 텍스트를 판정한다. 목록 밖 확장자는 내용을 읽지 않고 '불투명'으로만 셌다 —
+# 2026-10-22 재클론 검사에서 리비전 실행 파일 jobs/*.job 13개가 그렇게 빠져 있던 것을 찾았다
+# (내용은 독립 검사로 깨끗함을 확인). 그래서 .job 을 넣고, 불투명 파일이 하나라도 있으면
+# 아래 판정에서 '깨끗'을 내지 않는다. 안 본 것과 봐서 깨끗한 것을 구분하기 위해서다.
 TEXT_EXT = {'.py', '.md', '.txt', '.yaml', '.yml', '.json', '.sh', '.tex', '.cfg',
-            '.ini', '.toml', '.cff', '.csv', '.bat', '.bib', '.log', ''}
+            '.ini', '.toml', '.cff', '.csv', '.bat', '.bib', '.log', '.job', ''}
 SKIP_DIRS = {'.git', '__pycache__', 'node_modules', '.venv', 'venv', '.pytest_cache'}
 
 
@@ -532,6 +536,7 @@ def main():
             sha, path = line.strip().split(' ', 1)
             pairs.append((sha, path))
     l3 = {}
+    hist_opaque = set()
     if pairs:
         checks = git('cat-file', '--batch-check',
                      stdin='\n'.join(s for s, _ in pairs).encode()).decode().split('\n')
@@ -543,6 +548,7 @@ def main():
                 continue
             seen.add((sha, path))
             if Path(path).suffix.lower() not in TEXT_EXT:
+                hist_opaque.add(path)
                 continue
             h = blob_hits(git('cat-file', 'blob', sha), needles)
             if h:
@@ -591,8 +597,10 @@ def main():
     n1b = report('L1b. 바이너리 컨테이너 (xlsx/docx/pdf 압축 해제 후)', l1b,
                  'zip+XML 과 PDF 스트림을 풀어서 본다. 원시 바이트로는 안 잡히는 층.')
 
+    opaque = sorted(set(opaque) | hist_opaque)
     print('=' * 74)
-    print(' 참고. 불투명 바이너리 %d개 — 자동 판정 불가(육안 확인 필요)' % len(opaque))
+    print(' 불투명 파일 %d개 (작업 트리 + 이력) — 내용을 읽지 못했다. 있으면 판정을 내리지 않는다'
+          % len(opaque))
     print('=' * 74)
     for b in sorted(opaque)[:20]:
         print('   %s' % b)
@@ -602,11 +610,13 @@ def main():
     print('\n' + '=' * 74)
     remote = git('remote', '-v').decode().strip()
     print(' 원격: %s' % (remote if remote else '없음 (push 이력 없음)'))
-    bad = n0 or n1 or n1b or n1c or n1d or n1e or n1f or n1g or n2 or l3 or unverified
+    bad = n0 or n1 or n1b or n1c or n1d or n1e or n1f or n1g or n2 or l3 or unverified or opaque
     print(' 판정: L0 %d / L1 %d / L1b %d / L1c %d / L1d %d / L1e %d / L1f %d / L1g %d'
           ' / L2 %d / L3 %d' % (n0, n1, n1b, n1c, n1d, n1e, n1f, n1g, n2, len(l3)))
     if unverified:
         print(' L1f UNVERIFIED — 사설 파일이 없어 기관·실명·실제ID 를 검사하지 못했다.')
+    if opaque:
+        print(' 불투명 파일 %d개 — 내용을 검사하지 못했으므로 깨끗하다고 판정하지 않는다.' % len(opaque))
     print(' => %s' % ('PUSH 불가' if bad else '전부 깨끗 — PUSH 가능'))
     print('=' * 74)
     return 1 if bad else 0
