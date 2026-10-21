@@ -37,7 +37,9 @@ import fusion_eval_common as FE          # noqa: E402
 import fusion_sensitivity_trend as FST   # noqa: E402
 import calibration_multiplicity as CM    # noqa: E402
 
-FROZEN = REPO / 'release/paper/results_frozen'
+# A clone keeps the frozen results at paper/results_frozen; the authors' working tree keeps
+# this repository under release/ (same fallback as centred_irv2.py).
+FROZEN = next(p for p in (REPO / 'paper/results_frozen', REPO / 'release/paper/results_frozen') if p.exists())
 SUBMITTED = dict(FE.BB)
 MIRRORED = {
     'IR-v2': 'runs/phasec_b0_inception_resnet_v2_5fold_osflip',

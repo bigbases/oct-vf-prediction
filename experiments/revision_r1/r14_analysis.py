@@ -42,7 +42,9 @@ W = 0.47
 CNN_DIRS = {0: PASS_B / 'runs/phasec_b0_inception_resnet_v2_5fold',
             1: HERE / 'runs/r14_exclude_irv2', 2: HERE / 'runs/r14_censored_irv2'}
 XGB_DIRS = {0: PASS_B / 'runs/oof', 1: HERE / 'runs/r14_xgb/arm1'}
-FROZEN = REPO / 'release/paper/results_frozen'
+# A clone keeps the frozen results at paper/results_frozen; the authors' working tree keeps
+# this repository under release/ (same fallback as centred_irv2.py).
+FROZEN = next(p for p in (REPO / 'paper/results_frozen', REPO / 'release/paper/results_frozen') if p.exists())
 GUARD = {('OOF', 'fusion'): 6.3327, ('OOF', 'cnn'): 6.7669, ('OOF', 'xgb'): 7.1605,
          ('TEST', 'fusion'): 6.4404, ('TEST', 'cnn'): 6.0834, ('TEST', 'xgb'): 7.6697}
 
