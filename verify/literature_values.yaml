@@ -241,3 +241,13 @@ literature:
     value: "-7.03"
     cite: "abdullahi2026"
     checked: "not re-checked against the source in revision round 1"
+
+  # Accepted article (MDPI proof, 2026-10-22): the same values and checks as above, with the
+  # fragments of the copy-edited text.
+  - {file: "discussion.tex", contains: 'peaks at 5.5 dB at 11 dB against 2.0 dB at 33~dB', value: "5.5", cite: "rabiolo2019", checked: 'not re-checked against the source in revision round 1'}
+  - {file: "discussion.tex", contains: 'peaks at 5.5 dB at 11 dB against 2.0 dB at 33~dB', value: "11", cite: "rabiolo2019", checked: 'not re-checked against the source in revision round 1'}
+  - {file: "discussion.tex", contains: 'peaks at 5.5 dB at 11 dB against 2.0 dB at 33~dB', value: "2.0", cite: "rabiolo2019", checked: 'not re-checked against the source in revision round 1'}
+  - {file: "discussion.tex", contains: 'peaks at 5.5 dB at 11 dB against 2.0 dB at 33~dB', value: "33", cite: "rabiolo2019", checked: 'not re-checked against the source in revision round 1'}
+  - {file: "methods.tex", contains: 'by less than 0.2~dB per 10', value: "0.2", cite: "yohannan2017", checked: 'not re-checked against the source in revision round 1'}
+  - {file: "methods.tex", contains: 'Applying the minimum of 6 \fix{used by Hasan et al.~\cite{hasan2025}}', value: "6", cite: "hasan2025", checked: 'checked against the original by the authors, 2026-10-14: Hasan 2025, Cirrus signal strength 6 or above on the 1-10 scale'}
+  - {file: "related_work.tex", contains: 'on their own 241~subjects', value: "241", cite: "abdullahi2026", checked: 'checked against the source: docs/journal_manuscript/abdullahi2026_verification.md'}

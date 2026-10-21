@@ -471,3 +471,21 @@ anchors:
   - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "0.80", source: "revision_methods_numbers.json", path: "r11_xgb.r_map_vcd_vs_printed.r", pin: true}
   - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "277", source: "revision_methods_numbers.json", path: "r11_xgb.r_map_vcd_vs_printed.n", pin: true}
   - {file: "methods.tex", contains: "The sector-averaged maps were passed to the image branch", printed: "25", source: "revision_methods_numbers.json", path: "r11_xgb.sets.map26.cirrus_geometry", pin: true}
+
+  # Accepted article (MDPI proof, 2026-10-22). The copy-edit changed spacing and markup
+  # (~ ties, \fix{}, merged paragraphs), so the fragments above no longer match the final text.
+  # Same sources as before where the sentence existed; the "less than 0.2 dB" bound is the upper
+  # 95% limit of the ensemble sector-minus-original difference (results.tex states the derivation).
+  - {file: "abstract.tex", contains: 'cost the five-backbone ensemble less than 0.2 dB per eye in cross-validation', printed: "0.2", source: "r11_analysis.json", path: "splits.OOF.comparisons.80.ci.1"}
+  - {file: "conclusions.tex", contains: 'removing spatial detail within sectors cost that ensemble less than 0.2 dB per eye', printed: "0.2", source: "r11_analysis.json", path: "splits.OOF.comparisons.80.ci.1"}
+  - {file: "discussion.tex", contains: 'sector averaging cost the five-backbone ensemble less than 0.2 dB per eye', printed: "0.2", source: "r11_analysis.json", path: "splits.OOF.comparisons.80.ci.1"}
+  - {file: "discussion.tex", contains: 'replacing each sector by its mean cost the five-backbone ensemble less than 0.2 dB per eye', printed: "0.2", source: "r11_analysis.json", path: "splits.OOF.comparisons.80.ci.1"}
+  - {file: "introduction.tex", contains: 'costs the five-backbone ensemble less than 0.2 dB per eye', printed: "0.2", source: "r11_analysis.json", path: "splits.OOF.comparisons.80.ci.1"}
+  - {file: "introduction.tex", contains: 'regional averaging cost the ensemble less than 0.2 dB per eye', printed: "0.2", source: "r11_analysis.json", path: "splits.OOF.comparisons.80.ci.1"}
+  - {file: "results.tex", contains: 'bounds any loss from removing spatial detail below 0.2 dB per eye', printed: "0.2", source: "r11_analysis.json", path: "splits.OOF.comparisons.80.ci.1"}
+  - {file: "methods.tex", contains: 'it accounts for 93.1\% of all 0 dB labels there', printed: "93.1", source: "skeleton_numbers.json", path: "labels.share_of_zeros_from_minus1_pct"}
+  - {file: "discussion.tex", contains: 'on the 37 held-out eyes the sector-averaged maps were worse in all five backbones', printed: "37", source: "r11_analysis.json", path: "splits.TEST.n_eyes"}
+  - {file: "results.tex", contains: 'Every branch over-predicts below', printed: "14.8", source: "calibration_multiplicity.json", path: "calibration.OOF.Ensemble.measured [0,10).mean_bias"}
+  - {file: "results.tex", contains: 'difference is $+0.066$ dB for the primary backbone', printed: "0.066", source: "r13_analysis.json", path: "mirrored_vs_unmirrored_cnn.0.mean_delta", pin: true}
+  - {file: "results.tex", contains: 'difference is $+0.066$ dB for the primary backbone', printed: "0.79", source: "r13_analysis.json", path: "mirrored_vs_unmirrored_cnn.0.p_wilcoxon", pin: true}
+  - {file: "results.tex", contains: 'Xception favours the mirrored runs, $p = 0.020$', printed: "0.020", source: "r13_analysis.json", path: "mirrored_vs_unmirrored_cnn.3.p_wilcoxon", pin: true}

@@ -302,12 +302,10 @@ ANCHORS = [
      'region 중심 16점'),
     ('severity_region.json', 'region.peripheral.n_points_per_eye',
      'region 주변 36점'),
-    # 좌우 미러링 절제 (§4.4). 네 수치 전부 osflip_compare.json 에 있었는데
-    # 동결이 안 돼 있었다. p 둘은 그대로 있고 delta 둘은 DERIVED(delta).
-    ('osflip_compare.json', 'paired_wilcoxon_flip_vs_noflip.oof_cnn.p',
-     '미러링 OOF CNN p=0.79'),
-    ('osflip_compare.json', 'paired_wilcoxon_flip_vs_noflip.test_cnn.p',
-     '미러링 held-out CNN p=0.19'),
+    # (퇴역 2026-10-22) 좌우 미러링 절제의 옛 문장(osflip_compare.json 의 p 0.79 / 0.19)은
+    # 게재 원고에서 R1-3 결과 문장과 표 7 로 바뀌었다. 새 문장의 +0.066 · p = 0.79 · p = 0.020 은
+    # verify/sentence_anchors.yaml 에 r13_analysis.json mirrored_vs_unmirrored_cnn 으로 고정했다.
+    # 투고본을 다시 검사하려면 이 두 항목과 아래 delta 두 항목, ANCHOR_LOC 두 줄을 되살린다.
     # floor label 제거 후 held-out fusion vs summary (§4.6). 원고의 1.9e-4 는
     # 여태 reliability_sensitivity.json 의 **vgg16 OOF fusion_vs_cnn**
     # 1.852e-4 로 통과했다 — 백본·split·비교쌍이 전부 다른 값이다.
@@ -378,11 +376,8 @@ DERIVED = [
      'passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.3|'
      'passes.B.ENSEMBLE.OOF.xgb_residual_mean_by_bin.3',
      'delta', '구간 [30,inf) 격차 1.76'),
-    # 좌우 미러링 절제의 두 효과크기 (flip - noflip).
-    ('osflip_compare.json', 'flip.oof_cnn.rmse|noflip.oof_cnn.rmse',
-     'delta', '미러링 OOF CNN +0.147'),
-    ('osflip_compare.json', 'flip.test_cnn.rmse|noflip.test_cnn.rmse',
-     'delta', '미러링 held-out CNN -0.261'),
+    # (퇴역 2026-10-22) 좌우 미러링 절제의 두 효과크기(osflip_compare.json flip - noflip,
+    # +0.147 / -0.261)는 게재 원고에 없다. 위 p 두 항목과 같은 이유다.
     # 14 dB floor 재학습이 바꾼 예측 분포 (04_results.tex:216-221, 05_discussion.tex:183)
     ('stepsize_sensitivity.json', 'clamp_retrain.stratified_fusion.frac_pred_below_floor',
      'pct_comp', '재학습 fusion 예측의 99.7%가 14 dB 이상'),
@@ -474,10 +469,6 @@ ANCHOR_LOC = {
         ('results.tex', r'Central \(\$\\leq'),
     'anchor:severity_region.json#region.peripheral.n_points_per_eye':
         ('results.tex', r'Peripheral & '),
-    'anchor:osflip_compare.json#paired_wilcoxon_flip_vs_noflip.oof_cnn.p':
-        ('results.tex', r'out-of-fold CNN'),
-    'anchor:osflip_compare.json#paired_wilcoxon_flip_vs_noflip.test_cnn.p':
-        ('results.tex', r'held-out CNN'),
     # 캡션은 2자리로 인쇄한다(1.59). delta 의 기본 자릿수는 3자리라
     # 위치를 등록해서 원고가 자릿수를 정하게 한다.
     'derived:bias_by_bin.json#passes.B.ENSEMBLE.OOF.cnn_residual_mean_by_bin.0|'
@@ -573,6 +564,9 @@ LATEX_NOISE = re.compile(
     r'newcommand|orcidauthor\w*|hspace|vspace|columnwidth|textwidth|'
     r'linewidth|begin|end)\s*\{[^}]*\}'
 )
+# MDPI 조판 명령의 수치 인자. 교정본(2026-10-22)이 \textls[-15]{...}(자간)를 넣었고, 그
+# -15 가 인용 문단의 근거 없는 수치로 잡혔다. 인자만 지우고 중괄호 안 본문은 남긴다.
+MDPI_LAYOUT = re.compile(r'\\textls\[[^\]]*\]')
 SCI = re.compile(r'([0-9]+(?:\.[0-9]+)?)\s*\\times\s*10\^\{?(-?[0-9]+)\}?')
 
 # 저자가 넣은 줄바꿈이 지수 표기 한가운데를 끊는 경우.
@@ -732,6 +726,7 @@ def extract(line: str):
     s = VERSION_NAMED.sub(' ', s)              # "CUDA 11.3"
     s = VERSION_SEMVER.sub(' ', s)             # "3.10.18" -> '3.10' 방지
     s = LATEX_NOISE.sub(' ', s)                # \cite{...} 등 제거
+    s = MDPI_LAYOUT.sub(' ', s)                # \textls[-15] (교정본 자간)
     out = []
     for mant, exp in SCI.findall(s):
         out.append((f'{mant}e{exp}', float(mant) * 10 ** int(exp)))
@@ -1002,6 +997,8 @@ def selftest():
         ('IR-v2 backbone', [], 'IR-v2 는 백본 이름이다 — 수가 아니다'),
         ('range 10-20 dB', ['10'], '영숫자 뒤 하이픈은 계속 막는다'),
         ('pages 1--2', ['1'], 'LaTeX en-dash 를 음수로 읽지 않는다'),
+        ('\\textls[-15]{Networks predict 5.77 dB}', ['5.77'],
+         'MDPI 자간 명령의 인자 -15 는 수치가 아니다 — 본문 수치는 남긴다'),
     ]
     for line, want_toks, why in ex_cases:
         got = [t for t, _ in extract(line)]
@@ -1393,8 +1390,11 @@ def scan_placeholders(patterns, sections=None):
         except ValueError:
             rel = str(f)
         for ln, line in enumerate(f.read_text(encoding='utf-8').splitlines(), 1):
+            # LaTeX 주석은 인쇄되지 않는다. 교정본(2026-10-22)의 MDPI 템플릿이 주석 처리된 저자 약력
+            # 두 줄에 'Firstname Lastname' 을 남겨 두어 걸렸다. extract() 와 같은 규칙으로 자른다.
+            printed_part = re.split(r'(?<!\\)%', line)[0]
             for pid, text, rx in patterns:
-                if rx.search(line):
+                if rx.search(printed_part):
                     hits.append(Finding(
                         kind='PLACEHOLDER',
                         id=f'placeholder:{pid}:{rel}:{ln}',
