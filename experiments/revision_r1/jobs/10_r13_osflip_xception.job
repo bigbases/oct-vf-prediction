@@ -1,0 +1,1 @@
+train.py --backbone xception --flip_os_images

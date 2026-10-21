@@ -1,0 +1,1 @@
+train_r11.py --backbone inception_resnet_v2 --map_mode sector

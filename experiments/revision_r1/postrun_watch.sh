@@ -5,7 +5,7 @@
 #   setsid nohup ./postrun_watch.sh > logs/postrun_watch.nohup 2>&1 < /dev/null &
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-PY="${PY:-$HOME/miniconda3/envs/hvf/bin/python}"
+PY="${PY:-python}"
 Q="$HERE/queue"
 LOG="$HERE/logs/postrun.log"
 cd "$HERE" || exit 1
