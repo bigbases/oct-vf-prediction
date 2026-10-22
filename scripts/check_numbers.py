@@ -553,10 +553,12 @@ STRUCTURAL = {
 #   (a) 3성분 이상(semver): 1.12.1 · 3.10.18 · 1.26.4 — 측정값은 이 모양이 없다
 #   (b) 알려진 소프트웨어 이름 바로 뒤의 2성분: "CUDA 11.3" 한 건뿐이다
 VERSION_SEMVER = re.compile(r'(?<![0-9.])[0-9]+(?:\.[0-9]+){2,}(?![0-9])')
+#   Tesseract · pytesseract: 게재 원고의 OCR 소프트웨어 "Tesseract 5.5.0 via pytesseract 0.3.13"
+#   (교정본, 2026-10-22). 이름과 버전 사이에 MDPI 가 넣는 붙임 공백(~)도 구분자로 받는다.
 VERSION_NAMED = re.compile(
     r'(?<![A-Za-z])(?:PyTorch|CUDA|cuDNN|timm|XGBoost|Python|NumPy|SciPy|'
     r'scikit-learn|scikit-image|pandas|statsmodels|matplotlib|LightGBM|'
-    r'CatBoost|OpenCV|Pillow)\s+v?[0-9]+(?:\.[0-9]+)+(?![0-9])')
+    r'CatBoost|OpenCV|Pillow|Tesseract|pytesseract)(?:\s|~)+v?[0-9]+(?:\.[0-9]+)+(?![0-9])')
 
 # LaTeX 문법에서 나오는 수치 — 내용이 아니다.
 LATEX_NOISE = re.compile(
@@ -999,6 +1001,11 @@ def selftest():
         ('pages 1--2', ['1'], 'LaTeX en-dash 를 음수로 읽지 않는다'),
         ('\\textls[-15]{Networks predict 5.77 dB}', ['5.77'],
          'MDPI 자간 명령의 인자 -15 는 수치가 아니다 — 본문 수치는 남긴다'),
+        ('read by Tesseract 5.5.0 via pytesseract 0.3.13 at 300 dpi', ['300'],
+         'OCR 소프트웨어 버전 두 개는 수치가 아니다 — 뒤 수치는 남긴다'),
+        ('Tesseract 5.5 via pytesseract 0.3', [], '두 성분 버전도 이름 뒤면 버전이다'),
+        ('Tesseract~5.5.0 via pytesseract~0.3.13', [], 'MDPI 붙임 공백(~) 뒤 버전'),
+        ('CUDA~11.3 on one GPU', [], '기존 이름도 ~ 뒤 버전을 받는다'),
     ]
     for line, want_toks, why in ex_cases:
         got = [t for t, _ in extract(line)]
