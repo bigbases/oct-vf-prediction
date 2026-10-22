@@ -64,6 +64,14 @@
       "fusion": 4.5681
     }
   },
+  "passB_measured_zero_points": {
+    "n_points": 2,
+    "image_pred_dB": [
+      28.6842,
+      26.8117
+    ],
+    "note": "Image-branch predictions at the points whose measured sensitivity is 0 dB, largest first (Figure 6 caption text)."
+  },
   "distribution_position": {
     "rmse_fusion_minus_summary": {
       "case_delta": -2.7684,
@@ -304,6 +312,18 @@
       "got": 1.0,
       "want": 1.0,
       "tol": 0,
+      "ok": true
+    },
+    "zero_points_n_A_equals_B": {
+      "got": 2.0,
+      "want": 2.0,
+      "tol": 0,
+      "ok": true
+    },
+    "zero_points_image_A_equals_B": {
+      "got": 0.0,
+      "want": 0.0,
+      "tol": 1e-06,
       "ok": true
     },
     "cohort_summary_bin0": {

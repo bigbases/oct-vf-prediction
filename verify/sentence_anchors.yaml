@@ -489,3 +489,9 @@ anchors:
   - {file: "results.tex", contains: 'difference is $+0.066$ dB for the primary backbone', printed: "0.066", source: "r13_analysis.json", path: "mirrored_vs_unmirrored_cnn.0.mean_delta", pin: true}
   - {file: "results.tex", contains: 'difference is $+0.066$ dB for the primary backbone', printed: "0.79", source: "r13_analysis.json", path: "mirrored_vs_unmirrored_cnn.0.p_wilcoxon", pin: true}
   - {file: "results.tex", contains: 'Xception favours the mirrored runs, $p = 0.020$', printed: "0.020", source: "r13_analysis.json", path: "mirrored_vs_unmirrored_cnn.3.p_wilcoxon", pin: true}
+  # 13.2 is the Summary branch, the smallest of the six branches frozen in
+  # calibration_multiplicity.json (14.8 above is the ensemble); the sentence is kept as printed
+  # (authors, 2026-10-22). 29 is the larger of the two image-branch predictions at the 0 dB
+  # points of the illustrative eye (28.68 and 26.81), added to case_profile.json for this anchor.
+  - {file: "results.tex", contains: 'Every branch over-predicts below', printed: "13.2", source: "calibration_multiplicity.json", path: "calibration.OOF.Summary.measured [0,10).mean_bias"}
+  - {file: "results.tex", contains: 'predicting 29 dB where the measured sensitivity is 0', printed: "29", source: "case_profile.json", path: "passB_measured_zero_points.image_pred_dB.0", pin: true}

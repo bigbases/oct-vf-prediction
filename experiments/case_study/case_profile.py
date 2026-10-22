@@ -186,6 +186,22 @@ def main() -> int:
     i0 = idx[0]
     chk('vf_date_match_A_B', float(D['keys'][i0][2] == vf_date), 1.0, 0)
 
+    # (1b) 측정값이 0 dB 인 점의 이미지 분지 예측 (2026-10-22 추가) ---------
+    # 원고 그림 6 설명의 "predicting 29 dB where the measured sensitivity is 0" 은 이 값을
+    # 읽은 것인데 산출물에 없었다. 이미지 분지는 w 와 무관하고, 패스 A(그림 원본)와 B 가
+    # 같은지 가드로 확인한다. 값만 낸다 — 지점 위치는 그림에 이미 있다.
+    zb = D['mask'][i0] & (D['lab'][i0] == 0)
+    za = np.asarray(ea['mask']).astype(bool) & (np.asarray(ea['lab']) == 0)
+    img_b = np.sort(D['image'][i0][zb])[::-1]
+    img_a = np.sort(np.asarray(ea['cnn'])[za])[::-1]
+    chk('zero_points_n_A_equals_B', float(za.sum()), float(zb.sum()), 0)
+    chk('zero_points_image_A_equals_B',
+        float(np.abs(img_a - img_b).max()) if img_a.size == img_b.size and img_b.size else np.nan, 0.0, 1e-6)
+    zero_points = {'n_points': int(zb.sum()),
+                   'image_pred_dB': [round(float(x), 4) for x in img_b],
+                   'note': 'Image-branch predictions at the points whose measured sensitivity is '
+                           '0 dB, largest first (Figure 6 caption text).'}
+
     # (2) 분포상 위치 ------------------------------------------------------
     dist = {}
     case_metric = {}
@@ -281,6 +297,7 @@ def main() -> int:
                   'bins': fst.BIN_LABELS, 'bin_edges_dB': [0, 10, 20, 30, 'inf']},
         'passA_identity_check': passA,
         'passB_case_metrics': case_metric,
+        'passB_measured_zero_points': zero_points,
         'distribution_position': dist,
         'bins_case': case_bins,
         'bins_cohort_w047': cohort_bins,
