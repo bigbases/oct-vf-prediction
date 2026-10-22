@@ -14,11 +14,14 @@ trained on a GPU machine; everything else runs on CPU.
 | SciPy | 1.15.2 |
 | scikit-learn | 1.7.2 |
 | matplotlib | 3.9.4 |
+| OCR (report extraction) | Tesseract 5.5.0 (v5.5.0.20241111, Windows) via pytesseract 0.3.13 |
 | Platform | Linux |
 
 Exact pins are in `requirements.txt`; `environment.yml` is the equivalent conda
 specification. `extract_cirrus.py` and the `ocr_*.py` scripts additionally need
-the `tesseract` and `poppler-utils` system binaries.
+the `tesseract` and `poppler-utils` system binaries. The OCR behind the reported
+dataset ran on Windows with the Tesseract build in the table (`tesseract --version` on
+that machine); the rest of the table is the Linux environment.
 
 ## Install
 
