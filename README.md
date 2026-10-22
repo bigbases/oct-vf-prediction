@@ -6,6 +6,10 @@ pair of Cirrus thickness maps, a gradient-boosted branch reads the report's
 summary parameters, and the two are combined by late fusion with a single scalar
 weight fitted inside each cross-validation fold.
 
+The article: Kim M-S, Lim B-Y, Jung H-G, Kim MJ. Predicting Humphrey 24-2 Visual Field
+Sensitivity from OCT: A Comparison of Thickness Maps and Printed Summary Parameters.
+*Bioengineering* 2026, 13, 1244. https://doi.org/10.3390/bioengineering13111244
+
 **Research code, provided as-is.** It was written for one cohort on one device
 and is not a general-purpose tool.
 
@@ -395,11 +399,21 @@ fix changed and by how much.
 
 ## Citation
 
-`CITATION.cff` carries the author list, the affiliations and the repository URL.
-Two fields are deliberately absent, each with a comment saying what it waits on:
-the DOI, issued when the first release tag is archived, and the journal
-reference, added on acceptance. E-mail addresses are not listed either —
+Please cite the article:
+
+> Kim M-S, Lim B-Y, Jung H-G, Kim MJ. Predicting Humphrey 24-2 Visual Field Sensitivity
+> from OCT: A Comparison of Thickness Maps and Printed Summary Parameters. *Bioengineering*
+> 2026, 13, 1244. https://doi.org/10.3390/bioengineering13111244
+
+The article is at https://www.mdpi.com/2306-5354/13/11/1244. `CITATION.cff` carries the
+same reference as its preferred citation, with the author list, the affiliations and the
+repository URL. One field is still deliberately absent: the DOI of the software itself,
+issued when a release is archived. E-mail addresses are not listed either —
 correspondence addresses are given in the article.
+
+The tag `v1.1-bioengineering` marks the code and frozen results at acceptance, and
+`submitted-v1` the state at submission. Later commits on `main` add checks and records for
+the published text; none changes a reported number.
 
 ## License
 

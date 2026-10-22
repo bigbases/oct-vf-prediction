@@ -89,6 +89,11 @@ ALLOW = (
     #   2026-08-31                          (ResNet50 예측이 저장된 날, 산출물 note)
     #     paper/results_frozen/resnet50_late_fusion.json
     b'20260530_193547', b'20260711', b'2026-08-31',
+    # 게재 논문의 DOI 10.3390/bioengineering13111244 (13권 11호 1244번). 접미사의 8자리가
+    # 환자ID(8자리) 모양에 걸린다. 매핑표·전체 환자번호 목록·차단 목록 어디에도 없음을
+    # 확인했다(2026-10-23). 숫자 단독이 아니라 DOI 토큰 전체만 허용한다.
+    #   CITATION.cff, README.md
+    b'bioengineering13111244',
 )
 TOOL_PATTERNS = {
     '보조도구 이름': re.compile(

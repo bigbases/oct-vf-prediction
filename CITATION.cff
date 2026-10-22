@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: "If you use this software, please cite the article below."
 title: "Predicting the 24-2 visual field from a single SD-OCT session"
 abstract: >-
   Research code for predicting 52 pointwise Humphrey 24-2 threshold
@@ -31,8 +31,27 @@ authors:
     affiliation: >-
       Department of Ophthalmology, National Medical Center, Seoul 04564,
       Republic of Korea
-# Deliberately omitted until they exist:
-#   doi:                 Zenodo archive DOI, issued after the first release tag.
-#   preferred-citation:  journal article, after acceptance.
+preferred-citation:
+  type: article
+  title: >-
+    Predicting Humphrey 24-2 Visual Field Sensitivity from OCT: A Comparison of
+    Thickness Maps and Printed Summary Parameters
+  authors:
+    - given-names: Min-Sol
+      family-names: Kim
+    - given-names: Bo-Young
+      family-names: Lim
+    - given-names: Ho-Gil
+      family-names: Jung
+    - given-names: Moon Jung
+      family-names: Kim
+  journal: Bioengineering
+  year: 2026
+  volume: 13
+  start: 1244  # article number
+  doi: "10.3390/bioengineering13111244"
+  url: "https://www.mdpi.com/2306-5354/13/11/1244"
+# Deliberately omitted until it exists:
+#   doi:  Zenodo archive DOI of the software itself (the article's DOI is above).
 # Author e-mail addresses are intentionally not listed here; correspondence
 # addresses are given in the article.
